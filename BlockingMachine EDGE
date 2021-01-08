@@ -9,7 +9,8 @@
 # %USERPROFILE%\AppData\Local\Microsoft\Edge\User Data\Trust Protection Lists
 # macOS: 
 # ~/Library/Application Support/Microsoft Edge/Trust Protection Lists
-#track.tenjin.com/
+#
+track.tenjin.com/
 ms.applovin.com/
 track.saygames.io/
 settings.crashlytics.com/

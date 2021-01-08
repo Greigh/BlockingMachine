@@ -17,8 +17,7 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
-0.0.0.0 0.0.0.0cf0 kerning1expnd0expndtw0 
-pardtx720tx1440tx2160tx2880tx3600tx4320tx5040tx5760tx6480tx7200tx7920tx8640pardeftab720pardirnaturalpartightenfactor0
+0.0.0.0 0.0.0.0
 cf0 0.0.0.0 track.tenjin.com
 0.0.0.0 ms.applovin.com
 0.0.0.0 track.saygames.io
@@ -11720,4 +11719,4 @@ cf0 0.0.0.0 track.tenjin.com
 0.0.0.0 zincx.com
 0.0.0.0 zoekhelden.nl
 0.0.0.0 zuuvi.com
-0.0.0.0 zypmedia.com}
+0.0.0.0 zypmedia.com
