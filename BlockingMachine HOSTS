@@ -2626,7 +2626,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 app.sina.cn
 0.0.0.0 app.sina.com.cn
 0.0.0.0 app.sjk.ijinshan.com
-0.0.0.0 app.snapchat.com
 0.0.0.0 app.streameye.com
 0.0.0.0 app.swrve.com
 0.0.0.0 app.waps.cn
@@ -5925,7 +5924,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 images-pw.secureserver.net
 0.0.0.0 images.ad-maker.info
 0.0.0.0 images.ads.fairfax.com.au
-0.0.0.0 images.bitmoji.com
 0.0.0.0 images.intellitxt.com
 0.0.0.0 images.millennialmedia.com
 0.0.0.0 images.mpression.net
