@@ -6019,7 +6019,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 imupdate.3g.cn
 0.0.0.0 in-appadvertising.com
 0.0.0.0 in-page-push.com
-0.0.0.0 in.appcenter.ms
 0.0.0.0 in.cuebiq.com
 0.0.0.0 in.naked.com
 0.0.0.0 in1.secure.uu.cc
@@ -11238,8 +11237,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 www.globalismedia.com
 0.0.0.0 www.google-analytics.com
 0.0.0.0 www.googleadservices.com
-0.0.0.0 www.googletagmanager.com
-0.0.0.0 www.googletagservices.com
 0.0.0.0 www.gorillanation.com
 0.0.0.0 www.gumgum.com
 0.0.0.0 www.guohead.com
