@@ -2875,8 +2875,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 awio.com
 0.0.0.0 awltovhc.com
 0.0.0.0 aws-ajax.com
-0.0.0.0 aws.api.snapchat.com
-0.0.0.0 aws.duplex.snapchat.com
 0.0.0.0 awsmer.com
 0.0.0.0 awstaticdn.net
 0.0.0.0 awsurveys.com
@@ -4004,7 +4002,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 code-server.biz
 0.0.0.0 code.etracker.com
 0.0.0.0 coedmediagroup.com
-0.0.0.0 cognac-prod.appspot.com
 0.0.0.0 cognitiv.ai
 0.0.0.0 cognitivematch.com
 0.0.0.0 cogocast.net
@@ -4990,7 +4987,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 euro-linkindex.de
 0.0.0.0 euroclick.com
 0.0.0.0 europacash.com
-0.0.0.0 europe-west1-gcp.api.snapchat.com
 0.0.0.0 european-toplist.de
 0.0.0.0 euroranking.de
 0.0.0.0 euros4click.de
@@ -5389,7 +5385,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 gbanners.hornymatches.com
 0.0.0.0 gcdn.2mdn.net
 0.0.0.0 gcdsdk.appsflyer.com
-0.0.0.0 gcp.api.snapchat.com
 0.0.0.0 gcs.sc-cdn.net
 0.0.0.0 gdeslon.ru
 0.0.0.0 gdmdigital.com
@@ -6145,7 +6140,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 intergi.com
 0.0.0.0 intermarkets.net
 0.0.0.0 intermundomedia.com
-0.0.0.0 internal-api.snapkit.com
 0.0.0.0 internetadbrokers.com
 0.0.0.0 internetbrands.com
 0.0.0.0 internetfuel.com
@@ -7315,7 +7309,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 mutuza.win
 0.0.0.0 muwmedia.com
 0.0.0.0 mv.ad.naver.com
-0.0.0.0 mvm.snapchat.com
 0.0.0.0 mw.app.qq.com
 0.0.0.0 mwc.velti.com
 0.0.0.0 mws.adsage.com
@@ -10011,7 +10004,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 tqlkg.com
 0.0.0.0 tr.adinterax.com
 0.0.0.0 tr.iadsdk.apple.com
-0.0.0.0 tr.snapchat.com
 0.0.0.0 trace.qq.com
 0.0.0.0 traceadmanager.com
 0.0.0.0 track.176.com
@@ -10578,13 +10570,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 urlsafe.baidu.com
 0.0.0.0 urlservice.sj.91.com
 0.0.0.0 urtbk.com
-0.0.0.0 us-central1-gcp.api.sc-gw.com
-0.0.0.0 us-central1-gcp.api.snapchat.com
-0.0.0.0 us-central1-gcp.api.snapchat.com
-0.0.0.0 us-east1-aws.api.sc-gw.com
-0.0.0.0 us-east1-aws.api.snapchat.com
-0.0.0.0 us-east1-aws.api.snapchat.com
-0.0.0.0 us-east4-gcp.api.snapchat.com
 0.0.0.0 us.a1.yimg.com
 0.0.0.0 us.ads.justpremium.com
 0.0.0.0 us.adserver.yahoo.com
