@@ -3895,6 +3895,7 @@
 0.0.0.0 ads4cheap.com
 0.0.0.0 ads4homes.com
 0.0.0.0 ads5-adnow.com
+0.0.0.0 ads5-snoneu.truecaller.com
 0.0.0.0 ads5.canoe.ca
 0.0.0.0 ads5.iphone.s3.amazonaws.com
 0.0.0.0 ads5.sabah.com.tr
@@ -6513,7 +6514,6 @@
 0.0.0.0 analytics.tooso.ai
 0.0.0.0 analytics.tout.com
 0.0.0.0 analytics.tribeca.vidavee.com
-0.0.0.0 analytics.twitter.com
 0.0.0.0 analytics.unibuddy.co
 0.0.0.0 analytics.upworthy.com
 0.0.0.0 analytics.urx.io
@@ -6840,14 +6840,12 @@
 0.0.0.0 api.mobula.sdk.duapps.com
 0.0.0.0 api.myhappyads.com
 0.0.0.0 api.nas.nct.vn
-0.0.0.0 api.newrelic.com
 0.0.0.0 api.newsfeed.intl.miui.com
 0.0.0.0 api.ning.com
 0.0.0.0 api.nobeta.com.br
 0.0.0.0 api.nrelate.com
 0.0.0.0 api.oneaudience.com
 0.0.0.0 api.onelink.me
-0.0.0.0 api.onesignal.com
 0.0.0.0 api.openfeint.com
 0.0.0.0 api.openx.com
 0.0.0.0 api.pc120.com
@@ -6862,9 +6860,7 @@
 0.0.0.0 api.rubic.com.tr
 0.0.0.0 api.safedk.com
 0.0.0.0 api.sbz.vn
-0.0.0.0 api.sc-gw.com
 0.0.0.0 api.sec.miui.com
-0.0.0.0 api.segment.io
 0.0.0.0 api.share.baidu.com
 0.0.0.0 api.share.mob.com
 0.0.0.0 api.smartadv.ru
@@ -6960,7 +6956,6 @@
 0.0.0.0 appared.online
 0.0.0.0 apparentsav.club
 0.0.0.0 apparest.com
-0.0.0.0 appboy-images.com
 0.0.0.0 appboy.com
 0.0.0.0 appboycdn.com
 0.0.0.0 appcast.io
@@ -7044,7 +7039,6 @@
 0.0.0.0 appsfire.com
 0.0.0.0 appsfire.net
 0.0.0.0 appsflybeta.biz
-0.0.0.0 appsflyer.com
 0.0.0.0 appsha2.space
 0.0.0.0 appshelf.ttpsdk.info
 0.0.0.0 appsnack.com
@@ -7761,7 +7755,6 @@
 0.0.0.0 awreert.ru
 0.0.0.0 awrnrkmwtia.com
 0.0.0.0 aws-ajax.com
-0.0.0.0 aws.api.snapchat.com
 0.0.0.0 awsatstb.com
 0.0.0.0 awseukpi.whisbi.com
 0.0.0.0 awsmer.com
@@ -8362,7 +8355,6 @@
 0.0.0.0 baypops.com
 0.0.0.0 baysexthy.com
 0.0.0.0 baywttgdhe.download
-0.0.0.0 bazaarvoice.com
 0.0.0.0 bazenatuzu.com
 0.0.0.0 baztrack.com
 0.0.0.0 bb1acb0ea5ddb1fed8.com
@@ -8517,7 +8509,6 @@
 0.0.0.0 beabsolom.com
 0.0.0.0 beachfront.com
 0.0.0.0 beacon2.indieclick.com
-0.0.0.0 beacon-1.newrelic.com
 0.0.0.0 beacon-fullpage-predictor.goguardian.com
 0.0.0.0 beacon.affil.walmart.com
 0.0.0.0 beacon.aimtell.com
@@ -10701,7 +10692,6 @@
 0.0.0.0 cdn.oas-c18.adnxs.com
 0.0.0.0 cdn.oas-eu1.adnxs.com
 0.0.0.0 cdn.odoscope.cloud
-0.0.0.0 cdn.onesignal.com
 0.0.0.0 cdn.optimizely.com
 0.0.0.0 cdn.outfit7.com
 0.0.0.0 cdn.pardot.com
@@ -11674,7 +11664,6 @@
 0.0.0.0 clouderrorreporting.googleapis.com
 0.0.0.0 cloudfastads.ru
 0.0.0.0 cloudflare.solutions
-0.0.0.0 cloudflareinsights.com
 0.0.0.0 cloudfront-labs.amazonaws.com
 0.0.0.0 cloudgallery.net
 0.0.0.0 cloudiiv.com
@@ -16231,7 +16220,6 @@
 0.0.0.0 eszkrcviokckfb.com
 0.0.0.0 et-cod.com
 0.0.0.0 et-code.ru
-0.0.0.0 et.nytimes.com
 0.0.0.0 et.twyn.com
 0.0.0.0 et.w.inmobi.com
 0.0.0.0 etacontent.com
@@ -16303,7 +16291,6 @@
 0.0.0.0 eu-adcenter.net
 0.0.0.0 eu-ma.sam4m.com
 0.0.0.0 eu-survey.com
-0.0.0.0 eu-west1-aws.duplex.sc-gw.com
 0.0.0.0 eu.market-place.su
 0.0.0.0 euadsapi.manhuaren.com
 0.0.0.0 euadw.com
@@ -18301,7 +18288,6 @@
 0.0.0.0 gcm.ksmobile.net
 0.0.0.0 gcomrarlta.com
 0.0.0.0 gcontentdelivery.info
-0.0.0.0 gcp.api.snapchat.com
 0.0.0.0 gcpjstirhbqjx.com
 0.0.0.0 gcqdiydpfytvn.com
 0.0.0.0 gctwh9xc.site
@@ -19232,6 +19218,7 @@
 0.0.0.0 grapefruitlifestyle.com
 0.0.0.0 grapeshot.co.uk
 0.0.0.0 graph.instagram.com
+0.0.0.0 graphql.instagram.com
 0.0.0.0 graph.m-freeway.com
 0.0.0.0 grapheffect.com
 0.0.0.0 graphenedigitalanalytics.in
@@ -19439,9 +19426,6 @@
 0.0.0.0 gtop100.com
 0.0.0.0 gtop.ro
 0.0.0.0 gtopstats.com
-0.0.0.0 gtq6.sct.sc-prod.net
-0.0.0.0 gtq.sct.sc-prod.ne
-0.0.0.0 gtq.sct.sc-prod.net
 0.0.0.0 gtrk.s3.amazonaws.com
 0.0.0.0 gts-ads.twistbox.com
 0.0.0.0 gtsads.com
@@ -22908,7 +22892,6 @@
 0.0.0.0 js4386.fujianryt.com
 0.0.0.0 js88895.net
 0.0.0.0 js*.abolezi.com
-0.0.0.0 js-agent.newrelic.com
 0.0.0.0 js-kods.club
 0.0.0.0 js-sec.indexww.com
 0.0.0.0 js.23yy.com
@@ -24707,7 +24690,6 @@
 0.0.0.0 lishuanghao.com
 0.0.0.0 lislepostsax.com
 0.0.0.0 lisqvfrr.com
-0.0.0.0 list-manage.com
 0.0.0.0 listat.biz
 0.0.0.0 listen.ph.126.net
 0.0.0.0 listenloop.com
@@ -25204,6 +25186,7 @@
 0.0.0.0 look-reklama.ru
 0.0.0.0 look.flowln.com
 0.0.0.0 look.kfiopkln.com
+0.0.0.0 lookaside.facebook.com
 0.0.0.0 lookery.com
 0.0.0.0 lookfornews.net
 0.0.0.0 lookit-quick.com
@@ -27128,7 +27111,6 @@
 0.0.0.0 mobile-10.com
 0.0.0.0 mobile-campaigns.avast.com
 0.0.0.0 mobile-click.biz
-0.0.0.0 mobile-collector.newrelic.com
 0.0.0.0 mobile-ent.biz
 0.0.0.0 mobile-service.segment.com
 0.0.0.0 mobile.adchina.com
@@ -28418,7 +28400,6 @@
 0.0.0.0 newoctads.com
 0.0.0.0 newopenx.detik.com
 0.0.0.0 newpoints.info
-0.0.0.0 newrelic.com
 0.0.0.0 newrrb.bid
 0.0.0.0 news02.biz
 0.0.0.0 news07.biz
@@ -28852,7 +28833,6 @@
 0.0.0.0 notchchatterboxdoor.com
 0.0.0.0 notchcollectormuffin.com
 0.0.0.0 notenpartner.de
-0.0.0.0 notes-analytics-events.apple.com
 0.0.0.0 notestscredi.club
 0.0.0.0 notheredef.fun
 0.0.0.0 nothickner.club
@@ -29753,7 +29733,6 @@
 0.0.0.0 onerror.gq
 0.0.0.0 onerror.ml
 0.0.0.0 onesegreativec.site
-0.0.0.0 onesignal.com
 0.0.0.0 onespot-tracking.herokuapp.com
 0.0.0.0 onespot.com
 0.0.0.0 onestat.com
@@ -34712,7 +34691,6 @@
 0.0.0.0 rpdtrk.com
 0.0.0.0 rpeonetedronsitren.info
 0.0.0.0 rpjzlykhkdc.com
-0.0.0.0 rpm-images.newrelic.com
 0.0.0.0 rpqknedxr.com
 0.0.0.0 rpts.org
 0.0.0.0 rpuuwsjcu.com
@@ -35781,7 +35759,6 @@
 0.0.0.0 segment-analytics.com
 0.0.0.0 segment-pixel.invitemedia.com
 0.0.0.0 segment.com
-0.0.0.0 segment.io
 0.0.0.0 segmentify.com
 0.0.0.0 segments.adap.tv
 0.0.0.0 segs.jp
@@ -38037,7 +38014,6 @@
 0.0.0.0 stats.webstarts.com
 0.0.0.0 stats.wired.com
 0.0.0.0 stats.wordpress.com
-0.0.0.0 stats.wp.com
 0.0.0.0 stats.wpmucdn.com
 0.0.0.0 stats.wwd.com
 0.0.0.0 stats.wwitv.com
@@ -38665,7 +38641,6 @@
 0.0.0.0 syndication.realsrv.com
 0.0.0.0 syndication.traffichaus.com
 0.0.0.0 syndication.trafficreps.com
-0.0.0.0 syndication.twitter.com
 0.0.0.0 syndigonetworks.com
 0.0.0.0 syndopop.com
 0.0.0.0 synergy-e.com
@@ -42261,7 +42236,7 @@
 0.0.0.0 us4post.com
 0.0.0.0 us5fzonaco.ru
 0.0.0.0 us6odtasve.ru
-0.0.0.0 us-east4-gcp.api.snapchat.com
+0.0.0.0 us-central1-gcp.api.snapchat.com
 0.0.0.0 us-events.api.iheart.com
 0.0.0.0 us-tracking.nextdoor.com
 0.0.0.0 us.3zs0.date
@@ -42278,7 +42253,6 @@
 0.0.0.0 usabilla.com
 0.0.0.0 usablenet.com
 0.0.0.0 usage.influxdata.com
-0.0.0.0 usage.readdle.com
 0.0.0.0 usage.seibert-media.io
 0.0.0.0 usahacmyhl.com
 0.0.0.0 usairguw.com
@@ -43686,7 +43660,6 @@
 0.0.0.0 waxtamnit.com
 0.0.0.0 way2traffic.com
 0.0.0.0 waycash.net
-0.0.0.0 wayfair.com
 0.0.0.0 wayfarerspoutpraise.com
 0.0.0.0 waynagmay.com
 0.0.0.0 waypresentsstud.com
@@ -45039,7 +45012,6 @@
 0.0.0.0 www.netcommunities.com
 0.0.0.0 www.netseer.com
 0.0.0.0 www.netshelter.net
-0.0.0.0 www.newrelic.com
 0.0.0.0 www.newsinc.com
 0.0.0.0 www.ning.com
 0.0.0.0 www.npario-inc.net
