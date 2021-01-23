@@ -2,7 +2,7 @@
 !
 ! Title: BlockingMachine
 !
-! January 15, 2021
+! Version: 1.23.21
 !
 ! This list contains block $cookie extended ABP-syntax of AdGuard, e.g ||example.org$cookie,third-party
 !
