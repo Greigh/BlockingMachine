@@ -10,3 +10,14 @@ I used several difference sources around the web by doing research with other Ho
 - Easylist (https://github.com/easylist/easylist)
 - BlockYouX (https://ceadd.ca/blockyoux/)
 - Myself (https://thegreighcanary.xyz/)
+
+## How to use
+1. Get the RAW format of the version you'd like to use (HOSTS, ABP, or Edge)
+2. Copy the URL.
+3. Paste it into your filter of your choice. 
+    - AdBlock Plus
+    - AdGuard
+    - PiHole
+    - uBlock Origin
+4. It should update as I push updates
+    - Just make sure you are updating your filters regularly.
