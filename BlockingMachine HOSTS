@@ -3928,6 +3928,7 @@
 0.0.0.0 ads-for-free.com
 0.0.0.0 ads-game-configuration-master.ads.prd.ie.internal.unity3d.com
 0.0.0.0 ads-im-netz.de
+0.0.0.0 ads-interfaces.sc-cdn.net
 0.0.0.0 ads-leaseweb.appsgeyser.com
 0.0.0.0 ads-link.net
 0.0.0.0 ads-mall.com
@@ -14988,7 +14989,6 @@
 0.0.0.0 du8783wkf05yr.cloudfront.net
 0.0.0.0 dualmarket.info
 0.0.0.0 dualstack.adbert-web-lbs-*.elb.amazonaws.com
-0.0.0.0 dualstack.com.imgix.map.fastly.net
 0.0.0.0 duamgurza.com
 0.0.0.0 duamilsyr.com
 0.0.0.0 duamuprs.com
@@ -16612,7 +16612,6 @@
 0.0.0.0 extfiles.net
 0.0.0.0 extmap.an.ace.advertising.com
 0.0.0.0 extmap.rub.ace.advertising.com
-0.0.0.0 extole.com
 0.0.0.0 extole.io
 0.0.0.0 extra33.com
 0.0.0.0 extra.thebigboss.org
@@ -18491,7 +18490,6 @@
 0.0.0.0 getbackstory.com
 0.0.0.0 getbeacon.io
 0.0.0.0 getblue.io
-0.0.0.0 getblueshift.com
 0.0.0.0 getbonusnow3.com
 0.0.0.0 getcake.com
 0.0.0.0 getclicky.com
@@ -18735,8 +18733,6 @@
 0.0.0.0 glareart.com
 0.0.0.0 glargoun.uk
 0.0.0.0 glassboxcdn.com
-0.0.0.0 glassboxdigital.io
-0.0.0.0 glassdoor.com
 0.0.0.0 glasszz.com
 0.0.0.0 glaswall.online
 0.0.0.0 glattepush.com
@@ -29659,7 +29655,6 @@
 0.0.0.0 omsjf.cmgame.com
 0.0.0.0 omsyfxirjg.com
 0.0.0.0 omt.shinobi.jp
-0.0.0.0 omtrdc.net
 0.0.0.0 omtvxcle.com
 0.0.0.0 omymicrossmuc.info
 0.0.0.0 omynews.net
@@ -29766,7 +29761,6 @@
 0.0.0.0 online-dn.com
 0.0.0.0 online-media24.de
 0.0.0.0 online-media-stats.com
-0.0.0.0 online-metrix.net
 0.0.0.0 online-path.com
 0.0.0.0 online-prod.zenmxapps.com
 0.0.0.0 online-right-now.net
@@ -31640,7 +31634,6 @@
 0.0.0.0 polyad.galaxypub.vn
 0.0.0.0 polyad.net
 0.0.0.0 polydarth.com
-0.0.0.0 polyfill.io
 0.0.0.0 polymorphicads.jp
 0.0.0.0 pomhz.com
 0.0.0.0 pomolation.ru
@@ -36807,7 +36800,6 @@
 0.0.0.0 snakesshop.com
 0.0.0.0 snambepupkjggz.com
 0.0.0.0 snammar-jumntal.com
-0.0.0.0 snap-storage-cdn.l.google.com
 0.0.0.0 snap.com
 0.0.0.0 snap.snapmobile.asia
 0.0.0.0 snapads.com
@@ -37555,7 +37547,6 @@
 0.0.0.0 stack-sonar.com
 0.0.0.0 stackadapt.com
 0.0.0.0 stackattacka.com
-0.0.0.0 stackpath.bootstrapcdn.com
 0.0.0.0 stackpath.com
 0.0.0.0 stackpathdns.com
 0.0.0.0 stadsvc.com
@@ -42236,7 +42227,6 @@
 0.0.0.0 us4post.com
 0.0.0.0 us5fzonaco.ru
 0.0.0.0 us6odtasve.ru
-0.0.0.0 us-central1-gcp.api.snapchat.com
 0.0.0.0 us-events.api.iheart.com
 0.0.0.0 us-tracking.nextdoor.com
 0.0.0.0 us.3zs0.date
