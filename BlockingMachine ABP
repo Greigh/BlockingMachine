@@ -2,7 +2,7 @@
 !
 ! Title: BlockingMachine
 !
-! Version: 1.30.21
+! Version: 2.03.21
 !
 ! This list contains block $cookie extended ABP-syntax of AdGuard, e.g ||example.org$cookie,third-party
 !
@@ -16616,7 +16616,6 @@
 ||extfiles.net^
 ||extmap.an.ace.advertising.com^
 ||extmap.rub.ace.advertising.com^
-||extole.io^
 ||extra33.com^
 ||extra.thebigboss.org^
 ||extrablocks.ru^
