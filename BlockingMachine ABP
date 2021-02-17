@@ -2,7 +2,7 @@
 !
 ! Title: BlockingMachine
 !
-! Version: 2.03.21
+! Version: 2.17.21
 !
 ! This list contains block $cookie extended ABP-syntax of AdGuard, e.g ||example.org$cookie,third-party
 !
@@ -31320,7 +31320,6 @@
 ||pixel.tapad.com^
 ||pixel.trackverify.com^
 ||pixel.tree.com^
-||pixel.watch^
 ||pixel.welt.de^
 ||pixel.widgetly.com^
 ||pixel.wp.com^
@@ -47455,3 +47454,4 @@
 ||zzxlukodff.com^
 ||zzyonghao.com^
 ||zzznews.ru^
+@@||appleterm.com^
