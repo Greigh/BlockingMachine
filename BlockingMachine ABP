@@ -6335,7 +6335,6 @@
 ||analytics.anvato.net^
 ||analytics.any.do^
 ||analytics.apnewsregistry.com^
-||analytics.archive.org^
 ||analytics.artirix.com^
 ||analytics.atomiconline.com^
 ||analytics.audioeye.com^
@@ -11000,7 +10999,6 @@
 ||chartboost.com^
 ||chartboosts.com^
 ||chasteminihaunting.com^
-||chat-gateway-prod.chat.snapchat.com^
 ||chatango.com^
 ||chatintr.com^
 ||chaturbate.com^
@@ -16575,7 +16573,6 @@
 ||expedientlonesome.com^
 ||expenditurebaneopenly.com^
 ||expepp.de^
-||experian.com^
 ||experianmarketingservices.digital^
 ||experience.contextly.com^
 ||experienceeggs.com^
@@ -23235,6 +23232,7 @@
 ||kampyle.com^
 ||kan5.xyz^
 ||kan8.xyz^
+||kandji.io^
 ||kanfaxing.com^
 ||kangerlu.com^
 ||kanghuaixin.cn^
@@ -44448,7 +44446,6 @@
 ||workshirty.club^
 ||worlanned.pro^
 ||world-2012.info^
-||world-gen.g.aaplimg.com^
 ||world.calzedonia.com^
 ||world.popadscdn.net^
 ||worlddatinghere.com^
@@ -47454,4 +47451,6 @@
 ||zzxlukodff.com^
 ||zzyonghao.com^
 ||zzznews.ru^
+! Exceptions
 @@||appleterm.com^
+@@||analytics.twitter.com^
