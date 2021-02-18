@@ -47451,6 +47451,8 @@
 ||zzxlukodff.com^
 ||zzyonghao.com^
 ||zzznews.ru^
+!
 ! Exceptions
-@@||appleterm.com^$document
+!
+@@||appleterm.com^$document,$important
 @@||analytics.twitter.com^
