@@ -9,6 +9,7 @@ I used several difference sources around the web by doing research with other Ho
 - AdGuard (https://github.com/AdguardTeam/AdguardFilters)
 - Easylist (https://github.com/easylist/easylist)
 - BlockYouX (https://ceadd.ca/blockyoux/)
+- Peter Lowe (https://pgl.yoyo.org/adservers/)
 - Myself (https://thegreighcanary.xyz/)
 
 ## How to use
