@@ -1,12 +1,16 @@
-[AdBlockPlus 2.0]
+! Title: BlockMachine
+! Description: Filter that blocks ads, trackers, and other bad things.
+! Version: 21.5.2
+! Expires: 4 days (update frequency)
 !
-! Title: BlockingMachine
+!Last modified: Wed, Feb 25, 2021 12:19 GMT
+!Homepage:      https://github.com/Greigh/
+!Format:        AdGuard Syntax
+!Entries:       47447
+!Credits:       Daniel Hipskind - https://thegreighcanary.xyz/
+!This URL:      https://raw.githubusercontent.com/Greigh/BlockingMachine/master/BlockingMachine%20ABP
+!Other formats: https://github.com/greigh/BlockingMachine
 !
-! Version: 2.18.21
-!
-! This list contains block $cookie extended ABP-syntax of AdGuard, e.g ||example.org$cookie,third-party
-!
-! 
 ||0a0qetx8et.com^
 ||0a4bcef12091ce7.com^
 ||0aa89ur58y.top^
@@ -13475,7 +13479,6 @@
 ||d.plugrush.com^
 ||d.push.daoyoudao.com^
 ||d.shareaholic.com^
-||d.skimresources.com^
 ||d.trafiq.party^
 ||d.turn.com^
 ||d.union.ijinshan.com^
@@ -20908,7 +20911,6 @@
 ||i.nl02.net^
 ||i.pgcdn.com^
 ||i.po.st^
-||i.skimresources.com^
 ||i.t.webtracker.jp^
 ||i.tapit.com^
 ||i.ua^
@@ -35138,7 +35140,6 @@
 ||s.send.microad.jp^
 ||s.sharesdk.cn^
 ||s.shbywsd.cn^
-||s.skimresources.com^
 ||s.sniphub.com^
 ||s.soha.vn^
 ||s.srvsynd.com^
@@ -38782,7 +38783,6 @@
 ||t.sgc.io^
 ||t.sharethis.com^
 ||t.signalayer.com^
-||t.skimresources.com^
 ||t.smile.eu^
 ||t.spot.im^
 ||t.uc.cn^
@@ -47451,6 +47451,10 @@
 ||zzznews.ru^
 !
 ! Exceptions
+! Made these exceptions due to breaking webpages.
+! Ads should still be blocked. 
 !
-@@||appleterm.com^$document,$important
-@@||analytics.twitter.com^
+@@||appleterm.com^$important,document
+@@||analytics.twitter.com^$important,document
+@@||skimlinks.com^$important,document
+@@||google.com/adsense^$important,document
