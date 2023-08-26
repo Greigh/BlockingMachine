@@ -3,14 +3,7 @@
 - If you find any issues, be sure to create an issue.
 
 ## Sources
-I used several difference sources around the web by doing research with other Host blocking lists as well as used W3, W3Tech, and other online marketing. I also used my own experience.
-
-## Credits
-- AdGuard (https://github.com/AdguardTeam/AdguardFilters)
-- Easylist (https://github.com/easylist/easylist)
-- BlockYouX (https://ceadd.ca/blockyoux/)
-- Peter Lowe (https://pgl.yoyo.org/adservers/)
-- Myself (https://thegreighcanary.xyz/)
+I used several difference sources around the web by doing research with other Host blocking lists as well as used W3, W3Tech, and other online marketing. I also used my own experience and blocking. Please let me know if you have any issues and I will address them.
 
 ## How to use
 1. Get the RAW format of the version you'd like to use (HOSTS, ABP, or Edge)
