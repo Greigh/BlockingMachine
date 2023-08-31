@@ -8,7 +8,7 @@ I used several difference sources around the web by doing research with other Ho
 ## How to use
 1. Get the [RAW format](https://raw.githubusercontent.com/Greigh/BlockingMachine/master/BlockingMachine%20AdGuard)
 2. Copy the URL.
-3. Paste it into your filter of your choice. 
+3. Paste it into your filter of your choice.
     - AdBlock Plus
     - AdGuard
     - PiHole

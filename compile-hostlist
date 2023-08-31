@@ -1,7 +1,6 @@
 cd /Users/daniel/Documents/GitHub/BlockingMachine
 
-# Create compiled blocklist
-time /Users/daniel/Documents/GitHub/BlockingMachine -v -c hostlist-compiler-config.json -o BlockingMachine
+hostlist-compiler -c hostlist-compiler-config.json -o BlockingMachine
 
 # Remove all whitelisted entries, this is a blocklist after all
 sed -i '/^@@/d' BlockingMachine
@@ -18,5 +17,5 @@ currentTime=`/bin/date '+%H:%M:%S'`
 
 # Push it to GitHub
 git add *
-git commit -m " update ${currentDate} ${currentTime}"
+git commit -m "Update ${currentDate} ${currentTime}"
 git push
