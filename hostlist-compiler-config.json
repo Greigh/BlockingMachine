@@ -645,16 +645,6 @@
       ]
     },
     {
-      "name": "HaGeZi's DoH/VPN/TOR/Proxy Bypass DNS Blocklist",
-      "source": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-proxy-bypass.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Validate"
-      ]
-    },
-    {
       "name": "HaGeZi's Fake DNS Blocklist",
       "source": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt",
       "type": "adblock",
