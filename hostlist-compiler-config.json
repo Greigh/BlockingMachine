@@ -5,6 +5,16 @@
   "license": "GPLv3",
   "sources": [
     {
+      "name": "MyFilter",
+      "source": "./BlockingMachineTemp",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress",
+        "Validate"
+      ]
+    },
+    {
       "name": "AdGuard DNS filter",
       "source": "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt",
       "type": "adblock",
