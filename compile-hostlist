@@ -2,9 +2,6 @@ cd /Users/daniel/Documents/GitHub/BlockingMachine
 
 hostlist-compiler -c hostlist-compiler-config.json -o BlockingMachine
 
-# Remove all whitelisted entries, this is a blocklist after all
-sed -i '/^@@/d' BlockingMachine
-
 # Remove empty lines
 sed -i '/^$/d' BlockingMachine
 
