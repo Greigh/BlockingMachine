@@ -252,15 +252,6 @@
       ]
     },
     {
-      "name": "Peter Lowe's List",
-      "source": "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=1&mimetype=plaintext",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress"
-      ]
-    },
-    {
       "name": "Perflyst and Dandelion Sprout's Smart-TV Blocklist",
       "source": "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV-AGH.txt",
       "type": "adblock",
