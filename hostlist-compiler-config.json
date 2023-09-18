@@ -15,6 +15,15 @@
       ]
     },
     {
+      "name": "AdGuard Home Whitelist",
+      "source": "https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
       "name": "AdGuard DNS filter",
       "source": "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt",
       "type": "adblock",
@@ -101,37 +110,8 @@
       ]
     },
     {
-      "name": "OISD Small List",
-      "source": "https://small.oisd.nl/",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress"
-      ]
-    },
-    {
       "name": "Lightswitch05 - Ads and Tracking",
       "source": "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt",
-      "type": "hosts",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Validate"
-      ]
-    },
-    {
-      "name": "Lightswitch05 - Facebook",
-      "source": "https://www.github.developerdan.com/hosts/lists/facebook-extended.txt",
-      "type": "hosts",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Validate"
-      ]
-    },
-    {
-      "name": "Lightswitch05 - AMP Hosts",
-      "source": "https://www.github.developerdan.com/hosts/lists/amp-hosts-extended.txt",
       "type": "hosts",
       "transformations": [
         "RemoveComments",
