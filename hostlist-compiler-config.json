@@ -597,7 +597,7 @@
     {
       "name": "AdGuard Home Whitelist",
       "source": "https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist_slim.txt",
-      "type": "list",
+      "type": "adblock",
       "transformations": [
         "RemoveComments",
         "Compress"
