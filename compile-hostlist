@@ -8,5 +8,5 @@ currentTime=`/bin/date '+%H:%M:%S'`
 
 # Push it to GitHub
 git add *
-git commit -m "Update ${currentDate} ${currentTime}"
+git commit -m -f "Update ${currentDate} ${currentTime}"
 git push

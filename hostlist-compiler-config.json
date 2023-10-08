@@ -574,6 +574,15 @@
         "RemoveComments",
         "Compress"
       ]
+    },
+    {
+      "name": "OISD Small",
+      "source": "https://small.oisd.nl/",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
     }
   ],
   "transformations": [
