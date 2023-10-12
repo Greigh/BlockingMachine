@@ -15,6 +15,15 @@
       ]
     },
     {
+      "name": "d3ward Basic List",
+      "source": "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
       "name": "AdGuard Home Whitelist",
       "source": "https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt",
       "type": "adblock",
@@ -117,6 +126,15 @@
         "RemoveComments",
         "Compress",
         "Validate"
+      ]
+    },
+    {
+      "name": "Fanboy Annoyances",
+      "source": "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
       ]
     },
     {
