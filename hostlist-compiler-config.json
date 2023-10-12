@@ -24,6 +24,24 @@
       ]
     },
     {
+      "name": "NoTracking",
+      "source": "https://adguardteam.github.io/HostlistsRegistry/assets/filter_32.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
+      "name": "1Hosts (Lite)",
+      "source": "https://cdn.jsdelivr.net/gh/badmojr/1Hosts@master/Lite/adblock.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
       "name": "AdGuard Home Whitelist",
       "source": "https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist.txt",
       "type": "adblock",
