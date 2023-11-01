@@ -42,6 +42,24 @@
       ]
     },
     {
+      "name": "AdGuard Tracking Filter",
+      "source": "https://filters.adtidy.org/ios/filters/3_optimized.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
+      "name": "AdGuard Mobile Ads Filter",
+      "source": "https://filters.adtidy.org/ios/filters/11_optimized.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
       "name": "AdGuard DNS filter",
       "source": "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt",
       "type": "adblock",
