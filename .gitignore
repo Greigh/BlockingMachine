@@ -4,3 +4,5 @@ editlist
 *.DS_Store
 .DS_Store
 BlockingMachineTemp
+compile-hostlist
+.vscode
