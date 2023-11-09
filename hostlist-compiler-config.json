@@ -6,7 +6,7 @@
   "sources": [
     {
       "name": "MyFilter",
-      "source": "./BlockingMachineTemp",
+      "source": "documents/BlockingMachineTemp",
       "type": "adblock",
       "transformations": [
         "RemoveComments",
