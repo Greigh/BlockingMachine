@@ -1,6 +1,6 @@
 # BlockingMachine
 - Use this tool to block ads and trackers
-- If you find any issues, be sure to create an issue.
+- If you find any issues, be sure to create an [issue](https://github.com/Greigh/BlockingMachine/issues).
 
 ## Sources
 I used several difference sources around the web by doing research with other Host blocking lists as well as used W3, W3Tech, and other online marketing. I also used my own experience and blocking. Please let me know if you have any issues and I will address them.
@@ -35,8 +35,9 @@ I used several difference sources around the web by doing research with other Ho
 2. Copy the URL.
 3. Paste it into your filter of your choice.
     - AdBlock Plus
-    - AdGuard
-    - PiHole
+    - AdGuard [Home]
+    - PiHole (Only uses Host file syntax, I recommend using [AdGuard Home](https://adguard.com/en/adguard-home/overview.html))
     - uBlock Origin
 4. It should update as I push updates
     - Just make sure you are updating your filters regularly.
+    - Updates don't come everyday.
