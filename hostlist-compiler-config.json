@@ -27,6 +27,17 @@
       ]
     },
     {
+      "name": "d3Host List by d3ward",
+      "source": "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.adblock",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress",
+        "Deduplicate",
+        "Validate"
+      ]
+    },
+    {
       "name": "1Hosts (Lite)",
       "source": "https://cdn.jsdelivr.net/gh/badmojr/1Hosts@master/Lite/adblock.txt",
       "type": "adblock",
