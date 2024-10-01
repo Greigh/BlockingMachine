@@ -603,8 +603,26 @@
       ]
     },
     {
+      "name": "HaGeZi's Ultimate DNS Blocklist",
+      "source": "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/ultimate.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
       "name": "AdGuard Home Whitelist",
       "source": "https://raw.githubusercontent.com/hl2guide/AdGuard-Home-Whitelist/main/whitelist_slim.txt",
+      "type": "adblock",
+      "transformations": [
+        "RemoveComments",
+        "Compress"
+      ]
+    },
+    {
+      "name": "aGeZi's Pro DNS Blocklist",
+      "source": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt",
       "type": "adblock",
       "transformations": [
         "RemoveComments",
