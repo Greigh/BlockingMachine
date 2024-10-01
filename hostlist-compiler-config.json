@@ -11,7 +11,8 @@
       "transformations": [
         "RemoveComments",
         "Compress",
-        "Deduplicate"
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -20,7 +21,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -29,7 +32,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -38,7 +43,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -47,7 +54,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -56,7 +65,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -65,7 +76,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -74,7 +87,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -84,6 +99,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -94,6 +110,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -104,6 +121,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -114,6 +132,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -124,6 +143,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -133,7 +153,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -142,7 +164,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -162,6 +186,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -171,7 +196,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -180,7 +207,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -190,6 +219,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -199,7 +229,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -208,7 +240,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -235,7 +269,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -244,7 +280,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -254,6 +292,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -274,6 +313,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -283,7 +323,8 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Validate"
       ]
     },
     {
@@ -292,7 +333,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -301,7 +344,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -310,7 +355,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -320,6 +367,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -330,6 +378,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -340,6 +389,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -360,6 +410,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -369,7 +420,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -378,7 +431,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -388,6 +443,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -398,6 +454,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -408,6 +465,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -417,7 +475,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -426,7 +486,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -435,7 +497,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -444,7 +508,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -453,7 +519,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -462,7 +530,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -471,7 +541,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -480,7 +552,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -489,7 +563,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -498,7 +574,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -535,6 +613,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -544,7 +623,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -553,7 +634,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -563,6 +646,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -590,7 +674,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -599,7 +685,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -608,7 +696,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -617,7 +707,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -626,7 +718,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     }
   ],
