@@ -49,17 +49,6 @@
       ]
     },
     {
-      "name": "AdGuard Tracking Filter",
-      "source": "https://filters.adtidy.org/ios/filters/3_optimized.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Deduplicate",
-        "Validate"
-      ]
-    },
-    {
       "name": "AdGuard Mobile Ads Filter",
       "source": "https://filters.adtidy.org/ios/filters/11_optimized.txt",
       "type": "adblock",
@@ -104,17 +93,6 @@
       ]
     },
     {
-      "name": "AWAvenue Ads Rule",
-      "source": "https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Deduplicate",
-        "Validate"
-      ]
-    },
-    {
       "name": "uBlock filters – Unbreak",
       "source": "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
       "type": "adblock",
@@ -128,17 +106,6 @@
     {
       "name": "Fanboy Annoyances",
       "source": "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Deduplicate",
-        "Validate"
-      ]
-    },
-    {
-      "name": "Ad filter list by Disconnect",
-      "source": "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt",
       "type": "adblock",
       "transformations": [
         "RemoveComments",
@@ -236,30 +203,8 @@
       ]
     },
     {
-      "name": "Matomo.org - referrer spammers",
-      "source": "https://raw.githubusercontent.com/matomo-org/referrer-spam-list/master/spammers.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Deduplicate",
-        "Validate"
-      ]
-    },
-    {
       "name": "HaGeZi's Allowlist Referral",
       "source": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/whitelist-referral.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Deduplicate",
-        "Validate"
-      ]
-    },
-    {
-      "name": "HaGeZi's Fake DNS Blocklist",
-      "source": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt",
       "type": "adblock",
       "transformations": [
         "RemoveComments",
