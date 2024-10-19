@@ -246,37 +246,8 @@
       ]
     },
     {
-      "name": "Firebog - Admiral",
-      "source": "https://v.firebog.net/hosts/Admiral.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Deduplicate",
-        "Validate"
-      ]
-    },
-    {
       "name": "Firebog - Easylist",
       "source": "https://v.firebog.net/hosts/Easylist.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress"
-      ]
-    },
-    {
-      "name": "Firebog - Prigent Crypto",
-      "source": "https://v.firebog.net/hosts/Prigent-Crypto.txt",
-      "type": "adblock",
-      "transformations": [
-        "RemoveComments",
-        "Compress"
-      ]
-    },
-    {
-      "name": "Firebog - Prigent Malware",
-      "source": "https://v.firebog.net/hosts/Prigent-Malware.txt",
       "type": "adblock",
       "transformations": [
         "RemoveComments",
@@ -314,6 +285,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -335,6 +307,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -372,17 +345,6 @@
       ]
     },
     {
-      "name": "NoCoin Filter List",
-      "source": "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/hosts.txt",
-      "type": "hosts",
-      "transformations": [
-        "RemoveComments",
-        "Compress",
-        "Deduplicate",
-        "Validate"
-      ]
-    },
-    {
       "name": "VNM: ABPVN List",
       "source": "https://abpvn.com/filter/abpvn-DEfBko.txt?adguard",
       "type": "hosts",
@@ -411,6 +373,7 @@
       "transformations": [
         "RemoveComments",
         "Compress",
+        "Deduplicate",
         "Validate"
       ]
     },
@@ -605,7 +568,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
@@ -614,7 +579,9 @@
       "type": "adblock",
       "transformations": [
         "RemoveComments",
-        "Compress"
+        "Compress",
+        "Deduplicate",
+        "Validate"
       ]
     },
     {
