@@ -7,7 +7,7 @@
 @@||ally.com.ssl.d1.sc.omtrdc.net^$important
 @@||analytics.chase.com^$important
 @@||smetrics.usbank.com^$important
-@@||zn6vxkyqywaf9f1t7-usbank.siteintercept.qualtrics.com^$important
+@@||siteintercept.qualtrics.com^$important
 @@||usbank.demdex.net^$important
 @@||usbank-sync.quantummetric.com^$important
 #Roku Mobile App Fix
@@ -20,7 +20,6 @@
 # Cellular Carrier Fixes
 @@||tmobile.sc.omtrdc.net^$important
 @@||verizontelecom.sc.omtrdc.net^$important
-@@||zn9nssxmv9itcz7nq-verizoncx.siteintercept.qualtrics.com^$important
 @@||sanalytics.verizon.com^$important
 @@||engage.vzw.com^$important
 @@||verizon.inq.com^$important
@@ -32,7 +31,6 @@
 @@||homedepot.tt.omtrdc.net^$important
 @@||homedepot.com.ssl.d2.sc.omtrdc.net^$important
 @@||h-homedepot.online-metrix.net^$important
-@@||zn_42v6draxyafsjmv-homedepot.siteintercept.qualtrics.com^$important
 @@||customer.homedepot.com^$important
 @@||swasc.homedepot.com^$important
 # Amazon Fixes
@@ -82,7 +80,6 @@
 #Roku and Hulu adblocks
 ||dpm.demdex.net^$important
 #Random Blocks
-twitch.tv##+js(vaft-ublock-origin)
 ||fedex.com/content/dam/fedex-com/visibility^$important
 ||plus.unsplash.com^$important
 ||istockphoto.com^$important
@@ -103,7 +100,6 @@ twitch.tv##+js(vaft-ublock-origin)
 ||tv.deezer.com^$important
 ||cdns-content.dzcdn.net
 ||nbc-jite.nbcuni.com^$important
-||googleads.g.doubleclick.net^$important
 ||static.doubleclick.net^$important
 ||track.sr.roku.com^$important
 ||p.ads.roku.com^$important
@@ -117,7 +113,6 @@ twitch.tv##+js(vaft-ublock-origin)
 ||get.geo.opera.com^$important
 ||xml.opera.com^$important
 ||cert-test.sandbox.google.com^$important
-||googleads.g.doubleclick.net^$important
 ||hbbtv.redbutton.de^$important
 ||hbbtv.zdf.de^$important
 ||drscdn.500px.org^$important
@@ -211,3 +206,13 @@ twitch.tv##+js(vaft-ublock-origin)
 @@||pgyuel-launches.appsflyersdk.com^$important
 @@||pgyuel-cdn-settings.appsflyersdk.com^$important
 @@||app-measurement.com^$important
+@@||beacon.shazam.com^$important
+#Trying to fix Verizon
+@@||cdn.quantummetric.com^$important
+@@||bam-cell.nr-data.net^$important
+@@||ingest.quantummetric.com^$important
+@@||logging.pw.adn.cloud^$important
+@@||pt.ispot.tv^$important
+@@||www-alv.google-analytics.com^$important
+@@||websdk.appsflyer.com^$important
+@@||mobile-collector.newrelic.com^$important

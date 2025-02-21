@@ -1,0 +1,2 @@
+AdGuard rules count: 75069
+Browser rules count: 59629
