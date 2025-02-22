@@ -6,8 +6,8 @@ extends:
 syntax:
   - AdGuard
 rules:
-  - invalid-modifiers: off
-  - no-console: warn
-  - max-len:
-      code: 120
-      ignorePattern: "^\\s*\\w+\\s*\\$[\\w\\s]*$"
+  invalid-modifiers: off
+  no-excluded-rules:
+    - error
+    - regexp-patterns:
+        - ^\\s*\\w+\\s*\\$[\\w\\s]*$
