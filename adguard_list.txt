@@ -12,6 +12,7 @@
 @@||usbank-sync.quantummetric.com^$important
 #Roku Mobile App Fix
 @@||mobile.logs.roku.com^$important
+@@||logs.roku.com^$important
 # Affiliate Linking Fixes
 @@||click.linksynergy.com^$important
 @@||ctrk.klclick1.com^$important

@@ -1,0 +1,13 @@
+# AGLint config file
+# Documentation: https://github.com/AdguardTeam/AGLint#configuration
+root: true
+extends:
+  - aglint:recommended
+syntax:
+  - AdGuard
+rules:
+  - invalid-modifiers: off
+  - no-console: warn
+  - max-len:
+      code: 120
+      ignorePattern: "^\\s*\\w+\\s*\\$[\\w\\s]*$"

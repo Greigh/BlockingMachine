@@ -1,11 +1,12 @@
 'use strict';
+const process = require('process');
 const blockMachine = require('./BlockingMachine');
 const fs = require('fs');
 const path = require('path');
 
 const debug = process.argv.includes('-debug');
 const verbose = process.argv.includes('-verbose');
-const outputFilePath = path.resolve(__dirname, 'output.txt');
+const outputFilePath = path.resolve(path.dirname(require.main.filename), 'output.txt');
 
 // Helper function to log messages
 async function logMessage(message, verbose, alwaysLog = false) {

@@ -4,6 +4,8 @@ const path = require('path'); // Import path for handling file paths
 const fs = require('fs'); // Import fs for file system operations
 
 // Define file paths
+const __filename = require('process').argv[1];
+const __dirname = path.dirname(__filename);
 const filtersFilePath = path.resolve(__dirname, 'filters.txt'); // File path for filters.txt
 const mergedFilePath = path.resolve(__dirname, 'adguard_merged.txt'); // File path for adguard_merged.txt
 const browserRulesFilePath = path.resolve(__dirname, 'browserRules.txt'); // File path for browserRules.txt
@@ -21,7 +23,7 @@ async function logMessage(message, verbose, alwaysLog = false) {
 }
 
 // Read filter URLs from filters.txt (one URL per line)
-async function loadFilterUrls(debug, verbose, logMessage) {
+async function loadFilterUrls(debug, verbose) {
     try {
         await logMessage('Reading filter URLs from filters.txt', verbose);
         const fileContent = await fs.promises.readFile(filtersFilePath, { encoding: 'utf8' });
@@ -37,7 +39,7 @@ async function loadFilterUrls(debug, verbose, logMessage) {
 }
 
 // Fetch text content from a URL with retry logic
-async function fetchText(url, retries = 3, debug, verbose, logMessage) {
+async function fetchText(url, retries = 3, debug, verbose) {
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
             await logMessage(`Fetching URL: ${url} (Attempt ${attempt})`, debug);
@@ -103,7 +105,7 @@ async function convertToAdGuardRule(line) {
 }
 
 // Update all lists by fetching and processing filter URLs
-async function updateAllLists(debug, verbose, logMessage) {
+async function updateAllLists(debug, verbose) {
     await logMessage('Starting updateAllLists', verbose);
     await loadFilterUrls(debug, verbose, logMessage);
     if (FILTER_URLS.length === 0) {
@@ -193,7 +195,7 @@ async function updateAllLists(debug, verbose, logMessage) {
 }
 
 // Ensure filters.txt and browserRules.txt files exist
-async function ensureFiltersFileExists(debug, verbose, logMessage) {
+async function ensureFiltersFileExists(debug, verbose) {
     try {
         await logMessage('Checking if filters.txt exists', debug);
         await fs.promises.access(filtersFilePath);
