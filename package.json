@@ -2,11 +2,12 @@
   "name": "blockingmachine",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "build": "npm run start",
     "aglint": "aglint -c config/.aglintrc.yaml",
-    "eslint": "eslint -c config/eslint.config.mjs . && markdownlint -c config/.markdownlint.json '**/*.md'",
+    "eslint": "eslint -c config/eslint.config.mjs",
     "update-md": "node src/updateMarkdown.js",
     "mdlint": "markdownlint -c config/.markdownlint.json '**/*.md'",
     "lint": "npm run aglint && npm run eslint && npm run mdlint"
@@ -20,7 +21,9 @@
   },
   "devDependencies": {
     "@adguard/aglint": "^2.1.3",
-    "@eslint/js": "^9.20.0",
+    "@babel/eslint-parser": "^7.26.8",
+    "@eslint/eslintrc": "^3.3.0",
+    "@eslint/js": "^9.21.0",
     "eslint": "^9.20.1",
     "globals": "^16.0.0",
     "markdownlint-cli": "^0.31.1"
