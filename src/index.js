@@ -1,12 +1,20 @@
 'use strict';
 
 // Import required modules
+import { logMessage } from './utils/log.js'; // Ensure this is used somewhere in the code
+import axios from 'axios'; // Ensure this is used somewhere in the code
+
+// Define __dirname for ES modules
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+import { mergedFilePath, browserRulesFilePath } from './utils/paths.js'; // Ensure these are used somewhere in the code
+
 const process = require('process');
 const { updateAllLists, ensureFiltersFileExists } = require('./rules/update'); // Import functions from update.js
-const { logMessage } = require('./utils/log'); // Import logMessage function from log.js
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios'); // Import axios for making HTTP requests
 
 // Check for debug and verbose flags in the command line arguments
 const debug = process.argv.includes('-debug');
@@ -17,8 +25,6 @@ const outputFilePath = path.resolve(path.dirname(require.main.filename), 'output
 
 // Define file paths for various filter lists
 const filtersFilePath = path.resolve(__dirname, 'filters.txt'); // File path for filters.txt
-const mergedFilePath = path.resolve(__dirname, 'adguard_merged.txt'); // File path for adguard_merged.txt
-const browserRulesFilePath = path.resolve(__dirname, 'browserRules.txt'); // File path for browserRules.txt
 
 // Clear the output file before every run
 fs.writeFileSync(outputFilePath, '', 'utf8');

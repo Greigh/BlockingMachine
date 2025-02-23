@@ -51,32 +51,30 @@ This project consolidates multiple filter lists into a unified format, making it
 
 ## How to Use
 
-### Prerequisites
-
-#### Whole Home Filtering
+### Prerequisites for Whole Home Filtering
 
 - [AdGuard Home](https://adguard.com/en/adguard-home/overview.html) (Recommended)
 - [PiHole](https://pi-hole.net/) (Hosts filter only)
 - [Wireguard](https://www.wireguard.com/) (more advanced)
 
-#### iOS Filtering
+### Prerequisites for iOS Filtering
 
 - [AdGuard Pro](https://adguard.com/en/adguard-ios-pro/overview.html) (Recommended)
 - [AdBlocker DNS Ultimate AdBlock](https://apps.apple.com/us/app/adblocker-dns-ultimate-adblock/id6475119148)
 
-#### Android Filtering
+### Prerequisites for Android Filtering
 
 - [AdGuard](https://adguard.com/en/adguard-android/overview.html) (Recommended)
 
-#### Windows Filtering
+### Prerequisites for Windows Filtering
 
 - [AdGuard](https://adguard.com/en/adguard-windows/overview.html) (Recommended)
 
-#### macOS Filtering
+### Prerequisites for macOS Filtering
 
 - [AdGuard](https://adguard.com/en/adguard-mac/overview.html)
 
-#### Browser Filtering
+### Prerequisites for Browser Filtering
 
 - [Brave Browser](https://brave.com/)
   - Chromium-based browser with built-in filtering (Recommended)
@@ -93,7 +91,7 @@ This project consolidates multiple filter lists into a unified format, making it
   - [uBlock](https://ublockorigin.com/)
   - [Adblock Plus](https://adblockplus.org/en/download)
 
-#### System Based Filtering
+### Prerequisites for System Based Filtering
 
 - Block using the Hosts File on your computer (Not Recommended)
   - macOS: `/private/etc/hosts`

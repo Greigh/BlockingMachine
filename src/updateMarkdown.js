@@ -1,5 +1,10 @@
 'use strict';
 
+// Define __dirname for ES modules
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 // Import required modules
 const fs = require('fs');
 const path = require('path');
