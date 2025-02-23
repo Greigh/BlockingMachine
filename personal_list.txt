@@ -1,0 +1,219 @@
+#Brave (brave.com) Browser (Privacy Centric Browser) Fixes
+@@||brave.com^$important
+#US Bank Fixes
+@@||tracking.sp.sofi.com^$important
+@@||usbank.com.ssl.d2.sc.omtrdc.net^$important
+@@||ally.tt.omtrdc.net^$important
+@@||ally.com.ssl.d1.sc.omtrdc.net^$important
+@@||analytics.chase.com^$important
+@@||smetrics.usbank.com^$important
+@@||siteintercept.qualtrics.com^$important
+@@||usbank.demdex.net^$important
+@@||usbank-sync.quantummetric.com^$important
+#Roku Mobile App Fix
+@@||mobile.logs.roku.com^$important
+@@||logs.roku.com^$important
+# Affiliate Linking Fixes
+@@||click.linksynergy.com^$important
+@@||ctrk.klclick1.com^$important
+@@||bestbuy.7tiv.net^$important
+@@||onelink.me^$important
+# Cellular Carrier Fixes
+@@||tmobile.sc.omtrdc.net^$important
+@@||verizontelecom.sc.omtrdc.net^$important
+@@||sanalytics.verizon.com^$important
+@@||engage.vzw.com^$important
+@@||verizon.inq.com^$important
+#Google Calendar Widget Fixes
+@@||reminders-pa.clients6.google.com^$important
+@@||calendar.google.com^$important
+@@||ssl.gstatic.com^$important
+# Home Depot App Fixes
+@@||homedepot.tt.omtrdc.net^$important
+@@||homedepot.com.ssl.d2.sc.omtrdc.net^$important
+@@||h-homedepot.online-metrix.net^$important
+@@||customer.homedepot.com^$important
+@@||swasc.homedepot.com^$important
+# Amazon Fixes
+@@||aan.amazon.com^$important
+@@||aax-us-iad.amazon.com^$important
+@@||fls-na.amazon.com^$important
+@@||device-metrics-us-2.amazon.com^$important
+#FedEx Fixes
+@@||fedex.sc.omtrdc.net^$important
+@@||fedex.tt.omtrdc.net^$important
+# CVS App Fixes
+@@||cvshealth.tt.omtrdc.net^$important
+#Target Red Card Fixes
+@@||img9.target.com^$important
+# Plex TV Personal Analytics Fix
+@@||analytics.plex.tv^$important
+# Job Market Fixes
+@@||gdc.indeed.com^$important
+@@||click.appcast.io^$important
+#Breaks some websites
+@@||analytics.google.com^$important
+#iOS/Android Redirect Fixes
+@@||smart.link^$important
+@@||r.bttn.io^$important
+@@||open.homey.app^$important
+#Trello Fixes
+@@||xp.atlassian.com^$important
+#GTA RP Fixes
+@@||echorp.net^$important
+@@||footprintdns.com^$important
+@@||cfx.re^$important
+@@||fivem.net^$important
+#TikTok Fix
+@@||tiktokv.us^$important
+#Random fixes for across the Internet
+@@||yeggzb.clicks.mlsend.com^$important
+@@||akamai.net^$important
+@@||mparticle.map.fastly.net^$important
+@@||auth.split.io^$important
+@@||app.engage.redhat.com^$important
+@@||js-agent.newrelic.com^$important
+@@||assets.adobedtm.com^$important
+@@||media.evolv.ai^$important
+@@||c.go-mpulse.net^$important
+@@||nexus.ensighten.com^$important
+@@||scripps.tt.omtrdc.net^$important
+#Roku and Hulu adblocks
+||dpm.demdex.net^$important
+#Random Blocks
+||fedex.com/content/dam/fedex-com/visibility^$important
+||plus.unsplash.com^$important
+||istockphoto.com^$important
+||ads-a.unity3d.com^$important^$important
+@@||www.google-analytics.com^$important
+@@||ssl.google-analytics.com^$important
+@@||time.apple.com^$important
+||roku.adsmeasurement.com^$important
+||get.geo.opera.com^$important
+||xml.opera.com^$important
+||itv.ard.de^$important
+||cert-test.sandbox.google.com^$important
+||hbbtv.redbutton.de^$important
+||hbbtv.zdf.de^$important
+||drscdn.500px.org^$important
+||tv-static.scdn.co^$important
+||apicache.vudu.com^$important
+||tv.deezer.com^$important
+||cdns-content.dzcdn.net
+||nbc-jite.nbcuni.com^$important
+||static.doubleclick.net^$important
+||track.sr.roku.com^$important
+||p.ads.roku.com^$important
+||bif.sr.roku.com^$important
+||traces.sr.roku.com^$important
+||amarillo.sb.roku.com^$important
+||logs.roku.com^$important
+||display.ravm.tv^$important
+||ravm.tv^$important
+||api.distribution.hulu.com^$important
+||get.geo.opera.com^$important
+||xml.opera.com^$important
+||cert-test.sandbox.google.com^$important
+||hbbtv.redbutton.de^$important
+||hbbtv.zdf.de^$important
+||drscdn.500px.org^$important
+||tv-static.scdn.co^$important
+||apicache.vudu.com^$important
+||tv.deezer.com^$important
+||cdns-content.dzcdn.net^$important
+||nbc-jite.nbcuni.com^$important
+||control-zoo-dtsstage.tvinteractive.tv^$important
+||coordinator-production-28516768.us-east-1.elb.amazonaws.com^$important
+||cjpowercast.com^$important
+||tvinteractive.tv^$important
+||adgrx.com^$important
+||samba.tv^$important
+||doubleverify.com^$important
+||dv.tech^$important
+||adsafeprotected.com^$important
+||rlcdn.com^$important
+||d.agkn.com^$important
+||brightline.tv^$important
+||dxnt.net^$important
+||bluecava.com^$important
+||adsafeprotected.com^$important
+||2mdn.net^$important
+||w55c.net^$important
+||fwmrm.net^$important
+@@||medal.tv^$important
+@@||swishapps.ai^$important
+||nbcstreaming.hb.omtrdc.net^$important
+||track.activemetering.com^$important
+||ir.surveywall-api.survata.com^$important
+||p.tvpixel.com^$important
+||g008-vod-us-cmaf-prd-ns.prd.pck.netskrt.net^$important
+||events.mountain.com^$important
+||us-east-1.event.prod.bidr.io^$important
+@@||minerva.devices.a2z.com^$important
+@@||metrics.iclud.com^$important
+@@||time.apple.com^$important
+@@||time-macos.apple.com^$important
+@@||time-ios.apple.com^$important
+@@||time1.apple.com^$important
+@@||time2.apple.com^$important
+@@||time3.apple.com^$important
+@@||time4.apple.com^$important
+@@||time5.apple.com^$important
+@@||time6.apple.com^$important
+@@||time7.apple.com^$important
+@@||time.euro.apple.com^$important
+@@||pool.ntp.org^$important
+@@||time.aws.com^$important
+@@||time.google.com^$important
+@@||time.android.com^$important
+@@||time.cloudflare.com^$important
+@@||time.windows.com^$important
+@@||nist.gov^$important
+@@||telemetry.sdk.inmobi.com^$important
+@@||focusrite.count.ly^$important
+@@||sdk-events.inner-active.mobi^$important
+@@||o-sdk.mediation.unity3d.com^$important
+@@||tfpodf-cdn-settings.appsflyersdk.com^$important
+@@||t.indeed.com^$important
+@@||browser-intake-datadoghq.com^$important
+@@||easebar.com^$important
+@@||tmobile.demdex.net^$important
+@@||lptag.liveperson.net^$important
+@@||cm.everesttech.net^$important
+@@||solutions.invocacdn.com^$important
+||app.appsflyer.com^$important
+||*.amazon-adsystem.com^$important
+||amazon-adsystem.com^$important
+||adinfo.amazon.com^$important
+||adnxs.com^$important
+||s.w-x.co^$important
+@@||events.launchdarkly.com^$important
+@@||servedby.flashtalking.com^$important
+@@||tagmanager1.citibankonline.com^$important
+@@||data.privacy.ensighten.com^$important
+@@||edge.adobedc.net^$important
+@@||live.rezync.com^$important
+@@||h.online-metrix.net^$important
+@@||collector.github.com^$important
+@@||browser.pipe.aria.microsoft.com^$important
+@@||westus2-0.in.applicationinsights.azure.com^$important
+@@||3gl.net^$important
+||impression.link^$important
+||hbevents-public.mz.unity3d.com^$important
+||pmc-vibe.go-vip.net^$important
+@@||vanguard.demdex.net^$important
+@@||analytics.plaid.com^$important
+@@||eastus-8.in.applicationinsights.azure.com^$important
+@@||pgyuel-launches.appsflyersdk.com^$important
+@@||pgyuel-cdn-settings.appsflyersdk.com^$important
+@@||app-measurement.com^$important
+@@||beacon.shazam.com^$important
+#Trying to fix Verizon
+@@||cdn.quantummetric.com^$important
+@@||bam-cell.nr-data.net^$important
+@@||ingest.quantummetric.com^$important
+@@||logging.pw.adn.cloud^$important
+@@||pt.ispot.tv^$important
+@@||www-alv.google-analytics.com^$important
+@@||websdk.appsflyer.com^$important
+@@||mobile-collector.newrelic.com^$important
