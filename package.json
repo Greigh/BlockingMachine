@@ -5,9 +5,10 @@
   "scripts": {
     "start": "node src/index.js",
     "build": "npm run start",
-    "lint": "aglint",
-    "lint2": "eslint -c config/eslint.config.mjs . && markdownlint -c config/.markdownlint.json '**/*.md'",
-    "update-md": "node src/updateMarkdown.js"
+    "lint": "aglint -c config/.aglintrc.yaml",
+    "eslint": "eslint -c config/eslint.config.mjs . && markdownlint -c config/.markdownlint.json '**/*.md'",
+    "update-md": "node src/updateMarkdown.js",
+    "mdlint": "markdownlint -c config/.markdownlint.json '**/*.md'"
   },
   "dependencies": {
     "axios": "^1.7.9",
@@ -25,16 +26,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaVersion": 2018
-  },
-  "rules": {
-    "no-console": "off"
   }
 }

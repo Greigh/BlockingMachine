@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run AGLint
-        run: npm run lint
-
       - name: Run update script
         run: npm run start
 
@@ -65,7 +62,25 @@ jobs:
         run: npm install -g markdownlint-cli
 
       - name: Run markdownlint
-        run: markdownlint '**/*.md'
+        run: npm run mdlint
+
+  eslint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run eslint
 
   aglint:
     name: Run AGLint
@@ -84,7 +99,7 @@ jobs:
         run: npm ci
 
       - name: Run AGLint
-        run: npm run lint
+        run: npm run aglint
 
   deploy-website:
     name: Deploy Website
@@ -98,6 +113,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website # Adjust this path to your website directory
+          publish_branch: gh-pages
 
   notify:
     name: Discord Notification
@@ -105,6 +121,7 @@ jobs:
     needs: 
       - update-txt-files
       - markdownlint
+      - eslint
       - aglint
       - deploy-website
     if: ${{ failure() }} # Only notify on failure
