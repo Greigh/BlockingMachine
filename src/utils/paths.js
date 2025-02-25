@@ -8,8 +8,8 @@ import path from 'path';
 
 // Define the file paths for various filter lists and output files
 export const thirdPartyFiltersFilePath = path.join(__dirname, 'thirdPartyFilters.txt'); // Path to the third-party filters file
-export const mergedFilePath = path.join(__dirname, 'merged.txt'); // Path to the merged AdGuard rules file
-export const browserRulesFilePath = path.join(__dirname, 'browserRules.txt'); // Path to the browser rules file
+export const mergedFilePath = path.join(__dirname, 'merged.txt'); // Fixed undefined path
+export const browserRulesFilePath = path.join(__dirname, 'browserRules.txt'); // Fixed undefined path
 export const outputFilePath = path.join(__dirname, 'output.txt'); // Path to the output file for logging
 export const adguardFilePath = path.join(__dirname, 'adguard.txt'); // Path to the AdGuard rules file
 export const personalListFilePath = path.join(__dirname, 'personalList.txt'); // Path to the personal list file

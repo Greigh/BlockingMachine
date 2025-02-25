@@ -1,6 +1,6 @@
 // Import required modules
-const axios = require('axios');
-const { logMessage } = require('./log');
+import axios from 'axios';
+import { logMessage } from './log.js';
 
 /**
  * Fetches text content from a URL with retry logic.
@@ -11,7 +11,7 @@ const { logMessage } = require('./log');
  * @param {boolean} verbose - Flag to enable verbose logging.
  * @returns {Promise<string>} - The fetched text content, or an empty string if all attempts fail.
  */
-async function fetchText(url, retries = 3, debug, verbose) {
+export async function fetchText(url, retries = 3, debug, verbose) {
     // Attempt to fetch the URL up to the specified number of retries
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
@@ -36,8 +36,3 @@ async function fetchText(url, retries = 3, debug, verbose) {
         }
     }
 }
-
-// Export the fetchText function
-module.exports = {
-    fetchText
-};

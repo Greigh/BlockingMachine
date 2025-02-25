@@ -1,33 +1,34 @@
 'use strict';
 
 // Import required modules
-import { logMessage } from './utils/log.js'; // Ensure this is used somewhere in the code
-import axios from 'axios'; // Ensure this is used somewhere in the code
-
-// Define __dirname for ES modules
-import { dirname } from 'path';
+import { logMessage } from './utils/log.js';
+import axios from 'axios';
+import express from 'express';
+import bodyParser from 'body-parser';
+import path from 'path';
 import { fileURLToPath } from 'url';
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { dirname } from 'path';
+import { promises as fs } from 'fs';
+import * as fsSync from 'fs';
+import { mergedFilePath, browserRulesFilePath } from './utils/paths.js';
+import { updateAllLists, ensureFiltersFileExists } from './rules/update.js';
 
-import { mergedFilePath, browserRulesFilePath } from './utils/paths.js'; // Ensure these are used somewhere in the code
-
-const process = require('process');
-const { updateAllLists, ensureFiltersFileExists } = require('./rules/update'); // Import functions from update.js
-const fs = require('fs');
-const path = require('path');
+// Get the current file's directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Check for debug and verbose flags in the command line arguments
 const debug = process.argv.includes('-debug');
 const verbose = process.argv.includes('-verbose');
 
 // Define the path to the output file
-const outputFilePath = path.resolve(path.dirname(require.main.filename), 'output.txt');
+const outputFilePath = path.resolve(dirname(__filename), 'output.txt');
 
 // Define file paths for various filter lists
-const filtersFilePath = path.resolve(__dirname, 'filters.txt'); // File path for filters.txt
+const filtersFilePath = path.resolve(__dirname, 'filters.txt');
 
 // Clear the output file before every run
-fs.writeFileSync(outputFilePath, '', 'utf8');
+fsSync.writeFileSync(outputFilePath, '', 'utf8');
 
 // Array to store filter URLs
 let FILTER_URLS = [];
@@ -44,7 +45,7 @@ async function loadFilterUrls(debug, verbose, logMessage) {
         // Log the start of reading filter URLs
         await logMessage('Reading filter URLs from filters.txt', verbose);
         // Read the content of filters.txt
-        const fileContent = await fs.promises.readFile(filtersFilePath, { encoding: 'utf8' });
+        const fileContent = await fs.readFile(filtersFilePath, { encoding: 'utf8' });
         // Split the content by new lines, trim each line, and filter out empty lines
         FILTER_URLS = fileContent
             .split(/\r?\n/)
@@ -77,3 +78,30 @@ async function loadFilterUrls(debug, verbose, logMessage) {
         console.error('Error occurred:', error);
     }
 })();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Basic route
+app.get('/', (req, res) => {
+    res.send('Blocking Machine is running!');
+});
+
+// Start server
+app.listen(port, () => {
+    logMessage(`Server is running on port ${port}`);
+});
+
+// Handle process events
+process.on('SIGTERM', () => {
+    logMessage('Received SIGTERM. Performing graceful shutdown...', 'warn');
+    process.exit(0);
+});
+
+process.on('SIGINT', () => {
+    logMessage('Received SIGINT. Performing graceful shutdown...', 'warn');
+    process.exit(0);
+});

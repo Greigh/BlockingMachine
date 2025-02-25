@@ -1,22 +1,16 @@
-// Import required modules
-const fs = require('fs');
-const { outputFilePath } = require('./paths'); // Import the output file path
-
 /**
- * Helper function to log messages to a file.
- * 
- * @param {string} message - The message to log.
- * @param {boolean} verbose - Flag to enable verbose logging.
- * @param {boolean} [alwaysLog=false] - Flag to always log the message regardless of the verbose flag.
+ * Logs a message to the console with timestamp
+ * @param {string} message - Message to log
+ * @param {string} [level='info'] - Log level (info, warn, error)
  */
-async function logMessage(message, verbose, alwaysLog = false) {
-    // If verbose logging is not enabled and alwaysLog is false, do not log the message
-    if (!verbose && !alwaysLog) return;
-    // Append the message to the output file
-    await fs.promises.appendFile(outputFilePath, message + '\n', 'utf8');
-}
+export const logMessage = (message, level = 'info') => {
+    const timestamp = new Date().toISOString();
+    const logLevels = {
+        info: console.log,
+        warn: console.warn,
+        error: console.error
+    };
 
-// Export the logMessage function
-module.exports = {
-    logMessage
+    const logFn = logLevels[level] || console.log;
+    logFn(`[${timestamp}] ${message}`);
 };

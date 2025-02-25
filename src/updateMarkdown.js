@@ -6,15 +6,15 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Import required modules
-const fs = require('fs');
-const path = require('path');
-const { logMessage } = require('./utils/log'); // Import logMessage function from log.js
-const {
+import fs from 'fs';
+import path from 'path';
+import { logMessage } from './utils/log.js';
+import {
+    thirdPartyFiltersFilePath,
     adguardFilePath,
     browserRulesFilePath,
-    hostsFilePath,
-    thirdPartyFiltersFilePath
-} = require('./utils/paths'); // Import file paths from paths.js
+    hostsFilePath
+} from './utils/paths.js';
 
 /**
  * Function to count the number of rules in a file.

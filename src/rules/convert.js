@@ -5,7 +5,7 @@
  * @param {boolean} [includeDnsRewrite=true] - Whether to include the DNS rewrite directive in the rule.
  * @returns {string|null} - The converted AdGuard rule, or null if the line should be ignored.
  */
-async function convertToAdGuardRule(line, includeDnsRewrite = true) {
+export async function convertToAdGuardRule(line, includeDnsRewrite = true) {
     // Ignore specific localhost and broadcast addresses
     if (
         line === '127.0.0.1 localhost' ||
@@ -51,8 +51,3 @@ async function convertToAdGuardRule(line, includeDnsRewrite = true) {
 
     return line; // Return the original line if it doesn't match any of the above conditions
 }
-
-// Export the convertToAdGuardRule function
-module.exports = {
-    convertToAdGuardRule
-};

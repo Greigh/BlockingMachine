@@ -1,18 +1,18 @@
 // Import required modules
-const fs = require('fs'); // File system module for reading and writing files
-const { fetchText } = require('../utils/fetch'); // Custom function to fetch text from URLs
-const { logMessage } = require('../utils/log'); // Custom function to log messages
-const { convertToAdGuardRule } = require('./convert'); // Custom function to convert rules to AdGuard format
-const {
+import fs from 'fs';
+import { fetchText } from '../utils/fetch.js';
+import { logMessage } from '../utils/log.js';
+import { convertToAdGuardRule } from './convert.js';
+import {
+    combinedFilePath,
     thirdPartyFiltersFilePath,
     mergedFilePath,
     browserRulesFilePath,
     outputFilePath,
     adguardFilePath,
     personalListFilePath,
-    hostsFilePath,
-    combinedFilePath // Add a new path for the combined list
-} = require('../utils/paths'); // Import file paths from paths.js
+    hostsFilePath
+} from '../utils/paths.js';
 
 /**
  * Reads filter URLs from thirdPartyFilters.txt (one URL per line).
@@ -126,7 +126,7 @@ function generateMetadataComment(type, count) {
  * @param {boolean} debug - Flag to enable debug logging.
  * @param {boolean} verbose - Flag to enable verbose logging.
  */
-async function updateAllLists(debug, verbose) {
+export async function updateAllLists(debug, verbose) {
     await logMessage('Starting updateAllLists', verbose);
     const FILTER_URLS = await loadFilterUrls(debug, verbose);
     if (FILTER_URLS.length === 0) {
@@ -228,7 +228,7 @@ async function updateAllLists(debug, verbose) {
  * @param {boolean} debug - Flag to enable debug logging.
  * @param {boolean} verbose - Flag to enable verbose logging.
  */
-async function ensureFiltersFileExists(debug, verbose) {
+export async function ensureFiltersFileExists(debug, verbose) {
     try {
         await logMessage('Checking if thirdPartyFilters.txt exists', verbose);
         await fs.promises.access(thirdPartyFiltersFilePath);
@@ -271,9 +271,3 @@ async function ensureFiltersFileExists(debug, verbose) {
         }
     }
 }
-
-// Export the functions
-module.exports = {
-    updateAllLists,
-    ensureFiltersFileExists
-};
