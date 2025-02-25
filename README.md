@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 <p align="center">
-  <img src="website/images/BlockingMachine.png" alt="Blocking Machine" width="200" />
+  <img src="public/images/BlockingMachine.png" alt="Blocking Machine" width="200" />
 </p>
 <h1 align="center">BlockingMachine</h1>
 <p align="center">
@@ -39,7 +39,7 @@
 - **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->73573
   - [DNS Rewrite Filter](adguard_dnsrewrite.txt)
   - [Normal Filter List](AdGuard.txt)
-- **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->57629
+- **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->57628
 - **[Hosts Rules](hosts.txt):** <!-- hostsCount -->70217
 - More lists to come!
 
