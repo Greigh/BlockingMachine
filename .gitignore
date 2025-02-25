@@ -7,3 +7,12 @@ env
 .env
 .env.local
 .env.development.local
+
+.vscode
+.idea
+*.iml
+*.log
+*.log.*
+*.log-*
+*.log/*
+vscode

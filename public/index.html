@@ -1,120 +1,142 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title data-id="metaTitle"></title>
-        <link rel="shortcut icon" type="image/png" href="images/BlockIngMachine.png">
-        <link rel="stylesheet" href="index.css" />
-    </head>
-    <body>
-        <div class="page-block">
-            <div class="container">
-                <div class="grid">
-                    <div class="column column--left">
-                        <div class="content">
-                            <h1 data-id="protectedTitle" class="title content__title content__title--blue"></h1>
-                            <div data-id="protectedDesc" class="text content__text"></div>
-                            <div class="content__btn">
-                                <button type="button" class="button" data-size="medium" data-type="filled" data-color="blue" data-id="backBtn" data-back-btn></button>
-                            </div>
-                            <div class="content__dropdown">
-                                <ul class="faq">
-                                    <li class="faq__item">
-                                        <div class="faq-item" data-dropdown-item>
-                                            <h2 class="subtitle faq-item__toggle">
-                                                <button type="button" data-id="safeDropdownTitle3" class="text faq-item__toggle-btn" data-dropdown-toggle></button>
-                                                <span class="faq-item__toggle-btn-icon">
-                                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="m6.05 9.9 5.9 6.1 6.1-5.9" stroke="#828A92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </span>
-                                            </h2>
-<div class="faq-item__content" data-dropdown-content>
-                                                <div class="faq-item__desc" data-dropdown-desc>
-                                                    <div data-id="protectedDropdownDesc3" class="text faq-item__text"></div>
-                                                    <div data-id="protectedDropdownDesc4" class="text faq-item__text"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="faq__item">
-                                        <div class="faq-item" data-dropdown-item>
-                                            <h2 class="subtitle faq-item__toggle">
-                                                <button type="button" data-id="safeDropdownTitle4" class="faq-item__toggle-btn" data-dropdown-toggle></button>
-                                                <span class="faq-item__toggle-btn-icon">
-                                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="m6.05 9.9 5.9 6.1 6.1-5.9" stroke="#828A92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </span>
-                                            </h2>
-                                            <div class="faq-item__content" data-dropdown-content>
-                                                <div class="faq-item__desc" data-dropdown-desc>
-                                                    <div data-id="safeDropdownDesc4_1" class="text faq-item__text"></div>
-                                                    <div data-id="safeDropdownDesc4_2" class="text faq-item__text"></div>
-                                                </div>
-                                            </div>
-                                            <div class="faq-item__content" data-dropdown-content>
-                                                <div class="faq-item__desc" data-dropdown-desc>
-                                                    <div data-id="protectedDropdownDesc3" class="text faq-item__text"></div>
-                                                    <div data-id="protectedDropdownDesc4" class="text faq-item__text"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="faq__item">
-                                        <div class="faq-item" data-dropdown-item>
-                                            <h2 class="subtitle faq-item__toggle">
-                                                <button type="button" data-id="safeDropdownTitle4" class="faq-item__toggle-btn" data-dropdown-toggle></button>
-                                                <span class="faq-item__toggle-btn-icon">
-                                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="m6.05 9.9 5.9 6.1 6.1-5.9" stroke="#828A92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </span>
-                                            </h2>
-                                            <div class="faq-item__content" data-dropdown-content>
-                                                <div class="faq-item__desc" data-dropdown-desc>
-                                                    <div data-id="safeDropdownDesc4_1" class="text faq-item__text"></div>
-                                                    <div data-id="safeDropdownDesc4_2" class="text faq-item__text"></div>
-                                                </div>
-       </div<div class="column column--right">
-                        <div class="pic">
-                            <img src="images/BlockingMachine.svg" alt="BlockingMachine" width="90%">                            
-                        </div>
-                                     </div>
-                                        </div<div class="column column--right">
-                        <div class="pic">
-                            <img src="images/BlockingMachine.svg" alt="BlockingMachine" width="90%">                       >
-     
-                        </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title data-id="metaTitle"></title>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="images/BlockIngMachine.png"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="page-block">
+      <div class="container">
+        <!-- Theme Toggle -->
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle dark mode"
+        >
+          🌓
+        </button>
+
+        <div class="grid">
+          <!-- Left Column -->
+          <div class="column column--left">
+            <div class="content">
+              <!-- Header -->
+              <h1
+                data-id="protectedTitle"
+                class="title content__title content__title--blue"
+              ></h1>
+              <div data-id="protectedDesc" class="text content__text"></div>
+
+              <!-- Back Button -->
+              <div class="content__btn">
+                <button
+                  type="button"
+                  class="button"
+                  data-size="medium"
+                  data-type="filled"
+                  data-color="blue"
+                  data-id="backBtn"
+                  data-back-btn
+                ></button>
+              </div>
+
+              <!-- FAQ Section -->
+              <div class="content__dropdown">
+                <ul class="faq">
+                  <!-- FAQ Item 1 -->
+                  <li class="faq__item" data-dropdown-item>
+                    <button
+                      type="button"
+                      class="faq-item__toggle"
+                      data-dropdown-toggle
+                    >
+                      <span data-id="safeDropdownTitle3"
+                        >Why is this website blocked?</span
+                      >
+                      <svg
+                        class="faq-item__icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M6 9l6 6 6-6"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    <div class="faq-item__content" data-dropdown-content>
+                      <div class="faq-item__desc">
+                        <p
+                          data-id="protectedDropdownDesc3"
+                          class="faq-item__text"
+                        ></p>
+                        <p
+                          data-id="protectedDropdownDesc4"
+                          class="faq-item__text"
+                        ></p>
+                      </div>
                     </div>
->
-                                    </li>
-                             <div class="column column--right">
-                        <div class="pic">
-                            <img src="images/BlockingMachine.svg" alt="BlockingMachine" width="90%">                            
-                        </div>
+                  </li>
+
+                  <!-- FAQ Item 2 -->
+                  <li class="faq__item" data-dropdown-item>
+                    <button
+                      type="button"
+                      class="faq-item__toggle"
+                      data-dropdown-toggle
+                    >
+                      <span data-id="safeDropdownTitle4"
+                        >How to temporarily unblock this website?</span
+                      >
+                      <svg
+                        class="faq-item__icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M6 9l6 6 6-6"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    <div class="faq-item__content" data-dropdown-content>
+                      <div class="faq-item__desc">
+                        <p
+                          data-id="safeDropdownDesc4_1"
+                          class="faq-item__text"
+                        ></p>
+                        <p
+                          data-id="safeDropdownDesc4_2"
+                          class="faq-item__text"
+                        ></p>
+                      </div>
                     </div>
-   </ul>
-                            </div>
-              <div class="column column--right">
-                        <div class="pic">
-                            <img src="images/BlockingMachine.svg" alt="BlockingMachine" width="90%">                            
-                        </div>
-                    </div>
-          </div>
-                    </div>
-                    <div class="column column--right">
-                        <div class="pic">
-                            <img src="imBlock<script src="script.js"></script>
-ingMachinechine.svg" alt="Block<script src="script.js"></script>
-ingMachine" width="90%">                            
-                        </div>
-              <script src="script.js"></script>
-      </div>
-                </div>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="column column--right">
+            <div class="pic"></div>
+          </div>
         </div>
-        <script src="script.js"></script>
-    </body>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
