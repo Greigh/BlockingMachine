@@ -1,4 +1,4 @@
-name: Primary Workflow
+name: UpdateFilters
 permissions: write-all
 on:
   push:
@@ -12,43 +12,14 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
-  lint:
-    name: Run Linters
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          # Remove cache option since we're doing a fresh install
-          # cache: npm
-
-      # Fresh install without cache
-      - name: Clean Install
-        run: |
-          npm cache clean --force
-          rm -rf node_modules package-lock.json
-          npm install
-          npm ci
-
-      # Run linters
-      - run: npm run eslint
-      - run: npm run mdlint
-      - run: npm run aglint
-
-  update-txt-files:
-    needs: lint
+  update-filters:
     name: Update TXT Files
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          # Remove cache option
-          # cache: npm
 
       # Fresh install without cache
       - name: Clean Install
@@ -75,33 +46,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  deploy-website:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "./public"
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   notify:
     name: Discord Notification
     runs-on: ubuntu-latest
     needs:
-      - update-txt-files
-      - deploy-website
-    if: ${{ failure() }} # Only notify on failure
+      - update-filters
+    if: ${{ always() }} # Always notify regardless of success or failure
     steps:
       - name: Notify
         uses: nobrayner/discord-webhook@v1

@@ -1,46 +1,27 @@
-<!-- markdownlint-disable -->
-<p align="center">
-  <img src="public/images/BlockingMachine.png" alt="Blocking Machine" width="200" />
-</p>
-<h1 align="center">BlockingMachine</h1>
-<p align="center">
-  <a href="https://github.com/greigh/BlockingMachine/actions/workflows/updates.yml" target="_blank">
-    <img src="https://img.shields.io/github/actions/workflow/status/greigh/BlockingMachine/updates.yml?branch=main" alt="Update TXT Files status">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/actions/workflows/eslint.yml" target="_blank">
-    <img src="https://img.shields.io/github/actions/workflow/status/greigh/BlockingMachine/eslint.yml?branch=main" alt="ESLint status">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/actions/workflows/markdownlint.yml" target="_blank">
-    <img src="https://img.shields.io/github/actions/workflow/status/greigh/BlockingMachine/markdownlint.yml?branch=main" alt="MarkdownLint status">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/actions/workflows/aglint.yml" target="_blank">
-    <img src="https://img.shields.io/github/actions/workflow/status/greigh/BlockingMachine/aglint.yml?branch=main" alt="AGLint status">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/blob/main/LICENSE" target="_blank">
-    <img src="https://img.shields.io/github/license/greigh/BlockingMachine" alt="License">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/graphs/contributors" target="_blank">
-    <img src="https://img.shields.io/github/contributors/greigh/BlockingMachine" alt="GitHub contributors">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/graphs/commit-activity" target="_blank">
-    <img src="https://img.shields.io/github/commit-activity/m/greigh/BlockingMachine" alt="GitHub commit activity">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/issues" target="_blank">
-    <img src="https://img.shields.io/github/issues/greigh/BlockingMachine" alt="GitHub issues">
-  </a>
-  <a href="https://github.com/greigh/BlockingMachine/issues?q=is%3Aissue+is%3Aclosed" target="_blank">
-    <img src="https://img.shields.io/github/issues-closed/greigh/BlockingMachine" alt="GitHub closed issues">
-  </a>
-</p>
-<!-- markdownlint-restore -->
+<p align="center"><img src="./public/images/BlockingMachine.png" width="200">
+
+<center>
+
+# Blocking Machine
+
+[![UPDATEFILTERS](https://img.shields.io/github/actions/workflow/status/badges/shields/updatefilters.yml?label=Filter%20Updates)](https://github.com/Greigh/BlockingMachine/blob/main/.github/workflows/updatefilters.yml)
+[![ESLINT](https://img.shields.io/github/actions/workflow/status/badges/shields/eslint.yml?label=eslint)](https://github.com/greigh/BlockingMachine/actions/workflows/eslint.yml)
+[![MDLINT](https://img.shields.io/github/actions/workflow/status/badges/shields/mdlint.yml?label=mdlint)](https://github.com/greigh/BlockingMachine/actions/workflows/mdlint.yml)
+[![AGLINT](https://img.shields.io/github/actions/workflow/status/badges/shields/aglint.yml?label=aglint)](https://github.com/greigh/BlockingMachine/actions/workflows/aglint.yml)
+[![LICENSE](https://img.shields.io/github/license/greigh/BlockingMachine)](https://github.com/greigh/BlockingMachine/blob/main/LICENSE)
+[![COMMITS](https://img.shields.io/github/commit-activity/m/greigh/BlockingMachine)](https://github.com/greigh/BlockingMachine/graphs/commit-activity)
+[![ISSUES](https://img.shields.io/github/issues/greigh/BlockingMachine)](https://github.com/greigh/BlockingMachine/issues)
+[![CLOSEDISSUES](https://img.shields.io/github/issues-closed/greigh/BlockingMachine)](https://github.com/greigh/BlockingMachine/issues?q=is%3Aissue+is%3Aclosed)
+
+</center>
 
 Last Updated: February 25, 2025 at 9:39 AM
 
 ## Rule Counts and Links (Lists are updated at midnight everyday)
 
-- **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->73571
+- **AdGuard Rules:** <!-- adguardCount -->73571
   - [DNS Rewrite Filter](adguard_dnsrewrite.txt)
-  - [Normal Filter List](AdGuard.txt)
+  - [Normal Filter List](adguard.txt)
 - **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->57629
 - **[Hosts Rules](hosts.txt):** <!-- hostsCount -->70215
 - More lists to come!

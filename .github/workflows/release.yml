@@ -1,0 +1,54 @@
+name: Daily Updates
+
+on:
+  schedule:
+    - cron: "25 0 * * *" # Runs daily at 0:25 UTC
+  workflow_dispatch: # Allow manual triggers
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create new release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run version
+        continue-on-error: true
+
+      - name: Commit README update
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update last updated timestamp [skip ci]" && git push)
+
+  notify:
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    needs:
+      - update
+    if: ${{ always() }}
+    steps:
+      - name: Notify
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          username: GitHub Actions
+          avatar-url: https://avatars0.githubusercontent.com/u/44036562?s=200&v=4
+          include-details: true
+          color-success: 17cf48
+          color-failure: e72727
+          color-cancelled: d3d3d3

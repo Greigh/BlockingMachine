@@ -31,9 +31,9 @@ async function updateMarkdown() {
 
         // Update the counts in README.md
         let updatedContent = readmeContent
-            .replace(/<!-- adguardCount -->.*/, `<!-- adguardCount -->${adguardCount}`)
-            .replace(/<!-- browserRulesCount -->.*/, `<!-- browserRulesCount -->${browserRulesCount}`)
-            .replace(/<!-- hostsCount -->.*/, `<!-- hostsCount -->${hostsCount}`);
+            .replace(/<!-- adguardCount -->.*/, `<!-- adguardCount -->${adguardCount} rules`)
+            .replace(/<!-- browserRulesCount -->.*/, `<!-- browserRulesCount -->${browserRulesCount} rules`)
+            .replace(/<!-- hostsCount -->.*/, `<!-- hostsCount -->${hostsCount} rules`);
 
         // Write the updated content back to README.md
         await fs.promises.writeFile(readmePath, updatedContent);

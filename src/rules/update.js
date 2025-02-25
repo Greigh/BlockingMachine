@@ -84,7 +84,7 @@ function addRuleToSets(line, rule, noDnsRewriteRule, sets) {
                 const hostRule = `0.0.0.0 ${domain}`;
                 hostsSet.add(hostRule);
 
-                const adGuardRule = `||${domain}^$dnsrewrite=ad-block.dns.adguard.com`;
+                const adGuardRule = `||${domain}^$dnsrewrite=greigh.github.io/BlockingMachine`; // #issue-2
                 const exceptionRule = `@@||${domain}^`;
 
                 if (trimmedLine.startsWith('||')) {
@@ -106,7 +106,7 @@ function addRuleToSets(line, rule, noDnsRewriteRule, sets) {
 /**
  * Helper function to generate metadata comments.
  * 
- * @param {string} type - The type of the list (e.g., AdGuard, Browser).
+ * @param {string} type - The type of the list (e.g., AdGuard, Browser, Hosts).
  * @param {number} count - The number of entries in the list.
  * @returns {string} - The generated metadata comment.
  */
@@ -116,19 +116,38 @@ function generateMetadataComment(type, count) {
         .replace('T', ' ')
         .replace(/\.\d+Z$/, '');
 
-    return `! Title: BlockingMachine
+    if (type === 'Hosts') {
+        return `# Title: BlockingMachine
+# Expires: 1 days (update frequency)
+# Description: Filter rules for blocking unwanted content
+# Homepage: https://github.com/greigh/blockingmachine
+# License: ${LICENSE}
+# Please report any unblocked content or problems on GitHub
+#
+# This list contains host file entries for blocking
+# Type: ${type}
+# Entries: ${count}
+# Updated On: ${updatedOn}
+# Created by: Greigh (aka Daniel)
+#
+# Format: 0.0.0.0 domain.tld or 127.0.0.1 domain.tld
+\n`;
+    }
+
+    // For AdGuard and Browser rules
+    return `! Title: BlockingMachine ${type} Rules
 ! Expires: 1 days
 ! Description: Filter rules for blocking unwanted content
 ! Homepage: https://github.com/greigh/blockingmachine
 ! License: ${LICENSE}
 ! Please report any unblocked content or problems on GitHub
 !
-! This list covers all Aglinting rules
+! This list contains ${type.toLowerCase()} specific blocking rules
 ! Type: ${type}
 ! Entries: ${count}
 ! Updated On: ${updatedOn}
 ! Created by: Greigh (aka Daniel)
-`;
+\n`;
 }
 
 /**

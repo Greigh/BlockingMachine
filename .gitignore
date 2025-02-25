@@ -16,3 +16,6 @@ env
 *.log-*
 *.log/*
 vscode
+
+.tmp 
+desktop.ini
