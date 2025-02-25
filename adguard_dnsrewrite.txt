@@ -7,8 +7,8 @@
 !
 ! This list covers all Aglinting rules
 ! Type: AdGuard
-! Entries: 72187
-! Updated On: 2025-02-25 07:06:56
+! Entries: 72186
+! Updated On: 2025-02-25 07:13:35
 ! Created by: Greigh (aka Daniel)
 ||adx-open-service.youku.com^$dnsrewrite=ad-block.dns.adguard.com
 ||ad.youku.com^$dnsrewrite=ad-block.dns.adguard.com
@@ -62874,7 +62874,6 @@
 ||6e.co.kr^$dnsrewrite=ad-block.dns.adguard.com
 ||6e8db01a49.26c42ca1c2.com^$dnsrewrite=ad-block.dns.adguard.com
 ||6ea337b8a4.com^$dnsrewrite=ad-block.dns.adguard.com
-||6ec5c9fcec.com^$dnsrewrite=ad-block.dns.adguard.com
 ||6fbb07e2de.7aa82805b9.com^$dnsrewrite=ad-block.dns.adguard.com
 ||6fe62b9eb9.com^$dnsrewrite=ad-block.dns.adguard.com
 ||6ox.de^$dnsrewrite=ad-block.dns.adguard.com
