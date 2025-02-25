@@ -1,8 +1,13 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const { Octokit } = require('@octokit/rest');
+import { promises as fs } from 'fs';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { Octokit } from '@octokit/rest';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN
@@ -102,7 +107,7 @@ Released: ${date} at ${time}
 
         // Update README timestamp
         const readmePath = path.join(__dirname, '..', 'README.md');
-        let readme = fs.readFileSync(readmePath, 'utf8');
+        let readme = await fs.readFile(readmePath, 'utf8');
 
         // Add or update the timestamp line
         const timestampLine = `Last Updated: ${date} at ${time}`;
@@ -117,7 +122,7 @@ Released: ${date} at ${time}
                 readme.slice(insertPosition);
         }
 
-        fs.writeFileSync(readmePath, readme);
+        await fs.writeFile(readmePath, readme);
 
         return version;
     } catch (error) {
@@ -126,16 +131,9 @@ Released: ${date} at ${time}
     }
 }
 
-// Add to package.json dependencies
-const packageJson = {
-    "dependencies": {
-        "@octokit/rest": "^19.0.7"
-    }
-};
+const isMainModule = import.meta.url === `file://${process.argv[1]}`;
 
-module.exports = { generateVersion, updateVersion };
-
-if (require.main === module) {
+if (isMainModule) {
     updateVersion()
         .then(version => console.log(`Created release ${version}`))
         .catch(error => {
@@ -143,3 +141,5 @@ if (require.main === module) {
             process.exit(1);
         });
 }
+
+export { generateVersion, updateVersion };
