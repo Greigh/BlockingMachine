@@ -12,7 +12,8 @@
     "mdlint": "markdownlint -c config/.markdownlint.json \"./README.md\" \"./docs/**/*.md\"",
     "lint": "npm run aglint && npm run eslint && npm run mdlint",
     "clean-rules": "node src/rules/cleanRules.js",
-    "update": "node src/update.js"
+    "update": "node src/update.js",
+    "version": "node src/version.js"
   },
   "dependencies": {
     "@octokit/rest": "^21.1.1",
