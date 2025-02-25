@@ -17,10 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Add cache clearing step
+      - name: Clear npm cache
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+      - run: npm install
       - run: npm ci
       - run: npm run eslint
       - run: npm run mdlint
@@ -32,10 +40,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Add cache clearing step
+      - name: Clear npm cache
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+      - run: npm install
       - run: npm ci
       - run: npm run update
       - run: npm run update-md
