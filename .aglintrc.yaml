@@ -1,0 +1,35 @@
+# Default configuration file for AGLint
+root: true
+extends:
+  - aglint:recommended
+syntax:
+  - Common
+rules:
+  no-excluded-rules:
+    - off
+    - regexp-patterns:
+        - \|\|telemetry\.api\.playstation\.com
+        - \|\|mobile\.pipe\.aria\.microsoft.com
+        - .ad-area
+        - .sidebar-ad
+        - .Ad-Container
+        - .cookie-modal
+        - cookie-modal
+        - (\/sd)?_ads_updater-
+        - \|\|b\.karte\.io
+        - \|\|static\.karte\.io
+        - static-assets\.bamgrid\.com\/analytics
+        - staff-start\.com\/js\/track\/
+        - minkou.jp\/js\/tracking\.js
+        - amazon.com\/1\/batch\/1\/OP\/
+        - amazon.com\/1\/batch\/1\/OE\/
+        - youtube\.com\^\$removeparam=si
+        - syndication\.twitter\.com\^
+        - fiverr\.com\^\$removeparam=ref
+  no-short-rules: 
+    - warn
+    - { minLength: 3 }
+  invalid-modifiers:
+    - off
+  no-invalid-css-syntax:
+    - off

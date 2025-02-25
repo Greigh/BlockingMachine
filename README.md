@@ -36,18 +36,30 @@
 
 ## Rule Counts and Links (Lists are updated at midnight everyday)
 
-- **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->
+- **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->73574
   - [DNS Rewrite Filter](adguard_dnsrewrite.txt)
   - [Normal Filter List](AdGuard.txt)
-- **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->
-- **[Hosts Rules](hosts.txt):** <!-- hostsCount -->
+- **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->57624
+- **[Hosts Rules](hosts.txt):** <!-- hostsCount -->70218
 - More lists to come!
 
-## About BlockingMachine
+## Third Party Filters
+<!-- thirdPartyFilters -->
+<!-- endThirdPartyFilters -->
 
-The Blocking Machine is a comprehensive tool designed to enhance your online privacy and security by blocking unwanted content such as ads, trackers, and malicious websites. By leveraging various filtering techniques and integrating with popular tools like AdGuard Home, PiHole, and browser extensions, the Blocking Machine provides a robust solution for users looking to take control of their internet experience.
+# Blocking Machine
 
-This project consolidates multiple filter lists into a unified format, making it easier to manage and deploy across different platforms and devices. Whether you're looking to implement whole-home filtering, browser-based blocking, or system-level protection, the Blocking Machine offers a versatile and effective approach to maintaining a cleaner and safer online environment.
+This web application maintains an up-to-date, unified list of blocking rules from various sources. It aggregates rules
+from trusted sources and converts them into a standardized format.
+
+## Features
+
+- Aggregates filter lists from multiple sources
+- Converts rules to AdGuard compatible format
+- Provides a unified blocklist endpoint
+- Supports DNS rewrites
+- Automatic daily updates
+- Basic web interface for status monitoring
 
 ## How to Use
 

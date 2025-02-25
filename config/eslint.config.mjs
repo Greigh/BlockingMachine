@@ -1,9 +1,8 @@
 import { FlatCompat } from '@eslint/eslintrc';
-import globals from 'globals';
-import pluginJs from '@eslint/js';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { defineConfig } from 'eslint-define-config';
+import js from '@eslint/js';
+import globals from 'globals';
 
 // Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -12,48 +11,35 @@ const __dirname = path.dirname(__filename);
 // Create an instance of FlatCompat
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-  recommendedConfig: {
-    env: {
-      es6: true,
-      node: true,
-    },
-  },
 });
 
-export default defineConfig({
-  files: ['**/*.js'],
-  languageOptions: {
-    ecmaVersion: 2023,
-    sourceType: 'module',
-    globals: {
-      ...globals.browser,
-      ...globals.node,
-      myCustomGlobal: 'readonly',
-    },
-    parser: '@babel/eslint-parser',
-    parserOptions: {
-      requireConfigFile: false,
-      babelOptions: {
-        presets: ['@babel/preset-env'],
+export default [
+  js.configs.recommended,
+  {
+    files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+      },
+      parser: await import('@babel/eslint-parser'),
+      parserOptions: {
+        requireConfigFile: false,
+        babelOptions: {
+          presets: ['@babel/preset-env'],
+        },
       },
     },
+    rules: {
+      'semi': ['error', 'always'],
+      'quotes': ['error', 'single'],
+      'indent': ['error', 4],
+      'no-unused-vars': 'warn',
+      'no-console': 'off',
+      'no-undef': 'error',
+    },
   },
-  plugins: {
-    js: pluginJs,
-    '@typescript-eslint': {},
-  },
-  rules: {
-    'no-unused-vars': 'error',
-    'no-undef': 'error',
-  },
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  parser: '@typescript-eslint/parser',
-});
+  ...compat.extends('plugin:@typescript-eslint/recommended'),
+];

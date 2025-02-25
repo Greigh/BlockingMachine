@@ -4,15 +4,24 @@ import { fetchText } from '../utils/fetch.js';
 import { logMessage } from '../utils/log.js';
 import { convertToAdGuardRule } from './convert.js';
 import {
-    combinedFilePath,
     thirdPartyFiltersFilePath,
-    mergedFilePath,
+    adguardDnsrewriteFilePath, // Changed from mergedFilePath
     browserRulesFilePath,
     outputFilePath,
     adguardFilePath,
-    personalListFilePath,
     hostsFilePath
 } from '../utils/paths.js';
+
+// Configuration constants
+const LICENSE = 'MIT';
+const excludePatterns = [
+    /###cookie-modal$/,
+    /##\.cookie-modal$/,
+    /##\.Cookie/,
+    /##\.cookie/,
+    /###cookie/,
+    /###Cookie/
+];
 
 /**
  * Reads filter URLs from thirdPartyFilters.txt (one URL per line).
@@ -52,47 +61,45 @@ async function loadFilterUrls(debug, verbose) {
  * @param {object} sets - The sets to add the rules to.
  */
 function addRuleToSets(line, rule, noDnsRewriteRule, sets) {
-    const { adGuardSet, noDnsRewriteSet, personalListSet, combinedSet, browserRulesSet, hostsSet } = sets;
+    const { adGuardSet, noDnsRewriteSet, combinedSet, browserRulesSet, hostsSet } = sets;
+    const trimmedLine = line.trim();
 
-    // Check if the line is an AdGuard rule or exception rule
-    if (line.trim().startsWith('||') || line.trim().startsWith('@@||')) {
-        // Check if the rule contains specific characters indicating an AdGuard rule
-        if (line.trim().startsWith('||') && (line.trim().includes('^$') || line.trim().includes('$') || line.trim().includes('/'))) {
-            adGuardSet.add(line.trim());
+    // Handle hosts rules first
+    if (trimmedLine.startsWith('0.0.0.0') || trimmedLine.startsWith('127.0.0.1')) {
+        hostsSet.add(trimmedLine);
+        combinedSet.add(trimmedLine);
+        return;
+    }
+
+    // Handle AdGuard rules
+    if (trimmedLine.startsWith('||') || trimmedLine.startsWith('@@||')) {
+        if (trimmedLine.startsWith('||') && (trimmedLine.includes('^$') || trimmedLine.includes('$') || trimmedLine.includes('/'))) {
+            adGuardSet.add(trimmedLine);
             noDnsRewriteSet.add(noDnsRewriteRule);
-            personalListSet.add(line.trim());
-            combinedSet.add(line.trim());
+            combinedSet.add(trimmedLine);
         } else {
-            const trimmedLine = line.trim();
             const parts = trimmedLine.split('||');
             if (parts.length > 1) {
                 const domain = parts[1].split('^')[0];
+                const hostRule = `0.0.0.0 ${domain}`;
+                hostsSet.add(hostRule);
+
                 const adGuardRule = `||${domain}^$dnsrewrite=ad-block.dns.adguard.com`;
                 const exceptionRule = `@@||${domain}^`;
-                if (line.trim().startsWith('||')) {
+
+                if (trimmedLine.startsWith('||')) {
                     if (!adGuardSet.has(exceptionRule)) {
                         adGuardSet.add(adGuardRule);
                         noDnsRewriteSet.add(noDnsRewriteRule);
-                        personalListSet.add(adGuardRule);
                         combinedSet.add(adGuardRule);
-                    }
-                } else if (line.trim().startsWith('@@||')) {
-                    if (!adGuardSet.has(adGuardRule)) {
-                        adGuardSet.add(line.trim());
-                        noDnsRewriteSet.add(noDnsRewriteRule);
-                        personalListSet.add(line.trim());
-                        combinedSet.add(line.trim());
                     }
                 }
             }
         }
     } else {
-        // Add browser rules and host rules
-        browserRulesSet.add(line.trim());
-        combinedSet.add(line.trim());
-        if (line.startsWith('0.0.0.0') || line.startsWith('127.0.0.1')) {
-            hostsSet.add(line.trim());
-        }
+        // Browser rules
+        browserRulesSet.add(trimmedLine);
+        combinedSet.add(trimmedLine);
     }
 }
 
@@ -104,12 +111,16 @@ function addRuleToSets(line, rule, noDnsRewriteRule, sets) {
  * @returns {string} - The generated metadata comment.
  */
 function generateMetadataComment(type, count) {
-    const updatedOn = new Date().toISOString().split('T')[0];
+    const now = new Date();
+    const updatedOn = now.toISOString()
+        .replace('T', ' ')
+        .replace(/\.\d+Z$/, '');
+
     return `! Title: BlockingMachine
 ! Expires: 1 days
-! Description: 
+! Description: Filter rules for blocking unwanted content
 ! Homepage: https://github.com/greigh/blockingmachine
-! License: 
+! License: ${LICENSE}
 ! Please report any unblocked content or problems on GitHub
 !
 ! This list covers all Aglinting rules
@@ -118,6 +129,38 @@ function generateMetadataComment(type, count) {
 ! Updated On: ${updatedOn}
 ! Created by: Greigh (aka Daniel)
 `;
+}
+
+/**
+ * Filter and count rules in a file, excluding comments and empty lines
+ * @param {string} filePath - The path to the file to process
+ * @param {boolean} debug - Enable debug logging
+ * @param {boolean} verbose - Enable verbose logging
+ * @returns {Promise<number>} - The number of valid rules
+ */
+export async function filterRules(filePath, debug, verbose) {
+    try {
+        const fileContent = await fs.promises.readFile(filePath, { encoding: 'utf8' });
+        const lines = fileContent.split(/\r?\n/);
+
+        const validRules = lines.filter(line => {
+            const trimmedLine = line.trim();
+            return trimmedLine &&
+                !trimmedLine.startsWith('#') &&
+                !trimmedLine.startsWith('//') &&  // Exclude JS-style comments
+                !trimmedLine.startsWith('!') &&   // Exclude AdGuard comments
+                !trimmedLine.startsWith('[') &&   // Exclude section headers
+                !excludePatterns.some(pattern => pattern.test(trimmedLine));
+        });
+
+        // Write filtered content back with proper line endings
+        await fs.promises.writeFile(filePath, validRules.join('\n') + '\n');
+        await logMessage(`Filtered and wrote ${validRules.length} rules to ${filePath}`, verbose);
+        return validRules.length;
+    } catch (err) {
+        await logMessage(`Error filtering rules: ${err.message}`, debug);
+        return 0;
+    }
 }
 
 /**
@@ -139,11 +182,10 @@ export async function updateAllLists(debug, verbose) {
         const adGuardSet = new Set();
         const browserRulesSet = new Set();
         const noDnsRewriteSet = new Set();
-        const personalListSet = new Set();
         const hostsSet = new Set();
-        const combinedSet = new Set(); // New set for combined rules
+        const combinedSet = new Set();
 
-        const sets = { adGuardSet, browserRulesSet, noDnsRewriteSet, personalListSet, hostsSet, combinedSet };
+        const sets = { adGuardSet, browserRulesSet, noDnsRewriteSet, hostsSet, combinedSet };
 
         // Process each line of the fetched filter lists
         for (let txt of results) {
@@ -174,39 +216,39 @@ export async function updateAllLists(debug, verbose) {
         const adGuardCount = adGuardSet.size;
         const browserRulesCount = browserRulesSet.size;
         const noDnsRewriteCount = noDnsRewriteSet.size;
-        const personalListCount = personalListSet.size;
         const hostsCount = hostsSet.size;
-        const combinedCount = combinedSet.size; // Count for combined rules
+        const combinedCount = combinedSet.size;
 
         const adGuardContent = generateMetadataComment('AdGuard', adGuardCount) + [...adGuardSet].join('\n');
         const browserRulesContent = generateMetadataComment('Browser', browserRulesCount) + [...browserRulesSet].join('\n');
         const noDnsRewriteContent = generateMetadataComment('No DNS Rewrite', noDnsRewriteCount) + [...noDnsRewriteSet].join('\n');
-        const personalListContent = generateMetadataComment('Personal', personalListCount) + [...personalListSet].join('\n');
         const hostsContent = generateMetadataComment('Hosts', hostsCount) + [...hostsSet].join('\n');
-        const combinedContent = generateMetadataComment('Combined', combinedCount) + [...combinedSet].join('\n');
 
         // Write the content to respective files
-        await fs.promises.writeFile(mergedFilePath, adGuardContent, 'utf8');
+        await fs.promises.writeFile(adguardDnsrewriteFilePath, adGuardContent, 'utf8');
         await fs.promises.writeFile(browserRulesFilePath, browserRulesContent, 'utf8');
         await fs.promises.writeFile(adguardFilePath, noDnsRewriteContent, 'utf8');
-        await fs.promises.writeFile(personalListFilePath, personalListContent, 'utf8');
         await fs.promises.writeFile(hostsFilePath, hostsContent, 'utf8');
-        await fs.promises.writeFile(combinedFilePath, combinedContent, 'utf8'); // Write combined set to file
 
-        await logMessage('Combined AdGuard list and browser rules updated successfully.', verbose);
+        await logMessage('AdGuard list and browser rules updated successfully.', verbose);
         if (debug) {
             await logMessage('AdGuard rules: ' + [...adGuardSet].join(', '), verbose);
             await logMessage('Browser rules: ' + [...browserRulesSet].join(', '), verbose);
             await logMessage('No DNS Rewrite rules: ' + [...noDnsRewriteSet].join(', '), verbose);
-            await logMessage('Personal list: ' + [...personalListSet].join(', '), verbose);
             await logMessage('Hosts rules: ' + [...hostsSet].join(', '), verbose);
-            await logMessage('Combined rules: ' + [...combinedSet].join(', '), verbose); // Log combined rules
         }
 
         // Write rule counts to output.txt
-        const outputContent = `AdGuard rules count: ${adGuardCount}\nBrowser rules count: ${browserRulesCount}\nNo DNS Rewrite rules count: ${noDnsRewriteCount}\nPersonal list count: ${personalListCount}\nHosts rules count: ${hostsCount}\nCombined rules count: ${combinedCount}\n`;
+        const outputContent = `AdGuard rules count: ${adGuardCount}\nBrowser rules count: ${browserRulesCount}\nNo DNS Rewrite rules count: ${noDnsRewriteCount}\nHosts rules count: ${hostsCount}\nCombined rules count: ${combinedCount}\n`;
         await fs.promises.writeFile(outputFilePath, outputContent, 'utf8');
         await logMessage('Rule counts written to output.txt', verbose);
+
+        // Filter rules after processing
+        await filterRules(browserRulesFilePath, debug, verbose);
+        await filterRules(adguardFilePath, debug, verbose);
+        await filterRules(hostsFilePath, debug, verbose);
+
+        await logMessage('All files filtered successfully', verbose);
     } catch (err) {
         await logMessage(`Error updating lists: ${err.message}`, debug);
         console.error(err.stack);

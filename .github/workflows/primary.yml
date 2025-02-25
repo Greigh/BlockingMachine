@@ -12,104 +12,55 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
+  lint:
+    name: Run Linters
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run eslint
+      - run: npm run mdlint
+      - run: npm run aglint
+
   update-txt-files:
+    needs: lint
     name: Update TXT Files
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run update script
-        run: npm run start
-
+          cache: npm
+      - run: npm ci
+      - run: npm run update
+      - run: npm run update-md
       - name: Check for changes
-        id: git_diff
+        id: changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --exit-code || echo "changes" > changes.txt
-
-      - name: Commit and push changes
-        if: steps.git_diff.outputs.changes == 'changes'
+          git add -A
+          git diff --staged --quiet || echo "has_changes=true" >> $GITHUB_OUTPUT
+      - name: Commit and push if changed
+        if: steps.changes.outputs.has_changes == 'true'
         run: |
-          git commit -m "Update .txt files"
+          git commit -m "Update filter lists and documentation"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  markdownlint:
-    name: Markdown Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install markdownlint-cli
-        run: npm install -g markdownlint-cli
-
-      - name: Run markdownlint
-        run: npm run mdlint
-
-  eslint:
-    name: Run ESLint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run ESLint
-        run: npm run eslint
-
-  aglint:
-    name: Run AGLint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run AGLint
-        run: npm run aglint
-
   deploy-website:
+    needs: update-txt-files
     name: Deploy Website
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website # Adjust this path to your website directory
@@ -118,11 +69,8 @@ jobs:
   notify:
     name: Discord Notification
     runs-on: ubuntu-latest
-    needs: 
+    needs:
       - update-txt-files
-      - markdownlint
-      - eslint
-      - aglint
       - deploy-website
     if: ${{ failure() }} # Only notify on failure
     steps:

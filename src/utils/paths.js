@@ -6,12 +6,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Import the 'path' module to handle and transform file paths
 import path from 'path';
 
-// Define the file paths for various filter lists and output files
-export const thirdPartyFiltersFilePath = path.join(__dirname, 'thirdPartyFilters.txt'); // Path to the third-party filters file
-export const mergedFilePath = path.join(__dirname, 'merged.txt'); // Fixed undefined path
-export const browserRulesFilePath = path.join(__dirname, 'browserRules.txt'); // Fixed undefined path
-export const outputFilePath = path.join(__dirname, 'output.txt'); // Path to the output file for logging
-export const adguardFilePath = path.join(__dirname, 'adguard.txt'); // Path to the AdGuard rules file
-export const personalListFilePath = path.join(__dirname, 'personalList.txt'); // Path to the personal list file
-export const hostsFilePath = path.join(__dirname, 'hosts.txt'); // Path to the hosts rules file
-export const combinedFilePath = path.join(__dirname, 'combined.txt'); // Path to the combined browser and AdGuard rules file
+// Get the project root directory (two levels up from utils folder)
+const rootDir = path.resolve(__dirname, '../../');
+
+// Define the file paths relative to project root
+export const thirdPartyFiltersFilePath = path.join(rootDir, 'thirdPartyFilters.txt');
+export const adguardDnsrewriteFilePath = path.join(rootDir, 'adguard_dnsrewrite.txt'); // Changed from mergedFilePath
+export const browserRulesFilePath = path.join(rootDir, 'browserRules.txt');
+export const outputFilePath = path.join(rootDir, 'output.txt');
+export const adguardFilePath = path.join(rootDir, 'adguard.txt');
+export const hostsFilePath = path.join(rootDir, 'hosts.txt');
+export const readmePath = path.join(rootDir, 'README.md');
+export const filtersFilePath = path.join(rootDir, 'filters.txt');

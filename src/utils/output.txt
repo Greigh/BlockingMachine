@@ -1,6 +1,0 @@
-AdGuard rules count: 1633
-Browser rules count: 17
-No DNS Rewrite rules count: 1633
-Personal list count: 1633
-Hosts rules count: 0
-Combined rules count: 1650
