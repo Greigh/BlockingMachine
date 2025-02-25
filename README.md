@@ -34,7 +34,7 @@
 </p>
 <!-- markdownlint-restore -->
 
-Last Updated: February 25, 2025 at 4:00 PM
+Last Updated: February 25, 2025 at 9:39 AM
 
 ## Rule Counts and Links (Lists are updated at midnight everyday)
 
