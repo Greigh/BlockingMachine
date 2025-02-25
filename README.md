@@ -34,6 +34,8 @@
 </p>
 <!-- markdownlint-restore -->
 
+Last Updated: February 25, 2025 at 4:00 PM
+
 ## Rule Counts and Links (Lists are updated at midnight everyday)
 
 - **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->73573
