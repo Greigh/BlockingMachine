@@ -7,8 +7,8 @@
 !
 ! This list covers all Aglinting rules
 ! Type: AdGuard
-! Entries: 72186
-! Updated On: 2025-02-25 09:05:34
+! Entries: 72184
+! Updated On: 2025-02-25 09:36:54
 ! Created by: Greigh (aka Daniel)
 ||adx-open-service.youku.com^$dnsrewrite=ad-block.dns.adguard.com
 ||ad.youku.com^$dnsrewrite=ad-block.dns.adguard.com
@@ -62858,7 +62858,6 @@
 ||654b11e34e.2eb4977fca.com^$dnsrewrite=ad-block.dns.adguard.com
 ||656fe3805b.b0edf74166.com^$dnsrewrite=ad-block.dns.adguard.com
 ||657376d1f1.65a95a9d2b.com^$dnsrewrite=ad-block.dns.adguard.com
-||6662a5efa0.com^$dnsrewrite=ad-block.dns.adguard.com
 ||669baa8973.3a434abae1.com^$dnsrewrite=ad-block.dns.adguard.com
 ||66av.cc^$dnsrewrite=ad-block.dns.adguard.com
 ||69688qp.com^$dnsrewrite=ad-block.dns.adguard.com
@@ -67026,7 +67025,6 @@
 ||fidiaestherstepbairn.com^$dnsrewrite=ad-block.dns.adguard.com
 ||fiehff.com^$dnsrewrite=ad-block.dns.adguard.com
 ||filespicy.com^$dnsrewrite=ad-block.dns.adguard.com
-||fillmapmovepea.live^$dnsrewrite=ad-block.dns.adguard.com
 ||filmoljupci.com^$dnsrewrite=ad-block.dns.adguard.com
 ||filter-eu.adportonic.com^$dnsrewrite=ad-block.dns.adguard.com
 ||filter-eu.adsailor.com^$dnsrewrite=ad-block.dns.adguard.com

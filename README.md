@@ -38,11 +38,11 @@ Last Updated: February 25, 2025 at 4:00 PM
 
 ## Rule Counts and Links (Lists are updated at midnight everyday)
 
-- **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->73573
+- **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->73571
   - [DNS Rewrite Filter](adguard_dnsrewrite.txt)
   - [Normal Filter List](AdGuard.txt)
 - **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->57629
-- **[Hosts Rules](hosts.txt):** <!-- hostsCount -->70217
+- **[Hosts Rules](hosts.txt):** <!-- hostsCount -->70215
 - More lists to come!
 
 ## Third Party Filters

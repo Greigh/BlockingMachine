@@ -60660,7 +60660,6 @@
 0.0.0.0 654b11e34e.2eb4977fca.com
 0.0.0.0 656fe3805b.b0edf74166.com
 0.0.0.0 657376d1f1.65a95a9d2b.com
-0.0.0.0 6662a5efa0.com
 0.0.0.0 669baa8973.3a434abae1.com
 0.0.0.0 66av.cc
 0.0.0.0 69688qp.com
@@ -64828,7 +64827,6 @@
 0.0.0.0 fidiaestherstepbairn.com
 0.0.0.0 fiehff.com
 0.0.0.0 filespicy.com
-0.0.0.0 fillmapmovepea.live
 0.0.0.0 filmoljupci.com
 0.0.0.0 filter-eu.adportonic.com
 0.0.0.0 filter-eu.adsailor.com
