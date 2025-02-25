@@ -63,7 +63,7 @@ jobs:
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website # Adjust this path to your website directory
+          publish_dir: ./public # Adjust this path to your website directory
           publish_branch: gh-pages
 
   notify:
