@@ -9,5 +9,6 @@ rules:
   invalid-modifiers: off
   no-excluded-rules:
     - error
-    - regexp-patterns:
-        - ^\\s*\\w+\\s*\\$[\\w\\s]*$
+  regexp-patterns:
+    - pattern: '^\s*\w+\s*\$\w+$'
+      message: "Invalid pattern"
