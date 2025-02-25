@@ -39,7 +39,7 @@
 - **[AdGuard Rules](adguard.txt):** <!-- adguardCount -->73573
   - [DNS Rewrite Filter](adguard_dnsrewrite.txt)
   - [Normal Filter List](AdGuard.txt)
-- **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->57628
+- **[Browser Rules](browserRules.txt):** <!-- browserRulesCount -->57629
 - **[Hosts Rules](hosts.txt):** <!-- hostsCount -->70217
 - More lists to come!
 
