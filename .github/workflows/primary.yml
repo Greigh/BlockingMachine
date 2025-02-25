@@ -18,18 +18,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Add cache clearing step
-      - name: Clear npm cache
-        run: |
-          npm cache clean --force
-          rm -rf node_modules package-lock.json
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm install
-      - run: npm ci
+          # Remove cache option since we're doing a fresh install
+          # cache: npm
+
+      # Fresh install without cache
+      - name: Clean Install
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install
+          npm ci
+
+      # Run linters
       - run: npm run eslint
       - run: npm run mdlint
       - run: npm run aglint
@@ -41,18 +44,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Add cache clearing step
-      - name: Clear npm cache
-        run: |
-          npm cache clean --force
-          rm -rf node_modules package-lock.json
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm install
-      - run: npm ci
+          # Remove cache option
+          # cache: npm
+
+      # Fresh install without cache
+      - name: Clean Install
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install
+          npm ci
+
       - run: npm run update
       - run: npm run update-md
       - name: Check for changes
