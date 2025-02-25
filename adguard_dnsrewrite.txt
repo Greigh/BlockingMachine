@@ -8,7 +8,7 @@
 ! This list covers all Aglinting rules
 ! Type: AdGuard
 ! Entries: 72186
-! Updated On: 2025-02-25 08:43:27
+! Updated On: 2025-02-25 08:46:58
 ! Created by: Greigh (aka Daniel)
 ||adx-open-service.youku.com^$dnsrewrite=ad-block.dns.adguard.com
 ||ad.youku.com^$dnsrewrite=ad-block.dns.adguard.com
