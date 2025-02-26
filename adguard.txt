@@ -57524,6 +57524,9 @@
 ||51tongji.trafficmanager.net^
 ||67.21.92.*.gif
 ||cnzz.trafficmanager.net^
+||zlzgfj.icu^
+||lnptph.icu^
+||pisb.cn^
 ||druqodrly.com^
 ||bidotz.icu^
 ||nktydx.icu^
@@ -62876,7 +62879,6 @@
 ||4webmasters.com^
 ||4wheel.de^
 ||4xporn.com^
-||5029bb74f2.com^
 ||502c849091.com^
 ||5075971fc6.com^
 ||50hardcore.galleryprogram.com^
@@ -64371,7 +64373,6 @@
 ||alexianer-service.de^
 ||alexine.net^
 ||alexisceilingrelease.com^
-||alf-img.com^
 ||alfa-medosmotr.ru^
 ||alfa-search.com^
 ||alfa9.com^
@@ -65425,7 +65426,6 @@
 ||bowelslipperypraised.com^
 ||bowgevyingly.com^
 ||bowie-cdn.fathomdns.com^
-||bowlinear.com^
 ||bowlingunauthorized.com^
 ||bowsingchilkat.click^
 ||box.anchorfree.net^
@@ -67261,7 +67261,6 @@
 ||flyingfish.editorslab.de^
 ||flyingfish.whoisrepresented.org^
 ||flytierchurred.space^
-||fmstitial.xyz^
 ||foaphodoufaiw.net^
 ||foasoucib.com^
 ||focusporn.com^
@@ -68898,7 +68897,6 @@
 ||nupsabipsa.net^
 ||nuqwe.com^
 ||nut.cc^
-||nutsinmid.live^
 ||nvidiacenter.com^
 ||nx7.hdxxxclips.com^
 ||ny.foonerne.com^
@@ -69321,7 +69319,6 @@
 ||plxveodfvh.xyz^
 ||pm.gamedistribution.com^
 ||pmd-vp-aka.canal-plus.com^
-||pmnpknpjbpqjjc.xyz^
 ||pnq.babcoxmediainc.com^
 ||pnwrs5xz.click^
 ||poasauwhoothy.net^
@@ -69548,7 +69545,6 @@
 ||pundr.esexa.online^
 ||pundr.shemrec.cc^
 ||punkieamplect.com^
-||pupkeptale.live^
 ||purdasseer.com^
 ||pureadsltd.com^
 ||purp.sukaporn.com^
@@ -71503,8 +71499,6 @@
 ||vpscoupon.top^
 ||vrfupfyu.com^
 ||vrs.cz^
-||vst.videolink.host^
-||vst.videolink.site^
 ||vsx.hotpornfile.org^
 ||vulture.bettershore.com^
 ||vulture.lagosdesaliencia.com^
@@ -71616,6 +71610,7 @@
 ||widget.block4d.com^
 ||widget.onlinetv.ru^
 ||widgets.comcontent.net^
+||widgets.shop.moda.it^
 ||widgets.stackcommerce.com^
 ||wikia-ads.wikia.com^
 ||wildcat.fspy.io^

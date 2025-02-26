@@ -1833,6 +1833,7 @@
 0.0.0.0 assets.travix.com/client/cookie-banner-$script
 0.0.0.0 astrogaming.com/etc.clientlibs/logitech-common/clientlibs/onetrust.$script,~third-party
 0.0.0.0 ats-wrapper.privacymanager.io/ats-modules/*/ats.js$script,domain=iodonna.it|video.corriere.it|video.gazzetta.it
+0.0.0.0 badgeland.no/static/*/cookie-consent.js$~third-party
 0.0.0.0 banking.fyrst.de/translations/*-cookiedisclaimer$~third-party,xmlhttprequest
 0.0.0.0 barclays.co.uk
 0.0.0.0 bbci.co.uk
@@ -55168,6 +55169,9 @@
 0.0.0.0 51tongji.trafficmanager.net
 0.0.0.0 67.21.92.*.gif
 0.0.0.0 cnzz.trafficmanager.net
+0.0.0.0 zlzgfj.icu
+0.0.0.0 lnptph.icu
+0.0.0.0 pisb.cn
 0.0.0.0 druqodrly.com
 0.0.0.0 bidotz.icu
 0.0.0.0 nktydx.icu
@@ -60663,7 +60667,6 @@
 0.0.0.0 4webmasters.com
 0.0.0.0 4wheel.de
 0.0.0.0 4xporn.com
-0.0.0.0 5029bb74f2.com
 0.0.0.0 502c849091.com
 0.0.0.0 5075971fc6.com
 0.0.0.0 50hardcore.galleryprogram.com
@@ -62158,7 +62161,6 @@
 0.0.0.0 alexianer-service.de
 0.0.0.0 alexine.net
 0.0.0.0 alexisceilingrelease.com
-0.0.0.0 alf-img.com
 0.0.0.0 alfa-medosmotr.ru
 0.0.0.0 alfa-search.com
 0.0.0.0 alfa9.com
@@ -63207,7 +63209,6 @@
 0.0.0.0 bowelslipperypraised.com
 0.0.0.0 bowgevyingly.com
 0.0.0.0 bowie-cdn.fathomdns.com
-0.0.0.0 bowlinear.com
 0.0.0.0 bowlingunauthorized.com
 0.0.0.0 bowsingchilkat.click
 0.0.0.0 box.anchorfree.net
@@ -65041,7 +65042,6 @@
 0.0.0.0 flyingfish.editorslab.de
 0.0.0.0 flyingfish.whoisrepresented.org
 0.0.0.0 flytierchurred.space
-0.0.0.0 fmstitial.xyz
 0.0.0.0 foaphodoufaiw.net
 0.0.0.0 foasoucib.com
 0.0.0.0 focusporn.com
@@ -66670,7 +66670,6 @@
 0.0.0.0 nupsabipsa.net
 0.0.0.0 nuqwe.com
 0.0.0.0 nut.cc
-0.0.0.0 nutsinmid.live
 0.0.0.0 nvidiacenter.com
 0.0.0.0 nx7.hdxxxclips.com
 0.0.0.0 ny.foonerne.com
@@ -67091,7 +67090,6 @@
 0.0.0.0 plxveodfvh.xyz
 0.0.0.0 pm.gamedistribution.com
 0.0.0.0 pmd-vp-aka.canal-plus.com
-0.0.0.0 pmnpknpjbpqjjc.xyz
 0.0.0.0 pnq.babcoxmediainc.com
 0.0.0.0 pnwrs5xz.click
 0.0.0.0 poasauwhoothy.net
@@ -67318,7 +67316,6 @@
 0.0.0.0 pundr.esexa.online
 0.0.0.0 pundr.shemrec.cc
 0.0.0.0 punkieamplect.com
-0.0.0.0 pupkeptale.live
 0.0.0.0 purdasseer.com
 0.0.0.0 pureadsltd.com
 0.0.0.0 purp.sukaporn.com
@@ -69269,8 +69266,6 @@
 0.0.0.0 vpscoupon.top
 0.0.0.0 vrfupfyu.com
 0.0.0.0 vrs.cz
-0.0.0.0 vst.videolink.host
-0.0.0.0 vst.videolink.site
 0.0.0.0 vsx.hotpornfile.org
 0.0.0.0 vulture.bettershore.com
 0.0.0.0 vulture.lagosdesaliencia.com
@@ -69382,6 +69377,7 @@
 0.0.0.0 widget.block4d.com
 0.0.0.0 widget.onlinetv.ru
 0.0.0.0 widgets.comcontent.net
+0.0.0.0 widgets.shop.moda.it
 0.0.0.0 widgets.stackcommerce.com
 0.0.0.0 wikia-ads.wikia.com
 0.0.0.0 wildcat.fspy.io
