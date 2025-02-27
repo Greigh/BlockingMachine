@@ -1,5 +1,5 @@
 // Import required modules
-import fs from 'fs-extra';  // Make sure fs-extra is installed
+import { promises as fs } from 'fs';  // Make sure fs is installed
 import { fetchText } from '../utils/fetch.js';
 import { logMessage } from '../utils/log.js';
 import { convertToAdGuardRule, convertToBrowserRule, convertToHostsRule } from './convert.js';
@@ -33,7 +33,7 @@ async function loadFilterUrls(debug, verbose) {
         // Log the start of reading filter URLs
         await logMessage('Reading filter URLs from thirdPartyFilters.txt', verbose);
         // Read the content of thirdPartyFilters.txt
-        const fileContent = await fs.promises.readFile(thirdPartyFiltersFilePath, { encoding: 'utf8' });
+        const fileContent = await fs.readFile(thirdPartyFiltersFilePath, { encoding: 'utf8' });
         // Split the content by new lines, trim each line, and filter out empty lines
         const FILTER_URLS = fileContent
             .split(/\r?\n/)
@@ -148,7 +148,7 @@ ${commentChar} ==============================================\n`;
  */
 export async function filterRules(filePath, debug, verbose) {
     try {
-        const fileContent = await fs.promises.readFile(filePath, { encoding: 'utf8' });
+        const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
         const lines = fileContent.split(/\r?\n/);
 
         const validRules = lines.filter(line => {
@@ -162,7 +162,7 @@ export async function filterRules(filePath, debug, verbose) {
         });
 
         // Write filtered content back with proper line endings
-        await fs.promises.writeFile(filePath, validRules.join('\n') + '\n');
+        await fs.writeFile(filePath, validRules.join('\n') + '\n');
         await logMessage(`Filtered and wrote ${validRules.length} rules to ${filePath}`, verbose);
         return validRules.length;
     } catch (err) {
@@ -231,7 +231,7 @@ export async function updateAllLists(debug, verbose) {
 export async function ensureFiltersFileExists(debug, verbose) {
     try {
         await logMessage('Checking if thirdPartyFilters.txt exists', verbose);
-        await fs.promises.access(thirdPartyFiltersFilePath);
+        await fs.access(thirdPartyFiltersFilePath);
         await logMessage('thirdPartyFilters.txt exists', verbose);
     } catch (err) {
         await logMessage(`Error checking thirdPartyFilters.txt: ${err.message} `, debug);
@@ -242,7 +242,7 @@ export async function ensureFiltersFileExists(debug, verbose) {
                 'https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt',
             ];
             try {
-                await fs.promises.writeFile(thirdPartyFiltersFilePath, defaultUrls.join('\n'), 'utf8');
+                await fs.writeFile(thirdPartyFiltersFilePath, defaultUrls.join('\n'), 'utf8');
                 await logMessage('Created thirdPartyFilters.txt with default URLs', verbose);
             } catch (writeErr) {
                 await logMessage(`Error creating thirdPartyFilters.txt: ${writeErr.message} `, debug);
@@ -254,14 +254,14 @@ export async function ensureFiltersFileExists(debug, verbose) {
 
     try {
         await logMessage('Checking if browserRules.txt exists', verbose);
-        await fs.promises.access(browserRulesFilePath);
+        await fs.access(browserRulesFilePath);
         await logMessage('browserRules.txt exists', verbose);
     } catch (err) {
         await logMessage(`Error checking browserRules.txt: ${err.message} `, debug);
         if (err.code === 'ENOENT') {
             await logMessage('browserRules.txt does not exist, creating an empty file', debug);
             try {
-                await fs.promises.writeFile(browserRulesFilePath, '', 'utf8');
+                await fs.writeFile(browserRulesFilePath, '', 'utf8');
                 await logMessage('Created browserRules.txt', verbose);
             } catch (writeErr) {
                 await logMessage(`Error creating browserRules.txt: ${writeErr.message} `, debug);
@@ -311,7 +311,7 @@ export async function writeFilterSets(sets) {
     await Promise.all(
         writeOperations.map(async op => {
             try {
-                await fs.promises.writeFile(op.path, op.content, 'utf8');
+                await fs.writeFile(op.path, op.content, 'utf8');
                 await logMessage(`Successfully wrote ${op.type} rules`);
             } catch (err) {
                 await logMessage(`Error writing ${op.type} rules: ${err.message}`, 'error');

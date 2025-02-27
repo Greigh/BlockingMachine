@@ -42,7 +42,7 @@ jobs:
           npm cache clean --force
           rm -rf node_modules package-lock.json
           npm install
-          npm ci
+          npm ci --ignore-scripts
 
       - name: Update Lists
         id: update
