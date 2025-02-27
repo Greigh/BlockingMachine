@@ -1,5 +1,36 @@
 'use strict';
 
+// Add this at the top of your script.js
+document.addEventListener('DOMContentLoaded', function () {
+    // Handle demo button visibility
+    const demoButton = document.getElementById('demoButton');
+    const isProduction = window.location.hostname === 'greigh.github.io' || window.location.hostname === '127.0.0.1';
+
+    if (demoButton) {
+        if (isProduction) {
+            demoButton.style.display = 'block';
+            demoButton.href = '/demo';
+        } else {
+            // For local development
+            demoButton.style.display = 'none';
+        }
+    }
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+
+    // Theme toggle handler
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    }
+});
+
 // Global configuration
 const CONFIG = {
     PAGE_TYPE: 'protected_rule',
@@ -23,7 +54,7 @@ const LOCALES = {
         safeDropdownTitle4: 'How to temporarily unblock this website?',
         safeDropdownDesc4_1: 'To temporarily unblock this website, go to Server settings → User rules and create an unblocking rule',
         safeDropdownDesc4_2: 'If the issue persists, please report it <a href="%reports_url%">on our GitHub</a>.',
-        protectedTitle: 'Access blocked: <span>Ad or tracking domain</span>',
+        protectedTitle: 'Access blocked:<br/><span>Ad or tracking domain</span>',
         protectedDesc: 'Access to <strong>%host%</strong> is blocked. This website may track your activity or display ads.'
     }
 };
@@ -31,7 +62,10 @@ const LOCALES = {
 // Initialize app
 (() => {
     const pageData = {
-        host: window.location.host || '',
+        // Get the blocked domain from the referrer or URL parameters
+        host: new URLSearchParams(window.location.search).get('blocked') ||
+            document.referrer.replace(/^https?:\/\//, '').split('/')[0] ||
+            'unknown domain',
         reports_url: 'https://github.com/greigh/BlockingMachine/issues'
     };
 
@@ -57,23 +91,29 @@ const LOCALES = {
         document.querySelectorAll('[data-dropdown-item]').forEach(item => {
             const toggle = item.querySelector('[data-dropdown-toggle]');
             const content = item.querySelector('[data-dropdown-content]');
-            const icon = item.querySelector('.faq-item__toggle-btn-icon');
 
-            toggle?.addEventListener('click', () => {
-                const isActive = toggle.classList.toggle(CONFIG.ACTIVE_CLASS);
-                content?.classList.toggle(CONFIG.ACTIVE_CLASS);
-                icon?.classList.toggle(CONFIG.ACTIVE_CLASS);
+            if (!toggle || !content) return;
 
-                // Close other dropdowns if this one was opened
-                if (isActive) {
-                    document.querySelectorAll('[data-dropdown-item]').forEach(other => {
-                        if (other !== item) {
-                            other.querySelector('[data-dropdown-toggle]')?.classList.remove(CONFIG.ACTIVE_CLASS);
-                            other.querySelector('[data-dropdown-content]')?.classList.remove(CONFIG.ACTIVE_CLASS);
-                            other.querySelector('.faq-item__toggle-btn-icon')?.classList.remove(CONFIG.ACTIVE_CLASS);
+            toggle.setAttribute('aria-expanded', 'false');
+
+            toggle.addEventListener('click', () => {
+                const isExpanding = toggle.getAttribute('aria-expanded') === 'false';
+
+                // Close all other dropdowns
+                document.querySelectorAll('[data-dropdown-item]').forEach(other => {
+                    if (other !== item) {
+                        const otherToggle = other.querySelector('[data-dropdown-toggle]');
+                        const otherContent = other.querySelector('[data-dropdown-content]');
+                        if (otherToggle && otherContent) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            otherContent.classList.remove('active');
                         }
-                    });
-                }
+                    }
+                });
+
+                // Toggle current dropdown
+                toggle.setAttribute('aria-expanded', isExpanding ? 'true' : 'false');
+                content.classList.toggle('active');
             });
         });
     };
@@ -88,18 +128,17 @@ const LOCALES = {
 
         const setTheme = (theme = getSystemTheme()) => {
             document.documentElement.setAttribute('data-theme', theme);
-            theme ? localStorage.setItem('theme', theme) : localStorage.removeItem('theme');
+            document.body.className = theme === CONFIG.THEME.DARK ? 'dark-theme' : '';
+            if (theme) {
+                localStorage.setItem('theme', theme);
+            } else {
+                localStorage.removeItem('theme');
+            }
             themeToggle.textContent = theme === CONFIG.THEME.DARK ? '☀️' : '🌙';
         };
 
         // Initialize theme from storage or system preference
         setTheme(localStorage.getItem('theme'));
-
-        // Theme toggle handler
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            setTheme(currentTheme === CONFIG.THEME.DARK ? CONFIG.THEME.LIGHT : CONFIG.THEME.DARK);
-        });
 
         // System theme change handler
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -115,3 +154,25 @@ const LOCALES = {
     // Back button functionality
     document.querySelector('[data-back-btn]')?.addEventListener('click', () => window.history.back());
 })();
+
+const setTheme = (theme) => {
+    // Set theme on root element
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // Store theme preference
+    localStorage.setItem('theme', theme);
+
+    // Update body class
+    document.body.className = theme === 'dark' ? 'dark-theme' : 'light-theme';
+
+    // Update theme toggle button
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Force repaint to fix any transition issues
+    document.body.style.display = 'none';
+    document.body.offsetHeight; // trigger reflow
+    document.body.style.display = '';
+};

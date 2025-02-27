@@ -1,27 +1,42 @@
-name: UpdateFilters
+name: Update Filters
 permissions: write-all
+
 on:
+  schedule:
+    - cron: "0 0 * * *" # Primary run at midnight UTC
+    - cron: "0 12 * * *" # Backup run at noon UTC
+  workflow_dispatch: # Manual trigger
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-  schedule:
-    - cron: "0 0 * * *" # Runs daily at midnight
-  workflow_dispatch: # Allows manual triggering of the workflow
+    paths:
+      - "src/**"
+      - "public/**"
+      - ".github/workflows/**"
+  workflow_run:
+    workflows: ["ESLint"] # This ensures it runs after eslint
+    types:
+      - completed
 
 jobs:
   update-filters:
     name: Update TXT Files
     runs-on: ubuntu-latest
+    timeout-minutes: 30 # Prevent hanging jobs
+    concurrency:
+      group: filters-${{ github.ref }}
+      cancel-in-progress: false
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for better updates
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm" # Enable npm caching
 
-      # Fresh install without cache
       - name: Clean Install
         run: |
           npm cache clean --force
@@ -29,15 +44,25 @@ jobs:
           npm install
           npm ci
 
-      - run: npm run update
-      - run: npm run update-md
+      - name: Update Lists
+        id: update
+        run: npm run update
+        continue-on-error: true # Continue even if some lists fail
+        timeout-minutes: 15
+
+      - name: Update Documentation
+        run: npm run update-md
+        if: always() # Run even if update partially fails
+
       - name: Check for changes
         id: changes
+        if: always() # Check even if previous steps partially fail
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git diff --staged --quiet || echo "has_changes=true" >> $GITHUB_OUTPUT
+
       - name: Commit and push if changed
         if: steps.changes.outputs.has_changes == 'true'
         run: |
@@ -45,22 +70,3 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  notify:
-    name: Discord Notification
-    runs-on: ubuntu-latest
-    needs:
-      - update-filters
-    if: ${{ always() }} # Always notify regardless of success or failure
-    steps:
-      - name: Notify
-        uses: nobrayner/discord-webhook@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          discord-webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          username: GitHub Actions
-          avatar-url: https://avatars0.githubusercontent.com/u/44036562?s=200&v=4
-          include-details: true
-          color-success: 17cf48
-          color-failure: e72727
-          color-cancelled: d3d3d3

@@ -1,13 +1,34 @@
 name: Daily Updates
+permissions: write-all
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 on:
+  workflow_run:
+    workflows: ["Website"]
+    types:
+      - completed
+  push:
+    branches:
+      - main
   schedule:
-    - cron: "25 0 * * *" # Runs daily at 0:25 UTC
-  workflow_dispatch: # Allow manual triggers
+    - cron: "25 0 * * *"
+  workflow_dispatch:
 
 jobs:
+  check-dependencies:
+    name: Check Website Deployment
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - run: echo "Website deployment completed successfully"
+
   update:
     runs-on: ubuntu-latest
+    needs: check-dependencies
     steps:
       - uses: actions/checkout@v3
         with:
@@ -17,6 +38,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -33,22 +55,3 @@ jobs:
           git config --local user.name "GitHub Action"
           git add README.md
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update last updated timestamp [skip ci]" && git push)
-
-  notify:
-    name: Discord Notification
-    runs-on: ubuntu-latest
-    needs:
-      - update
-    if: ${{ always() }}
-    steps:
-      - name: Notify
-        uses: nobrayner/discord-webhook@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          discord-webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          username: GitHub Actions
-          avatar-url: https://avatars0.githubusercontent.com/u/44036562?s=200&v=4
-          include-details: true
-          color-success: 17cf48
-          color-failure: e72727
-          color-cancelled: d3d3d3

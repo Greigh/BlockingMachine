@@ -1,0 +1,36 @@
+name: Notification
+permissions: write-all
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+on:
+  workflow_run:
+    workflows:
+      - "ESLint"
+      - "MarkdownLint"
+      - "AgLint"
+      - "Website"
+      - "Daily Updates"
+    types:
+      - completed
+
+jobs:
+  notify:
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    if: |
+      always() &&
+      github.event.workflow_run.conclusion != 'skipped'
+    steps:
+      - name: Notify
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          username: GitHub Actions
+          avatar-url: https://avatars0.githubusercontent.com/u/44036562?s=200&v=4
+          include-details: true
+          color-success: 17cf48
+          color-failure: e72727
+          color-cancelled: d3d3d3

@@ -1,697 +1,474 @@
-/* Reset and base styles */
-*,
-:after,
-:before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Color schemes */
+/* -----------------------------
+   1. Theme Variables
+----------------------------- */
 :root {
-    /* Light theme colors */
-    --bg-color-light: #ffffff;
-    --text-color-light: #333333;
+    /* Colors - Light Theme */
+    --bg-color-light: #f5f5f5;
+    --text-color-light: #333;
     --container-bg-light: #ffffff;
     --border-color-light: #e0e0e0;
     --primary-color-light: #3c81f6;
     --primary-hover-light: #5091ff;
-    --heading-color-light: #1a1a1a;
+    --card-bg-light: #ffffff;
+    --input-bg-light: #ffffff;
     --dropdown-bg-light: #f5f5f5;
 
-    /* Dark theme colors */
+    /* Colors - Dark Theme */
     --bg-color-dark: #1a1a1a;
-    --text-color-dark: #e0e0e0;
+    --text-color-dark: #fff;
     --container-bg-dark: #242424;
     --border-color-dark: #333;
     --primary-color-dark: #3c81f6;
     --primary-hover-dark: #5091ff;
-    --heading-color-dark: #ffffff;
+    --card-bg-dark: #2d2d2d;
+    --input-bg-dark: #1e1e1e;
     --dropdown-bg-dark: #1e1e1e;
 
-    /* Default theme */
+    /* Dynamic Colors */
     --bg-color: var(--bg-color-light);
     --text-color: var(--text-color-light);
     --container-bg: var(--container-bg-light);
     --border-color: var(--border-color-light);
     --primary-color: var(--primary-color-light);
     --primary-hover: var(--primary-hover-light);
-    --heading-color: var(--heading-color-light);
+    --card-bg: var(--card-bg-light);
+    --input-bg: var(--input-bg-light);
     --dropdown-bg: var(--dropdown-bg-light);
 
     /* Typography */
-    --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        'Helvetica Neue', Arial, sans-serif;
-    --font-size-base: 16px;
+    --font-primary: 'Lexend', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-base: 0.9375rem;
+    /* 15px */
+    --font-size-sm: 0.875rem;
+    /* 14px */
+    --font-size-md: 1rem;
+    /* 16px */
     --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --line-height: 1.6;
+    /* 18px */
+    --font-size-xl: 1.75rem;
+    /* 28px */
+    --font-size-xxl: 2.5rem;
+    /* 40px */
+    --line-height-tight: 1.3;
+    /* Updated for headings */
+    --line-height-base: 1.6;
+    /* For general text */
+    --line-height-relaxed: 1.8;
+    /* For FAQ content */
 }
 
-/* Theme handling */
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --bg-color: var(--bg-color-dark);
-        --text-color: var(--text-color-dark);
-        --container-bg: var(--container-bg-dark);
-        --border-color: var(--border-color-dark);
-        --primary-color: var(--primary-color-dark);
-        --primary-hover: var(--primary-hover-dark);
-        --heading-color: var(--heading-color-dark);
-        --dropdown-bg: var(--dropdown-bg-dark);
-    }
+/* -----------------------------
+   2. Layout & Container
+----------------------------- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-:root[data-theme="dark"] {
+.page-block {
+    min-height: 100vh;
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+}
+
+/* Update container spacing */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+    /* Adjusted bottom padding */
+    border-radius: 16px;
+    background-color: var(--container-bg);
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    height: fit-content;
+    overflow: hidden;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2.5rem;
+    align-items: center;
+    /* Changed from 'start' to 'center' */
+    min-height: 500px;
+    /* Add minimum height to help with alignment */
+}
+
+/* -----------------------------
+   3. Column Layout
+----------------------------- */
+.column--left {
+    padding-right: 2.5rem;
+    padding: 2rem;
+    margin-top: -2rem;
+    /* Push content up */
+}
+
+.column--right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Changed from 'flex-start' to 'center' */
+    padding: 2rem;
+    height: 100%;
+}
+
+.column--right img {
+    max-width: 110%;
+    height: auto;
+    margin-top: 0;
+    margin-left: -5%;
+    /* Remove top margin */
+}
+
+/* -----------------------------
+   4. Header Components
+----------------------------- */
+.theme-toggle {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    background: var(--container-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.demo-button {
+    position: absolute;
+    top: 1.25rem;
+    right: 4.5rem;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    z-index: 100;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* -----------------------------
+   5. Content Styles
+----------------------------- */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.content__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    text-align: left;
+    width: 100%;
+    letter-spacing: -0.02em;
+}
+
+.content__title--blue {
+    color: var(--primary-color);
+    font-size: var(--font-size-xxl);
+    margin-bottom: 1rem;
+    text-align: left;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+
+.content__text {
+    margin-bottom: 2rem;
+    line-height: var(--line-height-base);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    text-align: left;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.content__btn {
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+    /* Reduced from 4.5rem for better balance */
+    width: auto;
+    text-align: left;
+}
+
+/* -----------------------------
+   7. FAQ Section
+----------------------------- */
+/* FAQ Section Layout */
+/* Update FAQ section spacing */
+.content__dropdown {
+    width: 100%;
+    margin-bottom: 1rem;
+    /* Reduced bottom margin */
+}
+
+.faq__item {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background-color: var(--container-bg);
+    transition: border-color 0.2s ease, background-color 0.3s ease;
+    overflow: hidden;
+}
+
+.faq-item__toggle {
+    width: 100%;
+    padding: 1.5rem 1.75rem;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-base);
+    font-family: var(--font-primary);
+}
+
+/* Update FAQ items spacing */
+.faq-item__content {
+    padding: 0 1.75rem;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-top: 1px solid transparent;
+}
+
+.faq-item__content.active {
+    opacity: 1;
+    max-height: 1000px;
+    padding: 0.5rem 1.75rem 1.75rem;
+    /* Added top padding for better content spacing */
+    background-color: var(--dropdown-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+.faq__item:has(.faq-item__content.active) {
+    border: 1px solid var(--border-color);
+    background-color: var(--dropdown-bg);
+}
+
+.faq-item__text {
+    color: var(--text-color);
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-relaxed);
+    margin: 0.5rem 0;
+    /* Slightly increased margin for better spacing */
+    opacity: 0.9;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.faq-item__icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+.faq-item__toggle[aria-expanded="true"] .faq-item__icon {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* Update FAQ title size */
+.content__dropdown h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.01em;
+    line-height: var(--line-height-tight);
+}
+
+/* Remove FAQ list bullets */
+.faq {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Add spacing for the button container */
+.button-container {
+    margin-top: 1rem;
+    /* Add some space between FAQ and button */
+    padding-bottom: 1rem;
+    /* Reduce bottom padding */
+}
+
+/* -----------------------------
+   8. Dark Theme
+----------------------------- */
+[data-theme="dark"] {
     --bg-color: var(--bg-color-dark);
     --text-color: var(--text-color-dark);
     --container-bg: var(--container-bg-dark);
     --border-color: var(--border-color-dark);
     --primary-color: var(--primary-color-dark);
     --primary-hover: var(--primary-hover-dark);
-    --heading-color: var(--heading-color-dark);
+    --card-bg: var(--card-bg-dark);
+    --input-bg: var(--input-bg-dark);
     --dropdown-bg: var(--dropdown-bg-dark);
 }
 
-:root[data-theme="light"] {
-    --bg-color: var(--bg-color-light);
-    --text-color: var(--text-color-light);
-    --container-bg: var(--container-bg-light);
-    --border-color: var(--border-color-light);
-    --primary-color: var(--primary-color-light);
-    --primary-hover: var(--primary-hover-light);
-    --heading-color: var(--heading-color-light);
-    --faq-border: var(--faq-border-light);
-    --dropdown-bg: var(--dropdown-bg-light);
+[data-theme="dark"] .container {
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.1);
 }
 
-/* Theme toggle button styles */
-.theme-toggle {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    border: 2px solid var(--border-color);
-    background: var(--container-bg);
+[data-theme="dark"] .faq__item:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(60, 129, 246, 0.03);
+}
+
+[data-theme="dark"] .faq__item:has(.faq-item__content.active) {
+    background-color: var(--card-bg-dark);
+}
+
+/* Update container styles */
+.container {
+    background-color: var(--container-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* Update card styles */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* Update input styles */
+input,
+textarea,
+select {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 1;
-}
-
-.theme-toggle:hover {
-    transform: scale(1.1);
-}
-
-html {
-    height: 100%;
-}
-
-body {
     font-family: var(--font-primary);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    font-weight: 400;
-    margin: 0;
-    min-height: 100%;
-    width: 100%;
 }
 
-/* Layout */
-.page-block {
-    min-height: 100vh;
-    padding: 1rem;
-    /* Reduced padding for mobile */
-    display: flex;
+/* Update dropdown styles */
+.dropdown-content {
+    background-color: var(--dropdown-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* -----------------------------
+   9. Media Queries
+----------------------------- */
+@media (max-width: 768px) {
+    .page-block {
+        padding: 0.75rem;
+    }
+
+    .container {
+        padding: 1.5rem 1.5rem 1rem;
+        border-radius: 12px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .column--left {
+        padding-right: 1rem;
+        padding: 1rem;
+    }
+
+    .column--right {
+        order: -1;
+    }
+
+    .faq-item__toggle {
+        padding: 1rem;
+    }
+
+    .faq-item__content {
+        padding: 0 1rem 1rem;
+    }
+
+    .content__dropdown {
+        margin-bottom: 2rem;
+        /* Reduced from 3.5rem */
+    }
+
+    .button-container {
+        margin-top: 0.75rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .content__btn {
+        margin-top: 1.5rem;
+        margin-bottom: 3rem;
+        /* Reduced from 4rem for mobile */
+    }
+}
+
+/* Update Back Button Styles */
+.button {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-}
-
-@media (min-width: 768px) {
-    .page-block {
-        padding: 2rem;
-    }
-}
-
-.container {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    /* Reduced padding for mobile */
-    background-color: var(--container-bg);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .container {
-        padding: 2rem;
-    }
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-}
-
-@media (min-width: 768px) {
-    .grid {
-        grid-template-columns: 2fr 1fr;
-    }
-}
-
-@media (min-width: 1024px) {
-    .grid {
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-        justify-content: space-between
-    }
-}
-
-.column {
-    max-width: 768px;
-    width: 100%
-}
-
-@media (min-width: 1024px) {
-    .column {
-        max-width: 476px
-    }
-}
-
-.column--right {
-    display: none
-}
-
-@media (min-width: 1024px) {
-    .column--right {
-        display: block
-    }
-}
-
-/* Content styling */
-.title {
-    font-size: 1.5rem;
-    /* Smaller font size for mobile */
-    line-height: 1.3;
-}
-
-@media (min-width: 768px) {
-    .title {
-        font-size: 2rem;
-    }
-}
-
-.subtitle {
-    font-size: 20px;
-    line-height: 24px
-}
-
-.product-title {
-    font-size: 18px;
-    line-height: 20px
-}
-
-.text {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 150%;
-    color: #555;
-}
-
-.content {
-    padding: 1rem;
-}
-
-@media (min-width: 768px) {
-    .content {
-        padding-left: 32px
-    }
-}
-
-.content__title {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-xl);
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-}
-
-.content__title span {
-    display: block
-}
-
-.content__title--red span {
-    color: #f04444
-}
-
-.content__title--blue span {
-    color: #3c81f6
-}
-
-.content__title--orange span {
-    color: #f59e10
-}
-
-.content__text {
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-    padding-top: 8px;
-    color: var(--text-color);
-}
-
-.content__text strong {
-    font-weight: 700;
-    color: var(--heading-color);
-}
-
-.content__btn {
-    margin: 24px 0 72px
-}
-
-.content__btn .button {
-    max-width: 400px
-}
-
-@media (min-width: 768px) {
-    .content__btn .button {
-        max-width: none;
-        min-width: 200px;
-        width: auto
-    }
-}
-
-/* Button styles */
-.button {
-    padding: 0.5rem 1rem;
-    /* Smaller padding for mobile */
-    height: 48px;
-    /* Reduced height for mobile */
-    font-size: 0.9rem;
-    /* Smaller font size for mobile */
-    border: none;
-    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
     background-color: var(--primary-color);
-    color: var(--heading-color);
-    font-size: 1rem;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
     cursor: pointer;
-    transition: background-color 0.2s;
-    display: block;
-    font-weight: 600;
-    line-height: 130%;
-    text-align: center;
+    transition: all 0.2s ease;
     text-decoration: none;
-    width: 100%
-}
-
-@media (min-width: 768px) {
-    .button {
-        padding: 0.75rem 1.5rem;
-        height: 56px;
-        font-size: 1rem;
-    }
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(60, 129, 246, 0.1);
+    margin: 0;
 }
 
 .button:hover {
     background-color: var(--primary-hover);
-}
-
-.button[data-type=filled] {
-    -webkit-transition: background-color .2s ease;
-    transition: background-color .2s ease
-}
-
-.button[data-type=filled][data-color=blue] {
-    background-color: #3c81f6;
-    color: #fff
-}
-
-.button[data-type=filled][data-color=blue]:focus,
-.button[data-type=filled][data-color=blue]:hover {
-    background-color: #3775de;
-    color: #fff
-}
-
-.button[data-type=filled][data-color=blue]:active {
-    background-color: #3169c7;
-    color: #fff
-}
-
-.button[data-type=filled][data-color=blue]:disabled {
-    background-color: #3c81f6;
-    color: #fff;
-    opacity: .5
-}
-
-.button[data-size=medium] {
-    padding-bottom: 18px;
-    padding-top: 18px
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(60, 129, 246, 0.2);
 }
 
 .button:active {
-    -webkit-transition: none;
-    transition: none
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(60, 129, 246, 0.1);
 }
 
-.button:disabled {
-    cursor: default
-}
-
-.pic {
-    width: 100%;
-    height: 100%;
-    min-height: 300px;
-    background: url('images/BlockIngMachine.png') no-repeat center;
-    background-size: contain;
-    padding-right: 32px;
-    filter: brightness(0.9) contrast(1.1);
-    opacity: 0.9;
-}
-
-/* FAQ section */
-.faq {
-    margin-top: 2rem;
-    list-style: none;
-    background: var(--container-bg);
-    border-radius: 8px;
-}
-
-.faq__item {
-    border-bottom: 1px solid var(--border-color);
-}
-
-.faq__item:last-child {
-    border-bottom: none;
-}
-
-.faq-item__toggle {
+body,
+button,
+input,
+textarea,
+select {
     font-family: var(--font-primary);
-    font-size: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    /* Reduced padding for mobile */
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-color);
-    text-align: left;
-}
-
-@media (min-width: 768px) {
-    .faq-item__toggle {
-        padding: 1.25rem;
-        font-size: 1.1rem;
-    }
-}
-
-.faq-item__toggle:hover {
-    background-color: var(--bg-color);
-}
-
-.faq-item__icon {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s ease;
-}
-
-.faq-item__icon.active {
-    transform: rotate(180deg);
-}
-
-.faq-item__content {
-    display: none;
-    background-color: var(--dropdown-bg);
-    border-top: 1px solid var(--border-color);
-    border-radius: 0 0 8px 8px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.faq-item__content.active {
-    display: block;
-    opacity: 1;
-    padding: 1rem;
-    /* Reduced padding for mobile */
-}
-
-@media (min-width: 768px) {
-    .faq-item__content.active {
-        padding: 1.25rem;
-    }
-}
-
-.faq-item__desc {
-    padding: 1.25rem;
-    color: var(--text-color);
-}
-
-.faq-item__text {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-base);
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-.faq-item__text:last-child {
-    margin-bottom: 0;
-}
-
-.faq-item__toggle-btn {
-    text-align: left;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    flex-grow: 1;
-    color: inherit;
-    display: block;
-    font-weight: inherit;
-    padding-right: 32px;
-    width: 100%;
-    width: 100%;
-    text-align: left;
-    padding: 0;
-    border: none;
-    background: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-color);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.faq-item__toggle-btn.active+.faq-item__toggle-btn-icon {
-    -webkit-transform: scaleY(-1);
-    -ms-transform: scaleY(-1);
-    transform: scaleY(-1)
-}
-
-.faq-item__toggle-btn--star {
-    padding-right: 64px
-}
-
-@media (min-width: 768px) {
-    .faq-item__toggle-btn--star {
-        padding-right: 32px
-    }
-}
-
-.faq-item__star-icon {
-    display: block;
-    height: 24px;
-    position: absolute;
-    right: 32px;
-    top: 0;
-    width: 24px
-}
-
-@media (min-width: 768px) {
-    .faq-item__star-icon {
-        left: -32px;
-        right: 0
-    }
-}
-
-.faq-item__toggle-btn-icon {
-    transition: transform 0.3s;
-    display: block;
-    height: 24px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    -webkit-transition: transform .2s ease;
-    transition: transform .2s ease;
-    width: 24px;
-    z-index: -1;
-    display: flex;
-    align-items: center;
-    margin-left: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.faq-item__toggle-btn-icon.active {
-    transform: rotate(180deg);
-}
-
-.faq-item__toggle-btn-icon svg {
-    transition: transform 0.3s ease;
-    width: 20px;
-    height: 20px;
-    stroke: var(--text-color);
-}
-
-.faq-item__toggle-btn-icon.active svg {
-    transform: rotate(180deg);
-}
-
-.faq-item__content {
-    display: none;
-    background-color: var(--dropdown-bg);
-    border-top: 1px solid var(--border-color);
-    border-radius: 0 0 8px 8px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.faq-item__content.active {
-    display: block;
-    opacity: 1;
-    padding: 1rem;
-}
-
-.faq-item__desc {
-    padding: 1rem 0;
-    overflow: hidden;
-    padding: 1.25rem;
-    color: var(--text-color);
-}
-
-.faq-item__text {
-    padding-top: 21px;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-.faq-item__text:first-child {
-    padding-top: 8px
-}
-
-.faq-item__text a {
-    color: var(--primary-color);
-    text-decoration: underline;
-    -webkit-transition: background-color .2s ease;
-    transition: background-color .2s ease;
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.faq-item__text a:focus,
-.faq-item__text a:hover {
-    color: var(--primary-hover);
-    text-decoration: underline;
-}
-
-.faq-item__text a:active {
-    color: #3169c7;
-    -webkit-transition: none;
-    transition: none
-}
-
-.faq-item__product {
-    margin-top: 24px
-}
-
-.faq-item__product:last-child {
-    margin-top: 48px
-}
-
-.product__header {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.product__header-logo {
-    height: 40px;
-    width: 40px
-}
-
-.product__header-content {
-    margin-left: 16px
-}
-
-.product__header-promo {
-    color: #828a92;
-    line-height: 20px
-}
-
-.product__desc {
-    margin-top: 16px
-}
-
-.product__features {
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap
-}
-
-.product__features,
-.product__features-item {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.product__features-item {
-    margin-top: 16px;
-    width: 100%
-}
-
-@media (min-width: 768px) {
-    .product__features-item {
-        padding-right: 24px;
-        width: 50%
-    }
-}
-
-.product__features-text {
-    line-height: 18px;
-    margin-left: 8px;
-    padding-top: 3px
-}
-
-.product__btn {
-    margin-top: 24px
-}
-
-.product__btn a {
-    border-radius: 8px;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 130%;
-    max-width: 400px;
-    padding: 14px 24px;
-    text-align: center;
-    text-decoration: none;
-    -webkit-transition: background-color .2s ease;
-    transition: background-color .2s ease;
-    width: 100%
 }

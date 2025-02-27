@@ -1,5 +1,0 @@
-AdGuard rules count: 73570
-Browser rules count: 59720
-No DNS Rewrite rules count: 73617
-Hosts rules count: 70262
-Combined rules count: 133290

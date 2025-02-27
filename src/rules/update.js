@@ -1,19 +1,17 @@
 // Import required modules
-import fs from 'fs';
+import fs from 'fs-extra';  // Make sure fs-extra is installed
 import { fetchText } from '../utils/fetch.js';
 import { logMessage } from '../utils/log.js';
-import { convertToAdGuardRule } from './convert.js';
+import { convertToAdGuardRule, convertToBrowserRule, convertToHostsRule } from './convert.js';
 import {
     thirdPartyFiltersFilePath,
-    adguardDnsrewriteFilePath, // Changed from mergedFilePath
+    adguardDnsrewriteFilePath,
     browserRulesFilePath,
-    outputFilePath,
     adguardFilePath,
     hostsFilePath
 } from '../utils/paths.js';
 
 // Configuration constants
-const LICENSE = 'MIT';
 const excludePatterns = [
     /###cookie-modal$/,
     /##\.cookie-modal$/,
@@ -56,99 +54,90 @@ async function loadFilterUrls(debug, verbose) {
  * Helper function to add rules to sets.
  * 
  * @param {string} line - The original rule line.
- * @param {string} rule - The converted AdGuard rule.
- * @param {string} noDnsRewriteRule - The converted AdGuard rule without DNS rewrite.
  * @param {object} sets - The sets to add the rules to.
  */
-function addRuleToSets(line, rule, noDnsRewriteRule, sets) {
-    const { adGuardSet, noDnsRewriteSet, combinedSet, browserRulesSet, hostsSet } = sets;
+async function addRuleToSets(line, sets) {
+    const { hostsSet, adGuardSet, noDnsRewriteSet, browserRulesSet, combinedSet } = sets;
     const trimmedLine = line.trim();
 
-    // Handle hosts rules first
-    if (trimmedLine.startsWith('0.0.0.0') || trimmedLine.startsWith('127.0.0.1')) {
-        hostsSet.add(trimmedLine);
-        combinedSet.add(trimmedLine);
+    // Skip invalid lines
+    if (!trimmedLine ||
+        trimmedLine.startsWith('#') ||
+        trimmedLine.startsWith('!') ||
+        trimmedLine.startsWith('//')) {
         return;
     }
 
-    // Handle AdGuard rules
-    if (trimmedLine.startsWith('||') || trimmedLine.startsWith('@@||')) {
-        if (trimmedLine.startsWith('||') && (trimmedLine.includes('^$') || trimmedLine.includes('$') || trimmedLine.includes('/'))) {
-            adGuardSet.add(trimmedLine);
-            noDnsRewriteSet.add(noDnsRewriteRule);
-            combinedSet.add(trimmedLine);
-        } else {
-            const parts = trimmedLine.split('||');
-            if (parts.length > 1) {
-                const domain = parts[1].split('^')[0];
-                const hostRule = `0.0.0.0 ${domain}`;
-                hostsSet.add(hostRule);
+    // Convert to all formats and add to appropriate sets
+    const hostsRule = await convertToHostsRule(trimmedLine);
+    const adGuardRule = await convertToAdGuardRule(trimmedLine, true);
+    const noRewriteRule = await convertToAdGuardRule(trimmedLine, false);
+    const browserRule = await convertToBrowserRule(trimmedLine);
 
-                const adGuardRule = `||${domain}^$dnsrewrite=greigh.github.io/BlockingMachine`; // #issue-2
-                const exceptionRule = `@@||${domain}^`;
+    if (hostsRule) hostsSet.add(hostsRule);
+    if (adGuardRule) adGuardSet.add(adGuardRule);
+    if (noRewriteRule) noDnsRewriteSet.add(noRewriteRule);
+    if (browserRule) browserRulesSet.add(browserRule);
 
-                if (trimmedLine.startsWith('||')) {
-                    if (!adGuardSet.has(exceptionRule)) {
-                        adGuardSet.add(adGuardRule);
-                        noDnsRewriteSet.add(noDnsRewriteRule);
-                        combinedSet.add(adGuardRule);
-                    }
-                }
-            }
-        }
-    } else {
-        // Browser rules
-        browserRulesSet.add(trimmedLine);
-        combinedSet.add(trimmedLine);
+    // Add to combined set based on priority
+    if (adGuardRule) {
+        combinedSet.add(adGuardRule);
+    } else if (browserRule) {
+        combinedSet.add(browserRule);
+    } else if (hostsRule) {
+        combinedSet.add(hostsRule);
     }
 }
 
 /**
- * Helper function to generate metadata comments.
- * 
- * @param {string} type - The type of the list (e.g., AdGuard, Browser, Hosts).
- * @param {number} count - The number of entries in the list.
- * @returns {string} - The generated metadata comment.
+ * Generate metadata header for filter lists
+ * @param {string} type - The type of list (AdGuard, Browser, Hosts)
+ * @param {number} count - Number of rules in the list
+ * @returns {string} Formatted metadata header
  */
-function generateMetadataComment(type, count) {
-    const now = new Date();
-    const updatedOn = now.toISOString()
+export function generateMetadata(type, count) {
+    const now = new Date().toISOString()
         .replace('T', ' ')
         .replace(/\.\d+Z$/, '');
 
-    if (type === 'Hosts') {
-        return `# Title: BlockingMachine
-# Expires: 1 days (update frequency)
-# Description: Filter rules for blocking unwanted content
-# Homepage: https://github.com/greigh/blockingmachine
-# License: ${LICENSE}
-# Please report any unblocked content or problems on GitHub
-#
-# This list contains host file entries for blocking
-# Type: ${type}
-# Entries: ${count}
-# Updated On: ${updatedOn}
-# Created by: Greigh (aka Daniel)
-#
-# Format: 0.0.0.0 domain.tld or 127.0.0.1 domain.tld
-\n`;
+    const commentChar = type === 'Hosts' ? '#' : '!';
+
+    // Create description based on filter type
+    let description;
+    switch (type) {
+        case 'AdGuard Standard':
+            description = 'Enhanced privacy protection filter list for blocking ads, trackers, annoyances, and pop-ups. ' +
+                'Includes domain-level blocking and custom rules to improve browsing experience.';
+            break;
+        case 'AdGuard DNS':
+            description = 'DNS rewrite filter rules for blocking ads, trackers, and annoyances at the DNS level. ' +
+                'Enhances privacy by preventing unwanted connections with custom DNS responses.';
+            break;
+        case 'Browser':
+            description = 'Browser-compatible filter rules for blocking ads, trackers, and annoyances. ' +
+                'Optimized for browser extensions and includes element hiding rules.';
+            break;
+        case 'Hosts':
+            description = 'Host-level domain blocking rules to prevent connections to ad servers, trackers, and malicious domains. ' +
+                'Blocks unwanted traffic at the system level by redirecting domains to 0.0.0.0.';
+            break;
+        default:
+            description = 'Domain blocking rules for blocking ads and trackers';
     }
 
-    // For AdGuard and Browser rules
-    return `! Title: BlockingMachine ${type} Rules
-! Expires: 1 days
-! Description: Filter rules for blocking unwanted content
-! Homepage: https://github.com/greigh/blockingmachine
-! License: ${LICENSE}
-! Please report any unblocked content or problems on GitHub
-!
-! This list contains ${type.toLowerCase()} specific blocking rules
-! Type: ${type}
-! Entries: ${count}
-! Updated On: ${updatedOn}
-! Created by: Greigh (aka Daniel)
-\n`;
+    return `${commentChar} Title: BlockingMachine ${type} Filter List
+${commentChar} Description: ${description}
+${commentChar} Homepage: https://github.com/greigh/BlockingMachine
+${commentChar} Last modified: ${now}
+${commentChar} Number of rules: ${count}
+${commentChar}
+${commentChar} Format: ${type === 'Hosts' ? '0.0.0.0 domain.tld' :
+            type === 'AdGuard DNS' ? '||domain.tld^$dnsrewrite=greigh.github.io/BlockingMachine' :
+                '||domain.tld^'}
+${commentChar} ==============================================\n`;
 }
+
+// Remove generateMetadataComment and generateHeaderMetadata functions
 
 /**
  * Filter and count rules in a file, excluding comments and empty lines
@@ -177,7 +166,7 @@ export async function filterRules(filePath, debug, verbose) {
         await logMessage(`Filtered and wrote ${validRules.length} rules to ${filePath}`, verbose);
         return validRules.length;
     } catch (err) {
-        await logMessage(`Error filtering rules: ${err.message}`, debug);
+        await logMessage(`Error filtering rules: ${err.message} `, debug);
         return 0;
     }
 }
@@ -191,95 +180,45 @@ export async function filterRules(filePath, debug, verbose) {
 export async function updateAllLists(debug, verbose) {
     await logMessage('Starting updateAllLists', verbose);
     const FILTER_URLS = await loadFilterUrls(debug, verbose);
+
     if (FILTER_URLS.length === 0) {
         await logMessage('No filter URLs found.', debug);
         return;
     }
+
     try {
-        // Fetch the content of each filter URL
-        const results = await Promise.all(FILTER_URLS.map(url => fetchText(url, 3, debug, verbose)));
-        const adGuardSet = new Set();
-        const browserRulesSet = new Set();
-        const noDnsRewriteSet = new Set();
-        const hostsSet = new Set();
-        const combinedSet = new Set();
+        // Create sets to store rules
+        const sets = {
+            hostsSet: new Set(),
+            adGuardSet: new Set(),
+            noDnsRewriteSet: new Set(),
+            browserRulesSet: new Set(),
+            combinedSet: new Set()
+        };
 
-        const sets = { adGuardSet, browserRulesSet, noDnsRewriteSet, hostsSet, combinedSet };
+        // Fetch and process rules
+        const results = await Promise.all(
+            FILTER_URLS.map(url => fetchText(url, 3, debug, verbose))
+        );
 
-        // Process each line of the fetched filter lists
-        for (let txt of results) {
-            const lines = txt.split(/\r?\n/);
-            for (let line of lines) {
-                const trimmedLine = line.trim();
-                if (
-                    !trimmedLine ||
-                    trimmedLine.startsWith('#') ||
-                    trimmedLine.startsWith('!') ||
-                    trimmedLine.startsWith('[') ||
-                    trimmedLine.startsWith('//') ||
-                    trimmedLine.startsWith('<') ||
-                    trimmedLine.startsWith('/*') ||
-                    trimmedLine.startsWith('*/') ||
-                    trimmedLine.startsWith('##') ||
-                    trimmedLine.startsWith('*')
-                ) {
-                    continue;
+        // Process results and add to sets
+        for (const content of results) {
+            if (content) {
+                const lines = content.split('\n');
+                for (const line of lines) {
+                    await addRuleToSets(line, sets);
                 }
-                const rule = await convertToAdGuardRule(trimmedLine);
-                const noDnsRewriteRule = await convertToAdGuardRule(trimmedLine, false);
-                addRuleToSets(trimmedLine, rule, noDnsRewriteRule, sets);
             }
         }
 
-        // Generate metadata comments and content for each list
-        const adGuardCount = adGuardSet.size;
-        const browserRulesCount = browserRulesSet.size;
-        const noDnsRewriteCount = noDnsRewriteSet.size;
-        const hostsCount = hostsSet.size;
-        const combinedCount = combinedSet.size;
+        // Write the sets to files with metadata
+        await writeFilterSets(sets);
 
-        const adGuardContent = generateMetadataComment('AdGuard', adGuardCount) + [...adGuardSet].join('\n');
-        const browserRulesContent = generateMetadataComment('Browser', browserRulesCount) + [...browserRulesSet].join('\n');
-        const noDnsRewriteContent = generateMetadataComment('No DNS Rewrite', noDnsRewriteCount) + [...noDnsRewriteSet].join('\n');
-        const hostsContent = generateMetadataComment('Hosts', hostsCount) + [...hostsSet].join('\n');
-
-        // Write the content to respective files
-        await fs.promises.writeFile(adguardDnsrewriteFilePath, adGuardContent, 'utf8');
-        await fs.promises.writeFile(browserRulesFilePath, browserRulesContent, 'utf8');
-        await fs.promises.writeFile(adguardFilePath, noDnsRewriteContent, 'utf8');
-        await fs.promises.writeFile(hostsFilePath, hostsContent, 'utf8');
-
-        await logMessage('AdGuard list and browser rules updated successfully.', verbose);
-        if (debug) {
-            await logMessage('AdGuard rules: ' + [...adGuardSet].join(', '), verbose);
-            await logMessage('Browser rules: ' + [...browserRulesSet].join(', '), verbose);
-            await logMessage('No DNS Rewrite rules: ' + [...noDnsRewriteSet].join(', '), verbose);
-            await logMessage('Hosts rules: ' + [...hostsSet].join(', '), verbose);
-        }
-
-        // Write rule counts to output.txt
-        const outputContent = `AdGuard rules count: ${adGuardCount}\nBrowser rules count: ${browserRulesCount}\nNo DNS Rewrite rules count: ${noDnsRewriteCount}\nHosts rules count: ${hostsCount}\nCombined rules count: ${combinedCount}\n`;
-        await fs.promises.writeFile(outputFilePath, outputContent, 'utf8');
-        await logMessage('Rule counts written to output.txt', verbose);
-
-        // Filter rules after processing
-        await filterRules(browserRulesFilePath, debug, verbose);
-        await filterRules(adguardFilePath, debug, verbose);
-        await filterRules(hostsFilePath, debug, verbose);
-
-        await logMessage('All files filtered successfully', verbose);
+        // Log completion
+        await logMessage('Successfully updated all filter lists', verbose);
     } catch (err) {
-        await logMessage(`Error updating lists: ${err.message}`, debug);
-        console.error(err.stack);
-        if (err.code === 'ENOENT') {
-            await logMessage('File not found: ' + err.message, debug);
-        } else if (err.code === 'EACCES') {
-            await logMessage('Permission denied: ' + err.message, debug);
-        } else if (err.response) {
-            await logMessage(`Network error: ${err.response.status} ${err.response.statusText}`, debug);
-        } else {
-            await logMessage(`Update error: ${err.message}`, debug);
-        }
+        await logMessage(`Error in updateAllLists: ${err.message}`, 'error');
+        throw err;
     }
 }
 
@@ -295,7 +234,7 @@ export async function ensureFiltersFileExists(debug, verbose) {
         await fs.promises.access(thirdPartyFiltersFilePath);
         await logMessage('thirdPartyFilters.txt exists', verbose);
     } catch (err) {
-        await logMessage(`Error checking thirdPartyFilters.txt: ${err.message}`, debug);
+        await logMessage(`Error checking thirdPartyFilters.txt: ${err.message} `, debug);
         if (err.code === 'ENOENT') {
             await logMessage('thirdPartyFilters.txt does not exist, creating with default URLs', debug);
             const defaultUrls = [
@@ -306,7 +245,7 @@ export async function ensureFiltersFileExists(debug, verbose) {
                 await fs.promises.writeFile(thirdPartyFiltersFilePath, defaultUrls.join('\n'), 'utf8');
                 await logMessage('Created thirdPartyFilters.txt with default URLs', verbose);
             } catch (writeErr) {
-                await logMessage(`Error creating thirdPartyFilters.txt: ${writeErr.message}`, debug);
+                await logMessage(`Error creating thirdPartyFilters.txt: ${writeErr.message} `, debug);
             }
         } else {
             await logMessage('Error checking thirdPartyFilters.txt: ' + err.message, debug);
@@ -318,17 +257,66 @@ export async function ensureFiltersFileExists(debug, verbose) {
         await fs.promises.access(browserRulesFilePath);
         await logMessage('browserRules.txt exists', verbose);
     } catch (err) {
-        await logMessage(`Error checking browserRules.txt: ${err.message}`, debug);
+        await logMessage(`Error checking browserRules.txt: ${err.message} `, debug);
         if (err.code === 'ENOENT') {
             await logMessage('browserRules.txt does not exist, creating an empty file', debug);
             try {
                 await fs.promises.writeFile(browserRulesFilePath, '', 'utf8');
                 await logMessage('Created browserRules.txt', verbose);
             } catch (writeErr) {
-                await logMessage(`Error creating browserRules.txt: ${writeErr.message}`, debug);
+                await logMessage(`Error creating browserRules.txt: ${writeErr.message} `, debug);
             }
         } else {
             await logMessage('Error checking browserRules.txt: ' + err.message, debug);
         }
     }
+}
+
+/**
+ * Write filter sets to their respective files with metadata headers
+ * @param {Object} sets - Object containing all filter sets
+ */
+export async function writeFilterSets(sets) {
+    const { hostsSet, adGuardSet, noDnsRewriteSet, browserRulesSet } = sets;
+
+    // Create array of write operations with correct metadata types
+    const writeOperations = [
+        {
+            path: hostsFilePath,
+            content: generateMetadata('Hosts', hostsSet.size) +
+                Array.from(hostsSet).join('\n') + '\n',
+            type: 'Hosts'
+        },
+        {
+            path: adguardDnsrewriteFilePath,
+            content: generateMetadata('AdGuard DNS', adGuardSet.size) +
+                Array.from(adGuardSet).join('\n') + '\n',
+            type: 'AdGuard DNS'
+        },
+        {
+            path: adguardFilePath,
+            content: generateMetadata('AdGuard Standard', noDnsRewriteSet.size) +
+                Array.from(noDnsRewriteSet).join('\n') + '\n',
+            type: 'AdGuard Standard'
+        },
+        {
+            path: browserRulesFilePath,
+            content: generateMetadata('Browser', browserRulesSet.size) +
+                Array.from(browserRulesSet).join('\n') + '\n',
+            type: 'Browser'
+        }
+    ];
+
+    // Execute all write operations
+    await Promise.all(
+        writeOperations.map(async op => {
+            try {
+                await fs.promises.writeFile(op.path, op.content, 'utf8');
+                await logMessage(`Successfully wrote ${op.type} rules`);
+            } catch (err) {
+                await logMessage(`Error writing ${op.type} rules: ${err.message}`, 'error');
+                throw err;
+            }
+        })
+    );
 }

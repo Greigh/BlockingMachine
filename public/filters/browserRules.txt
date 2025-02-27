@@ -1,0 +1,52 @@
+! Title: BlockingMachine Browser Filter List
+! Description: Browser-compatible filter rules for blocking ads, trackers, and annoyances. Optimized for browser extensions and includes element hiding rules.
+! Homepage: https://github.com/greigh/BlockingMachine
+! Last modified: 2025-02-27 03:02:12
+! Number of rules: 44
+!
+! Format: ||domain.tld^
+! ==============================================
+||m.yap.yahoo.com^$domain=~not.dns
+||manifest.auditude.com^$domain=~not_for_sdn_filter.com
+||kiesta.net^$third-party
+||painsko.com^$third-party
+||ad.mail.ru^$domain=~e.mail.ru|~octavius.mail.ru
+||adsmobila.com^$third-party
+||ts166.net^$third-party
+||postut.cn^$third-party
+||vennala.pw^$redirect=nooptext
+||adplex.co.kr^$third-party
+||tnkfactory.com^$third-party
+||iqzone.com^$third-party
+||postitial.com^$third-party
+||sexpennyauctions.com^$popup
+||valshara.com^$third-party
+||theship.club^$third-party
+||mobilebanner.ru^$third-party
+||inclk.com^$popup
+||jssdk.rayjump.com^$third-party
+||adtheorent.com^$third-party
+||tongqing2015.com^$third-party
+||pw.lpsxssm.com^$third-party
+||://o0e.ru^$third-party
+||31.14.252.148^$third-party
+||admitad.com^$domain=~admitad.com
+||applift.com^$redirect=nooptext
+||brokerbabe.com^$third-party
+||clkfeed.com^$popup
+||hostgrater.com^$third-party
+||keydot.net^$third-party
+||ma-code.ru^$third-party
+||mobile-click.biz^$third-party
+||owap.su^$third-party
+||pagead46.l.doubleclick.net^$third-party
+||partnerad.l.doubleclick.net^$third-party
+||plugin.mediavoice.com^$third-party
+||pos.baidu.com^$third-party
+||tapstat.ru^$third-party
+||track.cpatool.net^$popup,third-party
+||vidout.net^$third-party
+||yuhuads.com^$third-party
+||ziffdavis.com^$third-party
+||deloton.com^$popup,important
+||oclasrv.com^$popup,important

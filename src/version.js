@@ -15,6 +15,7 @@ const octokit = new Octokit({
 
 const REPO_OWNER = 'greigh';
 const REPO_NAME = 'BlockingMachine';
+const isInitialRelease = false; // Set this to true only for the first release
 
 async function generateVersion() {
     const now = new Date();
@@ -46,6 +47,74 @@ async function generateVersion() {
     }
 }
 
+async function updateThirdPartyFilters(readme) {
+    try {
+        const filtersJsonPath = path.join(__dirname, '..', 'src', 'filters.json');
+        const filters = JSON.parse(await fs.readFile(filtersJsonPath, 'utf8'));
+
+        const thirdPartyStart = '<!-- thirdPartyFilters -->';
+        const thirdPartyEnd = '<!-- endThirdPartyFilters -->';
+        const startIndex = readme.indexOf(thirdPartyStart) + thirdPartyStart.length;
+        const endIndex = readme.indexOf(thirdPartyEnd);
+
+        // Generate content from actual filter sources
+        const categorizedFilters = filters.reduce((acc, filter) => {
+            if (!acc[filter.category]) {
+                acc[filter.category] = [];
+            }
+            acc[filter.category].push(filter);
+            return acc;
+        }, {});
+
+        let thirdPartyContent = '\n';
+
+        // Add each category and its filters
+        for (const [category, filterList] of Object.entries(categorizedFilters)) {
+            thirdPartyContent += `### ${category}\n\n`;
+            for (const filter of filterList) {
+                thirdPartyContent += `- [${filter.name}](${filter.url})\n`;
+                if (filter.description) {
+                    thirdPartyContent += `  - *${filter.description}*\n`;
+                }
+            }
+            thirdPartyContent += '\n';
+        }
+
+        // Replace content between markers
+        return readme.slice(0, startIndex) + thirdPartyContent + readme.slice(endIndex);
+    } catch (error) {
+        console.error('Error updating third party filters:', error);
+        throw error;
+    }
+}
+
+async function getRecentCommits() {
+    try {
+        const { data: commits } = await octokit.repos.listCommits({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            per_page: 5,  // Last 5 commits
+            since: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() // Last 24 hours
+        });
+
+        if (!commits.length) {
+            return null;
+        }
+
+        return commits
+            .map(commit => {
+                const msg = commit.commit.message;
+                const hash = commit.sha.substring(0, 7);
+                return `- ${msg} (${hash})`;
+            })
+            .filter(msg => !msg.includes('[skip ci]'))
+            .join('\n');
+    } catch (error) {
+        console.error('Error fetching commits:', error);
+        return null;
+    }
+}
+
 async function updateVersion() {
     const version = await generateVersion();
     const now = new Date();
@@ -60,10 +129,13 @@ async function updateVersion() {
         hour12: true
     });
 
-    // Create GitHub release
-    try {
-        const isInitialRelease = true; // Set this to false after first release
-        const releaseNotes = isInitialRelease ? `
+    // Get current rule counts and recent commits
+    const adguardCount = await getRuleCount('adguard');
+    const browserRulesCount = await getRuleCount('browserRules');
+    const hostsCount = await getRuleCount('hosts');
+    const recentCommits = await getRecentCommits();
+
+    const releaseNotes = isInitialRelease ? `
 # BlockingMachine ${version} (Initial Release)
 
 Released: ${date} at ${time}
@@ -77,24 +149,23 @@ Released: ${date} at ${time}
   - Mobile-responsive interface
 
 ## Rule Counts
-- AdGuard: <!-- adguardCount --> rules
-- Browser: <!-- browserRulesCount --> rules
-- Hosts: <!-- hostsCount --> rules`
-            : `
+- AdGuard: ${adguardCount} rules
+- Browser: ${browserRulesCount} rules
+- Hosts: ${hostsCount} rules`
+        : `
 # BlockingMachine ${version}
 
 Released: ${date} at ${time}
 
 ## Rule Counts
-- AdGuard: <!-- adguardCount --> rules
-- Browser: <!-- browserRulesCount --> rules
-- Hosts: <!-- hostsCount --> rules
+- AdGuard: ${adguardCount} rules
+- Browser: ${browserRulesCount} rules
+- Hosts: ${hostsCount} rules
 
 ## Changes
-- Updated blocking rules
-- Refreshed rule counts
-- Generated new release`;
+${recentCommits || '- Updated blocking rules\n- Refreshed rule counts\n- Generated new release'}`;
 
+    try {
         await octokit.repos.createRelease({
             owner: REPO_OWNER,
             repo: REPO_NAME,
@@ -122,12 +193,31 @@ Released: ${date} at ${time}
                 readme.slice(insertPosition);
         }
 
+        // Update third party filters
+        readme = await updateThirdPartyFilters(readme);
+
         await fs.writeFile(readmePath, readme);
 
         return version;
     } catch (error) {
         console.error('Error creating release:', error);
         throw error;
+    }
+}
+
+// Helper function to get rule counts
+async function getRuleCount(type) {
+    try {
+        const filePath = path.join(__dirname, '..', `${type}.txt`);
+        const content = await fs.readFile(filePath, 'utf8');
+        return content.split('\n').filter(line =>
+            line.trim() &&
+            !line.startsWith('#') &&
+            !line.startsWith('!')
+        ).length;
+    } catch (error) {
+        console.error(`Error getting ${type} rule count:`, error);
+        return 0;
     }
 }
 
