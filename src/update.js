@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import { logMessage } from './utils/log.js';
+import { fetchData } from './utils/fetch.js';
 import {
     updateAllLists,
     ensureFiltersFileExists,
@@ -9,7 +10,8 @@ import {
     browserRulesFilePath,
     adguardFilePath,
     adguardDnsrewriteFilePath,
-    hostsFilePath
+    hostsFilePath,
+    thirdPartyFiltersFilePath
 } from './utils/paths.js';
 
 const debug = process.argv.includes('-debug');
@@ -76,6 +78,60 @@ async function cleanAllRules() {
     }
 }
 
+async function fetchThirdPartyFilters() {
+    try {
+        const content = await fs.readFile(thirdPartyFiltersFilePath, 'utf8');
+        const urls = content.split('\n').filter(url => url.trim() && !url.startsWith('#'));
+
+        console.log('Fetching third-party filters from:', urls);
+
+        const responses = await Promise.all(
+            urls.map(async url => {
+                try {
+                    const response = await fetchData(url);
+                    return response;
+                } catch (error) {
+                    return '';
+                }
+            })
+        );
+
+        const combined = responses.join('\n');
+        console.log(`Total third-party rules: ${combined.split('\n').length}`);
+        return combined;
+    } catch (error) {
+        console.error('Error fetching third-party filters:', error);
+        throw error;
+    }
+}
+
+async function update() {
+    try {
+        // First, get third-party filters
+        const thirdPartyContent = await fetchThirdPartyFilters();
+
+        // Combine with existing rules
+        const existingRules = await fs.readFile(adguardFilePath, 'utf8');
+        const combinedRules = existingRules + '\n' + thirdPartyContent;
+
+        // Process and deduplicate rules
+        const uniqueRules = new Set(
+            combinedRules.split('\n')
+                .map(line => line.trim())
+                .filter(line => line && !line.startsWith('!') && !line.startsWith('#'))
+        );
+
+        // Write back to files
+        await fs.writeFile(adguardFilePath, Array.from(uniqueRules).join('\n') + '\n');
+        await logMessage(`Updated rules with ${uniqueRules.size} unique entries`);
+
+        // Continue with rest of update process...
+    } catch (error) {
+        console.error('Update failed:', error);
+        process.exit(1);
+    }
+}
+
 async function main() {
     try {
         if (debug) {
@@ -97,3 +153,5 @@ async function main() {
 }
 
 main();
+
+export { update, fetchThirdPartyFilters };

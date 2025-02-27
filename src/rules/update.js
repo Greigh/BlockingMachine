@@ -60,32 +60,57 @@ async function addRuleToSets(line, sets) {
     const { hostsSet, adGuardSet, noDnsRewriteSet, browserRulesSet, combinedSet } = sets;
     const trimmedLine = line.trim();
 
-    // Skip invalid lines
+    // Debug logging
+    console.log('Processing rule:', trimmedLine);
+
+    // Skip empty lines and comments, but keep metadata
     if (!trimmedLine ||
-        trimmedLine.startsWith('#') ||
+        (trimmedLine.startsWith('#') && !trimmedLine.includes('0.0.0.0')) ||
         trimmedLine.startsWith('!') ||
         trimmedLine.startsWith('//')) {
         return;
     }
 
-    // Convert to all formats and add to appropriate sets
-    const hostsRule = await convertToHostsRule(trimmedLine);
-    const adGuardRule = await convertToAdGuardRule(trimmedLine, true);
-    const noRewriteRule = await convertToAdGuardRule(trimmedLine, false);
-    const browserRule = await convertToBrowserRule(trimmedLine);
+    // Preserve existing DNS rewrite rules
+    if (trimmedLine.includes('$dnsrewrite')) {
+        adGuardSet.add(trimmedLine);
+        combinedSet.add(trimmedLine);
+        console.log('Added DNS rewrite rule:', trimmedLine);
+        return;
+    }
 
-    if (hostsRule) hostsSet.add(hostsRule);
-    if (adGuardRule) adGuardSet.add(adGuardRule);
-    if (noRewriteRule) noDnsRewriteSet.add(noRewriteRule);
-    if (browserRule) browserRulesSet.add(browserRule);
+    // Convert and add rules to appropriate sets
+    try {
+        const hostsRule = await convertToHostsRule(trimmedLine);
+        const adGuardRule = await convertToAdGuardRule(trimmedLine, true);
+        const noRewriteRule = await convertToAdGuardRule(trimmedLine, false);
+        const browserRule = await convertToBrowserRule(trimmedLine);
 
-    // Add to combined set based on priority
-    if (adGuardRule) {
-        combinedSet.add(adGuardRule);
-    } else if (browserRule) {
-        combinedSet.add(browserRule);
-    } else if (hostsRule) {
-        combinedSet.add(hostsRule);
+        // Log conversions
+        console.log('Rule conversions:', {
+            original: trimmedLine,
+            hosts: hostsRule,
+            adGuard: adGuardRule,
+            noRewrite: noRewriteRule,
+            browser: browserRule
+        });
+
+        // Add to appropriate sets if valid
+        if (hostsRule) hostsSet.add(hostsRule);
+        if (adGuardRule) adGuardSet.add(adGuardRule);
+        if (noRewriteRule) noDnsRewriteSet.add(noRewriteRule);
+        if (browserRule) browserRulesSet.add(browserRule);
+
+        // Add to combined set based on priority
+        if (adGuardRule) {
+            combinedSet.add(adGuardRule);
+        } else if (browserRule) {
+            combinedSet.add(browserRule);
+        } else if (hostsRule) {
+            combinedSet.add(hostsRule);
+        }
+    } catch (error) {
+        console.error('Error processing rule:', trimmedLine, error);
     }
 }
 
@@ -156,22 +181,40 @@ export async function filterRules(filePath, debug, verbose) {
         const fileContent = await fs.readFile(filePath, { encoding: 'utf8' });
         const lines = fileContent.split(/\r?\n/);
 
+        // Preserve metadata and rules
         const validRules = lines.filter(line => {
             const trimmedLine = line.trim();
+
+            // Keep metadata lines
+            if (trimmedLine.startsWith('!') &&
+                (trimmedLine.includes('Title:') ||
+                    trimmedLine.includes('Description:') ||
+                    trimmedLine.includes('Homepage:') ||
+                    trimmedLine.includes('Last modified:') ||
+                    trimmedLine.includes('Number of rules:') ||
+                    trimmedLine.includes('Format:'))) {
+                return true;
+            }
+
+            // Keep valid rules
             return trimmedLine &&
-                !trimmedLine.startsWith('#') &&
-                !trimmedLine.startsWith('//') &&  // Exclude JS-style comments
-                !trimmedLine.startsWith('!') &&   // Exclude AdGuard comments
-                !trimmedLine.startsWith('[') &&   // Exclude section headers
+                !trimmedLine.startsWith('//') &&
+                !(trimmedLine.startsWith('#') && !trimmedLine.includes('0.0.0.0')) &&
                 !excludePatterns.some(pattern => pattern.test(trimmedLine));
         });
 
-        // Write filtered content back with proper line endings
         await fs.writeFile(filePath, validRules.join('\n') + '\n');
-        await logMessage(`Filtered and wrote ${validRules.length} rules to ${filePath}`, verbose);
-        return validRules.length;
+        const ruleCount = validRules.filter(line => {
+            const trimmed = line.trim();
+            return trimmed &&
+                !trimmed.startsWith('!') &&
+                !(trimmed.startsWith('#') && !trimmed.includes('0.0.0.0'));
+        }).length;
+
+        await logMessage(`Filtered and wrote ${ruleCount} rules to ${filePath}`, verbose);
+        return ruleCount;
     } catch (err) {
-        await logMessage(`Error filtering rules: ${err.message} `, debug);
+        await logMessage(`Error filtering rules: ${err.message}`, debug);
         return 0;
     }
 }

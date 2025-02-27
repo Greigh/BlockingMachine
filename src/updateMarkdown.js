@@ -12,10 +12,29 @@ import {
 async function countRules(filePath) {
     try {
         const content = await fs.readFile(filePath, 'utf8');
-        return content.split('\n').filter(line => {
+        // Split by newlines and filter out:
+        // - Empty lines
+        // - Comments starting with ! or #
+        // - Header sections
+        const rules = content.split('\n').filter(line => {
             const trimmed = line.trim();
-            return trimmed && !trimmed.startsWith('#') && !trimmed.startsWith('!');
-        }).length;
+            return trimmed &&
+                !trimmed.startsWith('!') &&
+                !trimmed.startsWith('#') &&
+                !trimmed.startsWith('=') &&
+                trimmed !== '' &&
+                !trimmed.includes('Title:') &&
+                !trimmed.includes('Description:') &&
+                !trimmed.includes('Homepage:') &&
+                !trimmed.includes('Last modified:') &&
+                !trimmed.includes('Number of rules:') &&
+                !trimmed.includes('Format:');
+        });
+
+        // Debug logging
+        console.log(`Counted ${rules.length} rules in ${filePath}`);
+
+        return rules.length;
     } catch (error) {
         console.error(`Error counting rules in ${filePath}:`, error);
         return 0;
