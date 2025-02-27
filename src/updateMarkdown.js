@@ -9,7 +9,6 @@ import {
     statsFilePath  // Add this to paths.js
 } from './utils/paths.js';
 import { filterRules } from './rules/update.js';
-
 /**
  * Updates both the README.md counts and stats.json file
  */
