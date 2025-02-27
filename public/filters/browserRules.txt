@@ -1,7 +1,7 @@
 ! Title: BlockingMachine Browser Filter List
 ! Description: Browser-compatible filter rules for blocking ads, trackers, and annoyances. Optimized for browser extensions and includes element hiding rules.
 ! Homepage: https://github.com/greigh/BlockingMachine
-! Last modified: 2025-02-27 04:25:37
+! Last modified: 2025-02-27 04:37:08
 ! Number of rules: 44
 !
 ! Format: ||domain.tld^

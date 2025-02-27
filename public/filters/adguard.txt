@@ -1,7 +1,7 @@
 ! Title: BlockingMachine AdGuard Standard Filter List
 ! Description: Enhanced privacy protection filter list for blocking ads, trackers, annoyances, and pop-ups. Includes domain-level blocking and custom rules to improve browsing experience.
 ! Homepage: https://github.com/greigh/BlockingMachine
-! Last modified: 2025-02-27 04:25:37
+! Last modified: 2025-02-27 04:37:08
 ! Number of rules: 1633
 !
 ! Format: ||domain.tld^
