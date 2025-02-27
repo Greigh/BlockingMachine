@@ -7,7 +7,7 @@
 !
 ! Format: 
 ! ||domain.tld^$dnsrewrite=greigh.github.io/BlockingMachine
-! 
+
 ||adx-open-service.youku.com^$dnsrewrite=greigh.github.io/BlockingMachine
 ||ad.youku.com^$dnsrewrite=greigh.github.io/BlockingMachine
 ||ykad-data.youku.com^$dnsrewrite=greigh.github.io/BlockingMachine
