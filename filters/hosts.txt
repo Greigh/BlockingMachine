@@ -1,12 +1,11 @@
 # Title: BlockingMachine Hosts Filter List
 # Description: Host-level domain blocking rules to prevent connections to ad servers, trackers, and malicious domains. Blocks unwanted traffic at the system level by redirecting domains to 0.0.0.0.
 # Homepage: https://github.com/greigh/BlockingMachine
-# Last modified: 2025-02-27 05:06:05
-# Number of rules: 68642
+# Last modified: 2025-02-27 05:51:23
+# Number of rules: 68640
 #
 # Format: 0.0.0.0 domain.tld
-# ==============================================
-0.0.0.0 adx-open-service.youku.com
+#0.0.0.0 adx-open-service.youku.com
 0.0.0.0 ad.youku.com
 0.0.0.0 ykad-data.youku.com
 0.0.0.0 cad.youku.com
@@ -1847,7 +1846,6 @@
 0.0.0.0 1370065b3a.com
 0.0.0.0 137kfj65k.de
 0.0.0.0 1386bd6fb0.52fa059b20.com
-0.0.0.0 13b3403320.com
 0.0.0.0 13b696a4c1.com
 0.0.0.0 13c4491879.com
 0.0.0.0 13p76nnir.de
@@ -5919,7 +5917,6 @@
 0.0.0.0 ahporntube.com
 0.0.0.0 ahqovxli.com
 0.0.0.0 ahscdn.com
-0.0.0.0 ahtate.ru
 0.0.0.0 ahtfzhs.xyz
 0.0.0.0 ahvradotws.com
 0.0.0.0 ahyyqq.xyz
@@ -6341,7 +6338,6 @@
 0.0.0.0 alpangorochan.com
 0.0.0.0 alpenridge.top
 0.0.0.0 alpha.tracedock.com
-0.0.0.0 alphabetforesteracts.com
 0.0.0.0 alphabetlayout.com
 0.0.0.0 alphabetmondayfowl.com
 0.0.0.0 alphabird.com
@@ -9764,6 +9760,7 @@
 0.0.0.0 blzwvb.xyz
 0.0.0.0 bm.annonce.cz
 0.0.0.0 bm.h576.com
+0.0.0.0 bmasamd.top
 0.0.0.0 bmbvrjymnjlrz.top
 0.0.0.0 bmcdn1.com
 0.0.0.0 bmcdn2.com
@@ -13462,7 +13459,6 @@
 0.0.0.0 cryptoatom.care
 0.0.0.0 cryptobeneluxbanner.care
 0.0.0.0 cryptojimmy.care
-0.0.0.0 cryptolabpro.com
 0.0.0.0 cryptomaster.care
 0.0.0.0 cryptomcw.com
 0.0.0.0 cryptonewsdom.care
@@ -18492,6 +18488,7 @@
 0.0.0.0 fbmediafor.com
 0.0.0.0 fbofferads.com
 0.0.0.0 fbuser.ovp.vn
+0.0.0.0 fbvbrb.icu
 0.0.0.0 fc-id.sensic.net
 0.0.0.0 fc.itmedia.co.jp
 0.0.0.0 fc.webmasterpro.de
@@ -19871,6 +19868,7 @@
 0.0.0.0 gcm.ksmobile.net
 0.0.0.0 gcolzvkh.com
 0.0.0.0 gcomwx.icu
+0.0.0.0 gcprivacy.com
 0.0.0.0 gcpusibqpnulkg.com
 0.0.0.0 gcumgu.xyz
 0.0.0.0 gcvir.xyz
@@ -21671,7 +21669,6 @@
 0.0.0.0 highrevenuecpmnetwork.com
 0.0.0.0 highrevenuegate.com
 0.0.0.0 highrevenuenetwork.com
-0.0.0.0 hightednubbin.shop
 0.0.0.0 hightrafficads.com
 0.0.0.0 highway.18manwa.com
 0.0.0.0 highway.cablecar.sph.com.sg
@@ -22927,7 +22924,6 @@
 0.0.0.0 insecurealbatross.com
 0.0.0.0 insecuritydisproveballoon.com
 0.0.0.0 insensitivedramaaudience.com
-0.0.0.0 insensitiveintegertransactions.com
 0.0.0.0 inseparablebeamsdavid.com
 0.0.0.0 insertjav182.fun
 0.0.0.0 insertludicrousintimidating.com
@@ -33331,6 +33327,7 @@
 0.0.0.0 rdbd.xsread.com
 0.0.0.0 rddjzbwt.click
 0.0.0.0 rddywd.com
+0.0.0.0 rdllzz.icu
 0.0.0.0 rdrctgoweb.com
 0.0.0.0 rdroot.com
 0.0.0.0 rdrsec.com
@@ -33697,7 +33694,6 @@
 0.0.0.0 reluctantlyjackpot.com
 0.0.0.0 reluctantlysolve.com
 0.0.0.0 reluctantturpentine.com
-0.0.0.0 reluraun.com
 0.0.0.0 remain.appcpi.net
 0.0.0.0 remainderskins.com
 0.0.0.0 remaininghurtful.com
@@ -34274,6 +34270,7 @@
 0.0.0.0 roikingdom.com
 0.0.0.0 roilsnadirink.com
 0.0.0.0 roinduk.com
+0.0.0.0 rojj.cn
 0.0.0.0 rok.com.com
 0.0.0.0 rokreeza.com
 0.0.0.0 rokymedia.com
@@ -35919,6 +35916,7 @@
 0.0.0.0 sharpwavedreinforce.com
 0.0.0.0 shasogna.com
 0.0.0.0 shassheld.live
+0.0.0.0 shatielsu.com
 0.0.0.0 shatsoutheshe.net
 0.0.0.0 shatterconceal.com
 0.0.0.0 shaugacakro.net
@@ -39931,7 +39929,6 @@
 0.0.0.0 tqaiowbyilodx.com
 0.0.0.0 tqanmatx.icu
 0.0.0.0 tqbrnd.xyz
-0.0.0.0 tqeobp89axcn.com
 0.0.0.0 tqnupxrwvo.com
 0.0.0.0 tqtqvb.xyz
 0.0.0.0 tquvbfl.com
@@ -41201,7 +41198,6 @@
 0.0.0.0 uep.gaijin.net
 0.0.0.0 uepkcdjgp.com
 0.0.0.0 uerbgnkas.com
-0.0.0.0 uetplfqbet.com
 0.0.0.0 uewotga.top
 0.0.0.0 ueykjfltxqsb.space
 0.0.0.0 ufaexpert.com
@@ -45664,6 +45660,7 @@
 0.0.0.0 0fmm.com
 0.0.0.0 101m3.com
 0.0.0.0 10desires.com
+0.0.0.0 13b3403320.com
 0.0.0.0 15d113e19a.com
 0.0.0.0 190b1f9880.com
 0.0.0.0 19d7fd2ed2.com
@@ -45924,6 +45921,7 @@
 0.0.0.0 alluviopurreic.com
 0.0.0.0 allworkovergot.com
 0.0.0.0 alpacahizz.com
+0.0.0.0 alphabetforesteracts.com
 0.0.0.0 alphagodaddy.com
 0.0.0.0 alsindustrate.info
 0.0.0.0 altaircastor.com
@@ -47042,6 +47040,7 @@
 0.0.0.0 insecure-motor.pro
 0.0.0.0 insecurepainting.pro
 0.0.0.0 insensibleconjecturefirm.com
+0.0.0.0 insensitiveintegertransactions.com
 0.0.0.0 insightexpress.com
 0.0.0.0 insightexpressai.com
 0.0.0.0 insistinestimable.com
@@ -47925,6 +47924,7 @@
 0.0.0.0 regulushamal.top
 0.0.0.0 relevanti.com
 0.0.0.0 relockembarge.shop
+0.0.0.0 reluraun.com
 0.0.0.0 remaysky.com
 0.0.0.0 remembermaterialistic.com
 0.0.0.0 remploymehnt.info
@@ -48442,6 +48442,7 @@
 0.0.0.0 uaucqlwwo.com
 0.0.0.0 ucbedayxxqpyuo.xyz
 0.0.0.0 ucconn.live
+0.0.0.0 uetplfqbet.com
 0.0.0.0 ufindsoul.com
 0.0.0.0 ufouxbwn.com
 0.0.0.0 ufvxiyewsyi.com
@@ -50441,7 +50442,6 @@
 0.0.0.0 zononi.com
 0.0.0.0 mcs.snssdk.com
 0.0.0.0 ib.snssdk.com
-0.0.0.0 gcprivacy.com
 0.0.0.0 slackb.com
 0.0.0.0 nmrodam.com
 0.0.0.0 collector.snplow.net
@@ -54440,6 +54440,7 @@
 0.0.0.0 gzppit.com
 0.0.0.0 eggyey.com
 0.0.0.0 svedkan.com
+0.0.0.0 ahtate.ru
 0.0.0.0 qntihf.com
 0.0.0.0 mlgrtn.com
 0.0.0.0 big6q4y2oy.ru
@@ -62545,10 +62546,6 @@
 0.0.0.0 zvietnakello.weebly.com
 0.0.0.0 zywjpypco.7hujk.de
 0.0.0.0 51tongji.trafficmanager.net
-0.0.0.0 shatielsu.com
-0.0.0.0 rdllzz.icu
-0.0.0.0 fbvbrb.icu
-0.0.0.0 rojj.cn
 0.0.0.0 pisb.cn
 0.0.0.0 scohmallt.com
 0.0.0.0 thampheth.com

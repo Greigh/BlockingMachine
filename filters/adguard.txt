@@ -1,12 +1,11 @@
 ! Title: BlockingMachine AdGuard Standard Filter List
 ! Description: Enhanced privacy protection filter list for blocking ads, trackers, annoyances, and pop-ups. Includes domain-level blocking and custom rules to improve browsing experience.
 ! Homepage: https://github.com/greigh/BlockingMachine
-! Last modified: 2025-02-27 05:06:05
-! Number of rules: 72289
+! Last modified: 2025-02-27 05:51:23
+! Number of rules: 72287
 !
 ! Format: ||domain.tld^
-! ==============================================
-||adx-open-service.youku.com^
+!||adx-open-service.youku.com^
 ||ad.youku.com^
 ||ykad-data.youku.com^
 ||cad.youku.com^
@@ -1945,7 +1944,6 @@
 ||1370065b3a.com^
 ||137kfj65k.de^
 ||1386bd6fb0.52fa059b20.com^
-||13b3403320.com^
 ||13b696a4c1.com^
 ||13c4491879.com^
 ||13p76nnir.de^
@@ -6017,7 +6015,6 @@
 ||ahporntube.com^
 ||ahqovxli.com^
 ||ahscdn.com^
-||ahtate.ru^
 ||ahtfzhs.xyz^
 ||ahvradotws.com^
 ||ahyyqq.xyz^
@@ -6439,7 +6436,6 @@
 ||alpangorochan.com^
 ||alpenridge.top^
 ||alpha.tracedock.com^
-||alphabetforesteracts.com^
 ||alphabetlayout.com^
 ||alphabetmondayfowl.com^
 ||alphabird.com^
@@ -9864,6 +9860,7 @@
 ||blzwvb.xyz^
 ||bm.annonce.cz^
 ||bm.h576.com^
+||bmasamd.top^
 ||bmbvrjymnjlrz.top^
 ||bmcdn1.com^
 ||bmcdn2.com^
@@ -13564,7 +13561,6 @@
 ||cryptoatom.care^
 ||cryptobeneluxbanner.care^
 ||cryptojimmy.care^
-||cryptolabpro.com^
 ||cryptomaster.care^
 ||cryptomcw.com^
 ||cryptonewsdom.care^
@@ -18595,6 +18591,7 @@
 ||fbmediafor.com^
 ||fbofferads.com^
 ||fbuser.ovp.vn^
+||fbvbrb.icu^
 ||fc-id.sensic.net^
 ||fc.itmedia.co.jp^
 ||fc.webmasterpro.de^
@@ -19974,6 +19971,7 @@
 ||gcm.ksmobile.net^
 ||gcolzvkh.com^
 ||gcomwx.icu^
+||gcprivacy.com^
 ||gcpusibqpnulkg.com^
 ||gcumgu.xyz^
 ||gcvir.xyz^
@@ -21775,7 +21773,6 @@
 ||highrevenuecpmnetwork.com^
 ||highrevenuegate.com^
 ||highrevenuenetwork.com^
-||hightednubbin.shop^
 ||hightrafficads.com^
 ||highway.18manwa.com^
 ||highway.cablecar.sph.com.sg^
@@ -23032,7 +23029,6 @@
 ||insecurealbatross.com^
 ||insecuritydisproveballoon.com^
 ||insensitivedramaaudience.com^
-||insensitiveintegertransactions.com^
 ||inseparablebeamsdavid.com^
 ||insertjav182.fun^
 ||insertludicrousintimidating.com^
@@ -33438,6 +33434,7 @@
 ||rdbd.xsread.com^
 ||rddjzbwt.click^
 ||rddywd.com^
+||rdllzz.icu^
 ||rdrctgoweb.com^
 ||rdroot.com^
 ||rdrsec.com^
@@ -33804,7 +33801,6 @@
 ||reluctantlyjackpot.com^
 ||reluctantlysolve.com^
 ||reluctantturpentine.com^
-||reluraun.com^
 ||remain.appcpi.net^
 ||remainderskins.com^
 ||remaininghurtful.com^
@@ -34381,6 +34377,7 @@
 ||roikingdom.com^
 ||roilsnadirink.com^
 ||roinduk.com^
+||rojj.cn^
 ||rok.com.com^
 ||rokreeza.com^
 ||rokymedia.com^
@@ -36026,6 +36023,7 @@
 ||sharpwavedreinforce.com^
 ||shasogna.com^
 ||shassheld.live^
+||shatielsu.com^
 ||shatsoutheshe.net^
 ||shatterconceal.com^
 ||shaugacakro.net^
@@ -40038,7 +40036,6 @@
 ||tqaiowbyilodx.com^
 ||tqanmatx.icu^
 ||tqbrnd.xyz^
-||tqeobp89axcn.com^
 ||tqnupxrwvo.com^
 ||tqtqvb.xyz^
 ||tquvbfl.com^
@@ -41309,7 +41306,6 @@
 ||uep.gaijin.net^
 ||uepkcdjgp.com^
 ||uerbgnkas.com^
-||uetplfqbet.com^
 ||uewotga.top^
 ||ueykjfltxqsb.space^
 ||ufaexpert.com^
@@ -45789,6 +45785,7 @@
 ||0fmm.com^
 ||101m3.com^
 ||10desires.com^
+||13b3403320.com^
 ||15d113e19a.com^
 ||190b1f9880.com^
 ||19d7fd2ed2.com^
@@ -46049,6 +46046,7 @@
 ||alluviopurreic.com^
 ||allworkovergot.com^
 ||alpacahizz.com^
+||alphabetforesteracts.com^
 ||alphagodaddy.com^
 ||alsindustrate.info^
 ||altaircastor.com^
@@ -47176,6 +47174,7 @@
 ||insecure-motor.pro^
 ||insecurepainting.pro^
 ||insensibleconjecturefirm.com^
+||insensitiveintegertransactions.com^
 ||insightexpress.com^
 ||insightexpressai.com^
 ||insistinestimable.com^
@@ -48066,6 +48065,7 @@
 ||regulushamal.top^
 ||relevanti.com^
 ||relockembarge.shop^
+||reluraun.com^
 ||remaysky.com^
 ||remembermaterialistic.com^
 ||remploymehnt.info^
@@ -48584,6 +48584,7 @@
 ||uaucqlwwo.com^
 ||ucbedayxxqpyuo.xyz^
 ||ucconn.live^
+||uetplfqbet.com^
 ||ufindsoul.com^
 ||ufouxbwn.com^
 ||ufvxiyewsyi.com^
@@ -50615,7 +50616,6 @@
 ||oclasrv.com$important
 ||mcs.snssdk.com^
 ||ib.snssdk.com^
-||gcprivacy.com^
 ||slackb.com^
 ||nmrodam.com^
 ||collector.snplow.net^
@@ -54785,6 +54785,7 @@
 ||gzppit.com^
 ||eggyey.com^
 ||svedkan.com^
+||ahtate.ru^
 ||qntihf.com^
 ||mlgrtn.com^
 ||big6q4y2oy.ru^
@@ -62941,10 +62942,6 @@
 ||38.33.15.*.gif
 ||51tongji.trafficmanager.net^
 ||67.21.92.*.gif
-||shatielsu.com^
-||rdllzz.icu^
-||fbvbrb.icu^
-||rojj.cn^
 ||pisb.cn^
 ||scohmallt.com^
 ||thampheth.com^
