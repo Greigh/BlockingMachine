@@ -162,7 +162,7 @@ ${commentChar} Last modified: ${now}
 ${commentChar} Number of rules: ${count}
 ${commentChar}
 ${commentChar} Format: ${type === 'Hosts' ? '0.0.0.0 domain.tld' :
-            type === 'AdGuard DNS' ? '||domain.tld^$dnsrewrite=greigh.github.io/BlockingMachine' :
+            type === 'AdGuard DNS' ? '||domain.tld^$dnsrewrite=blockingmachine.xyz' :
                 '||domain.tld^'}
 ${commentChar}`;
 }
