@@ -77,21 +77,35 @@ const normalizeNetworkRule = (line) => {
 export async function convertToAdGuardRule(line, includeDnsRewrite = true) {
     if (isCommentOrEmpty(line)) return null;
 
+    // Add debug logging
+    console.log('Converting to AdGuard rule:', { line, includeDnsRewrite });
+
     if (isHostsFormat(line)) {
         const parts = line.split(/\s+/);
         if (parts.length > 1) {
-            return includeDnsRewrite
+            const rule = includeDnsRewrite
                 ? `||${parts[1]}^$dnsrewrite=greigh.github.io/BlockingMachine`
                 : `||${parts[1]}^`;
+            console.log('Converted hosts to AdGuard:', { original: line, converted: rule });
+            return rule;
         }
     }
 
     if (line.startsWith('||')) {
-        // Remove any existing carets before adding our own
+        // Don't modify existing AdGuard rules unless they need DNS rewrite
+        if (!includeDnsRewrite || line.includes('$dnsrewrite')) {
+            console.log('Keeping existing AdGuard rule:', line);
+            return line;
+        }
+
+        // Only add DNS rewrite to domain-only rules
         const basePath = line.split('$')[0].replace(/\^+$/, '');
-        return includeDnsRewrite && !line.includes('$dnsrewrite')
-            ? `${basePath}^$dnsrewrite=greigh.github.io/BlockingMachine`
-            : line;
+        if (!basePath.includes('/')) {
+            const rule = `${basePath}^$dnsrewrite=greigh.github.io/BlockingMachine`;
+            console.log('Added DNS rewrite to rule:', { original: line, converted: rule });
+            return rule;
+        }
+        return line;
     }
 
     return null;
@@ -105,18 +119,29 @@ export async function convertToAdGuardRule(line, includeDnsRewrite = true) {
  */
 export async function convertToBrowserRule(line) {
     if (isCommentOrEmpty(line)) return null;
-    if (line.includes('$dnsrewrite')) return null;
 
-    // Handle element hiding and cosmetic rules
+    // Debug logging
+    console.log('Converting to browser rule:', line);
+
+    // Keep existing element hiding and cosmetic rules as-is
     if (ELEMENT_HIDING_PATTERNS.some(p => line.includes(p)) ||
         COSMETIC_PATTERNS.some(p => line.includes(p))) {
+        console.log('Keeping element hiding/cosmetic rule:', line);
         return line;
+    }
+
+    // Don't convert DNS rewrite rules to browser rules
+    if (line.includes('$dnsrewrite')) {
+        console.log('Skipping DNS rewrite rule:', line);
+        return null;
     }
 
     // Handle browser-specific modifiers
     const allModifiers = [...BROWSER_MODIFIERS.resource, ...BROWSER_MODIFIERS.targeting];
     if (allModifiers.some(mod => line.includes(mod))) {
-        return normalizeNetworkRule(line);
+        const normalized = normalizeNetworkRule(line);
+        console.log('Normalized browser rule:', { original: line, converted: normalized });
+        return normalized;
     }
 
     return null;
