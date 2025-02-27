@@ -5,9 +5,8 @@
 ! Last modified: 2025-02-27 05:06:05
 ! Number of rules: 73406
 !
-! Format: 
+! Format:
 ! ||domain.tld^$dnsrewrite=greigh.github.io/BlockingMachine
-
 ||adx-open-service.youku.com^$dnsrewrite=greigh.github.io/BlockingMachine
 ||ad.youku.com^$dnsrewrite=greigh.github.io/BlockingMachine
 ||ykad-data.youku.com^$dnsrewrite=greigh.github.io/BlockingMachine
