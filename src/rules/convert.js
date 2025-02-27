@@ -77,16 +77,12 @@ const normalizeNetworkRule = (line) => {
 export async function convertToAdGuardRule(line, includeDnsRewrite = true) {
     if (isCommentOrEmpty(line)) return null;
 
-    // Add debug logging
-    console.log('Converting to AdGuard rule:', { line, includeDnsRewrite });
-
     if (isHostsFormat(line)) {
         const parts = line.split(/\s+/);
         if (parts.length > 1) {
             const rule = includeDnsRewrite
-                ? `||${parts[1]}^$dnsrewrite=greigh.github.io/BlockingMachine`
+                ? `||${parts[1]}^$dnsrewrite=blockingmachine.xyz`
                 : `||${parts[1]}^`;
-            console.log('Converted hosts to AdGuard:', { original: line, converted: rule });
             return rule;
         }
     }
@@ -94,17 +90,17 @@ export async function convertToAdGuardRule(line, includeDnsRewrite = true) {
     if (line.startsWith('||')) {
         // Don't modify existing AdGuard rules unless they need DNS rewrite
         if (!includeDnsRewrite || line.includes('$dnsrewrite')) {
-            console.log('Keeping existing AdGuard rule:', line);
             return line;
         }
 
         // Only add DNS rewrite to domain-only rules
         const basePath = line.split('$')[0].replace(/\^+$/, '');
         if (!basePath.includes('/')) {
-            const rule = `${basePath}^$dnsrewrite=greigh.github.io/BlockingMachine`;
-            console.log('Added DNS rewrite to rule:', { original: line, converted: rule });
+            const rule = `${basePath}^$dnsrewrite=blockingmachine.xyz`;
             return rule;
         }
+        return line;
+    } else if (line.startsWith('@@||')) {
         return line;
     }
 
