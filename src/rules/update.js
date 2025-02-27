@@ -164,7 +164,7 @@ ${commentChar}
 ${commentChar} Format: ${type === 'Hosts' ? '0.0.0.0 domain.tld' :
             type === 'AdGuard DNS' ? '||domain.tld^$dnsrewrite=greigh.github.io/BlockingMachine' :
                 '||domain.tld^'}
-${commentChar} ==============================================\n`;
+${commentChar}`;
 }
 
 // Remove generateMetadataComment and generateHeaderMetadata functions
