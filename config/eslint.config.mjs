@@ -16,6 +16,7 @@ const compat = new FlatCompat({
 export default [
     js.configs.recommended,
     {
+        ignores: ['node_modules/**', 'dist/**'],
         files: ['src/**/*.js'],
         languageOptions: {
             ecmaVersion: 2022,
@@ -33,24 +34,14 @@ export default [
             },
         },
         rules: {
-            // Enforce semicolons at the end of statements
             'semi': ['error', 'always'],
-
-            // Enforce single quotes for string literals
             'quotes': ['error', 'single'],
-
-            // Disable indentation checking completely
             'indent': 'off',
-
-            // Warn when variables are declared but not used
             'no-unused-vars': 'warn',
-
-            // Allow console.log and other console methods
-            'no-console': 'off',
-
-            // Error when using undefined variables
+            'no-console': ['off', { allow: ['error', 'warn', 'info'] }],
             'no-undef': 'error',
-        },
+            'no-debugger': 'warn'
+        }
     },
     ...compat.extends('plugin:@typescript-eslint/recommended'),
 ];
