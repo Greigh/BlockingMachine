@@ -1,99 +1,178 @@
+'use strict';
 
-window.PAGE_TYPE = 'protected_rule';
+// Add this at the top of your script.js
+document.addEventListener('DOMContentLoaded', function () {
+    // Handle demo button visibility
+    const demoButton = document.getElementById('demoButton');
+    const isProduction = window.location.hostname === 'greigh.github.io' || window.location.hostname === '127.0.0.1';
 
-window.locales = {
+    if (demoButton) {
+        if (isProduction) {
+            demoButton.style.display = 'block';
+            demoButton.href = '/demo';
+        } else {
+            // For local development
+            demoButton.style.display = 'none';
+        }
+    }
 
-    en: {
-        metaTitle: 'BlockingMachine',
-        backBtn: 'Go back',
-        safeDropdownTitle3: 'Why is this website blocked?',
-        protectedDropDownTitle3: 'Why is this website blocked?',
-        safeDropdownDesc3: 'This website is blocked because it’s marked as an advertising or tracking domain. Your administrator has blocked access to <strong>%host%</strong>',
-        protectedDropdownDesc3: 'This website is blocked because it’s marked as an advertising or tracking domain. Your administrator has blocked access to <strong>%host%</strong>',
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
 
-        safeDropdownTitle4: 'How to unblock this website?',
-        safeDropdownDesc4_1: 'To unblock this website, sign up at <a href=\'%dns_website_url%\'>%dns_domain%</a> and connect this device to your server. Go to <strong>Server settings</strong> → <strong>User rules</strong> and create an unblocking rule for this website',
-        protectedDropdownDesc4: 'If you believe this website has been blocked in error, please <a href=\'%reports_new_issue_url%\'>let us know</a>',
+    // Theme toggle handler
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    }
+});
 
-        protectedTitle: 'Access blocked: <span>Ad or tracking domain</span>',
-        protectedDesc: 'Your administrator blocked access to <strong>%host%</strong> because it’s marked as an advertising or tracking domain. This website may track your activity or display ads.',
-    },
+// Global configuration
+const CONFIG = {
+    PAGE_TYPE: 'protected_rule',
+    APP_NAME: 'BlockingMachine',
+    ACTIVE_CLASS: 'active',
+    DEFAULT_LOCALE: 'en',
+    THEME: {
+        LIGHT: 'light',
+        DARK: 'dark'
+    }
 };
 
-!function () {
-    'use strict';
-    var t, o = window;
-    o.NodeList && !NodeList.prototype.forEach && (NodeList.prototype.forEach = function (t, n) {
-        n = n || o;
-        for (var e = 0; e < this.length; e++)
-            t.call(n, this[e], e, this);
+// Localization strings
+const LOCALES = {
+    en: {
+        metaTitle: CONFIG.APP_NAME,
+        backBtn: 'Go back',
+        safeDropdownTitle3: 'Why is this website blocked?',
+        protectedDropdownDesc3: 'This website is blocked because it contains advertising or tracking code.',
+        protectedDropdownDesc4: 'If you believe this website has been blocked in error, please <a href="%reports_url%">let us know</a>.',
+        safeDropdownTitle4: 'How to temporarily unblock this website?',
+        safeDropdownDesc4_1: 'To temporarily unblock this website, go to Server settings → User rules and create an unblocking rule',
+        safeDropdownDesc4_2: 'If the issue persists, please report it <a href="%reports_url%">on our GitHub</a>.',
+        protectedTitle: 'Access blocked:<br/><span>Ad or tracking domain</span>',
+        protectedDesc: 'Access to <strong>%host%</strong> is blocked. This website may track your activity or display ads.'
     }
-    );
-    var n = null
-        , e = 'BlockingMachine'
-        , a = null !== (t = o.location.host) && void 0 !== t ? t : ''
-        , r = {
-            host: a,
-            reports_url: ''.concat(a, '&from=').concat(o.PAGE_TYPE, '&app=').concat(e),
-            reports_new_issue_url: ''.concat(o.PAGE_TYPE, '&app=').concat(e),
-            website_url: ''.concat(o.PAGE_TYPE, '&app=').concat(e),
-            dns_website_url: ''.concat(o.PAGE_TYPE, '&app=').concat(e),
-            dns_domain: '',
-            user_rules_url: ''.concat(o.PAGE_TYPE, '&app=').concat(e),
-            users_count: '100',
-        };
-    document.querySelectorAll('[data-id]').forEach((function (t) {
-        var e = t.dataset.id;
-        if (e) {
-            var a = function (t) {
-                var e, a;
-                if (!n) {
-                    var r = (navigator.language || navigator.browserLanguage).replace(/-/g, '_').toLowerCase()
-                        , c = r.substr(0, 2).toLowerCase();
-                    n = o.locales[r] || o.locales[c] || o.locales.en;
-                }
-                return null !== (e = null !== (a = n[t]) && void 0 !== a ? a : o.locales.en[t]) && void 0 !== e ? e : t;
-            }(e);
-            for (var c in r)
-                a = a.replace(new RegExp('%'.concat(c, '%'), 'g'), r[c]);
-            t.innerHTML = a;
-        }
-    }
-    ));
-    var c = !!window.MSInputMethodContext && !!document.documentMode
-        , d = 'active'
-        , i = document.querySelectorAll('[data-dropdown-item]');
-    i.forEach((function (t) {
-        var o = t.querySelector('[data-dropdown-toggle]')
-            , n = t.querySelector('[data-dropdown-content]');
-        null == o || o.addEventListener('click', (function (e) {
-            i.forEach((function (t) {
-                var n = t.querySelector('[data-dropdown-toggle]')
-                    , e = t.querySelector('[data-dropdown-content]');
-                n !== o && (n.classList.remove(d),
-                e.classList.remove(d));
-            }
-            )),
-            e.currentTarget.classList.toggle(d),
-            n.classList.toggle(d),
-            c ? document.documentElement.scrollTop = t.offsetTop : n.addEventListener('transitionend', (function () {
-                window.scrollTo({
-                    top: window.scrollY + t.getBoundingClientRect().top,
-                    behavior: 'smooth'
-                });
-            }
-            ), {
-                once: !0
+};
+
+// Initialize app
+(() => {
+    const pageData = {
+        // Get the blocked domain from the referrer or URL parameters
+        host: new URLSearchParams(window.location.search).get('blocked') ||
+            document.referrer.replace(/^https?:\/\//, '').split('/')[0] ||
+            'unknown domain',
+        reports_url: 'https://github.com/greigh/BlockingMachine/issues'
+    };
+
+    // Content management
+    const updateContent = () => {
+        const locale = navigator.language?.toLowerCase().split('-')[0];
+        const strings = LOCALES[locale] || LOCALES[CONFIG.DEFAULT_LOCALE];
+
+        document.querySelectorAll('[data-id]').forEach(element => {
+            const key = element.dataset.id;
+            if (!key) return;
+
+            let text = strings[key] || key;
+            Object.entries(pageData).forEach(([key, value]) => {
+                text = text.replace(new RegExp(`%${key}%`, 'g'), value);
             });
-        }
-        ));
+            element.innerHTML = text;
+        });
+    };
+
+    // Dropdown functionality
+    const setupDropdowns = () => {
+        document.querySelectorAll('[data-dropdown-item]').forEach(item => {
+            const toggle = item.querySelector('[data-dropdown-toggle]');
+            const content = item.querySelector('[data-dropdown-content]');
+
+            if (!toggle || !content) return;
+
+            toggle.setAttribute('aria-expanded', 'false');
+
+            toggle.addEventListener('click', () => {
+                const isExpanding = toggle.getAttribute('aria-expanded') === 'false';
+
+                // Close all other dropdowns
+                document.querySelectorAll('[data-dropdown-item]').forEach(other => {
+                    if (other !== item) {
+                        const otherToggle = other.querySelector('[data-dropdown-toggle]');
+                        const otherContent = other.querySelector('[data-dropdown-content]');
+                        if (otherToggle && otherContent) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            otherContent.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Toggle current dropdown
+                toggle.setAttribute('aria-expanded', isExpanding ? 'true' : 'false');
+                content.classList.toggle('active');
+            });
+        });
+    };
+
+    // Theme handling
+    const initTheme = () => {
+        const themeToggle = document.getElementById('themeToggle');
+        if (!themeToggle) return;
+
+        const getSystemTheme = () =>
+            window.matchMedia('(prefers-color-scheme: dark)').matches ? CONFIG.THEME.DARK : CONFIG.THEME.LIGHT;
+
+        const setTheme = (theme = getSystemTheme()) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            document.body.className = theme === CONFIG.THEME.DARK ? 'dark-theme' : '';
+            if (theme) {
+                localStorage.setItem('theme', theme);
+            } else {
+                localStorage.removeItem('theme');
+            }
+            themeToggle.textContent = theme === CONFIG.THEME.DARK ? '☀️' : '🌙';
+        };
+
+        // Initialize theme from storage or system preference
+        setTheme(localStorage.getItem('theme'));
+
+        // System theme change handler
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (!localStorage.getItem('theme')) setTheme();
+        });
+    };
+
+    // Initialize everything
+    updateContent();
+    setupDropdowns();
+    initTheme();
+
+    // Back button functionality
+    document.querySelector('[data-back-btn]')?.addEventListener('click', () => window.history.back());
+})();
+
+const setTheme = (theme) => {
+    // Set theme on root element
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // Store theme preference
+    localStorage.setItem('theme', theme);
+
+    // Update body class
+    document.body.className = theme === 'dark' ? 'dark-theme' : 'light-theme';
+
+    // Update theme toggle button
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
     }
-    )),
-    document.querySelectorAll('[data-back-btn]').forEach((function (t) {
-        t.addEventListener('click', (function () {
-            o.history.back();
-        }
-        ));
-    }
-    ));
-}();
+
+    // Force repaint to fix any transition issues
+    document.body.style.display = 'none';
+    document.body.offsetHeight; // trigger reflow
+    document.body.style.display = '';
+};

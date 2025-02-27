@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Demo | BlockingMachine</title>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="../images/BlockingMachine.png"
+    />
+    <link rel="stylesheet" href="../index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page-block">
+      <div class="container">
+        <!-- Theme Toggle -->
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle dark mode"
+        >
+          🌓
+        </button>
+
+        <div class="grid">
+          <!-- Left Column -->
+          <div class="column column--left">
+            <div class="content">
+              <!-- Header -->
+              <h1 class="title content__title content__title--blue">
+                BlockingMachine Demo
+              </h1>
+
+              <!-- Stats Section -->
+              <div class="content__section">
+                <h2 class="content__subtitle">Live Statistics</h2>
+                <div class="stats-grid">
+                  <div class="stats-item">
+                    <h3>Domains Blocked</h3>
+                    <p id="domains-blocked">Loading...</p>
+                  </div>
+                  <div class="stats-item">
+                    <h3>Last Update</h3>
+                    <p id="last-update">Loading...</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Test Tool Section -->
+              <div class="content__section">
+                <h2 class="content__subtitle">Filter Test Tool</h2>
+                <div class="test-tool">
+                  <div class="test-input-group">
+                    <input
+                      type="url"
+                      id="test-url"
+                      class="input"
+                      placeholder="Enter URL to test"
+                    />
+                    <button onclick="testUrl()" class="button">Test URL</button>
+                  </div>
+                  <div id="test-results" class="test-results"></div>
+                </div>
+              </div>
+
+              <!-- Back Button -->
+              <div class="content__btn">
+                <a href="/" class="button">Go back</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="column column--right">
+            <img
+              src="../images/BlockingMachine.png"
+              alt="BlockingMachine Logo"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../script.js"></script>
+    <script src="./demo.js"></script>
+  </body>
+</html>
