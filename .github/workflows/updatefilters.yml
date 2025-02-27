@@ -4,7 +4,6 @@ permissions: write-all
 on:
   schedule:
     - cron: "0 0 * * *" # Primary run at midnight UTC
-    - cron: "0 12 * * *" # Backup run at noon UTC
   workflow_dispatch: # Manual trigger
   push:
     branches:
@@ -13,20 +12,13 @@ on:
       - "src/**"
       - "public/**"
       - ".github/workflows/**"
-  workflow_run:
-    workflows: ["ESLint"] # This ensures it runs after eslint
-    types:
-      - completed
 
 jobs:
   update-filters:
     name: Update TXT Files
     runs-on: ubuntu-latest
-    timeout-minutes: 30 # Prevent hanging jobs
     concurrency:
       group: filters-${{ github.ref }}
-      cancel-in-progress: false
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -64,7 +56,6 @@ jobs:
           git diff --staged --quiet || echo "has_changes=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push if changed
-        if: steps.changes.outputs.has_changes == 'true'
         run: |
           git commit -m "Update filter lists and documentation"
           git push
