@@ -1,49 +1,60 @@
 'use strict';
-import fs from 'fs';
+import { promises as fs } from 'fs';
 import { logMessage } from './utils/log.js';
 import {
     adguardFilePath,
     browserRulesFilePath,
     hostsFilePath,
     readmePath,
-    statsFilePath  // Add this to paths.js
+    statsFilePath
 } from './utils/paths.js';
-import { filterRules } from './rules/update.js';
-/**
- * Updates both the README.md counts and stats.json file
- */
+
+async function countRules(filePath) {
+    try {
+        const content = await fs.readFile(filePath, 'utf8');
+        return content.split('\n').filter(line => {
+            const trimmed = line.trim();
+            return trimmed && !trimmed.startsWith('#') && !trimmed.startsWith('!');
+        }).length;
+    } catch (error) {
+        console.error(`Error counting rules in ${filePath}:`, error);
+        return 0;
+    }
+}
+
 async function updateStats() {
     try {
-        // Get filtered counts
-        const adguardCount = await filterRules(adguardFilePath, false, true);
-        const browserRulesCount = await filterRules(browserRulesFilePath, false, true);
-        const hostsCount = await filterRules(hostsFilePath, false, true);
-        const totalRules = adguardCount + browserRulesCount + hostsCount;
+        // Get accurate rule counts
+        const browserRules = await countRules(browserRulesFilePath);
+        const dnsRules = await countRules(adguardFilePath);
+        const hostsRules = await countRules(hostsFilePath);
+        const totalRules = browserRules + dnsRules + hostsRules;
 
         // Create stats object
         const stats = {
             lastUpdated: new Date().toISOString(),
             totalRules,
-            browserRules: browserRulesCount,
-            dnsRules: adguardCount,
-            hostsRules: hostsCount
+            browserRules,
+            dnsRules,
+            hostsRules
         };
 
         // Update stats.json
-        await fs.promises.writeFile(
+        await fs.writeFile(
             statsFilePath,
             JSON.stringify(stats, null, 2)
         );
         await logMessage('Stats file updated successfully', true);
 
         // Update README.md
-        const readmeContent = await fs.promises.readFile(readmePath, { encoding: 'utf8' });
+        const readmeContent = await fs.readFile(readmePath, 'utf8');
         const updatedContent = readmeContent
-            .replace(/<!-- adguardCount -->.*/, `<!-- adguardCount -->${adguardCount} rules`)
-            .replace(/<!-- browserRulesCount -->.*/, `<!-- browserRulesCount -->${browserRulesCount} rules`)
-            .replace(/<!-- hostsCount -->.*/, `<!-- hostsCount -->${hostsCount} rules`);
+            .replace(/<!-- adguardCount -->.*/, `<!-- adguardCount -->${dnsRules} rules`)
+            .replace(/<!-- browserRulesCount -->.*/, `<!-- browserRulesCount -->${browserRules} rules`)
+            .replace(/<!-- hostsCount -->.*/, `<!-- hostsCount -->${hostsRules} rules`)
+            .replace(/<!-- totalRules -->.*/, `<!-- totalRules -->${totalRules} rules`);
 
-        await fs.promises.writeFile(readmePath, updatedContent);
+        await fs.writeFile(readmePath, updatedContent);
         await logMessage('Rule counts updated in README.md', true);
     } catch (error) {
         console.error('Error updating stats:', error);
@@ -52,4 +63,4 @@ async function updateStats() {
 }
 
 // Call the update function
-updateStats();
+updateStats().catch(console.error);

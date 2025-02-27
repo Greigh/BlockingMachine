@@ -36,3 +36,13 @@ export async function fetchText(url, retries = 3, debug, verbose) {
         }
     }
 }
+
+export async function fetchData(url) {
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching data from ${url}:`, error);
+        throw error;
+    }
+}

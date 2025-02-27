@@ -96,11 +96,16 @@ async function addRuleToSets(line, sets) {
  * @returns {string} Formatted metadata header
  */
 export function generateMetadata(type, count) {
+    if (!type || typeof count !== 'number') {
+        console.error('Invalid metadata parameters:', { type, count });
+        return '';
+    }
+
     const now = new Date().toISOString()
         .replace('T', ' ')
         .replace(/\.\d+Z$/, '');
 
-    const commentChar = type === 'Hosts' ? '#' : '!';
+    const commentChar = type.toLowerCase().includes('hosts') ? '#' : '!';
 
     // Create description based on filter type
     let description;
@@ -279,7 +284,14 @@ export async function ensureFiltersFileExists(debug, verbose) {
 export async function writeFilterSets(sets) {
     const { hostsSet, adGuardSet, noDnsRewriteSet, browserRulesSet } = sets;
 
-    // Create array of write operations with correct metadata types
+    // Debug logging to verify set sizes
+    console.log('Set sizes:', {
+        hosts: hostsSet.size,
+        adGuard: adGuardSet.size,
+        noRewrite: noDnsRewriteSet.size,
+        browser: browserRulesSet.size
+    });
+
     const writeOperations = [
         {
             path: hostsFilePath,
@@ -307,12 +319,17 @@ export async function writeFilterSets(sets) {
         }
     ];
 
+    // Debug the content before writing
+    for (const op of writeOperations) {
+        console.log(`${op.type} metadata:`, op.content.split('\n').slice(0, 7).join('\n'));
+    }
+
     // Execute all write operations
     await Promise.all(
         writeOperations.map(async op => {
             try {
                 await fs.writeFile(op.path, op.content, 'utf8');
-                await logMessage(`Successfully wrote ${op.type} rules`);
+                await logMessage(`Successfully wrote ${op.type} rules with metadata`);
             } catch (err) {
                 await logMessage(`Error writing ${op.type} rules: ${err.message}`, 'error');
                 throw err;
