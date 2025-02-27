@@ -75,7 +75,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Update stats
         run: |
-          node scripts/update-stats.js
+          npm run update-stats
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:

@@ -1,5 +1,4 @@
 import { promises as fs } from 'fs';
-import { resolve } from 'path';
 import { logMessage } from './utils/log.js';
 import {
     updateAllLists,

@@ -16,7 +16,7 @@ const compat = new FlatCompat({
 export default [
     js.configs.recommended,
     {
-        files: ['**/*.js', '**/*.mjs'],
+        files: ['src/**/*.js'],
         languageOptions: {
             ecmaVersion: 2022,
             sourceType: 'module',

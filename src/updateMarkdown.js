@@ -5,43 +5,52 @@ import {
     adguardFilePath,
     browserRulesFilePath,
     hostsFilePath,
-    readmePath
+    readmePath,
+    statsFilePath  // Add this to paths.js
 } from './utils/paths.js';
 import { filterRules } from './rules/update.js';
 
 /**
- * Reads and returns the content of README.md
- * @returns {Promise<string>} The README content
+ * Updates both the README.md counts and stats.json file
  */
-async function getReadmeContent() {
-    return await fs.promises.readFile(readmePath, { encoding: 'utf8' });
-}
-
-/**
- * Function to update the Markdown file with rule counts.
- */
-async function updateMarkdown() {
+async function updateStats() {
     try {
-        const readmeContent = await getReadmeContent();
-
         // Get filtered counts
         const adguardCount = await filterRules(adguardFilePath, false, true);
         const browserRulesCount = await filterRules(browserRulesFilePath, false, true);
         const hostsCount = await filterRules(hostsFilePath, false, true);
+        const totalRules = adguardCount + browserRulesCount + hostsCount;
 
-        // Update the counts in README.md
-        let updatedContent = readmeContent
+        // Create stats object
+        const stats = {
+            lastUpdated: new Date().toISOString(),
+            totalRules,
+            browserRules: browserRulesCount,
+            dnsRules: adguardCount,
+            hostsRules: hostsCount
+        };
+
+        // Update stats.json
+        await fs.promises.writeFile(
+            statsFilePath,
+            JSON.stringify(stats, null, 2)
+        );
+        await logMessage('Stats file updated successfully', true);
+
+        // Update README.md
+        const readmeContent = await fs.promises.readFile(readmePath, { encoding: 'utf8' });
+        const updatedContent = readmeContent
             .replace(/<!-- adguardCount -->.*/, `<!-- adguardCount -->${adguardCount} rules`)
             .replace(/<!-- browserRulesCount -->.*/, `<!-- browserRulesCount -->${browserRulesCount} rules`)
             .replace(/<!-- hostsCount -->.*/, `<!-- hostsCount -->${hostsCount} rules`);
 
-        // Write the updated content back to README.md
         await fs.promises.writeFile(readmePath, updatedContent);
         await logMessage('Rule counts updated in README.md', true);
     } catch (error) {
-        console.error('Error updating README.md:', error);
+        console.error('Error updating stats:', error);
+        process.exit(1);
     }
 }
 
-// Call the updateMarkdown function
-updateMarkdown();
+// Call the update function
+updateStats();

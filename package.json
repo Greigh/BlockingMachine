@@ -6,15 +6,15 @@
   "scripts": {
     "start": "node src/index.js --server",
     "build": "npm run update",
-    "aglint": "aglint -c public/filters/.aglintrc.yaml adguard.txt hosts.txt browserRules.txt adguard_dnsrewrite.txt",
+    "aglint": "aglint -c public/filters/.aglintrc.yaml public/filters/adguard.txt public/filters/hosts.txt public/filters/adguard_dnsrewrite.txt",
     "eslint": "eslint --config config/eslint.config.mjs \"src/**/*.js\"",
-    "update-md": "node src/updateMarkdown.js",
     "mdlint": "node --no-deprecation ./node_modules/.bin/markdownlint -c config/.markdownlint.json \"./README.md\" \"./docs/**/*.md\"",
     "mdlint:fix": "node --no-deprecation ./node_modules/.bin/markdownlint -f \"./README.md\" \"./docs/**/*.md\"",
     "lint": "npm run aglint && npm run eslint && npm run mdlint",
     "clean-rules": "node src/rules/cleanRules.js",
     "update": "node src/update.js",
-    "version": "node src/version.js"
+    "version": "node src/version.js",
+    "update-stats": "node src/updateMarkdown.js"
   },
   "dependencies": {
     "@octokit/rest": "^21.1.1",

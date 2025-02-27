@@ -50,8 +50,8 @@ jobs:
         continue-on-error: true # Continue even if some lists fail
         timeout-minutes: 15
 
-      - name: Update Documentation
-        run: npm run update-md
+      - name: Update Stats
+        run: npm run update-stats
         if: always() # Run even if update partially fails
 
       - name: Check for changes

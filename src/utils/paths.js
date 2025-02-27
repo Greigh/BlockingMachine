@@ -15,3 +15,5 @@ export const adguardDnsrewriteFilePath = resolve(filtersDir, 'adguard_dnsrewrite
 export const browserRulesFilePath = resolve(filtersDir, 'browserRules.txt');
 export const adguardFilePath = resolve(filtersDir, 'adguard.txt');
 export const hostsFilePath = resolve(filtersDir, 'hosts.txt');
+export const readmePath = resolve(rootDir, 'README.md');
+export const statsFilePath = resolve(filtersDir, 'stats.json');
