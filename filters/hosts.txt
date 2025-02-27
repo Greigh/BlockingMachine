@@ -1,7 +1,7 @@
 # Title: BlockingMachine Hosts Filter List
 # Description: Host-level domain blocking rules to prevent connections to ad servers, trackers, and malicious domains. Blocks unwanted traffic at the system level by redirecting domains to 0.0.0.0.
 # Homepage: https://github.com/greigh/BlockingMachine
-# Last modified: 2025-02-27 08:21:59
+# Last modified: 2025-02-27 08:37:30
 # Number of rules: 68662
 #
 # Format: 0.0.0.0 domain.tld
