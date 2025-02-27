@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js --server",
     "build": "npm run update",
-    "aglint": "aglint -c .aglintrc.yaml adguard.txt hosts.txt browserRules.txt adguard_dnsrewrite.txt",
+    "aglint": "aglint -c public/filters/.aglintrc.yaml adguard.txt hosts.txt browserRules.txt adguard_dnsrewrite.txt",
     "eslint": "eslint --config config/eslint.config.mjs \"src/**/*.js\"",
     "update-md": "node src/updateMarkdown.js",
     "mdlint": "node --no-deprecation ./node_modules/.bin/markdownlint -c config/.markdownlint.json \"./README.md\" \"./docs/**/*.md\"",

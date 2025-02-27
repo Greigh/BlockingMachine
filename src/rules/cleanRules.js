@@ -1,9 +1,6 @@
 import { promises as fs } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { browserRulesFilePath } from './utils/paths.js';
 
 const excludePatterns = [
     /###cookie-modal$/,
@@ -13,8 +10,7 @@ const excludePatterns = [
 async function cleanRules() {
     try {
         // Read browserRules.txt
-        const filePath = path.resolve(__dirname, '../../browserRules.txt');
-        const content = await fs.readFile(filePath, 'utf8');
+        const content = await fs.readFile(browserRulesFilePath, 'utf8');
 
         // Split into lines
         const lines = content.split('\n');
@@ -25,7 +21,7 @@ async function cleanRules() {
         });
 
         // Write back to file
-        await fs.writeFile(filePath, cleanedLines.join('\n'));
+        await fs.writeFile(browserRulesFilePath, cleanedLines.join('\n'));
 
         console.log('Successfully cleaned rules');
     } catch (error) {

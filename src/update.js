@@ -1,29 +1,30 @@
 import { promises as fs } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { resolve } from 'path';
 import { logMessage } from './utils/log.js';
 import {
     updateAllLists,
     ensureFiltersFileExists,
     writeFilterSets
 } from './rules/update.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import {
+    browserRulesFilePath,
+    adguardFilePath,
+    adguardDnsrewriteFilePath,
+    hostsFilePath
+} from './utils/paths.js';
 
 const debug = process.argv.includes('-debug');
 const verbose = process.argv.includes('-verbose');
 
 async function cleanAllRules() {
     const files = {
-        browser: '../browserRules.txt',
-        adguard: '../adguard.txt',
-        adguardDns: '../adguard_dnsrewrite.txt',
-        hosts: '../hosts.txt'
+        browser: browserRulesFilePath,
+        adguard: adguardFilePath,
+        adguardDns: adguardDnsrewriteFilePath,
+        hosts: hostsFilePath
     };
 
     try {
-        // Create sets to store cleaned rules
         const sets = {
             hostsSet: new Set(),
             adGuardSet: new Set(),
@@ -34,15 +35,13 @@ async function cleanAllRules() {
 
         // Read and clean each file
         for (const [type, filePath] of Object.entries(files)) {
-            const fullPath = path.resolve(__dirname, filePath);
-
             // Ensure file exists
-            await fs.access(fullPath).catch(async () => {
-                await fs.writeFile(fullPath, '', 'utf8');
+            await fs.access(filePath).catch(async () => {
+                await fs.writeFile(filePath, '', 'utf8');
                 await logMessage(`Created missing file: ${filePath}`, debug);
             });
 
-            const content = await fs.readFile(fullPath, 'utf8');
+            const content = await fs.readFile(filePath, 'utf8');
 
             // Filter rules and add to appropriate sets
             const lines = content.split('\n').filter(line => {
@@ -54,22 +53,21 @@ async function cleanAllRules() {
             });
 
             switch (type) {
-            case 'hosts':
-                lines.forEach(line => sets.hostsSet.add(line));
-                break;
-            case 'adguard':
-                lines.forEach(line => sets.noDnsRewriteSet.add(line));
-                break;
-            case 'adguardDns':
-                lines.forEach(line => sets.adGuardSet.add(line));
-                break;
-            case 'browser':
-                lines.forEach(line => sets.browserRulesSet.add(line));
-                break;
+                case 'hosts':
+                    lines.forEach(line => sets.hostsSet.add(line));
+                    break;
+                case 'adguard':
+                    lines.forEach(line => sets.noDnsRewriteSet.add(line));
+                    break;
+                case 'adguardDns':
+                    lines.forEach(line => sets.adGuardSet.add(line));
+                    break;
+                case 'browser':
+                    lines.forEach(line => sets.browserRulesSet.add(line));
+                    break;
             }
         }
 
-        // Write files with headers using writeFilterSets
         await writeFilterSets(sets);
         await logMessage('Successfully cleaned and wrote all rules', verbose);
 

@@ -10,7 +10,7 @@ const rootDir = resolve(__dirname, '../../');
 const filtersDir = resolve(rootDir, 'public/filters');
 
 // Define the file paths relative to filters directory
-export const thirdPartyFiltersFilePath = resolve(rootDir, 'thirdPartyFilters.txt');
+export const thirdPartyFiltersFilePath = resolve(filtersDir, 'thirdPartyFilters.txt');
 export const adguardDnsrewriteFilePath = resolve(filtersDir, 'adguard_dnsrewrite.txt');
 export const browserRulesFilePath = resolve(filtersDir, 'browserRules.txt');
 export const adguardFilePath = resolve(filtersDir, 'adguard.txt');
