@@ -1,12 +1,11 @@
 ! Title: BlockingMachine Browser Filter List
 ! Description: Browser-compatible filter rules for blocking ads, trackers, and annoyances. Optimized for browser extensions and includes element hiding rules.
 ! Homepage: https://github.com/greigh/BlockingMachine
-! Last modified: 2025-02-27 05:06:05
+! Last modified: 2025-02-27 05:51:23
 ! Number of rules: 61266
 !
 ! Format: ||domain.tld^
-! ==============================================
-||m.yap.yahoo.com^$domain=~not.dns
+!||m.yap.yahoo.com^$domain=~not.dns
 ||manifest.auditude.com^$domain=~not_for_sdn_filter.com
 ||kiesta.net^$third-party
 ||painsko.com^$third-party
