@@ -1,8 +1,8 @@
 ! Title: BlockingMachine AdGuard DNS Filter List
 ! Description: DNS rewrite filter rules for blocking ads, trackers, and annoyances at the DNS level. Enhances privacy by preventing unwanted connections with custom DNS responses.
 ! Homepage: https://github.com/greigh/BlockingMachine
-! Last modified: 2025-03-02 01:12:50
-! Number of rules: 76921
+! Last modified: 2025-03-03 01:11:03
+! Number of rules: 76933
 !
 ! Format: ||domain.tld^$dnsrewrite=blockingmachine.xyz
 !||adx-open-service.youku.com^$dnsrewrite=blockingmachine.xyz
@@ -3855,7 +3855,6 @@
 ||153acc74fd.com^$dnsrewrite=blockingmachine.xyz
 ||1548164934.rsc.cdn77.org^$dnsrewrite=blockingmachine.xyz
 ||1558334541.rsc.cdn77.org^$dnsrewrite=blockingmachine.xyz
-||1560807123.rsc.cdn77.org^$dnsrewrite=blockingmachine.xyz
 ||15752525.xyz^$dnsrewrite=blockingmachine.xyz
 ||15x.info^$dnsrewrite=blockingmachine.xyz
 ||16327739.xyz^$dnsrewrite=blockingmachine.xyz
@@ -4503,6 +4502,7 @@
 ||48f6041ce7.com^$dnsrewrite=blockingmachine.xyz
 ||49333767.xyz^$dnsrewrite=blockingmachine.xyz
 ||49706204.xyz^$dnsrewrite=blockingmachine.xyz
+||49709796.xyz^$dnsrewrite=blockingmachine.xyz
 ||49766251.xyz^$dnsrewrite=blockingmachine.xyz
 ||49d4db4864.com^$dnsrewrite=blockingmachine.xyz
 ||4a4a9db4ab.com^$dnsrewrite=blockingmachine.xyz
@@ -4590,7 +4590,6 @@
 ||533e4e8be4.com^$dnsrewrite=blockingmachine.xyz
 ||53469662.xyz^$dnsrewrite=blockingmachine.xyz
 ||536435ba94.com^$dnsrewrite=blockingmachine.xyz
-||536fbeeea4.com^$dnsrewrite=blockingmachine.xyz
 ||53c2dtzsj7t1.top^$dnsrewrite=blockingmachine.xyz
 ||53e91a4877.com^$dnsrewrite=blockingmachine.xyz
 ||53f2216e35.adfb5b0a32.com^$dnsrewrite=blockingmachine.xyz
@@ -4816,6 +4815,7 @@
 ||711f8130e4.com^$dnsrewrite=blockingmachine.xyz
 ||71e0e9090d.com^$dnsrewrite=blockingmachine.xyz
 ||72075223.xyz^$dnsrewrite=blockingmachine.xyz
+||72123581.xyz^$dnsrewrite=blockingmachine.xyz
 ||721ffc3ec5.com^$dnsrewrite=blockingmachine.xyz
 ||72356275.xyz^$dnsrewrite=blockingmachine.xyz
 ||72560514.xyz^$dnsrewrite=blockingmachine.xyz
@@ -5179,6 +5179,7 @@
 ||9bf9309f6f.com^$dnsrewrite=blockingmachine.xyz
 ||9bff4acb16.051e57adf3.com^$dnsrewrite=blockingmachine.xyz
 ||9cbj41a5.de^$dnsrewrite=blockingmachine.xyz
+||9cd4abb9e0.com^$dnsrewrite=blockingmachine.xyz
 ||9cd76b4462bb.com^$dnsrewrite=blockingmachine.xyz
 ||9d2cca15e4.com^$dnsrewrite=blockingmachine.xyz
 ||9d603009eb.com^$dnsrewrite=blockingmachine.xyz
@@ -5491,7 +5492,6 @@
 ||aa.4wank.com^$dnsrewrite=blockingmachine.xyz
 ||aa.fapnado.xxx^$dnsrewrite=blockingmachine.xyz
 ||aa.pornvideotop.com^$dnsrewrite=blockingmachine.xyz
-||aa03010iiko.com^$dnsrewrite=blockingmachine.xyz
 ||aa12b32ecc.com^$dnsrewrite=blockingmachine.xyz
 ||aa682509b0.f11631d24c.com^$dnsrewrite=blockingmachine.xyz
 ||aa7514796b.224e37d1ce.com^$dnsrewrite=blockingmachine.xyz
@@ -5659,7 +5659,6 @@
 ||abnegationdenoteimprobable.com^$dnsrewrite=blockingmachine.xyz
 ||abnegationsemicirclereproduce.com^$dnsrewrite=blockingmachine.xyz
 ||abniorant.com^$dnsrewrite=blockingmachine.xyz
-||abnormalearphones.com^$dnsrewrite=blockingmachine.xyz
 ||abnormalgently.com^$dnsrewrite=blockingmachine.xyz
 ||abnormalmansfield.com^$dnsrewrite=blockingmachine.xyz
 ||abnormalrebel.com^$dnsrewrite=blockingmachine.xyz
@@ -7842,7 +7841,6 @@
 ||aggregationstiffenflamboyant.com^$dnsrewrite=blockingmachine.xyz
 ||aggressivedifficulty.com^$dnsrewrite=blockingmachine.xyz
 ||aggressivefrequentneckquirky.com^$dnsrewrite=blockingmachine.xyz
-||aghppuhixd.com^$dnsrewrite=blockingmachine.xyz
 ||agi-static.indiatimes.com^$dnsrewrite=blockingmachine.xyz
 ||agilaujoa.net^$dnsrewrite=blockingmachine.xyz
 ||agilemedia.jp^$dnsrewrite=blockingmachine.xyz
@@ -8061,7 +8059,6 @@
 ||akisinn.me^$dnsrewrite=blockingmachine.xyz
 ||akisinn.site^$dnsrewrite=blockingmachine.xyz
 ||akjorcnawqp.com^$dnsrewrite=blockingmachine.xyz
-||akjoyjkjbajkv.top^$dnsrewrite=blockingmachine.xyz
 ||akjoyjkrwaaab.top^$dnsrewrite=blockingmachine.xyz
 ||akjoyjkrwalaa.top^$dnsrewrite=blockingmachine.xyz
 ||akku.mondo.trium.mitsubishi.sms13.de^$dnsrewrite=blockingmachine.xyz
@@ -8517,7 +8514,6 @@
 ||amplitudeundoubtedlycomplete.com^$dnsrewrite=blockingmachine.xyz
 ||ampltd.top.gg^$dnsrewrite=blockingmachine.xyz
 ||ampltd2.medal.tv^$dnsrewrite=blockingmachine.xyz
-||ampower.me^$dnsrewrite=blockingmachine.xyz
 ||amppidarwoqg.com^$dnsrewrite=blockingmachine.xyz
 ||amptrack-dailymail-co-uk.cdn.ampproject.org^$dnsrewrite=blockingmachine.xyz
 ||ampxchange.com^$dnsrewrite=blockingmachine.xyz
@@ -11333,7 +11329,6 @@
 ||bestcleaner.online^$dnsrewrite=blockingmachine.xyz
 ||bestclicktitle.com^$dnsrewrite=blockingmachine.xyz
 ||bestcond1tions.com^$dnsrewrite=blockingmachine.xyz
-||bestcontenthost.com^$dnsrewrite=blockingmachine.xyz
 ||bestcontentservice.top^$dnsrewrite=blockingmachine.xyz
 ||bestcontentuse.top^$dnsrewrite=blockingmachine.xyz
 ||bestconvertor.club^$dnsrewrite=blockingmachine.xyz
@@ -11351,7 +11346,6 @@
 ||bestmmogame.com^$dnsrewrite=blockingmachine.xyz
 ||bestonlinecasino.club^$dnsrewrite=blockingmachine.xyz
 ||bestowgradepunch.com^$dnsrewrite=blockingmachine.xyz
-||bestprizerhere.life^$dnsrewrite=blockingmachine.xyz
 ||bestreceived.com^$dnsrewrite=blockingmachine.xyz
 ||bestresulttostart.com^$dnsrewrite=blockingmachine.xyz
 ||bestrevenuenetwork.com^$dnsrewrite=blockingmachine.xyz
@@ -11437,6 +11431,7 @@
 ||bhlom.com^$dnsrewrite=blockingmachine.xyz
 ||bhlph.com^$dnsrewrite=blockingmachine.xyz
 ||bhohazozps.com^$dnsrewrite=blockingmachine.xyz
+||bhoscopop.com^$dnsrewrite=blockingmachine.xyz
 ||bhotiyadiascia.com^$dnsrewrite=blockingmachine.xyz
 ||bhqbirsac.site^$dnsrewrite=blockingmachine.xyz
 ||bhqvi.com^$dnsrewrite=blockingmachine.xyz
@@ -11531,6 +11526,7 @@
 ||bilsyndication.com^$dnsrewrite=blockingmachine.xyz
 ||bimaissebsiph.net^$dnsrewrite=blockingmachine.xyz
 ||bimlocal.com^$dnsrewrite=blockingmachine.xyz
+||bimnodstz.com^$dnsrewrite=blockingmachine.xyz
 ||bin-layer.ru^$dnsrewrite=blockingmachine.xyz
 ||bin-tds.site^$dnsrewrite=blockingmachine.xyz
 ||binaryborrowedorganized.com^$dnsrewrite=blockingmachine.xyz
@@ -11558,7 +11554,6 @@
 ||birdnavy.com^$dnsrewrite=blockingmachine.xyz
 ||birlingtriced.top^$dnsrewrite=blockingmachine.xyz
 ||biroacitups.net^$dnsrewrite=blockingmachine.xyz
-||birqmiowxfh.com^$dnsrewrite=blockingmachine.xyz
 ||birthday3452.fun^$dnsrewrite=blockingmachine.xyz
 ||birthdayinhale.com^$dnsrewrite=blockingmachine.xyz
 ||birthdependentmillennium.com^$dnsrewrite=blockingmachine.xyz
@@ -11640,7 +11635,6 @@
 ||blacklinknowss.co^$dnsrewrite=blockingmachine.xyz
 ||blackmailarmory.com^$dnsrewrite=blockingmachine.xyz
 ||blackmailingpanic.com^$dnsrewrite=blockingmachine.xyz
-||blackname.biz^$dnsrewrite=blockingmachine.xyz
 ||blacknessfinancialresign.com^$dnsrewrite=blockingmachine.xyz
 ||blacksaltys.com^$dnsrewrite=blockingmachine.xyz
 ||blacktri-a.akamaihd.net^$dnsrewrite=blockingmachine.xyz
@@ -12427,7 +12421,6 @@
 ||burgea.com^$dnsrewrite=blockingmachine.xyz
 ||burgeraphrite.top^$dnsrewrite=blockingmachine.xyz
 ||burgerrelationscrash.com^$dnsrewrite=blockingmachine.xyz
-||burglaryeffectuallyderange.com^$dnsrewrite=blockingmachine.xyz
 ||burglaryrunner.com^$dnsrewrite=blockingmachine.xyz
 ||burialgrief.com^$dnsrewrite=blockingmachine.xyz
 ||burialsupple.com^$dnsrewrite=blockingmachine.xyz
@@ -13610,7 +13603,6 @@
 ||cheecmou.com^$dnsrewrite=blockingmachine.xyz
 ||cheeghaukr.net^$dnsrewrite=blockingmachine.xyz
 ||cheeksognoura.net^$dnsrewrite=blockingmachine.xyz
-||cheekysleepyreproof.com^$dnsrewrite=blockingmachine.xyz
 ||cheeradvise.com^$dnsrewrite=blockingmachine.xyz
 ||cheerfullyassortment.com^$dnsrewrite=blockingmachine.xyz
 ||cheerfullybakery.com^$dnsrewrite=blockingmachine.xyz
@@ -13663,7 +13655,6 @@
 ||chicken.couleur.io^$dnsrewrite=blockingmachine.xyz
 ||chicken.p2pmarketdata.com^$dnsrewrite=blockingmachine.xyz
 ||chicken.redbrushart.com^$dnsrewrite=blockingmachine.xyz
-||chicken.tjsoler.dev^$dnsrewrite=blockingmachine.xyz
 ||chicken.zwei.haus^$dnsrewrite=blockingmachine.xyz
 ||chicoamseque.net^$dnsrewrite=blockingmachine.xyz
 ||chidir.com^$dnsrewrite=blockingmachine.xyz
@@ -13823,7 +13814,6 @@
 ||cinepro.com^$dnsrewrite=blockingmachine.xyz
 ||cinuraarrives.com^$dnsrewrite=blockingmachine.xyz
 ||cipledecline.buzz^$dnsrewrite=blockingmachine.xyz
-||cippusforebye.com^$dnsrewrite=blockingmachine.xyz
 ||ciqvaiywqpkpk.club^$dnsrewrite=blockingmachine.xyz
 ||ciqzagzwao.com^$dnsrewrite=blockingmachine.xyz
 ||circlejavgg124.fun^$dnsrewrite=blockingmachine.xyz
@@ -14325,7 +14315,6 @@
 ||coarseauthorization.com^$dnsrewrite=blockingmachine.xyz
 ||coashoohathaija.net^$dnsrewrite=blockingmachine.xyz
 ||coastdisinherithousewife.com^$dnsrewrite=blockingmachine.xyz
-||coastlineahead.com^$dnsrewrite=blockingmachine.xyz
 ||coastlinebravediffers.com^$dnsrewrite=blockingmachine.xyz
 ||coastlinejudgement.com^$dnsrewrite=blockingmachine.xyz
 ||coationexult.com^$dnsrewrite=blockingmachine.xyz
@@ -14386,7 +14375,6 @@
 ||coggancoherecomedia.shop^$dnsrewrite=blockingmachine.xyz
 ||cognatebenefactor.com^$dnsrewrite=blockingmachine.xyz
 ||cognatesyringe.com^$dnsrewrite=blockingmachine.xyz
-||cognitionmesmerize.com^$dnsrewrite=blockingmachine.xyz
 ||cognizancesteepleelevate.com^$dnsrewrite=blockingmachine.xyz
 ||cogsnarks.shop^$dnsrewrite=blockingmachine.xyz
 ||cogwoodprester.shop^$dnsrewrite=blockingmachine.xyz
@@ -15628,7 +15616,6 @@
 ||cutescale.online^$dnsrewrite=blockingmachine.xyz
 ||cutlipsdanelaw.shop^$dnsrewrite=blockingmachine.xyz
 ||cutsoussouk.net^$dnsrewrite=blockingmachine.xyz
-||cuttingstrikingtells.com^$dnsrewrite=blockingmachine.xyz
 ||cuttlefly.com^$dnsrewrite=blockingmachine.xyz
 ||cuvtnzv.cn^$dnsrewrite=blockingmachine.xyz
 ||cuwlmupz.com^$dnsrewrite=blockingmachine.xyz
@@ -15662,6 +15649,7 @@
 ||cxmolk.com^$dnsrewrite=blockingmachine.xyz
 ||cxornpyay.com^$dnsrewrite=blockingmachine.xyz
 ||cxsh.cn.com^$dnsrewrite=blockingmachine.xyz
+||cxuapz.xyz^$dnsrewrite=blockingmachine.xyz
 ||cxy88.friok.com^$dnsrewrite=blockingmachine.xyz
 ||cyamidfenbank.life^$dnsrewrite=blockingmachine.xyz
 ||cyan92010.com^$dnsrewrite=blockingmachine.xyz
@@ -18486,7 +18474,6 @@
 ||dreadfulprofitable.com^$dnsrewrite=blockingmachine.xyz
 ||dreadluckdecidedly.com^$dnsrewrite=blockingmachine.xyz
 ||dreamintim.net^$dnsrewrite=blockingmachine.xyz
-||dreamnews.biz^$dnsrewrite=blockingmachine.xyz
 ||dreamteamaffiliates.com^$dnsrewrite=blockingmachine.xyz
 ||drearypassport.com^$dnsrewrite=blockingmachine.xyz
 ||drenastheycam.com^$dnsrewrite=blockingmachine.xyz
@@ -18820,6 +18807,7 @@
 ||dzbkl37t8az8q.cloudfront.net^$dnsrewrite=blockingmachine.xyz
 ||dzcx04lyk9hjp.cloudfront.net^$dnsrewrite=blockingmachine.xyz
 ||dzdgfp673c1p0.cloudfront.net^$dnsrewrite=blockingmachine.xyz
+||dzdmvnegsov.com^$dnsrewrite=blockingmachine.xyz
 ||dzdnffs.xyz^$dnsrewrite=blockingmachine.xyz
 ||dzgwautxzdtn9.cloudfront.net^$dnsrewrite=blockingmachine.xyz
 ||dzigzdbqkc.com^$dnsrewrite=blockingmachine.xyz
@@ -18861,7 +18849,6 @@
 ||e04f630ca8.com^$dnsrewrite=blockingmachine.xyz
 ||e076.xyz^$dnsrewrite=blockingmachine.xyz
 ||e082.ukiahdailyjournal.com^$dnsrewrite=blockingmachine.xyz
-||e09a290e1b.com^$dnsrewrite=blockingmachine.xyz
 ||e0ad1f3ca8.com^$dnsrewrite=blockingmachine.xyz
 ||e0e5bc8f81.com^$dnsrewrite=blockingmachine.xyz
 ||e1110c095c.d057ad0c7b.com^$dnsrewrite=blockingmachine.xyz
@@ -19665,7 +19652,6 @@
 ||eralyearsfoundherto.com^$dnsrewrite=blockingmachine.xyz
 ||eramass.com^$dnsrewrite=blockingmachine.xyz
 ||eraptbiyoyj.com^$dnsrewrite=blockingmachine.xyz
-||eraserscorce.com^$dnsrewrite=blockingmachine.xyz
 ||eravesofefineg.info^$dnsrewrite=blockingmachine.xyz
 ||eravesofefinegoldf.com^$dnsrewrite=blockingmachine.xyz
 ||ercoeteasacom.com^$dnsrewrite=blockingmachine.xyz
@@ -20202,7 +20188,6 @@
 ||extentacquire.com^$dnsrewrite=blockingmachine.xyz
 ||extentbananassinger.com^$dnsrewrite=blockingmachine.xyz
 ||extenuatemusketsector.com^$dnsrewrite=blockingmachine.xyz
-||exterminateantique.com^$dnsrewrite=blockingmachine.xyz
 ||extincttravelled.com^$dnsrewrite=blockingmachine.xyz
 ||extinguishadjustexceed.com^$dnsrewrite=blockingmachine.xyz
 ||extinguishtogethertoad.com^$dnsrewrite=blockingmachine.xyz
@@ -20534,7 +20519,6 @@
 ||fbmedia-dhs.com^$dnsrewrite=blockingmachine.xyz
 ||fbmediafor.com^$dnsrewrite=blockingmachine.xyz
 ||fbofferads.com^$dnsrewrite=blockingmachine.xyz
-||fbpqvs.com^$dnsrewrite=blockingmachine.xyz
 ||fbqtjbxdpr.com^$dnsrewrite=blockingmachine.xyz
 ||fbuser.ovp.vn^$dnsrewrite=blockingmachine.xyz
 ||fbvbrb.icu^$dnsrewrite=blockingmachine.xyz
@@ -20716,6 +20700,7 @@
 ||ffc661579f.c2dffe940b.com^$dnsrewrite=blockingmachine.xyz
 ||ffdafx.xyz^$dnsrewrite=blockingmachine.xyz
 ||fffbd1538e.com^$dnsrewrite=blockingmachine.xyz
+||ffjevt.icu^$dnsrewrite=blockingmachine.xyz
 ||ffofcetgurwrd.com^$dnsrewrite=blockingmachine.xyz
 ||fft.delovoemesto.ru^$dnsrewrite=blockingmachine.xyz
 ||fftgasxe.xyz^$dnsrewrite=blockingmachine.xyz
@@ -21176,7 +21161,6 @@
 ||fnyaynma.com^$dnsrewrite=blockingmachine.xyz
 ||fnzuymy.com^$dnsrewrite=blockingmachine.xyz
 ||foaglaid.xyz^$dnsrewrite=blockingmachine.xyz
-||foaloocasho.net^$dnsrewrite=blockingmachine.xyz
 ||foalwoollenwolves.com^$dnsrewrite=blockingmachine.xyz
 ||foamingjessant.shop^$dnsrewrite=blockingmachine.xyz
 ||foaphodoufaiw.net^$dnsrewrite=blockingmachine.xyz
@@ -21968,7 +21952,6 @@
 ||geethoap.com^$dnsrewrite=blockingmachine.xyz
 ||geewedurisou.net^$dnsrewrite=blockingmachine.xyz
 ||geggeewrossle.com^$dnsrewrite=blockingmachine.xyz
-||geishastending.com^$dnsrewrite=blockingmachine.xyz
 ||geiybze.com^$dnsrewrite=blockingmachine.xyz
 ||gejusherstertithap.info^$dnsrewrite=blockingmachine.xyz
 ||gekeebsirs.com^$dnsrewrite=blockingmachine.xyz
@@ -22192,7 +22175,6 @@
 ||giaythethaonuhcm.com^$dnsrewrite=blockingmachine.xyz
 ||gibadvpara.com^$dnsrewrite=blockingmachine.xyz
 ||gibaivoa.com^$dnsrewrite=blockingmachine.xyz
-||gibbarwaiting.com^$dnsrewrite=blockingmachine.xyz
 ||gibbon.711.st^$dnsrewrite=blockingmachine.xyz
 ||gibevay.ru^$dnsrewrite=blockingmachine.xyz
 ||gichaisseexy.net^$dnsrewrite=blockingmachine.xyz
@@ -22459,6 +22441,7 @@
 ||gmltiiu.com^$dnsrewrite=blockingmachine.xyz
 ||gmmlmo.xyz^$dnsrewrite=blockingmachine.xyz
 ||gmossp-sp.jp^$dnsrewrite=blockingmachine.xyz
+||gmwqpgq.top^$dnsrewrite=blockingmachine.xyz
 ||gmxvmvptfm.com^$dnsrewrite=blockingmachine.xyz
 ||gmxysb.icu^$dnsrewrite=blockingmachine.xyz
 ||gmzdaily.com^$dnsrewrite=blockingmachine.xyz
@@ -22779,7 +22762,6 @@
 ||grauhoat.xyz^$dnsrewrite=blockingmachine.xyz
 ||grauptogaimp.net^$dnsrewrite=blockingmachine.xyz
 ||grauroocm.com^$dnsrewrite=blockingmachine.xyz
-||graushauls.xyz^$dnsrewrite=blockingmachine.xyz
 ||gravecheckbook.com^$dnsrewrite=blockingmachine.xyz
 ||graveljav128.fun^$dnsrewrite=blockingmachine.xyz
 ||gravelyoverthrow.com^$dnsrewrite=blockingmachine.xyz
@@ -23337,6 +23319,7 @@
 ||harborjavgg124.fun^$dnsrewrite=blockingmachine.xyz
 ||hardcoretrayversion.com^$dnsrewrite=blockingmachine.xyz
 ||harderjuniormisty.com^$dnsrewrite=blockingmachine.xyz
+||hardnessanything.com^$dnsrewrite=blockingmachine.xyz
 ||hardnesscorkimmature.com^$dnsrewrite=blockingmachine.xyz
 ||hardynylon.com^$dnsrewrite=blockingmachine.xyz
 ||hare.felix-schmid.de^$dnsrewrite=blockingmachine.xyz
@@ -25429,7 +25412,6 @@
 ||iwmigu.xyz^$dnsrewrite=blockingmachine.xyz
 ||iwovfiidszrk.tech^$dnsrewrite=blockingmachine.xyz
 ||iwrcoct.info^$dnsrewrite=blockingmachine.xyz
-||iwuh.org^$dnsrewrite=blockingmachine.xyz
 ||iwyrldaeiyv.com^$dnsrewrite=blockingmachine.xyz
 ||ix2.deepsexvids.com^$dnsrewrite=blockingmachine.xyz
 ||ixafr.com^$dnsrewrite=blockingmachine.xyz
@@ -26223,7 +26205,6 @@
 ||kepnatick.com^$dnsrewrite=blockingmachine.xyz
 ||ker2clk.com^$dnsrewrite=blockingmachine.xyz
 ||keraclya.com^$dnsrewrite=blockingmachine.xyz
-||kergaukr.com^$dnsrewrite=blockingmachine.xyz
 ||kernelsalso.shop^$dnsrewrite=blockingmachine.xyz
 ||kernh41.com^$dnsrewrite=blockingmachine.xyz
 ||kerryfluence.com^$dnsrewrite=blockingmachine.xyz
@@ -28080,7 +28061,6 @@
 ||lucubrado.info^$dnsrewrite=blockingmachine.xyz
 ||ludsaichid.net^$dnsrewrite=blockingmachine.xyz
 ||ludxivsakalg.com^$dnsrewrite=blockingmachine.xyz
-||lufferschrank.shop^$dnsrewrite=blockingmachine.xyz
 ||luggagebuttonlocum.com^$dnsrewrite=blockingmachine.xyz
 ||luggieimpeyan.top^$dnsrewrite=blockingmachine.xyz
 ||luhhcodutax.com^$dnsrewrite=blockingmachine.xyz
@@ -28108,7 +28088,6 @@
 ||lunggrandfatherhedge.com^$dnsrewrite=blockingmachine.xyz
 ||lungicko.net^$dnsrewrite=blockingmachine.xyz
 ||lungingunified.com^$dnsrewrite=blockingmachine.xyz
-||lunie24.gimmeporn.xyz^$dnsrewrite=blockingmachine.xyz
 ||lunio.net^$dnsrewrite=blockingmachine.xyz
 ||luofinality.com^$dnsrewrite=blockingmachine.xyz
 ||lupon.media^$dnsrewrite=blockingmachine.xyz
@@ -28260,7 +28239,6 @@
 ||m6690.top^$dnsrewrite=blockingmachine.xyz
 ||m6pz5h8qi18jq1s7hjkytxn7sjc0zpxw5gks3vyk8dcxs2cstjgdxkp7t1eb.me^$dnsrewrite=blockingmachine.xyz
 ||m700.bigrapidsnews.com^$dnsrewrite=blockingmachine.xyz
-||m73lae5cpmgrv38.com^$dnsrewrite=blockingmachine.xyz
 ||m81jmqmn.ru^$dnsrewrite=blockingmachine.xyz
 ||m821.saratogian.com^$dnsrewrite=blockingmachine.xyz
 ||m886.kmbc.com^$dnsrewrite=blockingmachine.xyz
@@ -29659,7 +29637,6 @@
 ||mouse.seekingtv.com^$dnsrewrite=blockingmachine.xyz
 ||mouseflow.com^$dnsrewrite=blockingmachine.xyz
 ||mouseforgerycondition.com^$dnsrewrite=blockingmachine.xyz
-||mousheen.net^$dnsrewrite=blockingmachine.xyz
 ||moustachepoke.com^$dnsrewrite=blockingmachine.xyz
 ||mouthdistance.bond^$dnsrewrite=blockingmachine.xyz
 ||movad.de^$dnsrewrite=blockingmachine.xyz
@@ -30264,7 +30241,6 @@
 ||neechube.net^$dnsrewrite=blockingmachine.xyz
 ||needeevo.xyz^$dnsrewrite=blockingmachine.xyz
 ||needleworkemmaapostrophe.com^$dnsrewrite=blockingmachine.xyz
-||needleworkhearingnorm.com^$dnsrewrite=blockingmachine.xyz
 ||needydepart.com^$dnsrewrite=blockingmachine.xyz
 ||needyscarcasserole.com^$dnsrewrite=blockingmachine.xyz
 ||neegreez.com^$dnsrewrite=blockingmachine.xyz
@@ -30719,7 +30695,6 @@
 ||notificationallow.com^$dnsrewrite=blockingmachine.xyz
 ||notifpushnext.net^$dnsrewrite=blockingmachine.xyz
 ||notify-bugs-fra1.rtl.de^$dnsrewrite=blockingmachine.xyz
-||notify-service.com^$dnsrewrite=blockingmachine.xyz
 ||notify.bugsnag.com^$dnsrewrite=blockingmachine.xyz
 ||notify6.com^$dnsrewrite=blockingmachine.xyz
 ||notifydisparage.com^$dnsrewrite=blockingmachine.xyz
@@ -31113,7 +31088,6 @@
 ||obeyfreelanceloan.com^$dnsrewrite=blockingmachine.xyz
 ||obeyroman.com^$dnsrewrite=blockingmachine.xyz
 ||obeysatman.com^$dnsrewrite=blockingmachine.xyz
-||obhggjchjkpb.xyz^$dnsrewrite=blockingmachine.xyz
 ||objectionportedseaside.com^$dnsrewrite=blockingmachine.xyz
 ||objective-wright-961fed.netlify.com^$dnsrewrite=blockingmachine.xyz
 ||objectivepressure.com^$dnsrewrite=blockingmachine.xyz
@@ -31214,6 +31188,7 @@
 ||odqciqdazjuk.com^$dnsrewrite=blockingmachine.xyz
 ||odutxioc.com^$dnsrewrite=blockingmachine.xyz
 ||odvrjedubvedqs.com^$dnsrewrite=blockingmachine.xyz
+||odxh.cn^$dnsrewrite=blockingmachine.xyz
 ||oedipalchuppah.shop^$dnsrewrite=blockingmachine.xyz
 ||oehgk.com^$dnsrewrite=blockingmachine.xyz
 ||oelwojattkd.xyz^$dnsrewrite=blockingmachine.xyz
@@ -31552,7 +31527,6 @@
 ||oneotheacon.cc^$dnsrewrite=blockingmachine.xyz
 ||onepstr.com^$dnsrewrite=blockingmachine.xyz
 ||onerousgreeted.com^$dnsrewrite=blockingmachine.xyz
-||oneselfindicaterequest.com^$dnsrewrite=blockingmachine.xyz
 ||oneselfoxide.com^$dnsrewrite=blockingmachine.xyz
 ||onesocailse.com^$dnsrewrite=blockingmachine.xyz
 ||onespot-tracking.herokuapp.com^$dnsrewrite=blockingmachine.xyz
@@ -31593,6 +31567,7 @@
 ||onmanectrictor.com^$dnsrewrite=blockingmachine.xyz
 ||onmantineer.com^$dnsrewrite=blockingmachine.xyz
 ||onmarketer.net^$dnsrewrite=blockingmachine.xyz
+||onmoxskatoxx.com^$dnsrewrite=blockingmachine.xyz
 ||onopolicycr.xyz^$dnsrewrite=blockingmachine.xyz
 ||onotube.com^$dnsrewrite=blockingmachine.xyz
 ||onpluslean.com^$dnsrewrite=blockingmachine.xyz
@@ -31648,7 +31623,6 @@
 ||oopheecahough.net^$dnsrewrite=blockingmachine.xyz
 ||oophooptoa.net^$dnsrewrite=blockingmachine.xyz
 ||oopsiksaicki.com^$dnsrewrite=blockingmachine.xyz
-||oopursie.com^$dnsrewrite=blockingmachine.xyz
 ||oortezaidib.com^$dnsrewrite=blockingmachine.xyz
 ||oosoojainy.xyz^$dnsrewrite=blockingmachine.xyz
 ||oostotsu.com^$dnsrewrite=blockingmachine.xyz
@@ -31973,7 +31947,6 @@
 ||ourtshipanditlas.info^$dnsrewrite=blockingmachine.xyz
 ||ourtshipanditlast.info^$dnsrewrite=blockingmachine.xyz
 ||oushaury.com^$dnsrewrite=blockingmachine.xyz
-||ousptbllgj.com^$dnsrewrite=blockingmachine.xyz
 ||oussaute.net^$dnsrewrite=blockingmachine.xyz
 ||ousseghu.net^$dnsrewrite=blockingmachine.xyz
 ||oussockobs.com^$dnsrewrite=blockingmachine.xyz
@@ -32414,7 +32387,6 @@
 ||pardyprofer.shop^$dnsrewrite=blockingmachine.xyz
 ||paregospeltheir.com^$dnsrewrite=blockingmachine.xyz
 ||parentingcalculated.com^$dnsrewrite=blockingmachine.xyz
-||parentlargevia.com^$dnsrewrite=blockingmachine.xyz
 ||parentsatellitecheque.com^$dnsrewrite=blockingmachine.xyz
 ||paripartner.com^$dnsrewrite=blockingmachine.xyz
 ||paripartners.ru^$dnsrewrite=blockingmachine.xyz
@@ -33534,7 +33506,6 @@
 ||pokrutim.ru^$dnsrewrite=blockingmachine.xyz
 ||polanders.com^$dnsrewrite=blockingmachine.xyz
 ||polarbear.codeday.org^$dnsrewrite=blockingmachine.xyz
-||polarbearyulia.com^$dnsrewrite=blockingmachine.xyz
 ||polarcdn-terrax.com^$dnsrewrite=blockingmachine.xyz
 ||polaris.zijieapi.com^$dnsrewrite=blockingmachine.xyz
 ||polarmobile.com^$dnsrewrite=blockingmachine.xyz
@@ -34662,7 +34633,6 @@
 ||pushanya.net^$dnsrewrite=blockingmachine.xyz
 ||pushatomic.com^$dnsrewrite=blockingmachine.xyz
 ||pushazam.com^$dnsrewrite=blockingmachine.xyz
-||pushbaddy.com^$dnsrewrite=blockingmachine.xyz
 ||pushbizapi.com^$dnsrewrite=blockingmachine.xyz
 ||pushcampaign.club^$dnsrewrite=blockingmachine.xyz
 ||pushcentric.com^$dnsrewrite=blockingmachine.xyz
@@ -35162,7 +35132,6 @@
 ||qydgdko.com^$dnsrewrite=blockingmachine.xyz
 ||qylyknxkeep.com^$dnsrewrite=blockingmachine.xyz
 ||qymkbmjssadw.top^$dnsrewrite=blockingmachine.xyz
-||qyusgj.xyz^$dnsrewrite=blockingmachine.xyz
 ||qywbslk.top^$dnsrewrite=blockingmachine.xyz
 ||qyyrynjspeamfx.com^$dnsrewrite=blockingmachine.xyz
 ||qz-hjgrdqih.fun^$dnsrewrite=blockingmachine.xyz
@@ -35484,7 +35453,6 @@
 ||real-consequence.pro^$dnsrewrite=blockingmachine.xyz
 ||real-feedback.toros.daum.net^$dnsrewrite=blockingmachine.xyz
 ||realbi.ru^$dnsrewrite=blockingmachine.xyz
-||realcastmedia.com^$dnsrewrite=blockingmachine.xyz
 ||realclick.vn^$dnsrewrite=blockingmachine.xyz
 ||realclix.com^$dnsrewrite=blockingmachine.xyz
 ||realevalbs.com^$dnsrewrite=blockingmachine.xyz
@@ -35521,7 +35489,6 @@
 ||reasulty.com^$dnsrewrite=blockingmachine.xyz
 ||reate.info^$dnsrewrite=blockingmachine.xyz
 ||reauksoffyrikm.com^$dnsrewrite=blockingmachine.xyz
-||reauthenticator.com^$dnsrewrite=blockingmachine.xyz
 ||rebelhaggard.com^$dnsrewrite=blockingmachine.xyz
 ||rebellionnaturalconsonant.com^$dnsrewrite=blockingmachine.xyz
 ||rebindskayoes.com^$dnsrewrite=blockingmachine.xyz
@@ -35875,7 +35842,6 @@
 ||rentalrebuild.com^$dnsrewrite=blockingmachine.xyz
 ||rentingimmoderatereflecting.com^$dnsrewrite=blockingmachine.xyz
 ||rentlysearchingf.com^$dnsrewrite=blockingmachine.xyz
-||reobalkeolov.top^$dnsrewrite=blockingmachine.xyz
 ||reopensnews.com^$dnsrewrite=blockingmachine.xyz
 ||reople.co.kr^$dnsrewrite=blockingmachine.xyz
 ||reorganizeache.com^$dnsrewrite=blockingmachine.xyz
@@ -36177,6 +36143,7 @@
 ||rhxbuslpclxnisl.com^$dnsrewrite=blockingmachine.xyz
 ||rhxdsplm.com^$dnsrewrite=blockingmachine.xyz
 ||rhythmxchange.com^$dnsrewrite=blockingmachine.xyz
+||rhzofr.icu^$dnsrewrite=blockingmachine.xyz
 ||rhzvlcu.xyz^$dnsrewrite=blockingmachine.xyz
 ||riamiavid.com^$dnsrewrite=blockingmachine.xyz
 ||riaoz.xyz^$dnsrewrite=blockingmachine.xyz
@@ -36322,7 +36289,6 @@
 ||rnmd.net^$dnsrewrite=blockingmachine.xyz
 ||rnnlfpaxjar.xyz^$dnsrewrite=blockingmachine.xyz
 ||rnodydenknowl.org^$dnsrewrite=blockingmachine.xyz
-||rnomqihksna.com^$dnsrewrite=blockingmachine.xyz
 ||rnotraff.com^$dnsrewrite=blockingmachine.xyz
 ||rnrycry.com^$dnsrewrite=blockingmachine.xyz
 ||rnv.life^$dnsrewrite=blockingmachine.xyz
@@ -36791,7 +36757,6 @@
 ||rtbdnav.com^$dnsrewrite=blockingmachine.xyz
 ||rtbfactory.com^$dnsrewrite=blockingmachine.xyz
 ||rtbfit.com^$dnsrewrite=blockingmachine.xyz
-||rtbget.com^$dnsrewrite=blockingmachine.xyz
 ||rtblmh.com^$dnsrewrite=blockingmachine.xyz
 ||rtbnowads.com^$dnsrewrite=blockingmachine.xyz
 ||rtbplatform.net^$dnsrewrite=blockingmachine.xyz
@@ -37338,7 +37303,6 @@
 ||sauhonaik.com^$dnsrewrite=blockingmachine.xyz
 ||saumoupsaug.com^$dnsrewrite=blockingmachine.xyz
 ||saunaentered.com^$dnsrewrite=blockingmachine.xyz
-||saunasupposedly.com^$dnsrewrite=blockingmachine.xyz
 ||sauptoacoa.com^$dnsrewrite=blockingmachine.xyz
 ||sauptowhy.com^$dnsrewrite=blockingmachine.xyz
 ||saurfeued.com^$dnsrewrite=blockingmachine.xyz
@@ -38086,7 +38050,6 @@
 ||shepherdalmightyretaliate.com^$dnsrewrite=blockingmachine.xyz
 ||sher.index.hu^$dnsrewrite=blockingmachine.xyz
 ||sherryfaithfulhiring.com^$dnsrewrite=blockingmachine.xyz
-||shertuwipsumt.net^$dnsrewrite=blockingmachine.xyz
 ||shestrozo.com^$dnsrewrite=blockingmachine.xyz
 ||shetchoultoocha.net^$dnsrewrite=blockingmachine.xyz
 ||shexawhy.net^$dnsrewrite=blockingmachine.xyz
@@ -38251,6 +38214,7 @@
 ||sickbedjibboom.com^$dnsrewrite=blockingmachine.xyz
 ||sicklybates.com^$dnsrewrite=blockingmachine.xyz
 ||sicklypercussivecoordinate.com^$dnsrewrite=blockingmachine.xyz
+||sicksarrish.top^$dnsrewrite=blockingmachine.xyz
 ||sicouthautso.net^$dnsrewrite=blockingmachine.xyz
 ||sid.nordstrom.com^$dnsrewrite=blockingmachine.xyz
 ||sidanarchy.net^$dnsrewrite=blockingmachine.xyz
@@ -41554,7 +41518,6 @@
 ||ti.tradetracker.net^$dnsrewrite=blockingmachine.xyz
 ||ti4la.icu^$dnsrewrite=blockingmachine.xyz
 ||tianji.flowgpt.com^$dnsrewrite=blockingmachine.xyz
-||tiaoap.xyz^$dnsrewrite=blockingmachine.xyz
 ||tibacta.com^$dnsrewrite=blockingmachine.xyz
 ||tibykzo.com^$dnsrewrite=blockingmachine.xyz
 ||tic-tic-bam.com^$dnsrewrite=blockingmachine.xyz
@@ -41685,7 +41648,6 @@
 ||tk.kaufda.de^$dnsrewrite=blockingmachine.xyz
 ||tk.meinprospekt.de^$dnsrewrite=blockingmachine.xyz
 ||tk.pathmonk.com^$dnsrewrite=blockingmachine.xyz
-||tkauru.xyz^$dnsrewrite=blockingmachine.xyz
 ||tkmrdtcfoid.com^$dnsrewrite=blockingmachine.xyz
 ||tknet.rayjump.com^$dnsrewrite=blockingmachine.xyz
 ||tkoaurrdcktnp.vip^$dnsrewrite=blockingmachine.xyz
@@ -42614,7 +42576,6 @@
 ||trackszn.median.eu^$dnsrewrite=blockingmachine.xyz
 ||tracktds.com^$dnsrewrite=blockingmachine.xyz
 ||tracktds.live^$dnsrewrite=blockingmachine.xyz
-||trackvisible.com^$dnsrewrite=blockingmachine.xyz
 ||trackvol.com^$dnsrewrite=blockingmachine.xyz
 ||trackvoluum.com^$dnsrewrite=blockingmachine.xyz
 ||trackwin.net^$dnsrewrite=blockingmachine.xyz
@@ -42663,7 +42624,6 @@
 ||trafficswarm.com^$dnsrewrite=blockingmachine.xyz
 ||traffictraders.com^$dnsrewrite=blockingmachine.xyz
 ||trafficz.com^$dnsrewrite=blockingmachine.xyz
-||traffikw.com^$dnsrewrite=blockingmachine.xyz
 ||traffiq.com^$dnsrewrite=blockingmachine.xyz
 ||traffmgnt.com^$dnsrewrite=blockingmachine.xyz
 ||traffmgnt.name^$dnsrewrite=blockingmachine.xyz
@@ -43107,7 +43067,6 @@
 ||tuxbpnne.com^$dnsrewrite=blockingmachine.xyz
 ||tvc.biphim.club^$dnsrewrite=blockingmachine.xyz
 ||tvfeel.cc^$dnsrewrite=blockingmachine.xyz
-||tvgxhvredn.xyz^$dnsrewrite=blockingmachine.xyz
 ||tvkaimh.com^$dnsrewrite=blockingmachine.xyz
 ||tvpixel.com^$dnsrewrite=blockingmachine.xyz
 ||tvpnnrungug.xyz^$dnsrewrite=blockingmachine.xyz
@@ -43210,9 +43169,9 @@
 ||tzaho.com^$dnsrewrite=blockingmachine.xyz
 ||tzbirdcod.com^$dnsrewrite=blockingmachine.xyz
 ||tzegilo.com^$dnsrewrite=blockingmachine.xyz
+||tzhrmcnidxqwrb.com^$dnsrewrite=blockingmachine.xyz
 ||tzimmescantara.com^$dnsrewrite=blockingmachine.xyz
 ||tzvpn.site^$dnsrewrite=blockingmachine.xyz
-||tzzvvohntnlvan.com^$dnsrewrite=blockingmachine.xyz
 ||u-oxmzhuo.tech^$dnsrewrite=blockingmachine.xyz
 ||u.btserve.com^$dnsrewrite=blockingmachine.xyz
 ||u.lucy-anne.com^$dnsrewrite=blockingmachine.xyz
@@ -43338,7 +43297,6 @@
 ||ufiidvv.icu^$dnsrewrite=blockingmachine.xyz
 ||ufiledsit.com^$dnsrewrite=blockingmachine.xyz
 ||ufiler-pro2.ru^$dnsrewrite=blockingmachine.xyz
-||ufinkln.com^$dnsrewrite=blockingmachine.xyz
 ||ufiuhnyydllpaed.com^$dnsrewrite=blockingmachine.xyz
 ||ufpcdn.com^$dnsrewrite=blockingmachine.xyz
 ||ufphkyw.com^$dnsrewrite=blockingmachine.xyz
@@ -43407,7 +43365,6 @@
 ||uktgg.dev-tester.com^$dnsrewrite=blockingmachine.xyz
 ||ukuleqasforsale.com^$dnsrewrite=blockingmachine.xyz
 ||ukzoweq.com^$dnsrewrite=blockingmachine.xyz
-||ulaiwhiw.xyz^$dnsrewrite=blockingmachine.xyz
 ||uldlikukemyfueu.com^$dnsrewrite=blockingmachine.xyz
 ||uldmakefeagr.info^$dnsrewrite=blockingmachine.xyz
 ||ulesxbo.com^$dnsrewrite=blockingmachine.xyz
@@ -44146,6 +44103,7 @@
 ||vegetationartcocoa.com^$dnsrewrite=blockingmachine.xyz
 ||vehiclepatsyacacia.com^$dnsrewrite=blockingmachine.xyz
 ||vehosw.com^$dnsrewrite=blockingmachine.xyz
+||veideasandcome.org^$dnsrewrite=blockingmachine.xyz
 ||veih8bee.xhcdn.com^$dnsrewrite=blockingmachine.xyz
 ||veille-referencement.com^$dnsrewrite=blockingmachine.xyz
 ||veilsuccessfully.com^$dnsrewrite=blockingmachine.xyz
@@ -44632,7 +44590,6 @@
 ||vpipi.com^$dnsrewrite=blockingmachine.xyz
 ||vplayer.newseveryday.com^$dnsrewrite=blockingmachine.xyz
 ||vplgggd.com^$dnsrewrite=blockingmachine.xyz
-||vpn-defend.com^$dnsrewrite=blockingmachine.xyz
 ||vpn-offers.info^$dnsrewrite=blockingmachine.xyz
 ||vpn-offers.org^$dnsrewrite=blockingmachine.xyz
 ||vpnclick.biz^$dnsrewrite=blockingmachine.xyz
@@ -45179,7 +45136,6 @@
 ||wettestspanemy.com^$dnsrewrite=blockingmachine.xyz
 ||wexevoom.net^$dnsrewrite=blockingmachine.xyz
 ||wextap.com^$dnsrewrite=blockingmachine.xyz
-||wfcs.lol^$dnsrewrite=blockingmachine.xyz
 ||wffbdim.com^$dnsrewrite=blockingmachine.xyz
 ||wfgo5vjs6cp0cdjx7bms3cn9lof2p01xho0pxgm1fd2fah3j5d8qd7x1d6eu.me^$dnsrewrite=blockingmachine.xyz
 ||wfijsc.xyz^$dnsrewrite=blockingmachine.xyz
@@ -45264,7 +45220,6 @@
 ||whiboubs.com^$dnsrewrite=blockingmachine.xyz
 ||whiceega.com^$dnsrewrite=blockingmachine.xyz
 ||whichcandiedhandgrip.com^$dnsrewrite=blockingmachine.xyz
-||whidsugnoackili.net^$dnsrewrite=blockingmachine.xyz
 ||whilstrorty.com^$dnsrewrite=blockingmachine.xyz
 ||whimsicalcoat.com^$dnsrewrite=blockingmachine.xyz
 ||whimsrehash.com^$dnsrewrite=blockingmachine.xyz
@@ -45494,7 +45449,6 @@
 ||winsaijy.top^$dnsrewrite=blockingmachine.xyz
 ||winsimpleprizes.life^$dnsrewrite=blockingmachine.xyz
 ||winslinks.com^$dnsrewrite=blockingmachine.xyz
-||wintjaywolf.org^$dnsrewrite=blockingmachine.xyz
 ||wintricksbanner.googlepages.com^$dnsrewrite=blockingmachine.xyz
 ||winzessolicit.com^$dnsrewrite=blockingmachine.xyz
 ||wioboy.xyz^$dnsrewrite=blockingmachine.xyz
@@ -45822,6 +45776,7 @@
 ||wuefmls.com^$dnsrewrite=blockingmachine.xyz
 ||wugroansaghadry.com^$dnsrewrite=blockingmachine.xyz
 ||wuiqiq.xyz^$dnsrewrite=blockingmachine.xyz
+||wumd.cn^$dnsrewrite=blockingmachine.xyz
 ||wumufama.com^$dnsrewrite=blockingmachine.xyz
 ||wunishamjch.com^$dnsrewrite=blockingmachine.xyz
 ||wurqaz.com^$dnsrewrite=blockingmachine.xyz
@@ -46818,7 +46773,6 @@
 ||ypgjkk.xyz^$dnsrewrite=blockingmachine.xyz
 ||ypkljvp.com^$dnsrewrite=blockingmachine.xyz
 ||ypkxka.xyz^$dnsrewrite=blockingmachine.xyz
-||ypmtvlaktm.com^$dnsrewrite=blockingmachine.xyz
 ||yprocedentwith.com^$dnsrewrite=blockingmachine.xyz
 ||yptqys.tianqistatic.com^$dnsrewrite=blockingmachine.xyz
 ||yqeuu.com^$dnsrewrite=blockingmachine.xyz
@@ -47323,6 +47277,7 @@
 ||bh-dm.com^$dnsrewrite=blockingmachine.xyz
 ||adrino.cloud^$dnsrewrite=blockingmachine.xyz
 ||bgn.gg^$dnsrewrite=blockingmachine.xyz
+||gibbarwaiting.com^$dnsrewrite=blockingmachine.xyz
 ||sheeme.com^$dnsrewrite=blockingmachine.xyz
 ||yourgoads.com^$dnsrewrite=blockingmachine.xyz
 ||runoj.click^$dnsrewrite=blockingmachine.xyz
@@ -47862,6 +47817,7 @@
 ||4dex.io^$dnsrewrite=blockingmachine.xyz
 ||4e0622e316.com^$dnsrewrite=blockingmachine.xyz
 ||4rabettraff.com^$dnsrewrite=blockingmachine.xyz
+||536fbeeea4.com^$dnsrewrite=blockingmachine.xyz
 ||551ba6c442.com^$dnsrewrite=blockingmachine.xyz
 ||56ovido.site^$dnsrewrite=blockingmachine.xyz
 ||598f0ce32f.com^$dnsrewrite=blockingmachine.xyz
@@ -48047,6 +48003,7 @@
 ||agafurretor.com^$dnsrewrite=blockingmachine.xyz
 ||agaroidapposer.top^$dnsrewrite=blockingmachine.xyz
 ||ageetsaimouphih.net^$dnsrewrite=blockingmachine.xyz
+||aghppuhixd.com^$dnsrewrite=blockingmachine.xyz
 ||agingschikee.com^$dnsrewrite=blockingmachine.xyz
 ||agl001.bid^$dnsrewrite=blockingmachine.xyz
 ||agl002.online^$dnsrewrite=blockingmachine.xyz
@@ -48275,6 +48232,7 @@
 ||bestcontentfee.top^$dnsrewrite=blockingmachine.xyz
 ||bestcontentfood.top^$dnsrewrite=blockingmachine.xyz
 ||bestcontentfund.top^$dnsrewrite=blockingmachine.xyz
+||bestcontenthost.com^$dnsrewrite=blockingmachine.xyz
 ||bestcontentindustry.top^$dnsrewrite=blockingmachine.xyz
 ||bestcontentjob.top^$dnsrewrite=blockingmachine.xyz
 ||bestcontentoperation.top^$dnsrewrite=blockingmachine.xyz
@@ -48286,6 +48244,7 @@
 ||bestcontenttrade.top^$dnsrewrite=blockingmachine.xyz
 ||bestcontentweb.top^$dnsrewrite=blockingmachine.xyz
 ||bestloans.tips^$dnsrewrite=blockingmachine.xyz
+||bestprizerhere.life^$dnsrewrite=blockingmachine.xyz
 ||besttracksolution.com^$dnsrewrite=blockingmachine.xyz
 ||betrendatimon.top^$dnsrewrite=blockingmachine.xyz
 ||bettercontentservice.top^$dnsrewrite=blockingmachine.xyz
@@ -48312,6 +48271,7 @@
 ||bipgialxcfvad.xyz^$dnsrewrite=blockingmachine.xyz
 ||biphic.com^$dnsrewrite=blockingmachine.xyz
 ||biroads.com^$dnsrewrite=blockingmachine.xyz
+||birqmiowxfh.com^$dnsrewrite=blockingmachine.xyz
 ||birthaslaver.com^$dnsrewrite=blockingmachine.xyz
 ||bizographics.com^$dnsrewrite=blockingmachine.xyz
 ||bj1110.online^$dnsrewrite=blockingmachine.xyz
@@ -48319,6 +48279,7 @@
 ||bktdmqdcvshs.xyz^$dnsrewrite=blockingmachine.xyz
 ||blacklinknow.com^$dnsrewrite=blockingmachine.xyz
 ||blackmailbrigade.com^$dnsrewrite=blockingmachine.xyz
+||blackname.biz^$dnsrewrite=blockingmachine.xyz
 ||bland-factor.pro^$dnsrewrite=blockingmachine.xyz
 ||blank-tune.pro^$dnsrewrite=blockingmachine.xyz
 ||blareclockwisebead.com^$dnsrewrite=blockingmachine.xyz
@@ -48384,6 +48345,7 @@
 ||bulcqmteuc.com^$dnsrewrite=blockingmachine.xyz
 ||bulletproxy.ch^$dnsrewrite=blockingmachine.xyz
 ||burdenmapwise.com^$dnsrewrite=blockingmachine.xyz
+||burglaryeffectuallyderange.com^$dnsrewrite=blockingmachine.xyz
 ||burnybdl.com^$dnsrewrite=blockingmachine.xyz
 ||bustling-let.pro^$dnsrewrite=blockingmachine.xyz
 ||butoxylhewhall.com^$dnsrewrite=blockingmachine.xyz
@@ -48452,6 +48414,7 @@
 ||cheedroumsoaphu.net^$dnsrewrite=blockingmachine.xyz
 ||cheefimtoalso.xyz^$dnsrewrite=blockingmachine.xyz
 ||cheeghek.xyz^$dnsrewrite=blockingmachine.xyz
+||cheekysleepyreproof.com^$dnsrewrite=blockingmachine.xyz
 ||cheepurs.xyz^$dnsrewrite=blockingmachine.xyz
 ||chemitug.net^$dnsrewrite=blockingmachine.xyz
 ||chfpgcbe.com^$dnsrewrite=blockingmachine.xyz
@@ -48474,6 +48437,7 @@
 ||churauwoch.com^$dnsrewrite=blockingmachine.xyz
 ||churchkhela.site^$dnsrewrite=blockingmachine.xyz
 ||cindybegulf.shop^$dnsrewrite=blockingmachine.xyz
+||cippusforebye.com^$dnsrewrite=blockingmachine.xyz
 ||circleblart.shop^$dnsrewrite=blockingmachine.xyz
 ||cisheeng.com^$dnsrewrite=blockingmachine.xyz
 ||cithernassorts.com^$dnsrewrite=blockingmachine.xyz
@@ -48507,8 +48471,10 @@
 ||cmrdr.com^$dnsrewrite=blockingmachine.xyz
 ||cmtrkg.com^$dnsrewrite=blockingmachine.xyz
 ||cntrealize.com^$dnsrewrite=blockingmachine.xyz
+||coastlineahead.com^$dnsrewrite=blockingmachine.xyz
 ||codefund.io^$dnsrewrite=blockingmachine.xyz
 ||cogitatetrailsplendid.com^$dnsrewrite=blockingmachine.xyz
+||cognitionmesmerize.com^$dnsrewrite=blockingmachine.xyz
 ||coinio.cc^$dnsrewrite=blockingmachine.xyz
 ||cokerymyocele.shop^$dnsrewrite=blockingmachine.xyz
 ||coleusobviate.shop^$dnsrewrite=blockingmachine.xyz
@@ -48584,6 +48550,7 @@
 ||customique.shop^$dnsrewrite=blockingmachine.xyz
 ||cuteab.com^$dnsrewrite=blockingmachine.xyz
 ||cutsauvo.net^$dnsrewrite=blockingmachine.xyz
+||cuttingstrikingtells.com^$dnsrewrite=blockingmachine.xyz
 ||cvastico.com^$dnsrewrite=blockingmachine.xyz
 ||cxeiymnwjyyi.xyz^$dnsrewrite=blockingmachine.xyz
 ||cycndlhot.xyz^$dnsrewrite=blockingmachine.xyz
@@ -48705,6 +48672,7 @@
 ||dratingmaject.com^$dnsrewrite=blockingmachine.xyz
 ||drawergypsyavalanche.com^$dnsrewrite=blockingmachine.xyz
 ||dreambooknews.com^$dnsrewrite=blockingmachine.xyz
+||dreamnews.biz^$dnsrewrite=blockingmachine.xyz
 ||dressingdedicatedmeeting.com^$dnsrewrite=blockingmachine.xyz
 ||dressmakerdecisivesuburban.com^$dnsrewrite=blockingmachine.xyz
 ||dribbleads.com^$dnsrewrite=blockingmachine.xyz
@@ -48805,6 +48773,7 @@
 ||eofst.com^$dnsrewrite=blockingmachine.xyz
 ||epaulebeardie.com^$dnsrewrite=blockingmachine.xyz
 ||epilinserts.com^$dnsrewrite=blockingmachine.xyz
+||eraserscorce.com^$dnsrewrite=blockingmachine.xyz
 ||eraudseen.xyz^$dnsrewrite=blockingmachine.xyz
 ||eravprvvqqc.xyz^$dnsrewrite=blockingmachine.xyz
 ||erbiscusysexbu.info^$dnsrewrite=blockingmachine.xyz
@@ -48841,6 +48810,7 @@
 ||extension-ad.com^$dnsrewrite=blockingmachine.xyz
 ||extension-install.com^$dnsrewrite=blockingmachine.xyz
 ||extensions-media.com^$dnsrewrite=blockingmachine.xyz
+||exterminateantique.com^$dnsrewrite=blockingmachine.xyz
 ||exterminatesuitcasedefenceless.com^$dnsrewrite=blockingmachine.xyz
 ||externozoner.top^$dnsrewrite=blockingmachine.xyz
 ||extremereach.io^$dnsrewrite=blockingmachine.xyz
@@ -48868,6 +48838,7 @@
 ||favorsbch.com^$dnsrewrite=blockingmachine.xyz
 ||favourablerecenthazardous.com^$dnsrewrite=blockingmachine.xyz
 ||fawhotoads.net^$dnsrewrite=blockingmachine.xyz
+||fbpqvs.com^$dnsrewrite=blockingmachine.xyz
 ||fc7c8be451.com^$dnsrewrite=blockingmachine.xyz
 ||fccinteractive.com^$dnsrewrite=blockingmachine.xyz
 ||fd2cd5c351.com^$dnsrewrite=blockingmachine.xyz
@@ -48922,6 +48893,7 @@
 ||fmstigat.online^$dnsrewrite=blockingmachine.xyz
 ||fnkcyztrojw.com^$dnsrewrite=blockingmachine.xyz
 ||foagrucheedauza.net^$dnsrewrite=blockingmachine.xyz
+||foaloocasho.net^$dnsrewrite=blockingmachine.xyz
 ||foasowut.xyz^$dnsrewrite=blockingmachine.xyz
 ||foerpo.com^$dnsrewrite=blockingmachine.xyz
 ||foghug.site^$dnsrewrite=blockingmachine.xyz
@@ -49007,6 +48979,7 @@
 ||gdktgkjfyvd.xyz^$dnsrewrite=blockingmachine.xyz
 ||geejushoaboustu.net^$dnsrewrite=blockingmachine.xyz
 ||geetacog.xyz^$dnsrewrite=blockingmachine.xyz
+||geishastending.com^$dnsrewrite=blockingmachine.xyz
 ||gelescu.cloud^$dnsrewrite=blockingmachine.xyz
 ||gen-ref.com^$dnsrewrite=blockingmachine.xyz
 ||genieessp.com^$dnsrewrite=blockingmachine.xyz
@@ -49106,6 +49079,7 @@
 ||gratataxis.shop^$dnsrewrite=blockingmachine.xyz
 ||graterpatent.com^$dnsrewrite=blockingmachine.xyz
 ||graungig.xyz^$dnsrewrite=blockingmachine.xyz
+||graushauls.xyz^$dnsrewrite=blockingmachine.xyz
 ||grave-orange.pro^$dnsrewrite=blockingmachine.xyz
 ||greatlifebargains2024.com^$dnsrewrite=blockingmachine.xyz
 ||greekroo.xyz^$dnsrewrite=blockingmachine.xyz
@@ -49321,6 +49295,7 @@
 ||ivesofefinegold.info^$dnsrewrite=blockingmachine.xyz
 ||ivstracker.net^$dnsrewrite=blockingmachine.xyz
 ||iwouhoft.com^$dnsrewrite=blockingmachine.xyz
+||iwuh.org^$dnsrewrite=blockingmachine.xyz
 ||izlrvevwd.com^$dnsrewrite=blockingmachine.xyz
 ||izoaghiwoft.net^$dnsrewrite=blockingmachine.xyz
 ||izonwjjsftvgfb.com^$dnsrewrite=blockingmachine.xyz
@@ -49432,6 +49407,7 @@
 ||kelreesh.xyz^$dnsrewrite=blockingmachine.xyz
 ||kemoachoubsosti.xyz^$dnsrewrite=blockingmachine.xyz
 ||kentishprided.com^$dnsrewrite=blockingmachine.xyz
+||kergaukr.com^$dnsrewrite=blockingmachine.xyz
 ||keypiifutwlhoc.com^$dnsrewrite=blockingmachine.xyz
 ||keypush.net^$dnsrewrite=blockingmachine.xyz
 ||kffxyakqgbprk.xyz^$dnsrewrite=blockingmachine.xyz
@@ -49570,6 +49546,7 @@
 ||ltassrv.com^$dnsrewrite=blockingmachine.xyz
 ||ltcwjnko.xyz^$dnsrewrite=blockingmachine.xyz
 ||luddismloukoum.com^$dnsrewrite=blockingmachine.xyz
+||lufferschrank.shop^$dnsrewrite=blockingmachine.xyz
 ||lukeaccesspopped.com^$dnsrewrite=blockingmachine.xyz
 ||lulavtrigla.com^$dnsrewrite=blockingmachine.xyz
 ||lumupu.xyz^$dnsrewrite=blockingmachine.xyz
@@ -49581,6 +49558,7 @@
 ||lwufzfufxwkw.com^$dnsrewrite=blockingmachine.xyz
 ||lwxuo.com^$dnsrewrite=blockingmachine.xyz
 ||lzqmjakwlllvk.top^$dnsrewrite=blockingmachine.xyz
+||m73lae5cpmgrv38.com^$dnsrewrite=blockingmachine.xyz
 ||madehugeai.live^$dnsrewrite=blockingmachine.xyz
 ||madsecz.com^$dnsrewrite=blockingmachine.xyz
 ||madserving.com^$dnsrewrite=blockingmachine.xyz
@@ -49755,6 +49733,7 @@
 ||neckedhilting.com^$dnsrewrite=blockingmachine.xyz
 ||neckloveham.live^$dnsrewrite=blockingmachine.xyz
 ||neebeech.com^$dnsrewrite=blockingmachine.xyz
+||needleworkhearingnorm.com^$dnsrewrite=blockingmachine.xyz
 ||neeletaxus.com^$dnsrewrite=blockingmachine.xyz
 ||neerecah.xyz^$dnsrewrite=blockingmachine.xyz
 ||neewouwoafisha.net^$dnsrewrite=blockingmachine.xyz
@@ -49800,6 +49779,7 @@
 ||notification-list.com^$dnsrewrite=blockingmachine.xyz
 ||notifications.website^$dnsrewrite=blockingmachine.xyz
 ||notiflist.com^$dnsrewrite=blockingmachine.xyz
+||notify-service.com^$dnsrewrite=blockingmachine.xyz
 ||notify.rocks^$dnsrewrite=blockingmachine.xyz
 ||noulddrugged.com^$dnsrewrite=blockingmachine.xyz
 ||noupsube.xyz^$dnsrewrite=blockingmachine.xyz
@@ -49832,6 +49812,7 @@
 ||oaxpcohp.com^$dnsrewrite=blockingmachine.xyz
 ||obeyingdecrier.shop^$dnsrewrite=blockingmachine.xyz
 ||obgdk.top^$dnsrewrite=blockingmachine.xyz
+||obhggjchjkpb.xyz^$dnsrewrite=blockingmachine.xyz
 ||objectsentrust.com^$dnsrewrite=blockingmachine.xyz
 ||obstanceder.pro^$dnsrewrite=blockingmachine.xyz
 ||obtrusivecrisispure.com^$dnsrewrite=blockingmachine.xyz
@@ -49870,6 +49851,7 @@
 ||onclickserver.com^$dnsrewrite=blockingmachine.xyz
 ||onedragon.win^$dnsrewrite=blockingmachine.xyz
 ||onenetworkdirect.net^$dnsrewrite=blockingmachine.xyz
+||oneselfindicaterequest.com^$dnsrewrite=blockingmachine.xyz
 ||onetouch17.info^$dnsrewrite=blockingmachine.xyz
 ||onetouch8.info^$dnsrewrite=blockingmachine.xyz
 ||onetrackesolution.com^$dnsrewrite=blockingmachine.xyz
@@ -49916,6 +49898,7 @@
 ||ourscience.info^$dnsrewrite=blockingmachine.xyz
 ||ousiademark.com^$dnsrewrite=blockingmachine.xyz
 ||ousinouk.xyz^$dnsrewrite=blockingmachine.xyz
+||ousptbllgj.com^$dnsrewrite=blockingmachine.xyz
 ||outchops.xyz^$dnsrewrite=blockingmachine.xyz
 ||outheelrelict.com^$dnsrewrite=blockingmachine.xyz
 ||outseethoozet.net^$dnsrewrite=blockingmachine.xyz
@@ -49947,6 +49930,7 @@
 ||panaservers.com^$dnsrewrite=blockingmachine.xyz
 ||pantodsahh.shop^$dnsrewrite=blockingmachine.xyz
 ||paradisenookminutes.com^$dnsrewrite=blockingmachine.xyz
+||parentlargevia.com^$dnsrewrite=blockingmachine.xyz
 ||parolersheeve.com^$dnsrewrite=blockingmachine.xyz
 ||parttimesupremeretard.com^$dnsrewrite=blockingmachine.xyz
 ||pasteldevaluation.com^$dnsrewrite=blockingmachine.xyz
@@ -50030,6 +50014,7 @@
 ||pohaunsairdeph.net^$dnsrewrite=blockingmachine.xyz
 ||pointedmana.info^$dnsrewrite=blockingmachine.xyz
 ||pointlessplan.pro^$dnsrewrite=blockingmachine.xyz
+||polarbearyulia.com^$dnsrewrite=blockingmachine.xyz
 ||polishedconcert.pro^$dnsrewrite=blockingmachine.xyz
 ||polishedwing.pro^$dnsrewrite=blockingmachine.xyz
 ||poloistwilrone.shop^$dnsrewrite=blockingmachine.xyz
@@ -50125,6 +50110,7 @@
 ||pushame.com^$dnsrewrite=blockingmachine.xyz
 ||pusharest.com^$dnsrewrite=blockingmachine.xyz
 ||pushazer.com^$dnsrewrite=blockingmachine.xyz
+||pushbaddy.com^$dnsrewrite=blockingmachine.xyz
 ||pushbasic.com^$dnsrewrite=blockingmachine.xyz
 ||pushckick.click^$dnsrewrite=blockingmachine.xyz
 ||pushdusk.com^$dnsrewrite=blockingmachine.xyz
@@ -50189,6 +50175,7 @@
 ||qwvvoaykyyvj.top^$dnsrewrite=blockingmachine.xyz
 ||qylmbemvlzjew.top^$dnsrewrite=blockingmachine.xyz
 ||qynmfgnu.xyz^$dnsrewrite=blockingmachine.xyz
+||qyusgj.xyz^$dnsrewrite=blockingmachine.xyz
 ||qywjvlaoyeavv.top^$dnsrewrite=blockingmachine.xyz
 ||qywjvlazeervj.top^$dnsrewrite=blockingmachine.xyz
 ||qzybrmzevbro.top^$dnsrewrite=blockingmachine.xyz
@@ -50239,6 +50226,7 @@
 ||remembermaterialistic.com^$dnsrewrite=blockingmachine.xyz
 ||remploymehnt.info^$dnsrewrite=blockingmachine.xyz
 ||remv43-rtbix.top^$dnsrewrite=blockingmachine.xyz
+||reobalkeolov.top^$dnsrewrite=blockingmachine.xyz
 ||reryn2ce.com^$dnsrewrite=blockingmachine.xyz
 ||resktdahcyqgu.xyz^$dnsrewrite=blockingmachine.xyz
 ||respondedkinkysofa.com^$dnsrewrite=blockingmachine.xyz
@@ -50276,6 +50264,7 @@
 ||rmxads.com^$dnsrewrite=blockingmachine.xyz
 ||rmzsglng.com^$dnsrewrite=blockingmachine.xyz
 ||rngpaluydont.com^$dnsrewrite=blockingmachine.xyz
+||rnomqihksna.com^$dnsrewrite=blockingmachine.xyz
 ||robazi.xyz^$dnsrewrite=blockingmachine.xyz
 ||roiapp.net^$dnsrewrite=blockingmachine.xyz
 ||rolltrafficroll.com^$dnsrewrite=blockingmachine.xyz
@@ -50307,6 +50296,7 @@
 ||rtbadsmenetwork.com^$dnsrewrite=blockingmachine.xyz
 ||rtbfradhome.com^$dnsrewrite=blockingmachine.xyz
 ||rtbfradnow.com^$dnsrewrite=blockingmachine.xyz
+||rtbget.com^$dnsrewrite=blockingmachine.xyz
 ||rtbinternet.com^$dnsrewrite=blockingmachine.xyz
 ||rtbix.com^$dnsrewrite=blockingmachine.xyz
 ||rtbix.xyz^$dnsrewrite=blockingmachine.xyz
@@ -50347,6 +50337,7 @@
 ||satisfied-tour.pro^$dnsrewrite=blockingmachine.xyz
 ||saucheethee.xyz^$dnsrewrite=blockingmachine.xyz
 ||saukaivounoa.xyz^$dnsrewrite=blockingmachine.xyz
+||saunasupposedly.com^$dnsrewrite=blockingmachine.xyz
 ||savefromad.net^$dnsrewrite=blockingmachine.xyz
 ||sbscrma.com^$dnsrewrite=blockingmachine.xyz
 ||scanshrugged.com^$dnsrewrite=blockingmachine.xyz
@@ -50404,6 +50395,7 @@
 ||shauladubhe.top^$dnsrewrite=blockingmachine.xyz
 ||shdegtbokshipns.xyz^$dnsrewrite=blockingmachine.xyz
 ||sheathweason.com^$dnsrewrite=blockingmachine.xyz
+||shertuwipsumt.net^$dnsrewrite=blockingmachine.xyz
 ||sheschemetraitor.com^$dnsrewrite=blockingmachine.xyz
 ||shiaflsteaw.com^$dnsrewrite=blockingmachine.xyz
 ||shimmering-novel.pro^$dnsrewrite=blockingmachine.xyz
@@ -50692,6 +50684,7 @@
 ||thunderhead.com^$dnsrewrite=blockingmachine.xyz
 ||thupsirsifte.xyz^$dnsrewrite=blockingmachine.xyz
 ||thymeycimnel.com^$dnsrewrite=blockingmachine.xyz
+||tiaoap.xyz^$dnsrewrite=blockingmachine.xyz
 ||tickleorganizer.com^$dnsrewrite=blockingmachine.xyz
 ||tiepinshazings.com^$dnsrewrite=blockingmachine.xyz
 ||tigroulseedsipt.net^$dnsrewrite=blockingmachine.xyz
@@ -50699,6 +50692,7 @@
 ||tinbuadserv.com^$dnsrewrite=blockingmachine.xyz
 ||titanads5.com^$dnsrewrite=blockingmachine.xyz
 ||tiypa.com^$dnsrewrite=blockingmachine.xyz
+||tkauru.xyz^$dnsrewrite=blockingmachine.xyz
 ||tkbo.com^$dnsrewrite=blockingmachine.xyz
 ||tkoqgxnvt.com^$dnsrewrite=blockingmachine.xyz
 ||toahicobeerile.com^$dnsrewrite=blockingmachine.xyz
@@ -50727,6 +50721,7 @@
 ||trackpush.com^$dnsrewrite=blockingmachine.xyz
 ||tracktilldeath.club^$dnsrewrite=blockingmachine.xyz
 ||trackvbmobs.click^$dnsrewrite=blockingmachine.xyz
+||trackvisible.com^$dnsrewrite=blockingmachine.xyz
 ||trackwilltrk.com^$dnsrewrite=blockingmachine.xyz
 ||trade46-q.com^$dnsrewrite=blockingmachine.xyz
 ||trading21s.com^$dnsrewrite=blockingmachine.xyz
@@ -50785,6 +50780,7 @@
 ||turncdn.com^$dnsrewrite=blockingmachine.xyz
 ||tuschesanaitis.com^$dnsrewrite=blockingmachine.xyz
 ||tutvp.com^$dnsrewrite=blockingmachine.xyz
+||tvgxhvredn.xyz^$dnsrewrite=blockingmachine.xyz
 ||tychon.bid^$dnsrewrite=blockingmachine.xyz
 ||tyhyorvhscdbx.xyz^$dnsrewrite=blockingmachine.xyz
 ||tyliontentful.com^$dnsrewrite=blockingmachine.xyz
@@ -50794,6 +50790,7 @@
 ||tyserving.com^$dnsrewrite=blockingmachine.xyz
 ||tytorimmer.shop^$dnsrewrite=blockingmachine.xyz
 ||tzaqkp.com^$dnsrewrite=blockingmachine.xyz
+||tzzvvohntnlvan.com^$dnsrewrite=blockingmachine.xyz
 ||u5lxh1y1pgxy.shop^$dnsrewrite=blockingmachine.xyz
 ||uads.space^$dnsrewrite=blockingmachine.xyz
 ||uaucqlwwo.com^$dnsrewrite=blockingmachine.xyz
@@ -50801,6 +50798,7 @@
 ||ucconn.live^$dnsrewrite=blockingmachine.xyz
 ||uetplfqbet.com^$dnsrewrite=blockingmachine.xyz
 ||ufindsoul.com^$dnsrewrite=blockingmachine.xyz
+||ufinkln.com^$dnsrewrite=blockingmachine.xyz
 ||ufouxbwn.com^$dnsrewrite=blockingmachine.xyz
 ||ufvxiyewsyi.com^$dnsrewrite=blockingmachine.xyz
 ||ugailidsay.xyz^$dnsrewrite=blockingmachine.xyz
@@ -50813,6 +50811,7 @@
 ||ukcomparends.pro^$dnsrewrite=blockingmachine.xyz
 ||ukentsiwoulukdlik.info^$dnsrewrite=blockingmachine.xyz
 ||uktwvhfezyvxn.com^$dnsrewrite=blockingmachine.xyz
+||ulaiwhiw.xyz^$dnsrewrite=blockingmachine.xyz
 ||ulonataghain.com^$dnsrewrite=blockingmachine.xyz
 ||ultimaterequirement.com^$dnsrewrite=blockingmachine.xyz
 ||ultrabetas.com^$dnsrewrite=blockingmachine.xyz
@@ -50930,6 +50929,7 @@
 ||voluminoussoup.pro^$dnsrewrite=blockingmachine.xyz
 ||volumntime.com^$dnsrewrite=blockingmachine.xyz
 ||vowingsirees.top^$dnsrewrite=blockingmachine.xyz
+||vpn-defend.com^$dnsrewrite=blockingmachine.xyz
 ||vroehguxtnt.com^$dnsrewrite=blockingmachine.xyz
 ||vrplynsfcr.xyz^$dnsrewrite=blockingmachine.xyz
 ||vstserv.com^$dnsrewrite=blockingmachine.xyz
@@ -50986,6 +50986,7 @@
 ||wersoorgaglaz.xyz^$dnsrewrite=blockingmachine.xyz
 ||wevrwqjqemoyk.top^$dnsrewrite=blockingmachine.xyz
 ||wewearegogogo.com^$dnsrewrite=blockingmachine.xyz
+||wfcs.lol^$dnsrewrite=blockingmachine.xyz
 ||wfnetwork.com^$dnsrewrite=blockingmachine.xyz
 ||whaickeenie.xyz^$dnsrewrite=blockingmachine.xyz
 ||whaixoads.xyz^$dnsrewrite=blockingmachine.xyz
@@ -51001,6 +51002,7 @@
 ||where.com^$dnsrewrite=blockingmachine.xyz
 ||wherebyinstantly.com^$dnsrewrite=blockingmachine.xyz
 ||whidoutounseegn.xyz^$dnsrewrite=blockingmachine.xyz
+||whidsugnoackili.net^$dnsrewrite=blockingmachine.xyz
 ||white-bicycle.pro^$dnsrewrite=blockingmachine.xyz
 ||whizzerrapiner.com^$dnsrewrite=blockingmachine.xyz
 ||whoaglouvawe.com^$dnsrewrite=blockingmachine.xyz
@@ -51032,6 +51034,7 @@
 ||windowsaura.com^$dnsrewrite=blockingmachine.xyz
 ||windsuredine.shop^$dnsrewrite=blockingmachine.xyz
 ||winterolivia.com^$dnsrewrite=blockingmachine.xyz
+||wintjaywolf.org^$dnsrewrite=blockingmachine.xyz
 ||wintrck.com^$dnsrewrite=blockingmachine.xyz
 ||wipzxpbs.com^$dnsrewrite=blockingmachine.xyz
 ||wiringsensitivecontents.com^$dnsrewrite=blockingmachine.xyz
@@ -51207,6 +51210,7 @@
 ||ypgmjlcgrp.com^$dnsrewrite=blockingmachine.xyz
 ||yplqr-fnh.space^$dnsrewrite=blockingmachine.xyz
 ||ypmnzrio.com^$dnsrewrite=blockingmachine.xyz
+||ypmtvlaktm.com^$dnsrewrite=blockingmachine.xyz
 ||yptjqrlbawn.xyz^$dnsrewrite=blockingmachine.xyz
 ||ytgngedq.xyz^$dnsrewrite=blockingmachine.xyz
 ||ytsa.net^$dnsrewrite=blockingmachine.xyz
@@ -51459,6 +51463,7 @@
 ||adrocket.com^$dnsrewrite=blockingmachine.xyz
 ||adroll.com^$dnsrewrite=blockingmachine.xyz
 ||adrsp.net^$dnsrewrite=blockingmachine.xyz
+||ads-bitcoin.com^$dnsrewrite=blockingmachine.xyz
 ||ads-pixiv.net^$dnsrewrite=blockingmachine.xyz
 ||ads01.com^$dnsrewrite=blockingmachine.xyz
 ||ads4media.online^$dnsrewrite=blockingmachine.xyz
@@ -52316,6 +52321,7 @@
 ||23.109.82.^$dnsrewrite=blockingmachine.xyz
 ||23.109.87.^$dnsrewrite=blockingmachine.xyz
 ||utiq-aws.net^$dnsrewrite=blockingmachine.xyz
+||1560807123.rsc.cdn77.org^$dnsrewrite=blockingmachine.xyz
 ||360playvid.com^$dnsrewrite=blockingmachine.xyz
 ||360playvid.info^$dnsrewrite=blockingmachine.xyz
 ||adinplay-venatus.workers.dev^$dnsrewrite=blockingmachine.xyz
@@ -55582,6 +55588,7 @@
 ||webtrekk.de^$dnsrewrite=blockingmachine.xyz
 ||webtrekk.net^$dnsrewrite=blockingmachine.xyz
 ||d1udjti6mtxz9q.cloudfront.net^$dnsrewrite=blockingmachine.xyz
+||utiq.pcgames.de^$dnsrewrite=blockingmachine.xyz
 ||telemetry.vaultdcr.com^$dnsrewrite=blockingmachine.xyz
 ||staging-*.ispot.tv^$dnsrewrite=blockingmachine.xyz
 ||telemetry.nbcuott.com^$dnsrewrite=blockingmachine.xyz
@@ -60423,6 +60430,7 @@
 ||mifsirnhvvrps.top^$dnsrewrite=blockingmachine.xyz
 ||misxgkvnlf.com^$dnsrewrite=blockingmachine.xyz
 ||motosal.net^$dnsrewrite=blockingmachine.xyz
+||mousheen.net^$dnsrewrite=blockingmachine.xyz
 ||naetoris.pw^$dnsrewrite=blockingmachine.xyz
 ||nvqonvfylkxdjc.com^$dnsrewrite=blockingmachine.xyz
 ||oardjnay.com^$dnsrewrite=blockingmachine.xyz
@@ -65117,10 +65125,12 @@
 ||38.33.15.*.gif^$dnsrewrite=blockingmachine.xyz
 ||51tongji.trafficmanager.net^$dnsrewrite=blockingmachine.xyz
 ||67.21.92.*.gif^$dnsrewrite=blockingmachine.xyz
-||ffjevt.icu^$dnsrewrite=blockingmachine.xyz
-||bimnodstz.com^$dnsrewrite=blockingmachine.xyz
-||odxh.cn^$dnsrewrite=blockingmachine.xyz
-||bhoscopop.com^$dnsrewrite=blockingmachine.xyz
+||pkvjrb.icu^$dnsrewrite=blockingmachine.xyz
+||oqea.cn^$dnsrewrite=blockingmachine.xyz
+||aillaeuyn.com^$dnsrewrite=blockingmachine.xyz
+||pjwk.cn^$dnsrewrite=blockingmachine.xyz
+||difzhd.icu^$dnsrewrite=blockingmachine.xyz
+||aa03010iiko.com^$dnsrewrite=blockingmachine.xyz
 ||nievolmqn.com^$dnsrewrite=blockingmachine.xyz
 ||sikvoilst.com^$dnsrewrite=blockingmachine.xyz
 ||riym.cn^$dnsrewrite=blockingmachine.xyz
@@ -67786,6 +67796,8 @@
 ||tradergpt.ai^$dnsrewrite=blockingmachine.xyz
 ||mat-pnu.ir^$dnsrewrite=blockingmachine.xyz
 ||androidupdate.download^$dnsrewrite=blockingmachine.xyz
+||159.100.22.89^$dnsrewrite=blockingmachine.xyz
+||ewpb.site^$dnsrewrite=blockingmachine.xyz
 ||planad.net^$dnsrewrite=blockingmachine.xyz
 ||aedi.ai^$dnsrewrite=blockingmachine.xyz
 ||mobon.net^$dnsrewrite=blockingmachine.xyz
@@ -75449,6 +75461,7 @@
 ||cleversite.ru/client/default/sound/
 ||cliengo.com^$dnsrewrite=blockingmachine.xyz
 ||cloudfront.net/prod/media/$domain=birdeye.com
+||clustertextilzgz.com/CatalogoBorman/ca-web/mobile/style/raw/flipsound.ogg
 ||contivio.com/Chat2/audio/
 ||crisp.chat/static/sounds/
 ||czater.pl/assets/sounds/
@@ -76517,7 +76530,6 @@
 @@||aliunicorn.com^*/cookie-info.js
 @@||alphavps.com/assets/js/services/CookiesConsent.min.js
 @@||ampproject.org^*/amp-consent-$domain=9to5google.com|9to5mac.com|amp-lasexta-com.cdn.ampproject.org|connectthewatts.com|dronedj.com|electrek.co|lelum.pl|martdroid.de|spaceexplored.com|www-history-com.cdn.ampproject.org
-@@||andromede-cms.com/vendor/rgpd/rgpd.js$~third-party
 @@||api.mercari.jp/experiments/get_running_experiments_by_name$xmlhttprequest,domain=jp.mercari.com
 @@||api.transcend.io/privacy/graphql$xmlhttprequest
 @@||apikeys.civiccomputing.com^$xmlhttprequest,domain=videogameschronicle.com
