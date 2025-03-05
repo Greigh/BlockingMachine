@@ -1,8 +1,8 @@
 # Title: BlockingMachine Hosts Filter List
 # Description: Host-level domain blocking rules to prevent connections to ad servers, trackers, and malicious domains. Blocks unwanted traffic at the system level by redirecting domains to 0.0.0.0.
 # Homepage: https://github.com/greigh/BlockingMachine
-# Last modified: 2025-03-04 01:09:48
-# Number of rules: 68904
+# Last modified: 2025-03-05 01:09:50
+# Number of rules: 68905
 #
 # Format: 0.0.0.0 domain.tld
 #0.0.0.0 adx-open-service.youku.com
@@ -222,7 +222,6 @@
 0.0.0.0 skt-asum.com
 0.0.0.0 bdapi-in-ads.realmemobile.com
 0.0.0.0 bjads.bejbej.ca
-0.0.0.0 external-ad.bunjang.co.kr
 0.0.0.0 hellay.net
 0.0.0.0 rqmob.com
 0.0.0.0 ads-server.mxplay.com
@@ -1130,6 +1129,7 @@
 0.0.0.0 ck.ads.oppomobile.com
 0.0.0.0 click.googleanalytics.com
 0.0.0.0 click.oneplus.cn
+0.0.0.0 client.app.coc.10086.cn
 0.0.0.0 clog.miguvideo.com
 0.0.0.0 cn-api.anythinktech.com
 0.0.0.0 cnlogs.umeng.com
@@ -18200,6 +18200,7 @@
 0.0.0.0 extentacquire.com
 0.0.0.0 extentbananassinger.com
 0.0.0.0 extenuatemusketsector.com
+0.0.0.0 external-ad.bunjang.co.kr
 0.0.0.0 extincttravelled.com
 0.0.0.0 extinguishadjustexceed.com
 0.0.0.0 extinguishtogethertoad.com
