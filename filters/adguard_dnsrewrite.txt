@@ -1,8 +1,8 @@
 ! Title: BlockingMachine AdGuard DNS Filter List
 ! Description: DNS rewrite filter rules for blocking ads, trackers, and annoyances at the DNS level. Enhances privacy by preventing unwanted connections with custom DNS responses.
 ! Homepage: https://github.com/greigh/BlockingMachine
-! Last modified: 2025-03-04 01:09:48
-! Number of rules: 76847
+! Last modified: 2025-03-05 01:09:50
+! Number of rules: 76848
 !
 ! Format: ||domain.tld^$dnsrewrite=blockingmachine.xyz
 !||adx-open-service.youku.com^$dnsrewrite=blockingmachine.xyz
@@ -237,7 +237,6 @@
 ||skt-asum.com^$dnsrewrite=blockingmachine.xyz
 ||bdapi-in-ads.realmemobile.com^$dnsrewrite=blockingmachine.xyz
 ||bjads.bejbej.ca^$dnsrewrite=blockingmachine.xyz
-||external-ad.bunjang.co.kr^$dnsrewrite=blockingmachine.xyz
 ||hellay.net^$dnsrewrite=blockingmachine.xyz
 ||rqmob.com^$dnsrewrite=blockingmachine.xyz
 ||ads-server.mxplay.com^$dnsrewrite=blockingmachine.xyz
@@ -1170,6 +1169,7 @@
 ||ck.ads.oppomobile.com^$dnsrewrite=blockingmachine.xyz
 ||click.googleanalytics.com^$dnsrewrite=blockingmachine.xyz
 ||click.oneplus.cn^$dnsrewrite=blockingmachine.xyz
+||client.app.coc.10086.cn^$dnsrewrite=blockingmachine.xyz
 ||clog.miguvideo.com^$dnsrewrite=blockingmachine.xyz
 ||cn-api.anythinktech.com^$dnsrewrite=blockingmachine.xyz
 ||cnlogs.umeng.com^$dnsrewrite=blockingmachine.xyz
@@ -20211,6 +20211,7 @@
 ||extentacquire.com^$dnsrewrite=blockingmachine.xyz
 ||extentbananassinger.com^$dnsrewrite=blockingmachine.xyz
 ||extenuatemusketsector.com^$dnsrewrite=blockingmachine.xyz
+||external-ad.bunjang.co.kr^$dnsrewrite=blockingmachine.xyz
 ||extincttravelled.com^$dnsrewrite=blockingmachine.xyz
 ||extinguishadjustexceed.com^$dnsrewrite=blockingmachine.xyz
 ||extinguishtogethertoad.com^$dnsrewrite=blockingmachine.xyz
@@ -69767,6 +69768,7 @@
 ||https-filtering-check.adtidy.org^$dnsrewrite=blockingmachine.xyz
 @@||cdn.cookielaw.org/scripttemplates/otSDKStub.js$domain=hollywoodreporter.com|resmed.com|southpark.de|movistar.es|redbull.com|all.accor.com|karriere.mcdonalds.de|blaklader.*|wallapop.com|rts.ch|npr.org|upc.pl|next.co.uk|zoom.us|rtlplay.be|motorsport-total.com|player.pl|mensjournal.com|gqmagazine.fr|nintendo.*|mtv.com|ryobitools.eu|cc.com|3sat.de|zdf.de|costco.com|giantbomb.com|glovoapp.com|rte.ie|digitaltrends.com|spiele.bild.de|spiele.stern.de|vanityfair.com|saarbruecker-zeitung.de|olympics.com|tvn.pl|bergfreunde.de|oe24.at|epicgames.com|toteraz.pl|natgeotv.com|midomi.com|volksfreund.de|kawasaki.com|ga.de|shop.mango.com|kralmuzik.com.tr|westernunion.com|roastmarket.de|new.cappex.com|vimeo.com|heute.at|ntv.com.tr|wargaming.net|metacritic.com|gq-magazine.co.uk|viafree.dk|viafree.fi|viafree.no|viafree.se|glamour.de|cbsnews.com|worldoftanks.ru|vg247.com|newyorker.com|games.miamiherald.com|eurogamer.es|eurogamer.de|bet.com|ikonpass.com|mcdelivery.de|id.trimble.com|skateboarding.transworld.net|newegg.com|docs.vmware.com|udemy.com|olx.pl|usmagazine.com|uefa.com|milwaukeetool.eu|muscleandfitness.com|20min.ch|ted.com|elisa.fi|nhl.com|porn300.com|indiewire.com|victorinox.com|darkreading.com|trustradius.com|start.gg|geappliances.com|popeyes.com|channel5.com|bigbearmountainresort.com|quora.com|vod.pl|blick.ch|elle.com|teenvogue.com|vogue.co.jp|vogue.co.uk|vogue.com|vogue.com.tw|vogue.de|vogue.es|vogue.fr|vogue.in|vogue.it|vogue.mx|vogue.ph|tvnturbo.pl|superporn.com|thebump.com|bk.com|safeway.com|motor1.com|southparkstudios.com.br|southpark.lat|southparkstudios.com|realsimple.com|538.nl|skyradio.nl|radio10.nl|radioveronica.nl|homedepot.ca|wired.com|europapark.de|jdpower.com|bonava.lv|nick.com|mtvema.com|mtv.co.uk|mtv.de|mtv.it|themessenger.com|nickjr.com|lnw.com|otodom.pl|irishtimes.com|tntsports.com.br|sonos.com|rossmann.pl|rentcafe.com|seriouseats.com|bhg.com|gamescom.global|championsleague.basketball|fnac.com|twojapogoda.pl|pagesix.com|sony.pl|dhl.de|questdiagnostics.com|payback.de|kfc.fr|kfc.es|kfc.de
 ||geolocation.onetrust.com/cookieconsentpub/*/geo/location$xmlhttprequest,redirect-rule=noopjson
+@@||consent.cookiebot.com/uc.js$domain=moto100.de
 @@||consent.cookiebot.com/uc.js$domain=gls-info.nl
 @@||cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js$domain=businessinsider.com
 @@||thefly.com/js/cookieConsent.js$domain=thefly.com
@@ -72749,7 +72751,7 @@
 ||cdn.synthesys.io/js/synthesys_widget.js
 ||receptions.smart-bdash.com^$dnsrewrite=blockingmachine.xyz
 ||static-cdn.onstove.com/*/stove-common-popup/$domain=indie.onstove.com
-||tver.jp/_next/static/chunks/$replace=/e\?(e\(\):\(n\.play\(\))/!1?\$1/,script
+||tver.jp/_next/static/chunks/pages/episodes/$script,replace=/e\.openQuestionnaireModal\?\?.+?\[e\.openQuestionnaireModal(\,)e\.controller\.play/e.controller.play)()}\$1[e.controller.play/
 ||magokoro-bento.com/wp/wp-content/themes/magokoro/js/blog-single.js
 ||cdn.viqeo.tv/js/assets/*/js/vq_fly_widget.js$domain=argumenti.ru|obrazovaka.ru
 ||vagalume.com.br/js/lib/modalAgeRestriction.js
@@ -76776,7 +76778,6 @@
 @@||app.conceptboard.com^*/SocialIcons.js$xmlhttprequest
 @@||app.veggly.net/plugins/cordova-plugin-x-socialsharing/$script,~third-party
 @@||arcgis.com/apps/Nearby/app/components/Share/$~third-party
-@@||arhn.eu/wp-content/themes/socialize/$~third-party
 @@||assets.msn.com/bundles/*/social-bar-$~third-party
 @@||authy.com/wp-content/themes/authy/assets/images/icons/
 @@||brave.com/wp-content/uploads/$image,~third-party
