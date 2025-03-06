@@ -1,7 +1,7 @@
 # Title: BlockingMachine Hosts Filter List
 # Description: Host-level domain blocking rules to prevent connections to ad servers, trackers, and malicious domains. Blocks unwanted traffic at the system level by redirecting domains to 0.0.0.0.
 # Homepage: https://github.com/greigh/BlockingMachine
-# Last modified: 2025-03-05 01:09:50
+# Last modified: 2025-03-06 01:09:37
 # Number of rules: 68905
 #
 # Format: 0.0.0.0 domain.tld
@@ -66729,7 +66729,7 @@
 0.0.0.0 consentmanager.net
 0.0.0.0 cdn.iubenda.com
 0.0.0.0 cmp.inmobi.com
-0.0.0.0 consent.dw.com
+0.0.0.0 cp.gutefrage.net
 0.0.0.0 cmp.gearupbooster.com
 0.0.0.0 ccm.hamburg-magazin.de
 0.0.0.0 utiq.t-online.de
