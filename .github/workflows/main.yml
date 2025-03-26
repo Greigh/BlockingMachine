@@ -68,9 +68,6 @@ jobs:
         id: update
         run: npm run update-filters -- --ci
 
-      - name: Generate stats
-        run: npm run test:stats
-
       - name: Get update info
         id: update-info
         run: |
@@ -121,13 +118,31 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
+      - name: Check workflow status
+        id: check
+        run: |
+          if [[ ${{ contains(needs.*.result, 'failure') }} == 'true' ]]; then
+            echo "status=failure" >> $GITHUB_OUTPUT
+          elif [[ ${{ contains(needs.*.result, 'cancelled') }} == 'true' ]]; then
+            echo "status=cancelled" >> $GITHUB_OUTPUT
+          else
+            echo "status=success" >> $GITHUB_OUTPUT
+          fi
+
       - name: Discord Notification
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          status: ${{ job.status }}
+          status: ${{ steps.check.outputs.status }}
           title: 'BlockingMachine Update'
           description: |
+            Status: ${{ steps.check.outputs.status }}
             Total Rules: ${{ needs.update.outputs.totalRules }}
             Updated on: ${{ needs.update.outputs.timestamp }}
             ${{ github.event.head_commit.message }}
+
+            Job Results:
+            - Lint: ${{ needs.lint.result }}
+            - Update: ${{ needs.update.result }}
+            - Website: ${{ needs.website.result }}
+            - Release: ${{ needs.release.result }}

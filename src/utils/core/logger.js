@@ -97,61 +97,33 @@ class LogManager {
 }
 
 export const LogLevel = {
-  ERROR: 'ERROR',
-  WARN: 'WARN',
-  INFO: 'INFO',
   DEBUG: 'DEBUG',
-  VERBOSE: 'VERBOSE',
+  INFO: 'INFO',
+  ERROR: 'ERROR',
 };
 
 // Create singleton instance
 const logManager = new LogManager();
 
 /**
- * Writes a message to logs
+ * Log a message with timestamp and level
  * @param {string} message - Message to log
  * @param {LogLevel} level - Log level
+ * @param {boolean} debug - Debug mode flag
+ * @param {boolean} verbose - Verbose mode flag
  */
-export async function logMessage(message, level = LogLevel.INFO) {
-  await logManager.ensureLogDirectories();
+export async function logMessage(
+  message,
+  level = LogLevel.INFO,
+  debug = false,
+  verbose = false
+) {
+  const timestamp = new Date().toISOString();
 
-  const now = new Date();
-  let entry = '';
-
-  switch (level) {
-    case LogLevel.ERROR:
-    case LogLevel.WARN:
-    case LogLevel.DEBUG:
-      entry = `[${now.toLocaleString()}] ${level}: ${message}`;
-      break;
-    case LogLevel.VERBOSE:
-      entry = `[${now.toISOString()}] ${level}: ${message}`;
-      break;
-    default:
-      entry = message;
-  }
-
-  await logManager.write(entry, level);
-
-  // Console output based on level and flags
-  const isDebug = process.argv.includes('--debug');
-  const isVerbose = process.argv.includes('--verbose');
-
-  switch (level) {
-    case LogLevel.ERROR:
-      console.error(entry);
-      break;
-    case LogLevel.WARN:
-      console.warn(entry);
-      break;
-    case LogLevel.DEBUG:
-      if (isDebug) console.log(entry);
-      break;
-    case LogLevel.VERBOSE:
-      if (isVerbose) console.log(entry);
-      break;
-    default:
-      console.log(entry);
+  if (verbose) {
+    console.log(timestamp, level, message, `[${debug ? 'DEBUG' : 'PROD'}]`);
+  } else {
+    console.log(message);
   }
 }
 
