@@ -27,7 +27,12 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ ! -f package-lock.json ]; then
+            npm install
+          else
+            npm ci
+          fi
 
       - name: Run linters
         run: |
@@ -50,6 +55,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          if [ ! -f package-lock.json ]; then
+            npm install
+          else
+            npm ci
+          fi
 
       - name: Update filters
         id: update
