@@ -1,5 +1,4 @@
 import { logMessage, LogLevel } from '../utils/core/logger.js';
-import { convertRules } from './convert.js';
 import { promises as fs } from 'fs';
 import { paths } from '../utils/core/paths.js';
 import { writeStats } from '../utils/io/writer.js';
@@ -194,29 +193,32 @@ export class FilterProcessor {
 
       // Track successful rule conversions
       switch (type) {
-        case RuleType.BROWSER:
+        case RuleType.BROWSER: {
           const browserRule = convertToBrowserRule(rule);
           if (browserRule) {
             sets.browser.add(browserRule);
             this.stats.rules.browser++;
           }
           break;
+        }
 
-        case RuleType.HOSTS:
+        case RuleType.HOSTS: {
           const hostsRule = convertToHostsRule(rule);
           if (hostsRule) {
             sets.hosts.add(hostsRule);
             this.stats.rules.hosts++;
           }
           break;
+        }
 
-        case RuleType.ADGUARD:
+        case RuleType.ADGUARD: {
           const adGuardRule = convertToAdGuardRule(rule);
           if (adGuardRule) {
             sets.adGuard.add(adGuardRule);
             // Don't increment here as these are counted in total
           }
           break;
+        }
 
         case RuleType.DNS:
           sets.dns.add(rule);
@@ -235,6 +237,9 @@ export class FilterProcessor {
     // Calculate total including all rule types
     this.stats.rules.total =
       sets.browser.size + sets.dns.size + sets.hosts.size;
+
+    // Write stats to file
+    await writeStats(this.stats);
 
     await logMessage(
       `Processed ${this.stats.rules.total} total rules:\n` +
