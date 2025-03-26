@@ -1,10 +1,6 @@
 /* Remove the display: none that was breaking the cards */
 .stats-grid,
 .card,
-.stat-item {
-    display: block;
-}
-
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -38,37 +34,7 @@
     height: auto;
 }
 
-/* Fix card styling */
-.card.product {
-    background-color: var(--card-dark);
-    border: 1px solid var(--border-dark);
-    border-radius: 8px;
-    padding: 24px;
-    margin: 20px 0;
-    display: block;
-    width: 100%;
-}
-
 /* Update input styling to match theme */
-input[type="url"] {
-    width: 100%;
-    padding: 1rem 1.25rem;
-    /* Increased padding */
-    margin: 1.5rem 0;
-    /* Increased margin */
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    /* Increased border radius to match theme */
-    color: var(--text-color);
-    font-size: var(--font-size-md);
-    /* Slightly larger font size */
-    font-family: var(--font-primary);
-    transition: all 0.2s ease;
-    height: 3.5rem;
-    /* Set specific height */
-}
-
 input[type="url"]:focus {
     border-color: var(--primary-color);
     outline: none;
@@ -81,28 +47,8 @@ input[type="url"]::placeholder {
     /* Increased opacity for better visibility */
 }
 
-/* Fix product features grid */
-.product__features {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin: 24px 0;
-    width: 100%;
-}
-
-.product__features-item {
-    background-color: var(--bg-dark);
-    border: 1px solid var(--border-dark);
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-}
-
 /* Fix responsive layout */
 @media (max-width: 768px) {
-    .product__features {
-        grid-template-columns: 1fr;
-    }
 
     .stats-grid {
         grid-template-columns: 1fr;
@@ -191,61 +137,27 @@ input[type="url"]::placeholder {
 }
 
 /* Test Results Styling */
-.result {
-    border: 1px solid var(--border-color);
-    background-color: var(--card-bg);
-    padding: 1.5rem;
-    border-radius: 12px;
-}
-
-.result h3 {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.result--blocked {
-    background-color: rgba(220, 38, 38, 0.1);
-    border-color: rgba(220, 38, 38, 0.2);
-}
-
-.result--allowed {
-    background-color: rgba(34, 197, 94, 0.1);
-    border-color: rgba(34, 197, 94, 0.2);
-}
-
-.result--error {
-    background-color: rgba(234, 179, 8, 0.1);
-    border-color: rgba(234, 179, 8, 0.2);
-}
-
-.loading {
-    color: var(--text-color);
+/* Add loading state styles */
+.button:disabled {
     opacity: 0.7;
-    font-style: italic;
+    cursor: not-allowed;
+    background-color: var(--primary-color-muted);
 }
 
-.error {
-    color: rgb(220, 38, 38);
-    font-weight: var(--font-weight-semibold);
+.loading::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
 }
 
 /* Update text colors */
-.product__features-text {
-    color: var(--text-secondary);
-    font-size: 16px;
-    line-height: 1.4;
-}
-
-.product__title {
-    color: var(--text-light);
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
 button {
     background: var(--primary-color);
     color: white;
@@ -259,12 +171,6 @@ button:hover {
     background: var(--primary-hover);
 }
 
-.test-result {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 4px;
-}
-
 .test-result.blocked {
     background-color: #ffe6e6;
     border: 1px solid #ff9999;
@@ -273,12 +179,6 @@ button:hover {
 .test-result.allowed {
     background-color: #e6ffe6;
     border: 1px solid #99ff99;
-}
-
-.product__features-title {
-    color: var(--text-light);
-    margin-bottom: 12px;
-    font-size: 18px;
 }
 
 .input {
@@ -292,16 +192,6 @@ button:hover {
     font-size: 16px;
 }
 
-.product__results {
-    margin-top: 20px;
-}
-
-.test-result {
-    padding: 16px;
-    border-radius: 8px;
-    margin-top: 16px;
-}
-
 .test-result.blocked {
     background-color: rgba(255, 99, 99, 0.1);
     border: 1px solid #ff6363;
@@ -310,11 +200,6 @@ button:hover {
 .test-result.allowed {
     background-color: rgba(75, 255, 75, 0.1);
     border: 1px solid #4bff4b;
-}
-
-.product__btn {
-    margin-top: 24px;
-    text-align: center;
 }
 
 .button {

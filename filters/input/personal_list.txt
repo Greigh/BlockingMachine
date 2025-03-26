@@ -1,0 +1,90 @@
+#Brave (brave.com) Browser (Privacy Centric Browser) Fixes
+@@||brave.com^$important
+#US Bank Fixes
+@@||tracking.sp.sofi.com^$important
+@@||usbank.com.ssl.d2.sc.omtrdc.net^$important
+@@||ally.tt.omtrdc.net^$important
+@@||ally.com.ssl.d1.sc.omtrdc.net^$important
+@@||analytics.chase.com^$important
+@@||smetrics.usbank.com^$important
+@@||zn6vxkyqywaf9f1t7-usbank.siteintercept.qualtrics.com^$important
+@@||usbank.demdex.net^$important
+@@||usbank-sync.quantummetric.com^$important
+#Roku Mobile App Fix
+@@||mobile.logs.roku.com^$important
+# Affiliate Linking Fixes
+@@||click.linksynergy.com^$important
+@@||ctrk.klclick1.com^$important
+@@||bestbuy.7tiv.net^$important
+@@||onelink.me^$important
+# Cellular Carrier Fixes
+@@||tmobile.sc.omtrdc.net^$important
+@@||verizontelecom.sc.omtrdc.net^$important
+@@||zn9nssxmv9itcz7nq-verizoncx.siteintercept.qualtrics.com^$important
+@@||sanalytics.verizon.com^$important
+@@||engage.vzw.com^$important
+@@||verizon.inq.com^$important
+#Google Calendar Widget Fixes
+@@||reminders-pa.clients6.google.com^$important
+@@||calendar.google.com^$important
+@@||ssl.gstatic.com^$important
+# Home Depot App Fixes
+@@||homedepot.tt.omtrdc.net^$important
+@@||homedepot.com.ssl.d2.sc.omtrdc.net^$important
+@@||h-homedepot.online-metrix.net^$important
+@@||zn_42v6draxyafsjmv-homedepot.siteintercept.qualtrics.com^$important
+@@||customer.homedepot.com^$important
+@@||swasc.homedepot.com^$important
+# Amazon Fixes
+@@||aan.amazon.com^$important
+@@||aax-us-iad.amazon.com^$important
+@@||fls-na.amazon.com^$important
+@@||device-metrics-us-2.amazon.com^$important
+#FedEx Fixes
+@@||fedex.sc.omtrdc.net^$important
+@@||fedex.tt.omtrdc.net^$important
+# CVS App Fixes
+@@||cvshealth.tt.omtrdc.net^$important
+#Target Red Card Fixes
+@@||img9.target.com^$important
+# Plex TV Personal Analytics Fix
+@@||analytics.plex.tv^$important
+# Job Market Fixes
+@@||gdc.indeed.com^$important
+@@||click.appcast.io^$important
+#iOS/Android Redirect Fixes
+@@||smart.link^$important
+@@||r.bttn.io^$important
+@@||open.homey.app^$important
+#Trello Fixes
+@@||xp.atlassian.com^$important
+#GTA RP Fixes
+@@||echorp.net^$important
+@@||footprintdns.com^$important
+@@||cfx.re^$important
+@@||fivem.net^$important
+#TikTok Fix
+@@||tiktokv.us^$important
+#Random fixes for across the Internet
+@@||yeggzb.clicks.mlsend.com^$important
+@@||servedby.flashtalking.com^$important
+@@||akamai.net^$important
+@@||mparticle.map.fastly.net^$important
+@@||auth.split.io^$important
+@@||app.engage.redhat.com^$important
+@@||js-agent.newrelic.com^$important
+@@||assets.adobedtm.com^$important
+@@||media.evolv.ai^$important
+@@||c.go-mpulse.net^$important
+@@||nexus.ensighten.com^$important
+@@||scripps.tt.omtrdc.net^$important
+@@||dc.services.visualstudio.com^$important
+@@||a46060.actonservice.com^$important
+#Hulu adblocks
+||dpm.demdex.net^$important
+#Random Blocks
+twitch.tv##+js(vaft-ublock-origin)
+||fedex.com/content/dam/fedex-com/visibility^$important
+||plus.unsplash.com^$important
+||istockphoto.com^$important
+||ads-a.unity3d.com^$important

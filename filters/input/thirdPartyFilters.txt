@@ -1,0 +1,10 @@
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt
+https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt
+https://raw.githubusercontent.com/MrBukLau/filter-lists/master/filters/basefilters.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_59.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_45.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_5.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+https://raw.githubusercontent.com/LanikSJ/ubo-filters/main/filters/getadmiral-domains.txt
+https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_14_Annoyances/filter.txt
+https://secure.fanboy.co.nz/fanboy-annoyance.txt

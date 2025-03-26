@@ -1,0 +1,9 @@
+{
+  "sourcesProcessed": 10,
+  "sourcesFailed": 90,
+  "totalRules": 264146,
+  "adguardRules": 115882,
+  "hostsRules": 115109,
+  "dnsRules": 115882,
+  "browserRules": 48329
+}

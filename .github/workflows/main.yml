@@ -1,0 +1,120 @@
+name: BlockingMachine CI
+permissions: write-all
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Daily at midnight UTC
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - '.github/workflows/**'
+      - '**.md'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linters
+        run: |
+          npm run eslint
+          npm run mdlint
+          npm run aglint
+
+  update:
+    needs: lint
+    runs-on: ubuntu-latest
+    outputs:
+      timestamp: ${{ steps.update-info.outputs.timestamp }}
+      totalRules: ${{ steps.update-info.outputs.totalRules }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Update filters
+        id: update
+        run: npm run update-filters -- --ci
+
+      - name: Generate stats
+        run: npm run test:stats
+
+      - name: Get update info
+        id: update-info
+        run: |
+          TIMESTAMP=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          TOTAL_RULES=$(jq '.totalRules' stats.json)
+          echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
+          echo "totalRules=$TOTAL_RULES" >> $GITHUB_OUTPUT
+
+  website:
+    needs: update
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+
+  release:
+    needs: [update, website]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: |
+            Total Rules: ${{ needs.update.outputs.totalRules }}
+            Updated on: ${{ needs.update.outputs.timestamp }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notify:
+    needs: [lint, update, website, release]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          status: ${{ job.status }}
+          title: 'BlockingMachine Update'
+          description: |
+            Total Rules: ${{ needs.update.outputs.totalRules }}
+            Updated on: ${{ needs.update.outputs.timestamp }}
+            ${{ github.event.head_commit.message }}

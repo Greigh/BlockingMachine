@@ -55,6 +55,21 @@
     /* For general text */
     --line-height-relaxed: 1.8;
     /* For FAQ content */
+
+    /* Add font weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Add transitions */
+    --transition-speed: 0.3s;
+    --transition-timing: ease;
+
+    /* Add shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* -----------------------------
@@ -320,69 +335,16 @@ body {
 }
 
 /* Add spacing for the button container */
-.button-container {
-    margin-top: 1rem;
-    /* Add some space between FAQ and button */
-    padding-bottom: 1rem;
-    /* Reduce bottom padding */
-}
-
 /* -----------------------------
    8. Dark Theme
 ----------------------------- */
-[data-theme="dark"] {
-    --bg-color: var(--bg-color-dark);
-    --text-color: var(--text-color-dark);
-    --container-bg: var(--container-bg-dark);
-    --border-color: var(--border-color-dark);
-    --primary-color: var(--primary-color-dark);
-    --primary-hover: var(--primary-hover-dark);
-    --card-bg: var(--card-bg-dark);
-    --input-bg: var(--input-bg-dark);
-    --dropdown-bg: var(--dropdown-bg-dark);
-}
-
-[data-theme="dark"] .container {
-    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="dark"] .faq__item:hover {
-    border-color: var(--primary-color);
-    background-color: rgba(60, 129, 246, 0.03);
-}
-
-[data-theme="dark"] .faq__item:has(.faq-item__content.active) {
-    background-color: var(--card-bg-dark);
-}
-
 /* Update container styles */
 .container {
     background-color: var(--container-bg);
     border: 1px solid var(--border-color);
 }
 
-/* Update card styles */
-.card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-}
-
-/* Update input styles */
-input,
-textarea,
-select {
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    font-family: var(--font-primary);
-}
-
 /* Update dropdown styles */
-.dropdown-content {
-    background-color: var(--dropdown-bg);
-    border: 1px solid var(--border-color);
-}
-
 /* -----------------------------
    9. Media Queries
 ----------------------------- */
@@ -422,17 +384,13 @@ select {
         /* Reduced from 3.5rem */
     }
 
-    .button-container {
-        margin-top: 0.75rem;
-        padding-bottom: 0.5rem;
-    }
-
     .content__btn {
         margin-top: 1.5rem;
         margin-bottom: 3rem;
         /* Reduced from 4rem for mobile */
     }
 }
+
 
 /* Update Back Button Styles */
 .button {
@@ -468,7 +426,9 @@ select {
 body,
 button,
 input,
-textarea,
-select {
+textarea {
     font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--text-color);
 }

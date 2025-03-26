@@ -1,103 +1,84 @@
-'use strict';
-
-import { logMessage } from './utils/log.js';
-import express from 'express';
-import bodyParser from 'body-parser';
-import * as fsSync from 'fs';
-import { updateAllLists, ensureFiltersFileExists } from './rules/update.js';
+/**
+ * BlockingMachine Entry Point
+ *
+ * Main entry point for the BlockingMachine filter update process.
+ * Handles:
+ * - Command line argument processing
+ * - Filter list updates
+ * - Error handling and logging
+ *
+ * Run with flags:
+ * npm run debug    - Show debug messages
+ * npm run verbose  - Show detailed processing
+ *
+ * @module index
+ */
 import { promises as fs } from 'fs';
-import {
-    outputFilePath,
-    browserRulesFilePath
-} from './utils/paths.js';
+import { logMessage, LogLevel } from './utils/core/logger.js';
+import { FilterProcessor } from './rules/processors.js';
+import { writeFilterSets, writeStats } from './utils/io/writer.js';
+import { paths, initializePaths } from './utils/core/paths.js';
 
-const excludePatterns = [
-    /###cookie-modal$/,
-    /##\.cookie-modal$/
-];
-
-async function cleanBrowserRules() {
-    try {
-        const content = await fs.readFile(browserRulesFilePath, 'utf8');
-
-        // Split into lines and filter out excluded patterns
-        const lines = content.split('\n');
-        const cleanedLines = lines.filter(line => {
-            return !excludePatterns.some(pattern => pattern.test(line));
-        });
-
-        // Write back to original file
-        await fs.writeFile(browserRulesFilePath, cleanedLines.join('\n'));
-        await logMessage('Successfully cleaned browser rules', verbose);
-    } catch (error) {
-        await logMessage('Error cleaning browser rules: ' + error.message, debug);
-        console.error(error.stack);
+async function validateAndInitialize() {
+  try {
+    // Validate input files
+    for (const [name, path] of Object.entries(paths.input)) {
+      try {
+        await fs.access(path, fs.constants.R_OK);
+        await logMessage(`Validated input file: ${name}`, LogLevel.DEBUG);
+      } catch (error) {
+        if (error.code === 'ENOENT') {
+          throw new Error(`Required input file missing: ${path}`);
+        }
+        throw error;
+      }
     }
+
+    // Initialize directories
+    await initializePaths();
+  } catch (error) {
+    await logMessage(`Initialization failed: ${error.message}`, LogLevel.ERROR);
+    throw error;
+  }
 }
 
-// Check for debug and verbose flags in the command line arguments
-const debug = process.argv.includes('-debug');
-const verbose = process.argv.includes('-verbose');
+/**
+ * Main application entry point
+ * @param {Object} options - Command line options
+ * @returns {Promise<void>}
+ */
+export async function main(options = {}) {
+  const debug = process.argv.includes('--debug') || options.debug;
+  const verbose = process.argv.includes('--verbose') || options.verbose;
 
-// Clear the output file before every run
-fsSync.writeFileSync(outputFilePath, '', 'utf8');
+  try {
+    // Validate inputs and initialize outputs
+    await validateAndInitialize();
 
-async function main() {
-    try {
-        if (debug) {
-            console.log('Starting script');
-        }
+    const processor = new FilterProcessor(debug, verbose);
+    await logMessage('Starting BlockingMachine...', LogLevel.INFO);
 
-        // Clean browser rules first
-        await cleanBrowserRules();
+    // Process filter lists
+    const sets = await processor.processFilterLists();
 
-        // Then proceed with existing operations
-        await ensureFiltersFileExists(debug, verbose);
-        await updateAllLists(debug, verbose);
+    // Write final sets
+    await writeFilterSets(sets);
+    await writeStats(processor.getStats());
 
-        if (debug) {
-            console.log('Script finished');
-        }
-
-        // Exit after updates if not running as server
-        if (!process.argv.includes('--server')) {
-            process.exit(0);
-        }
-    } catch (error) {
-        console.error('Error occurred:', error);
-        process.exit(1);
+    await logMessage(
+      'BlockingMachine update completed successfully',
+      LogLevel.INFO
+    );
+  } catch (error) {
+    await logMessage(`Update failed: ${error.message}`, LogLevel.ERROR);
+    if (debug) {
+      console.error(error);
     }
+    process.exit(1);
+  }
 }
 
-// Run updates
-main();
-
-// Only start server if --server flag is present
-if (process.argv.includes('--server')) {
-    const app = express();
-    const port = process.env.PORT || 3000;
-
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-
-    // Basic route
-    app.get('/', (req, res) => {
-        res.send('Blocking Machine is running!');
-    });
-
-    // Start server
-    app.listen(port, () => {
-        logMessage(`Server is running on port ${port}`);
-    });
-
-    // Handle process events
-    process.on('SIGTERM', () => {
-        logMessage('Received SIGTERM. Performing graceful shutdown...', 'warn');
-        process.exit(0);
-    });
-
-    process.on('SIGINT', () => {
-        logMessage('Received SIGINT. Performing graceful shutdown...', 'warn');
-        process.exit(0);
-    });
+// Only run if this is the main module
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(console.error);
 }

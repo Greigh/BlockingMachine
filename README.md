@@ -3,17 +3,12 @@
 
 # BlockingMachine
 
-[![UPDATEFILTERS](https://img.shields.io/github/actions/workflow/status/badges/shields/updatefilters.yml?label=Filter%20Updates)](https://github.com/Greigh/BlockingMachine/blob/main/.github/workflows/updatefilters.yml)
-[![ESLint](https://github.com/Greigh/BlockingMachine/actions/workflows/eslint.yml/badge.svg)](https://github.com/Greigh/BlockingMachine/actions/workflows/eslint.yml)
-[![MarkdownLint](https://github.com/Greigh/BlockingMachine/actions/workflows/mdlint.yml/badge.svg)](https://github.com/Greigh/BlockingMachine/actions/workflows/mdlint.yml)
-[![AgLint](https://github.com/Greigh/BlockingMachine/actions/workflows/aglint.yml/badge.svg)](https://github.com/Greigh/BlockingMachine/actions/workflows/aglint.yml)
-[![GitHub Pages](https://github.com/Greigh/BlockingMachine/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Greigh/BlockingMachine/actions/workflows/pages/pages-build-deployment)
-[![UpdateFilters](https://github.com/Greigh/BlockingMachine/actions/workflows/website.yml/badge.svg)](https://github.com/Greigh/BlockingMachine/actions/workflows/website.yml)
+[![CI Status](https://github.com/Greigh/BlockingMachine/actions/workflows/main.yml/badge.svg)](https://github.com/Greigh/BlockingMachine/actions/workflows/main.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/Greigh/BlockingMachine)](https://github.com/Greigh/BlockingMachine/releases)
 [![COMMITS](https://img.shields.io/github/commit-activity/m/greigh/BlockingMachine)](https://github.com/greigh/BlockingMachine/graphs/commit-activity)
 [![ISSUES](https://img.shields.io/github/issues/greigh/BlockingMachine)](https://github.com/greigh/BlockingMachine/issues)
-[![CLOSEDISSUES](https://img.shields.io/github/issues-closed/greigh/BlockingMachine)](https://github.com/greigh/BlockingMachine/issues?q=is%3Aissue+is%3Aclosed)
 
-Last Updated: February 26, 2025 at 1:58 AM
+Last Updated: March 26, 2025
 
 ---
 
@@ -21,7 +16,7 @@ Last Updated: February 26, 2025 at 1:58 AM
 and distributes filter lists across multiple platforms. It bridges the gap between different ad-blocking
 tools by providing unified, regularly updated filter lists.
 
-[View Demo](https://greigh.github.io/BlockingMachine) • [Quick Start](#quick-start) • [Documentation](https://greigh.github.io/BlockingMachine/docs)
+[View Demo](https://blockingmachine.xyz/demo/) • [Quick Start](#quick-start) • [Documentation](https://greigh.github.io/BlockingMachine/docs)
 
 ---
 
@@ -66,6 +61,8 @@ tools by providing unified, regularly updated filter lists.
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
     - [Running the Script](#running-the-script)
+    - [Available Scripts](#available-scripts)
+    - [CI/CD Workflow](#cicd-workflow)
   - [Project Structure](#project-structure)
   - [⚡ Quick Start](#-quick-start)
   - [🤝 Contributing](#-contributing)
@@ -89,8 +86,8 @@ tools by providing unified, regularly updated filter lists.
     - [Try it Now](#try-it-now)
     - [Quick Test](#quick-test)
     - [Demo Statistics](#demo-statistics)
-    - [Live Status](#live-status)
   - [Show Your Support](#show-your-support)
+    - [Live Status](#live-status)
 
 ## Available Filters
 
@@ -280,72 +277,111 @@ Chrome switched from Manifest V2 (MV2) to Manifest V3 (MV3), which affects how b
 
 ### Installation
 
-1. Clone the repository:
+```sh
+# Clone the repository
+git clone https://github.com/greigh/BlockingMachine.git
 
-    ```sh
-    git clone https://github.com/greigh/BlockingMachine.git
-    cd BlockingMachine
-    ```
+# Navigate to project directory
+cd BlockingMachine
 
-2. Install the dependencies:
-
-    ```sh
-    npm install
-    ```
+# Install dependencies
+npm install
+```
 
 ### Running the Script
 
 To run the Blocking Machine script, use the following command:
 
 ```sh
-npm start build
+# Update filter lists
+npm run update-filters
+
+# Create new release
+npm run update-release
+
+# Debug mode
+npm run debug
+
+# Verbose logging
+npm run verbose
 ```
+
+### Available Scripts
+
+| Category | Script | Description |
+|----------|--------|-------------|
+| **Main** | `npm run update-filters` | Updates all filter lists |
+| | `npm run update-filters:ci` | Updates filters in CI environment |
+| **Linting** | `npm run lint` | Runs all linters |
+| | `npm run eslint` | Runs ESLint code checks |
+| | `npm run mdlint` | Validates markdown files |
+| | `npm run aglint` | Validates filter syntax |
+| **Testing** | `npm test` | Runs all test suites |
+| | `npm run test:coverage` | Generates coverage report |
+| | `npm run test:watch` | Runs tests in watch mode |
+| **Debug** | `npm run debug` | Enables debug logging |
+| | `npm run verbose` | Enables verbose logging |
+
+### CI/CD Workflow
+
+BlockingMachine uses a streamlined GitHub Actions workflow that:
+
+1. **Lints & Tests**
+   - ESLint for code quality
+   - AGLint for filter syntax
+   - MarkdownLint for documentation
+   - Jest for unit tests
+
+2. **Updates & Deploys**
+   - Downloads latest filter rules
+   - Processes and optimizes rules
+   - Updates GitHub Pages
+   - Creates new release
+
+3. **Notifies**
+   - Posts status to Discord
+   - Updates README stats
+   - Generates changelog
+
+The workflow runs:
+- Daily at midnight UTC
+- On push to main branch
+- Manually via workflow dispatch
 
 ## Project Structure
 
 ```bash
 BlockingMachine/
 ├── .github/
-│   └── workflows/        # GitHub Actions workflows
-│       ├── eslint.yml
-│       ├── mdlint.yml
-│       ├── aglint.yml
-│       ├── website.yml
-│       └── release.yml
-├── src/                 # Source code
-│   ├── update.js
-│   └── utils/
-│       └── filters.js
-├── public/             # Public assets and generated files
-│   ├── images/
-│   │   └── BlockingMachine.png
-│   └── filters/        # Generated filter lists
-│       ├── adguard-dns.txt
-│       ├── standard.txt
-│       ├── browser.txt
-│       └── hosts.txt
-├── tests/              # Test files
-│   └── update.test.js
-├── config/             # Configuration files
+│   └── workflows/
+│       └── main.yml      # Combined CI/CD workflow
+├── config/              # Configuration files
 │   ├── eslint.config.mjs
-│   └── .markdownlint.json
+│   ├── jest.config.js
+│   └── jest.setup.js
 ├── docs/               # Documentation
-├── CODE_OF_CONDUCT.md  # Project guidelines
-├── CONTRIBUTING.md     # Contribution guidelines
-├── LICENSE            # Project license
-└── README.md         # Project documentation
+│   ├── CODE_OF_CONDUCT.md  # Project guidelines
+│   ├── CONTRIBUTING.md     # Contribution guidelines
+│   └── LICENSE            # Project license
+├── src/                # Source code
+│   ├── core/           # Core utilities
+│   │   ├── convert.js       # Rule conversion logic
+│   │   ├── fetch.js    # Network requests
+│   │   ├── filterUpdate.js  # Main filter update process
+│   │   └── processors.js    # Rule processing and categorization
+│   └── utils/          # Utility functions
+│       ├── io/            # Input/Output operations
+│       └── stats/         # Statistics tracking
 ```
 
 ## ⚡ Quick Start
 
 1. **Choose Your Platform**:
-
    - [Browser Extension](#browser-filtering)
    - [Network-Wide](#whole-home-filtering)
    - [Mobile Device](#mobile-filtering)
 
 2. **Copy the Filter URL**:
-
    | For | Use This |
    |-----|-----------|
    | AdGuard Home | `https://raw.githubusercontent.com/Greigh/BlockingMachine/main/public/filters/adguard-dns.txt` |
@@ -357,19 +393,16 @@ BlockingMachine/
 ## 🤝 Contributing
 
 We welcome contributions! Here's how you can help:
-
 - [Report bugs](https://github.com/Greigh/BlockingMachine/issues)
 - [Suggest enhancements](https://github.com/Greigh/BlockingMachine/issues)
 - [Submit pull requests](https://github.com/Greigh/BlockingMachine/pulls)
 
-Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting changes.
+Please read our [Contributing Guidelines](./docs/CONTRIBUTING.md) before submitting changes.
 
 ---
 
 <div align="center">
-
 Made with ❤️ by [Daniel Hipskind](https://danielhipskind.com/) aka Greigh
-
 </div>
 
 ## Features
@@ -379,21 +412,18 @@ Made with ❤️ by [Daniel Hipskind](https://danielhipskind.com/) aka Greigh
   - Browser extensions (uBlock Origin, AdGuard)
   - System-level (hosts file)
   - Mobile devices (iOS, Android)
-
 - **Smart Rule Processing**
   - Automatic rule deduplication
   - Syntax validation
   - Format conversion
   - Performance optimization
-
 - **Regular Updates**
   - Daily filter updates
   - Automatic GitHub Actions workflow
   - Real-time status monitoring
   - Discord notifications
-
 - **Easy Integration**
-  - Simple subscription URLs
+  - Simple subscription URL
   - One-click installation
   - Cross-platform compatibility
   - No configuration needed
@@ -403,10 +433,10 @@ Made with ❤️ by [Daniel Hipskind](https://danielhipskind.com/) aka Greigh
 ### Browsers
 
 - Firefox (Recommended) ✅
-- Safari ✅
 - Brave ✅
 - Chrome (Limited MV3 Support) ⚠️
 - Edge (Limited MV3 Support) ⚠️
+- Safari ✅
 
 ### Mobile
 
@@ -567,19 +597,13 @@ https://raw.githubusercontent.com/Greigh/BlockingMachine/main/public/filters/adg
 | Metric | Count |
 |--------|-------|
 | Domains Blocked | 50M+ |
-| False Positives | <0.001% |
 | Update Frequency | Every 24h |
 | Format Support | 4 Types |
-
-### Live Status
-
-[![Update Status](https://img.shields.io/github/actions/workflow/status/Greigh/BlockingMachine/updatefilters.yml?label=Filter%20Updates)](https://github.com/Greigh/BlockingMachine/actions)
-[![Last Update](https://img.shields.io/badge/dynamic/json?color=success&label=Last%20Update&query=$.lastUpdate&url=https://raw.githubusercontent.com/Greigh/BlockingMachine/main/public/stats.json)](https://greigh.github.io/BlockingMachine)
-
----
 
 ## Show Your Support
 
 Star the repo if you find it useful! ⭐
 
----
+### Live Status
+
+[![Update Status](https://img.shields.io/github/actions/workflow/status/Greigh/BlockingMachine/updatefilters.yml?label=Filter%20Updates)](https://github.com/Greigh/BlockingMachine/actions)

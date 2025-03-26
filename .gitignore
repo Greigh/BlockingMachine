@@ -16,7 +16,10 @@ env
 *.log-*
 *.log/*
 vscode
+logs
+
 
 .tmp 
 desktop.ini
 .htaccess
+coverage

@@ -1,37 +1,54 @@
+/**
+ * BlockingMachine Frontend Script
+ * 
+ * Handles all client-side functionality including:
+ * - Theme management (dark/light mode)
+ * - Localization
+ * - Content updates
+ * - Dropdown interactions
+ * - Demo button visibility
+ * 
+ * @module script
+ */
+
 'use strict';
 
-// Add this at the top of your script.js
+/**
+ * Initializes the application when DOM is fully loaded
+ * Handles demo button visibility and theme initialization
+ * 
+ * @listens DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', function () {
-    // Handle demo button visibility
     const demoButton = document.getElementById('demoButton');
-    const isProduction = window.location.hostname === 'greigh.github.io' || window.location.hostname === '127.0.0.1';
+    const isProduction = window.location.hostname === 'greigh.github.io' ||
+        window.location.hostname === '127.0.0.1';
 
     if (demoButton) {
         if (isProduction) {
             demoButton.style.display = 'block';
-            demoButton.href = '/demo';
+            demoButton.href = '/BlockingMachine/demo'; // Fix demo path
         } else {
-            // For local development
             demoButton.style.display = 'none';
         }
     }
 
-    // Initialize theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-
-    // Theme toggle handler
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-    }
+    // Use ThemeManager exclusively
+    ThemeManager.init();
 });
 
-// Global configuration
+/**
+ * @typedef {Object} AppConfig
+ * @property {string} PAGE_TYPE - Type of page being displayed
+ * @property {string} APP_NAME - Application name
+ * @property {string} ACTIVE_CLASS - CSS class for active elements
+ * @property {string} DEFAULT_LOCALE - Fallback locale
+ * @property {Object} THEME - Theme configuration
+ * @property {string} THEME.LIGHT - Light theme identifier
+ * @property {string} THEME.DARK - Dark theme identifier
+ */
+
+/** @type {AppConfig} */
 const CONFIG = {
     PAGE_TYPE: 'protected_rule',
     APP_NAME: 'BlockingMachine',
@@ -43,7 +60,14 @@ const CONFIG = {
     }
 };
 
-// Localization strings
+/**
+ * Localization strings for all supported languages
+ * Currently supports English (en) with placeholders for:
+ * - %reports_url% - GitHub issues URL
+ * - %host% - Blocked domain name
+ * 
+ * @constant {Object.<string, Object.<string, string>>}
+ */
 const LOCALES = {
     en: {
         metaTitle: CONFIG.APP_NAME,
@@ -59,7 +83,17 @@ const LOCALES = {
     }
 };
 
-// Initialize app
+/**
+ * Main application initialization
+ * Self-executing function to avoid global scope pollution
+ * 
+ * Handles:
+ * - URL parameter parsing
+ * - Content localization
+ * - Dropdown functionality
+ * - Theme management
+ * - Back button behavior
+ */
 (() => {
     const pageData = {
         // Get the blocked domain from the referrer or URL parameters
@@ -71,19 +105,37 @@ const LOCALES = {
 
     // Content management
     const updateContent = () => {
-        const locale = navigator.language?.toLowerCase().split('-')[0];
-        const strings = LOCALES[locale] || LOCALES[CONFIG.DEFAULT_LOCALE];
+        try {
+            const locale = navigator.language?.toLowerCase().split('-')[0];
+            const strings = LOCALES[locale] || LOCALES[CONFIG.DEFAULT_LOCALE];
 
-        document.querySelectorAll('[data-id]').forEach(element => {
-            const key = element.dataset.id;
-            if (!key) return;
+            if (!strings) {
+                console.error(`No localization found for ${locale}`);
+                return;
+            }
 
-            let text = strings[key] || key;
-            Object.entries(pageData).forEach(([key, value]) => {
-                text = text.replace(new RegExp(`%${key}%`, 'g'), value);
+            document.querySelectorAll('[data-id]').forEach(element => {
+                try {
+                    const key = element.dataset.id;
+                    if (!key || !strings[key]) {
+                        console.warn(`Missing translation key: ${key}`);
+                        return;
+                    }
+
+                    let text = strings[key];
+                    Object.entries(pageData).forEach(([key, value]) => {
+                        text = text.replace(new RegExp(`%${key}%`, 'g'), value);
+                    });
+                    element.innerHTML = text;
+                } catch (elementError) {
+                    console.error(`Error updating element ${element.dataset.id}:`, elementError);
+                }
             });
-            element.innerHTML = text;
-        });
+        } catch (error) {
+            console.error('Failed to update content:', error);
+            // Show fallback content
+            document.querySelector('[data-id="protectedTitle"]').textContent = 'Access Blocked';
+        }
     };
 
     // Dropdown functionality
@@ -118,61 +170,60 @@ const LOCALES = {
         });
     };
 
-    // Theme handling
-    const initTheme = () => {
-        const themeToggle = document.getElementById('themeToggle');
-        if (!themeToggle) return;
-
-        const getSystemTheme = () =>
-            window.matchMedia('(prefers-color-scheme: dark)').matches ? CONFIG.THEME.DARK : CONFIG.THEME.LIGHT;
-
-        const setTheme = (theme = getSystemTheme()) => {
-            document.documentElement.setAttribute('data-theme', theme);
-            document.body.className = theme === CONFIG.THEME.DARK ? 'dark-theme' : '';
-            if (theme) {
-                localStorage.setItem('theme', theme);
-            } else {
-                localStorage.removeItem('theme');
-            }
-            themeToggle.textContent = theme === CONFIG.THEME.DARK ? '☀️' : '🌙';
-        };
-
-        // Initialize theme from storage or system preference
-        setTheme(localStorage.getItem('theme'));
-
-        // System theme change handler
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            if (!localStorage.getItem('theme')) setTheme();
-        });
-    };
-
     // Initialize everything
     updateContent();
     setupDropdowns();
-    initTheme();
 
     // Back button functionality
     document.querySelector('[data-back-btn]')?.addEventListener('click', () => window.history.back());
 })();
 
-const setTheme = (theme) => {
-    // Set theme on root element
-    document.documentElement.setAttribute('data-theme', theme);
+/**
+ * Theme Management Module
+ * @namespace
+ */
+const ThemeManager = {
+    /**
+     * Gets system color scheme preference
+     * @returns {string} 'dark' or 'light'
+     */
+    getSystemTheme: () =>
+        window.matchMedia('(prefers-color-scheme: dark)').matches ?
+            CONFIG.THEME.DARK : CONFIG.THEME.LIGHT,
 
-    // Store theme preference
-    localStorage.setItem('theme', theme);
+    /**
+     * Sets and persists theme
+     * @param {string} theme - Theme to apply ('dark' or 'light')
+     */
+    setTheme: (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        document.body.className = `${theme}-theme`;
+        localStorage.setItem('theme', theme);
 
-    // Update body class
-    document.body.className = theme === 'dark' ? 'dark-theme' : 'light-theme';
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.textContent = theme === CONFIG.THEME.DARK ? '☀️' : '🌙';
+        }
 
-    // Update theme toggle button
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        // Force repaint to fix transitions
+        document.body.style.display = 'none';
+        document.body.offsetHeight;
+        document.body.style.display = '';
+    },
+
+    /**
+     * Initializes theme system
+     */
+    init: () => {
+        const savedTheme = localStorage.getItem('theme') || ThemeManager.getSystemTheme();
+        ThemeManager.setTheme(savedTheme);
+
+        // Watch for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    ThemeManager.setTheme(e.matches ? CONFIG.THEME.DARK : CONFIG.THEME.LIGHT);
+                }
+            });
     }
-
-    // Force repaint to fix any transition issues
-    document.body.style.display = 'none';
-    document.body.offsetHeight; // trigger reflow
-    document.body.style.display = '';
 };

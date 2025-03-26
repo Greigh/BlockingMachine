@@ -15,5 +15,6 @@
         "**/*.scss",
         "**/*.sass",
         "**/*.css"
-    ]
+    ],
+    "codewindProfiling.showProfiling": false
 }
