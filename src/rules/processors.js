@@ -6,6 +6,71 @@ import {
 } from '../utils/filters/filterUpdate.js';
 import { isValidUrl } from '../utils/filters/validator.js';
 
+export const RuleType = {
+  BROWSER: 'browser',
+  HOSTS: 'hosts',
+  ADGUARD: 'adguard',
+  DNS: 'dns',
+};
+
+/**
+ * Classify a rule into its type
+ * @param {string} rule - Rule to classify
+ * @returns {string} Rule type
+ */
+function classifyRule(rule) {
+  if (!rule || typeof rule !== 'string') return null;
+
+  if (rule.startsWith('||') || rule.includes('^')) {
+    return RuleType.ADGUARD;
+  } else if (rule.startsWith('0.0.0.0')) {
+    return RuleType.HOSTS;
+  } else if (rule.includes('##')) {
+    return RuleType.BROWSER;
+  } else if (rule.includes('$dnsrewrite')) {
+    return RuleType.DNS;
+  }
+
+  return null;
+}
+
+/**
+ * Convert rule to browser format
+ * @param {string} rule - Rule to convert
+ * @returns {string} Converted rule
+ */
+function convertToBrowserRule(rule) {
+  // Browser-specific conversion logic
+  return rule.replace(/^!/, '').trim();
+}
+
+/**
+ * Convert rule to hosts format
+ * @param {string} rule - Rule to convert
+ * @returns {string} Converted rule
+ */
+function convertToHostsRule(rule) {
+  // Hosts file format conversion
+  return `0.0.0.0 ${rule.replace(/^\|\|/, '').replace(/\^$/, '')}`;
+}
+
+/**
+ * Convert rule to AdGuard format
+ * @param {string} rule - Rule to convert
+ * @returns {string} Converted rule
+ */
+function convertToAdGuardRule(rule) {
+  // AdGuard specific conversion
+  return rule.startsWith('||') ? rule : `||${rule}`;
+}
+
+export {
+  classifyRule,
+  convertToBrowserRule,
+  convertToHostsRule,
+  convertToAdGuardRule,
+};
+
 export class FilterProcessor {
   constructor(debug = false, verbose = false) {
     this.debug = debug;

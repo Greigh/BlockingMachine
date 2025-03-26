@@ -10,7 +10,7 @@
     "update-filters:ci": "node src/index.js --ci --no-progress",
     "update-release": "node src/utils/github/release.js",
     "lint": "npm run aglint && npm run eslint && npm run mdlint",
-    "aglint": "aglint -c public/filters/.aglintrc.yaml public/filters/*.txt",
+    "aglint": "aglint -c filters/output/*.txt",
     "eslint": "eslint --config config/eslint.config.mjs \"src/**/*.js\"",
     "eslint:fix": "eslint --config config/eslint.config.mjs \"src/**/*.js\" --fix",
     "mdlint": "markdownlint -c config/.markdownlint.json \"./README.md\" \"./docs/**/*.md\"",

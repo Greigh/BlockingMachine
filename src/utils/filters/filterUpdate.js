@@ -1,6 +1,5 @@
 // Import required modules
 import { promises as fs } from 'fs';
-import path from 'path';
 import { logMessage, LogLevel } from '../core/logger.js';
 import { fetchContent } from '../core/fetch.js';
 import { writeFilterSets } from '../io/writer.js';

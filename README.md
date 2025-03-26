@@ -324,29 +324,28 @@ npm run verbose
 
 ### CI/CD Workflow
 
-BlockingMachine uses a streamlined GitHub Actions workflow that:
+BlockingMachine uses a streamlined GitHub Actions workflow that runs:
+
+- Daily at midnight UTC
+- On push to main branch
+- Manually via workflow dispatch
+
+The workflow performs these tasks:
 
 1. **Lints & Tests**
    - ESLint for code quality
    - AGLint for filter syntax
    - MarkdownLint for documentation
-   - Jest for unit tests
 
 2. **Updates & Deploys**
    - Downloads latest filter rules
    - Processes and optimizes rules
    - Updates GitHub Pages
-   - Creates new release
 
 3. **Notifies**
    - Posts status to Discord
    - Updates README stats
    - Generates changelog
-
-The workflow runs:
-- Daily at midnight UTC
-- On push to main branch
-- Manually via workflow dispatch
 
 ## Project Structure
 
@@ -392,9 +391,10 @@ BlockingMachine/
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+We welcome contributions! Please follow these steps:
+
 - [Report bugs](https://github.com/Greigh/BlockingMachine/issues)
-- [Suggest enhancements](https://github.com/Greigh/BlockingMachine/issues)
+- [Request features](https://github.com/Greigh/BlockingMachine/issues)
 - [Submit pull requests](https://github.com/Greigh/BlockingMachine/pulls)
 
 Please read our [Contributing Guidelines](./docs/CONTRIBUTING.md) before submitting changes.

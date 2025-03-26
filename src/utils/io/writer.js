@@ -16,6 +16,13 @@ import { logMessage, LogLevel } from '../core/logger.js';
 import { generateMetadata } from '../filters/metadata.js';
 import { dirname, join } from 'path';
 import { paths } from '../core/paths.js';
+import {
+  classifyRule,
+  convertToBrowserRule,
+  convertToHostsRule,
+  convertToAdGuardRule,
+  RuleType,
+} from '../../rules/processors.js';
 
 /**
  * Write filter rules to a file with optional metadata
@@ -212,24 +219,26 @@ async function processPersonalRules(sets, personalRulesPath, counter) {
 }
 
 /**
- * Gets the output file path for a given rule type
- * @param {string} type - Rule type (dns, hosts, browser, adguard)
- * @returns {string} Output file path
+ * Check for duplicate rules across sets
+ * @param {string} rule - Rule to check
+ * @param {Object} sets - Sets to check against
+ * @param {Object} counter - Stats counter
+ * @returns {Promise<boolean>} True if duplicate found
  */
-function getFilePathForType(type) {
-  const pathMap = {
-    dns: paths.output.dnsRewrite, // Fixed path reference
-    hosts: paths.output.hosts, // Fixed path reference
-    browser: paths.output.browser, // Fixed path reference
-    adguard: paths.output.adguard, // Fixed path reference
-  };
+async function checkForDuplicates(rule, sets, counter) {
+  const normalizedRule = rule.toLowerCase().trim();
 
-  const filePath = pathMap[type];
-  if (!filePath) {
-    throw new Error(`Invalid rule type: ${type}`);
+  for (const [type, set] of Object.entries(sets)) {
+    if (set.has(normalizedRule)) {
+      await logMessage(
+        `Duplicate rule found in ${type}: ${rule}`,
+        LogLevel.DEBUG
+      );
+      counter.stats.rules.duplicates++;
+      return true;
+    }
   }
-
-  return filePath;
+  return false;
 }
 
 /**
@@ -377,4 +386,5 @@ export {
   writeStats,
   getExamplesForType,
   backupPersonalRules,
+  checkForDuplicates, // Add to exports if needed elsewhere
 };

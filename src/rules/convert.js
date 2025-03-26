@@ -2,7 +2,31 @@ import { logMessage, LogLevel } from '../utils/core/logger.js';
 import { isValidDomain } from '../utils/filters/validator.js';
 
 /**
- * Initial categorization of rules into sets
+ * Rule category types for initial separation
+ * @typedef {Object} SeparatedRules
+ * @property {string[]} blocking - Network blocking rules (|| and hosts format)
+ * @property {string[]} unblocking - Exception rules (@@|| format)
+ * @property {string[]} browser - Cosmetic rules (## format)
+ */
+
+/**
+ * Final set of processed rules
+ * @typedef {Object} FinalRuleSets
+ * @property {Set<string>} browserRulesSet - Browser cosmetic rules
+ * @property {Set<string>} adGuardSet - AdGuard DNS rules
+ * @property {Set<string>} hostsSet - Hosts file format rules
+ * @property {Set<string>} dnsRewriteSet - DNS rewrite rules
+ */
+
+/**
+ * Separates rules into their initial categories based on syntax
+ * @param {string[]} rules - Array of raw filter rules
+ * @returns {SeparatedRules} Object containing categorized rules
+ *
+ * @example
+ * const rules = ['||example.com^', '##.ad-banner', '@@||trusted.com^'];
+ * const separated = separateRules(rules);
+ * // Returns: { blocking: ['||example.com^'], unblocking: ['@@||trusted.com^'], browser: ['##.ad-banner'] }
  */
 function separateRules(rules) {
   const separated = {
@@ -50,7 +74,14 @@ function separateRules(rules) {
 }
 
 /**
- * Extract clean domains from rules
+ * Extracts valid domains from filtering rules
+ * @param {string[]} rules - Array of filter rules
+ * @returns {Set<string>} Set of unique, valid domains
+ *
+ * @example
+ * const rules = ['||ads.example.com^', '0.0.0.0 tracker.com'];
+ * const domains = extractDomains(rules);
+ * // Returns: Set { 'ads.example.com', 'tracker.com' }
  */
 function extractDomains(rules) {
   const domains = new Set();
@@ -74,7 +105,20 @@ function extractDomains(rules) {
 }
 
 /**
- * Convert all rules to final formats
+ * Converts raw rules into standardized blocking formats
+ * @param {string[]} rules - Array of raw filter rules
+ * @returns {Promise<FinalRuleSets>} Object containing processed rule sets
+ * @throws {Error} If rule processing fails
+ *
+ * @example
+ * const rules = ['||ads.com^', '##.ad', '@@||safe.com^'];
+ * const sets = await convertRules(rules);
+ * // Returns: {
+ * //   browserRulesSet: Set { '##.ad' },
+ * //   adGuardSet: Set { '||ads.com^', '@@||safe.com^' },
+ * //   hostsSet: Set { '0.0.0.0 ads.com' },
+ * //   dnsRewriteSet: Set { '||ads.com^$dnsrewrite=blockingmachine.xyz', '@@||safe.com^' }
+ * // }
  */
 export async function convertRules(rules) {
   // First separate into initial categories
@@ -128,10 +172,19 @@ export async function convertRules(rules) {
   return finalSets;
 }
 
+/**
+ * Available rule types for classification
+ * @enum {string}
+ */
 export const RULE_TYPES = {
+  /** Exception rules starting with @@|| */
   ALLOWLIST: 'ALLOWLIST',
+  /** Rules in hosts file format */
   HOSTS: 'HOSTS',
+  /** AdGuard DNS format rules */
   ADGUARD: 'ADGUARD',
+  /** Browser cosmetic rules */
   BROWSER: 'BROWSER',
+  /** DNS rewrite rules */
   DNS_REWRITE: 'DNS_REWRITE',
 };

@@ -33,3 +33,5 @@ rules:
     - off
   no-invalid-css-syntax:
     - off
+  invalid-domain-list:
+    - off

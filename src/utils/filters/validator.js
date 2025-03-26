@@ -1,5 +1,4 @@
 import { logMessage, LogLevel } from '../core/logger.js';
-import { RuleType } from './classifier.js';
 
 // Trusted domains for filter sources
 const TRUSTED_DOMAINS = new Set([
@@ -303,7 +302,7 @@ function isValidBrowserRule(rule) {
  * @param {boolean} [verbose=false] - Enable verbose logging
  * @returns {Promise<boolean>} Whether URL is valid
  */
-async function isValidUrl(url, verbose = false) {
+async function isValidUrlForFilterList(url, verbose = false) {
   try {
     // Basic validation
     if (!url || typeof url !== 'string') {
@@ -390,9 +389,37 @@ function isSpecialRule(rule) {
   );
 }
 
+/**
+ * Validates a URL string
+ * @param {string} url - URL to validate
+ * @returns {boolean} - Whether URL is valid
+ */
+export function isValidUrl(url) {
+  try {
+    if (!url || typeof url !== 'string') {
+      return false;
+    }
+
+    const urlObj = new URL(url);
+    const isValidProtocol =
+      urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
+    const hasValidDomain = urlObj.hostname.includes('.');
+
+    if (!isValidProtocol || !hasValidDomain) {
+      logMessage(`Invalid URL format: ${url}`, LogLevel.DEBUG);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    logMessage(`URL validation error: ${error.message}`, LogLevel.DEBUG);
+    return false;
+  }
+}
+
 // Export all validation functions
 export {
-  isValidUrl,
+  isValidUrlForFilterList,
   isValidDnsRule,
   isValidDnsRewriteRule,
   isValidHostsRule,
