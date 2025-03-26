@@ -1,9 +1,15 @@
 {
-  "sourcesProcessed": 10,
-  "sourcesFailed": 90,
-  "totalRules": 264146,
-  "adguardRules": 115882,
-  "hostsRules": 115109,
-  "dnsRules": 115882,
-  "browserRules": 48329
+  "timestamp": "2025-03-26T23:09:55.969Z",
+  "rules": {
+    "total": 42103,
+    "browser": 42103,
+    "dns": 0,
+    "hosts": 0,
+    "duplicates": 0,
+    "invalid": 15945
+  },
+  "sources": {
+    "processed": 10,
+    "failed": 0
+  }
 }

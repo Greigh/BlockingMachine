@@ -17,25 +17,23 @@ import { promises as fs } from 'fs';
 import { logMessage, LogLevel } from './utils/core/logger.js';
 import { FilterProcessor } from './rules/processors.js';
 import { writeFilterSets, writeStats } from './utils/io/writer.js';
-import { paths, initializePaths } from './utils/core/paths.js';
+import { paths } from './utils/core/paths.js';
 
 async function validateAndInitialize() {
   try {
-    // Validate input files
-    for (const [name, path] of Object.entries(paths.input)) {
-      try {
-        await fs.access(path, fs.constants.R_OK);
-        await logMessage(`Validated input file: ${name}`, LogLevel.DEBUG);
-      } catch (error) {
-        if (error.code === 'ENOENT') {
-          throw new Error(`Required input file missing: ${path}`);
-        }
-        throw error;
-      }
-    }
+    await Promise.all([
+      fs.mkdir(paths.input.dir, { recursive: true }),
+      fs.mkdir(paths.output.dir, { recursive: true }),
+      fs.mkdir(paths.logs, { recursive: true }),
+    ]);
 
-    // Initialize directories
-    await initializePaths();
+    // Validate input files exist but don't create
+    await Promise.all([
+      fs.access(paths.input.personalList),
+      fs.access(paths.input.thirdPartyFilters),
+    ]);
+
+    await logMessage('Initialization complete', LogLevel.DEBUG);
   } catch (error) {
     await logMessage(`Initialization failed: ${error.message}`, LogLevel.ERROR);
     throw error;

@@ -302,13 +302,36 @@ async function writeFilterSets(sets) {
  * Writes stats to JSON file
  * @param {Object} stats - Statistics object to write
  */
-async function writeStats(stats) {
+export async function writeStats(stats) {
   try {
-    const statsJson = JSON.stringify(stats, null, 2);
-    await fs.writeFile(paths.output.stats, statsJson);
-    await logMessage('Updated stats file', LogLevel.DEBUG);
+    const formattedStats = {
+      timestamp: stats.timestamp || new Date().toISOString(),
+      rules: {
+        total: stats.rules.total || 0,
+        browser: stats.rules.browser || 0,
+        dns: stats.rules.dns || 0,
+        hosts: stats.rules.hosts || 0,
+        duplicates: stats.rules.duplicates || 0,
+        invalid: stats.rules.invalid || 0,
+      },
+      sources: {
+        processed: stats.sources.processed || 0,
+        failed: stats.sources.failed || 0,
+      },
+    };
+
+    await fs.writeFile(
+      paths.output.stats,
+      JSON.stringify(formattedStats, null, 2)
+    );
+
+    await logMessage(
+      `Updated stats file with ${formattedStats.rules.total} total rules`,
+      LogLevel.INFO
+    );
   } catch (error) {
     await logMessage(`Failed to write stats: ${error.message}`, LogLevel.ERROR);
+    throw error;
   }
 }
 
@@ -383,7 +406,6 @@ export {
   mergeUserRules,
   processPersonalRules,
   writeFilterSets,
-  writeStats,
   getExamplesForType,
   backupPersonalRules,
   checkForDuplicates, // Add to exports if needed elsewhere

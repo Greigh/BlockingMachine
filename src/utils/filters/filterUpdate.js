@@ -270,3 +270,16 @@ export {
   ensureFiltersFileExists,
   updateAllLists,
 };
+
+export async function processFilterList(url) {
+  try {
+    const response = await fetchFilterList(url);
+    return response?.data || null;
+  } catch (error) {
+    await logMessage(
+      `Failed to fetch ${url}: ${error.message}`,
+      LogLevel.ERROR
+    );
+    return null;
+  }
+}

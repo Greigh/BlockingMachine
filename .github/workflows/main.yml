@@ -41,12 +41,13 @@ jobs:
           npm run aglint
 
   update:
-    needs: lint
     runs-on: ubuntu-latest
     outputs:
       timestamp: ${{ steps.update-info.outputs.timestamp }}
       totalRules: ${{ steps.update-info.outputs.totalRules }}
-
+      browserRules: ${{ steps.update-info.outputs.browserRules }}
+      dnsRules: ${{ steps.update-info.outputs.dnsRules }}
+      hostsRules: ${{ steps.update-info.outputs.hostsRules }}
     steps:
       - uses: actions/checkout@v4
 
@@ -73,17 +74,24 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
 
-          # Check if stats file exists and has content
-          if [ -f stats.json ] && [ -s stats.json ]; then
-            TOTAL_RULES=$(jq '.totalRules' stats.json)
+          # Ensure stats.json exists and read it
+          if [ -f filters/output/stats.json ]; then
+            STATS=$(cat filters/output/stats.json)
+            TOTAL_RULES=$(echo $STATS | jq -r '.rules.total')
+            BROWSER_RULES=$(echo $STATS | jq -r '.rules.browser')
+            DNS_RULES=$(echo $STATS | jq -r '.rules.dns')
+            HOSTS_RULES=$(echo $STATS | jq -r '.rules.hosts')
           else
-            TOTAL_RULES="0"
-            echo "Warning: stats.json not found or empty, using default value"
+            echo "Warning: stats.json not found"
+            exit 1
           fi
 
-          # Output values
+          # Set outputs
           echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
-          echo "totalRules=${TOTAL_RULES:-0}" >> $GITHUB_OUTPUT
+          echo "totalRules=$TOTAL_RULES" >> $GITHUB_OUTPUT
+          echo "browserRules=$BROWSER_RULES" >> $GITHUB_OUTPUT
+          echo "dnsRules=$DNS_RULES" >> $GITHUB_OUTPUT
+          echo "hostsRules=$HOSTS_RULES" >> $GITHUB_OUTPUT
 
       - name: Upload filter files
         uses: actions/upload-artifact@v4
@@ -128,8 +136,23 @@ jobs:
           tag_name: v${{ github.run_number }}
           name: Release v${{ github.run_number }}
           body: |
-            Total Rules: ${{ needs.update.outputs.totalRules }}
-            Updated on: ${{ needs.update.outputs.timestamp }}
+            # BlockingMachine Update Summary
+
+            ## Statistics
+            - Total Rules: ${{ needs.update.outputs.totalRules }}
+            - Browser Rules: ${{ needs.update.outputs.browserRules }}
+            - DNS Rules: ${{ needs.update.outputs.dnsRules }}
+            - Hosts Rules: ${{ needs.update.outputs.hostsRules }}
+
+            ## Update Info
+            - Updated on: ${{ needs.update.outputs.timestamp }}
+            - Release Version: v${{ github.run_number }}
+
+            ## Files
+            - adguard.txt: DNS blocking rules
+            - adguard_dnsrewrite.txt: DNS rewrite rules
+            - browserRules.txt: Browser extension rules
+            - hosts.txt: System hosts format
           files: |
             filters/output/adguard.txt
             filters/output/adguard_dnsrewrite.txt

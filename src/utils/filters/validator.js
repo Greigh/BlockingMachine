@@ -409,6 +409,33 @@ export function isValidUrl(url) {
   }
 }
 
+export function isValidRule(rule) {
+  // Basic format checks
+  if (!rule || typeof rule !== 'string') return false;
+
+  // Allow AdGuard/uBlock syntax
+  if (rule.startsWith('||') || rule.startsWith('@@') || rule.includes('#')) {
+    return true;
+  }
+
+  // Allow hosts format
+  if (/^0\.0\.0\.0\s+[a-z0-9.-]+$/i.test(rule)) {
+    return true;
+  }
+
+  // Allow domain pattern
+  if (/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(rule)) {
+    return true;
+  }
+
+  // Allow element hiding rules
+  if (/#[@#]|##/.test(rule)) {
+    return true;
+  }
+
+  return false;
+}
+
 // Export all validation functions
 export {
   isValidUrlForFilterList,

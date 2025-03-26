@@ -3,58 +3,43 @@
  * @module paths
  */
 
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { promises as fs } from 'fs';
 import { logMessage, LogLevel } from './logger.js';
+import { join } from 'path';
 
-// Get base directory
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.resolve(__dirname, '../../..');
+// Base directories
+const baseDir = process.cwd();
+const filtersDir = join(baseDir, 'filters');
 
 // Define paths object - single source of truth
 export const paths = {
-  logs: path.join(rootDir, 'logs'),
-  filters: {
-    input: path.join(rootDir, 'filters', 'input'),
-    output: path.join(rootDir, 'filters', 'output'),
-  },
   input: {
-    personal: path.join(rootDir, 'filters', 'input', 'personal_list.txt'),
-    thirdParty: path.join(rootDir, 'filters', 'input', 'thirdPartyFilters.txt'),
+    dir: join(filtersDir, 'input'),
+    personalList: join(filtersDir, 'input', 'personal_list.txt'),
+    thirdPartyFilters: join(filtersDir, 'input', 'thirdPartyFilters.txt'),
   },
   output: {
-    adguard: path.join(rootDir, 'filters', 'output', 'adguard.txt'),
-    dnsRewrite: path.join(
-      rootDir,
-      'filters',
-      'output',
-      'adguard_dnsrewrite.txt'
-    ),
-    browser: path.join(rootDir, 'filters', 'output', 'browserRules.txt'),
-    hosts: path.join(rootDir, 'filters', 'output', 'hosts.txt'),
-    stats: path.join(rootDir, 'filters', 'output', 'stats.json'),
+    dir: join(filtersDir, 'output'),
+    adguard: join(filtersDir, 'output', 'adguard.txt'),
+    dnsRewrite: join(filtersDir, 'output', 'adguard_dnsrewrite.txt'),
+    browser: join(filtersDir, 'output', 'browserRules.txt'),
+    hosts: join(filtersDir, 'output', 'hosts.txt'),
+    stats: join(filtersDir, 'output', 'stats.json'), // Define stats file in output dir
   },
-  docs: {
-    readme: path.join(rootDir, 'README.md'),
-  },
-  config: {
-    aglint: path.join(rootDir, 'config', '.aglintrc.yaml'),
-    // Add other config files here as needed
-  },
+  logs: join(baseDir, 'logs'),
   test: {
-    results: path.join(rootDir, 'tests', 'results'),
-    fixtures: path.join(rootDir, 'tests', 'fixtures'),
+    dir: join(baseDir, 'tests'),
+    results: join(baseDir, 'tests', 'results'),
+    coverage: join(baseDir, 'coverage'),
   },
-  coverage: path.join(rootDir, 'coverage'),
 };
 
 // Export individual paths
-export const inputDir = paths.filters.input;
-export const outputDir = paths.filters.output;
+export const inputDir = paths.input.dir;
+export const outputDir = paths.output.dir;
 export const logsDir = paths.logs;
-export const personalListFilePath = paths.input.personal;
-export const thirdPartyFiltersFilePath = paths.input.thirdParty;
+export const personalListFilePath = paths.input.personalList;
+export const thirdPartyFiltersFilePath = paths.input.thirdPartyFilters;
 export const adguardFilePath = paths.output.adguard;
 export const dnsRewriteFilePath = paths.output.dnsRewrite;
 export const browserRulesFilePath = paths.output.browser;
