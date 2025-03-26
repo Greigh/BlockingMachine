@@ -9,32 +9,42 @@ async function loadFilterLists() {
     try {
         const lists = ['adguard.txt'];
         const responses = await Promise.all(
-            lists.map(list =>
-                fetch(`../filters/${list}`).then(res => res.text())
-            )
+            lists.map(async list => {
+                const response = await fetch(`../filters/${list}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${list}: ${response.status}`);
+                }
+                return response.text();
+            })
         );
 
-        // Process AdGuard rules
+        // Process AdGuard rules with better error handling
         filterLists = responses
             .join('\n')
             .split('\n')
             .filter(line => {
-                // Keep only lines that start with || and not @@||
+                if (!line) return false;
+                line = line.trim();
                 return line.startsWith('||') && !line.startsWith('@@||');
             })
             .map(line => {
-                // Extract domain from AdGuard syntax
-                // Remove || from start and everything after ^ (if exists)
-                return line.replace('||', '')
-                    .split('^')[0]
-                    .toLowerCase()
-                    .trim();
+                try {
+                    return line.replace('||', '')
+                        .split('^')[0]
+                        .toLowerCase()
+                        .trim();
+                } catch (error) {
+                    console.warn('Failed to process rule:', line, error);
+                    return null;
+                }
             })
-            .filter(Boolean); // Remove empty lines
+            .filter(Boolean);
 
         updateStats();
     } catch (error) {
         console.error('Failed to load filter lists:', error);
+        document.getElementById('domains-blocked').textContent = 'Error loading filters';
+        document.getElementById('last-update').textContent = 'Failed to update';
     }
 }
 
@@ -49,15 +59,15 @@ function updateStats() {
 }
 
 // URL testing logic
-function testUrl() {
+async function testUrl() {
     const urlInput = document.getElementById('test-url');
     const resultsDiv = document.getElementById('test-results');
+    const testButton = document.querySelector('.test-input-group button');
     let url = urlInput.value.trim();
 
-    if (!url) {
-        resultsDiv.innerHTML = '<p class="error">Please enter a URL</p>';
-        return;
-    }
+    testButton.disabled = true;
+    testButton.textContent = 'Testing...';
+    resultsDiv.innerHTML = '<p class="loading">Checking URL...</p>';
 
     try {
         // Add protocol if missing
@@ -71,26 +81,20 @@ function testUrl() {
 
         // Simple exact match against processed filter list
         const isBlocked = filterLists.includes(domain);
-
-        if (isBlocked) {
-            resultsDiv.innerHTML = `
-                <div class="result result--blocked">
-                    <h3>⛔️ URL is blocked</h3>
-                    <p>This domain matches our filter lists</p>
-                </div>`;
-        } else {
-            resultsDiv.innerHTML = `
-                <div class="result result--allowed">
-                    <h3>✅ URL is allowed</h3>
-                    <p>This URL passes all filtering rules</p>
-                </div>`;
-        }
+        resultsDiv.innerHTML = `
+            <div class="result ${isBlocked ? 'result--blocked' : 'result--allowed'}" role="alert">
+                <h3>${isBlocked ? '⛔️ URL is blocked' : '✅ URL is allowed'}</h3>
+                <p>${isBlocked ? 'This domain matches our filter lists' : 'This URL passes all filtering rules'}</p>
+            </div>`;
     } catch (error) {
         resultsDiv.innerHTML = `
-            <div class="result result--error">
+            <div class="result result--error" role="alert">
                 <h3>❌ Invalid URL</h3>
                 <p>Please enter a valid domain (e.g., example.com or www.example.com)</p>
             </div>`;
+    } finally {
+        testButton.disabled = false;
+        testButton.textContent = 'Test URL';
     }
 }
 
