@@ -72,9 +72,18 @@ jobs:
         id: update-info
         run: |
           TIMESTAMP=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
-          TOTAL_RULES=$(jq '.totalRules' stats.json)
+
+          # Check if stats file exists and has content
+          if [ -f stats.json ] && [ -s stats.json ]; then
+            TOTAL_RULES=$(jq '.totalRules' stats.json)
+          else
+            TOTAL_RULES="0"
+            echo "Warning: stats.json not found or empty, using default value"
+          fi
+
+          # Output values
           echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
-          echo "totalRules=$TOTAL_RULES" >> $GITHUB_OUTPUT
+          echo "totalRules=${TOTAL_RULES:-0}" >> $GITHUB_OUTPUT
 
   website:
     needs: update

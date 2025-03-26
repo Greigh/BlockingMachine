@@ -19,9 +19,7 @@ const DOMAIN_PATTERN = /^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i;
  * @returns {string|null} Extracted domain or null
  */
 function getDomain(rule) {
-  if (!rule || typeof rule !== 'string') {
-    return null;
-  }
+  if (!rule || typeof rule !== 'string') return null;
 
   try {
     // Hosts format
@@ -31,13 +29,10 @@ function getDomain(rule) {
 
     // AdGuard format
     if (rule.startsWith('||')) {
-      const domain = rule.slice(2).split('^')[0].split('$')[0];
-      return domain || null;
+      return rule.slice(2).split(/[\^$]/)[0] || null;
     }
 
-    // Extract domain using regex
-    const match = rule.match(/(?:^|\|\|)([\w.-]+\.[a-z]{2,})(?:\^|$|\$)/i);
-    return match?.[1] || null;
+    return null;
   } catch (error) {
     logMessage(`Error extracting domain: ${error.message}`, LogLevel.DEBUG);
     return null;
@@ -59,13 +54,10 @@ function isAllowlistRule(rule) {
 /**
  * Check if a rule has important modifier
  * @param {string} rule - Rule to check
- * @returns {boolean} - Whether rule has important modifier
+ * @returns {boolean} Whether rule has important modifier
  */
 function hasImportantModifier(rule) {
-  if (!rule || typeof rule !== 'string') {
-    return false;
-  }
-  return rule.includes('$important');
+  return rule?.includes('$important') || false;
 }
 
 /**
@@ -360,19 +352,9 @@ function checkForDuplicatesInSet(rule, set) {
  */
 function isValidDomain(domain) {
   try {
-    if (!domain || typeof domain !== 'string') {
-      return false;
-    }
-
-    // Remove leading/trailing whitespace
+    if (!domain || typeof domain !== 'string') return false;
     domain = domain.trim();
-
-    // Check length constraints
-    if (domain.length < 3 || domain.length > 255) {
-      return false;
-    }
-
-    // Check pattern
+    if (domain.length < 3 || domain.length > 255) return false;
     return DOMAIN_PATTERN.test(domain);
   } catch (error) {
     logMessage(`Domain validation error: ${error.message}`, LogLevel.DEBUG);
@@ -381,12 +363,7 @@ function isValidDomain(domain) {
 }
 
 function isSpecialRule(rule) {
-  return (
-    rule.includes('$important') ||
-    rule.includes('##+js') ||
-    rule.startsWith('@@') ||
-    rule.includes('$third-party')
-  );
+  return rule?.match(/(\$important|##+js|^@@|\$third-party)/) !== null;
 }
 
 /**
