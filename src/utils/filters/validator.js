@@ -377,10 +377,22 @@ export function isValidUrl(url) {
       return false;
     }
 
+    // Handle domain-only entries
+    if (!url.includes('://')) {
+      return isValidDomain(url);
+    }
+
     const urlObj = new URL(url);
-    const isValidProtocol =
-      urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
-    const hasValidDomain = urlObj.hostname.includes('.');
+
+    // Allow more protocols for filter lists
+    const validProtocols = ['http:', 'https:', 'data:', 'chrome:', 'browser:'];
+    const isValidProtocol = validProtocols.includes(urlObj.protocol);
+
+    // Domain validation
+    const hasValidDomain =
+      urlObj.hostname.includes('.') ||
+      urlObj.hostname === 'localhost' ||
+      urlObj.protocol === 'data:';
 
     if (!isValidProtocol || !hasValidDomain) {
       logMessage(`Invalid URL format: ${url}`, LogLevel.DEBUG);
@@ -389,7 +401,10 @@ export function isValidUrl(url) {
 
     return true;
   } catch (error) {
-    logMessage(`URL validation error: ${error.message}`, LogLevel.DEBUG);
+    // Only log actual errors, not validation failures
+    if (!(error instanceof TypeError)) {
+      logMessage(`URL validation error: ${error.message}`, LogLevel.DEBUG);
+    }
     return false;
   }
 }
