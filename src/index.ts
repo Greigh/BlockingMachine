@@ -3,6 +3,7 @@ import { autoUpdater } from 'electron-updater';
 import isDev from 'electron-is-dev';
 import path from 'path';
 import * as fs from 'fs/promises';
+import { mkdirSync } from 'fs';
 import type { Options as StoreOptions } from 'electron-store';
 import type { IpcMainInvokeEvent, IpcMainEvent } from 'electron';
 import { 
@@ -349,7 +350,13 @@ const initStore = async () => {
             
             // Step 7: Save to file
             sender.send('process-progress', { status: 'Saving to file...', percent: 95 });
-            const savePath = store.get('savePath');
+            const savePath = store.get('savePath') || path.join(
+              app.getPath('documents'), 
+              'BlockingMachine', 
+              'processed_rules.txt'
+            );
+            // Create directory if it doesn't exist
+            mkdirSync(path.dirname(savePath), { recursive: true }); // Use the sync version here
             await fs.writeFile(savePath, generatedList, 'utf8');
             console.log(`[IPC Main] Filter list saved to: ${savePath}`);
             
@@ -603,9 +610,15 @@ const initStore = async () => {
       iconPath = path.join(__dirname, '../assets', process.platform === 'win32' ? 'icon.ico' : 'Blockingmachine.icns');
     } else {
       // Production path (after packaging)
+      // Icon path logic for Windows
       iconPath = process.platform === 'win32' ? 
         path.join(process.resourcesPath, 'assets', 'icon.ico') : 
         path.join(process.resourcesPath, 'assets', 'Blockingmachine.icns');
+
+      // Auto-updater Windows configuration
+      if (process.platform === 'win32' && !process.env.NODE_ENV) {
+        autoUpdater.updateConfigPath = path.join(process.resourcesPath, 'app-update.yml');
+      }
     }
 
     // Keep a global reference of the resize debounce timer
@@ -617,8 +630,9 @@ const initStore = async () => {
         width: 1200,
         height: 800,
         icon: iconPath,
-        title: 'Blockingmachine', // Explicit title
-        titleBarStyle: 'hiddenInset', // For a more native macOS look
+        title: 'Blockingmachine',
+        titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
+        frame: true, // Use true for Windows, false for custom frame
         webPreferences: {
           nodeIntegration: false,
           contextIsolation: true,

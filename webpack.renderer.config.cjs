@@ -2,9 +2,6 @@ const rules = require('./webpack.rules.cjs');
 const plugins = require('./webpack.plugins.cjs');
 const path = require('path');
 
-// IMPORTANT: Double-check there's no duplicate CSS rule here
-// (Remove any additional CSS rules if they exist)
-
 module.exports = {
   module: {
     rules,

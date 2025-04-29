@@ -1,7 +1,7 @@
 {
   "name": "@blockingmachine/electron-app",
   "productName": "Blockingmachine (Beta)",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "An application to generate filter lists for Adguard Home and more.",
   "license": "BSD-3-Clause",
   "main": ".webpack/main",
@@ -9,8 +9,16 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "build": "electron-forge make"
+    "make:native": "electron-forge make --platform=darwin",
+    "build": "npm run make:native",
+    "make:win": "electron-forge make --platform=win32",
+    "make:mac": "electron-forge make --platform=darwin",
+    "release": "electron-forge make --platform=darwin && electron-builder --publish always"
+  },
+  "paths": {
+      "@blockingmachine/core": [
+        "../core/dist"
+      ]
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",
@@ -39,13 +47,15 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@blockingmachine/core": "workspace:*",
+    "@blockingmachine/core": "1.0.0-beta.3",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.1",
     "electron-store": "^10.0.1",
     "electron-updater": "^6.6.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "recharts": "^2.15.3",
+    "electron-log": "^5.3.4"
   },
   "build": {
     "appId": "com.blockingmachine.app",
@@ -67,5 +77,14 @@
     "name": "Daniel Hipskind",
     "email": "me@danielhipskind.com", 
     "url": "https://danielhipskind.com"
-  }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+  ]
 }

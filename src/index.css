@@ -1652,3 +1652,38 @@ input:focus-visible+.toggle-slider {
     opacity: 1;
   }
 }
+
+/* Windows-specific adjustments */
+@media (-webkit-device-pixel-ratio: 1) {
+
+  /* Windows tends to have lower DPI than Mac */
+  body {
+    font-size: 14px;
+    /* Slightly larger font for readability */
+  }
+
+  .container {
+    --container-padding-x: 15vh;
+    /* Less padding on Windows */
+  }
+
+  /* Scrollbar styling for Windows */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a0;
+  }
+}

@@ -13,6 +13,9 @@ module.exports = {
       path: false,
       fs: false,
     },
+    alias: {
+      '@blockingmachine/core': path.resolve(__dirname, '../core/dist'),
+    },
   },
   externals: {
     electron: 'electron',

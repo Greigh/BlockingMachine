@@ -1,0 +1,71 @@
+name: Build Electron App
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: |
+          cd packages/core
+          npm install
+          npm run build
+          cd ../electron-app
+          npm install
+      - name: Build Windows app
+        run: cd packages/electron-app && npm run make:win
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-build
+          path: packages/electron-app/out/make/**/*.exe
+
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: |
+          cd packages/core
+          npm install
+          npm run build
+          cd ../electron-app
+          npm install
+      - name: Build macOS app
+        run: cd packages/electron-app && npm run make:native
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-build
+          path: packages/electron-app/out/make/**/*.dmg
+
+  # New job to create a GitHub Release with the built artifacts
+  create-release:
+    needs: [build-windows, build-mac]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            windows-build/**/*.exe
+            mac-build/**/*.dmg
+          draft: false
+          prerelease: false
+          generate_release_notes: true
