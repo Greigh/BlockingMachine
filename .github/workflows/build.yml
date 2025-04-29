@@ -16,10 +16,6 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: |
-          cd packages/core
-          npm install
-          npm run build
-          cd ../electron-app
           npm install
       - name: Build Windows app
         run: cd packages/electron-app && npm run make:win
@@ -38,10 +34,6 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: |
-          cd packages/core
-          npm install
-          npm run build
-          cd ../electron-app
           npm install
       - name: Build macOS app
         run: cd packages/electron-app && npm run make:native
