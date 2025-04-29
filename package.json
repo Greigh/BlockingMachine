@@ -1,0 +1,71 @@
+{
+  "name": "@blockingmachine/electron-app",
+  "productName": "Blockingmachine (Beta)",
+  "version": "1.0.0-beta.2",
+  "description": "An application to generate filter lists for Adguard Home and more.",
+  "license": "BSD-3-Clause",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "build": "electron-forge make"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.4.2",
+    "@electron-forge/maker-deb": "^6.4.2",
+    "@electron-forge/maker-rpm": "^6.4.2",
+    "@electron-forge/maker-squirrel": "^6.4.2",
+    "@electron-forge/maker-zip": "^6.4.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
+    "@electron-forge/plugin-fuses": "^6.4.2",
+    "@electron-forge/plugin-webpack": "^6.4.2",
+    "@electron-forge/shared-types": "^6.4.2",
+    "@electron/typescript-definitions": "^9.1.2",
+    "@types/node": "^20.17.31",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.19",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.4",
+    "copy-webpack-plugin": "^13.0.0",
+    "css-loader": "^7.1.2",
+    "electron": "^29.0.0",
+    "esbuild-loader": "^4.3.0",
+    "node-loader": "^2.1.0",
+    "style-loader": "^4.0.0",
+    "ts-node": "11.0.0-beta.1",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "@blockingmachine/core": "workspace:*",
+    "electron-is-dev": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-store": "^10.0.1",
+    "electron-updater": "^6.6.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "build": {
+    "appId": "com.blockingmachine.app",
+    "publish": {
+      "provider": "github",
+      "owner": "greigh",
+      "repo": "Blockingmachine"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greigh/Blockingmachine.git"
+  },
+  "homepage": "https://github.com/greigh/Blockingmachine",
+  "bugs": {
+    "url": "https://github.com/greigh/Blockingmachine/issues"
+  },
+  "author": {
+    "name": "Daniel Hipskind",
+    "email": "me@danielhipskind.com", 
+    "url": "https://danielhipskind.com"
+  }
+}

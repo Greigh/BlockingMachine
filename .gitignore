@@ -1,0 +1,71 @@
+# IDE specific files
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+*.sublime-*
+
+# OS generated files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Build artifacts
+dist/
+build/
+*.app
+*.dmg
+*.zip
+*.pkg
+*.exe
+*.msi
+*.AppImage
+*.snap
+
+# Debug logs
+debug.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Local dev configs
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*~
+
+out
+node_modules
+.webpack
