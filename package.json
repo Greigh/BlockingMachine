@@ -15,11 +15,6 @@
     "make:mac": "electron-forge make --platform=darwin",
     "release": "electron-forge make --platform=darwin && electron-builder --publish always"
   },
-  "paths": {
-      "@blockingmachine/core": [
-        "../core/dist"
-      ]
-  },
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",
     "@electron-forge/maker-deb": "^6.4.2",

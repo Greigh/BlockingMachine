@@ -13,10 +13,10 @@ import {
   RuleType,
   downloadAndParseSource,
   parseFilterList,
-  RuleDeduplicator
+  RuleDeduplicator,
+  RuleStore
 } from '@blockingmachine/core';
 import type { FilterSource, ProcessingResult, Theme } from './types/global.js';
-import { RuleStore } from '@blockingmachine/core';
 import * as electronSquirrelStartup from 'electron-squirrel-startup';
 
 import { loadStore } from './utils/store-loader';
