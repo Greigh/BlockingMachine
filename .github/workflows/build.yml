@@ -19,11 +19,19 @@ jobs:
           npm install
       - name: Build Windows app
         run: npm run make:win
+      - name: Create directories and compress Windows artifacts
+        run: |
+          mkdir -p compressed
+          mkdir -p installers
+          Move-Item -Path out/make/**/*.exe -Destination installers/ -Force
+          Compress-Archive -Path installers/*.exe -DestinationPath compressed/BlockingMachine-Windows-${{ github.ref_name }}.zip
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: out/make/**/*.exe
+          path: |
+            installers/*.exe
+            compressed/*.zip
 
   build-mac:
     runs-on: macos-latest
@@ -37,11 +45,25 @@ jobs:
           npm install
       - name: Build macOS app
         run: npm run make:native
+      - name: Create directories and compress macOS artifacts
+        run: |
+          mkdir -p compressed
+          mkdir -p installers
+          mv out/make/**/*.dmg installers/ || echo "No DMG files found"
+          if [ -n "$(ls -A installers/*.dmg 2>/dev/null)" ]; then
+            cd installers
+            tar -czf ../compressed/BlockingMachine-macOS-${{ github.ref_name }}.tar.gz *.dmg
+            cd ..
+          else
+            echo "No DMG files to compress"
+          fi
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: mac-build
-          path: out/make/**/*.dmg
+          path: |
+            installers/*.dmg
+            compressed/*.tar.gz
 
   # New job to create a GitHub Release with the built artifacts
   create-release:
@@ -52,12 +74,18 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
 
+      - name: List downloaded files
+        run: |
+          find . -type f | sort
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            windows-build/**/*.exe
-            mac-build/**/*.dmg
+            windows-build/installers/*.exe
+            windows-build/compressed/*.zip
+            mac-build/installers/*.dmg
+            mac-build/compressed/*.tar.gz
           draft: false
           prerelease: true
           generate_release_notes: true
