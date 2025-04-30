@@ -18,21 +18,22 @@
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",
     "@electron-forge/maker-deb": "^6.4.2",
+    "@electron-forge/maker-dmg": "^7.8.0",
     "@electron-forge/maker-rpm": "^6.4.2",
     "@electron-forge/maker-squirrel": "^6.4.2",
     "@electron-forge/maker-zip": "^6.4.2",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
     "@electron-forge/plugin-fuses": "^6.4.2",
-    "@electron-forge/plugin-webpack": "^6.4.2",
+    "@electron-forge/plugin-webpack": "^7.8.0",
     "@electron-forge/shared-types": "^6.4.2",
     "@electron/typescript-definitions": "^9.1.2",
-    "@types/node": "^20.17.31",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.19",
+    "@types/node": "^20.17.32",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
     "@vercel/webpack-asset-relocator-loader": "^1.7.4",
     "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
-    "electron": "^29.0.0",
+    "electron": "^29.4.6",
     "esbuild-loader": "^4.3.0",
     "node-loader": "^2.1.0",
     "style-loader": "^4.0.0",
@@ -44,13 +45,13 @@
   "dependencies": {
     "@blockingmachine/core": "1.0.0-beta.3",
     "electron-is-dev": "^2.0.0",
+    "electron-log": "^5.3.4",
     "electron-squirrel-startup": "^1.0.1",
     "electron-store": "^10.0.1",
     "electron-updater": "^6.6.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "recharts": "^2.15.3",
-    "electron-log": "^5.3.4"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.3"
   },
   "build": {
     "appId": "com.blockingmachine.app",
@@ -70,7 +71,7 @@
   },
   "author": {
     "name": "Daniel Hipskind",
-    "email": "me@danielhipskind.com", 
+    "email": "me@danielhipskind.com",
     "url": "https://danielhipskind.com"
   },
   "files": [
@@ -79,7 +80,7 @@
     "LICENSE"
   ],
   "typeRoots": [
-      "./node_modules/@types",
-      "./src/types"
+    "./node_modules/@types",
+    "./src/types"
   ]
 }
