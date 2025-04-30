@@ -29,5 +29,25 @@ module.exports = function transformConfig(config) {
     delete config.devServer.headers['Content-Type'];
   }
 
+  // Make sure electron target is correctly set
+  config.target = 'electron-renderer';
+
+  // Handle ARM64 path issues by normalizing the output path
+  if (config.output && config.output.path) {
+    // Remove any architecture-specific path components
+    const normalizedPath = config.output.path.replace(/\/arm64$/, '');
+    config.output.path = normalizedPath;
+
+    // Ensure the directory structure exists
+    const fs = require('fs');
+    try {
+      if (!fs.existsSync(normalizedPath)) {
+        fs.mkdirSync(normalizedPath, { recursive: true });
+      }
+    } catch (err) {
+      console.warn('Could not create output directory:', err);
+    }
+  }
+
   return config;
 };

@@ -44,7 +44,8 @@ jobs:
         run: |
           npm install
       - name: Build macOS app
-        run: npm run make:native
+        run: |
+          npm run make:mac -- --arch=arm64
       - name: Create directories and compress macOS artifacts
         run: |
           mkdir -p compressed

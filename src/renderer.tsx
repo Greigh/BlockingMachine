@@ -49,5 +49,3 @@ if (container) {
 } else {
   console.error('Root element not found');
 }
-
-console.log('👋 React renderer initialized');

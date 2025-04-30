@@ -54,6 +54,15 @@ module.exports = {
     extraResource: [path.join(__dirname, 'assets')],
     executableName: 'BlockingMachine',
     appBundleId: 'com.danielhipskind.blockingmachine',
+    // Add these lines for more control over the build process
+    ignore: [
+      /^\/(src|.github|assets|scripts|(\.[^/]+))/,
+      function (path) {
+        return path.includes('node_modules/.bin') || path.includes('.git');
+      },
+    ],
+    // Make sure these directories are always included
+    overwrite: true,
   },
   rebuildConfig: {},
   makers: makers,
