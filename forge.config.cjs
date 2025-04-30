@@ -2,6 +2,7 @@ const { MakerDeb } = require('@electron-forge/maker-deb');
 const { MakerRpm } = require('@electron-forge/maker-rpm');
 const { MakerSquirrel } = require('@electron-forge/maker-squirrel');
 const { MakerZIP } = require('@electron-forge/maker-zip');
+const { WebpackPlugin } = require('@electron-forge/plugin-webpack');
 const path = require('path');
 
 // Conditionally import MakerDMG
