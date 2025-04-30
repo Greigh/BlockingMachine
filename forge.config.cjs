@@ -2,6 +2,7 @@ const { MakerDeb } = require('@electron-forge/maker-deb');
 const { MakerRpm } = require('@electron-forge/maker-rpm');
 const { MakerSquirrel } = require('@electron-forge/maker-squirrel');
 const { MakerZIP } = require('@electron-forge/maker-zip');
+const { MakerDMG } = require('@electron-forge/maker-dmg'); // Add this import
 const { WebpackPlugin } = require('@electron-forge/plugin-webpack');
 const path = require('path');
 
@@ -18,15 +19,34 @@ module.exports = {
       'assets',
       process.platform === 'darwin' ? 'Blockingmachine' : 'icon'
     ),
-    // Copy the assets directory into the packaged app
     extraResource: [path.join(__dirname, 'assets')],
+    // Ensure product name is valid
+    executableName: 'BlockingMachine',
+    appBundleId: 'com.danielhipskind.blockingmachine',
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
     new MakerZIP({}, ['darwin']),
     new MakerRpm({}),
     new MakerDeb({}),
+
+    // Keep just this one configured Squirrel maker
+    new MakerSquirrel({
+      name: 'BlockingMachine',
+      authors: 'Daniel Hipskind',
+      exe: 'BlockingMachine.exe',
+      setupExe: 'BlockingMachine-Setup.exe',
+      setupIcon: './assets/icon.ico',
+      iconUrl:
+        'https://raw.githubusercontent.com/greigh/Blockingmachine/main/assets/icon.ico',
+    }),
+
+    // Use the proper constructor format for DMG maker
+    new MakerDMG({
+      format: 'ULFO',
+      icon: path.join(__dirname, 'assets', 'Blockingmachine.icns'),
+      background: path.join(__dirname, 'assets', 'dmg-background.png'),
+    }),
   ],
   plugins: [
     new WebpackPlugin({
