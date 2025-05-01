@@ -1,51 +1,35 @@
-appId: com.danielhipskind.blockingmachine
+appId: com.blockingmachine.app
 productName: Blockingmachine (Beta)
-electronVersion: 36.0.0
+artifactName: ${name}-${version}-${os}-${arch}.${ext}
 buildDependenciesFromSource: true
 nodeGypRebuild: false
 
+npmRebuild: false
+
 files:
-  - ".build/**/*"
-  - "assets/**/*"
-  - "!**/*.map"
-  - "package.json"
-  - "!src/*"
-  - "!node_modules/**/*"
+  - '.build/**/*'
+  - 'assets/**/*'
+  - '!**/*.map'
+  - 'package.json'
+  - '!src/*'
+  - '!node_modules/**/*'
 
 directories:
-  output: "dist"
-  buildResources: "assets"
+  output: 'dist'
+  buildResources: 'assets'
 
 asar: true
 asarUnpack:
-  - ".build/**/*.node"
-  - "assets/**/*"
-
-outfile: '.build/renderer.js'
+  - '.build/**/*.node'
+  - 'assets/**/*'
 
 mac:
-  icon: assets/Blockingmachine.icns  # Use relative path
-  category: public.app-category.utilities
-  target:
-    - target: dmg
-      arch: [arm64]
-win:
-  icon: assets/icon.ico  # Use relative path
-  target:
-    - target: nsis
-      arch: [x64]
-    - target: portable
-      arch: [x64]
-nsis:
-  oneClick: false
-  allowToChangeInstallationDirectory: true
-  createDesktopShortcut: true
-  shortcutName: "Blockingmachine"
-  uninstallDisplayName: "Blockingmachine"
-dmg:
-  writeUpdateInfo: false
-  sign: true
-  artifactName: "${productName}-${version}-${arch}.dmg"
-  asyncOperations: false
   icon: assets/Blockingmachine.icns
-  background: assets/dmg-background.png
+  category: public.app-category.utilities
+  darkModeSupport: true
+  sign: false
+  target:
+    - { target: dmg }
+dmg:
+  icon: assets/Blockingmachine.icns
+  iconSize: 128
