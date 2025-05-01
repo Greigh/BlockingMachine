@@ -21,31 +21,13 @@ jobs:
         run: |
           npm run build
 
-      - name: Create directories and compress macOS artifacts
-        run: |
-          mkdir -p compressed
-          mkdir -p installers
-
-          # List what was actually built
-          find dist -type f | grep -i "dmg\|zip"
-
-          # Try to find the DMGs more broadly
-          find dist -name "*.dmg" -exec cp {} installers/ \; || echo "No DMG files found"
-
-          if [ -n "$(ls -A installers 2>/dev/null)" ]; then
-            cd installers
-            tar -czf ../compressed/Blockingmachine-macOS-v1.0.0-b.3.tar.gz *
-            cd ..
-          else
-            echo "No files to compress"
-          fi
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: mac-build
           path: |
-            installers/*.dmg
-            compressed/*.tar.gz
+            dist/*.dmg
+            dist/*.tar.gz
 
   # New job to create a GitHub Release with the built artifacts
   create-release:
@@ -62,7 +44,7 @@ jobs:
 
       - name: Debug dist directory
         run: |
-          echo "Listing dist directories:"
+          echo "Listing directories:"
           find dist -type d
           echo "Listing all files in dist directory:"
           find dist -type f
@@ -80,8 +62,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            mac-build/installers/*.dmg
-            mac-build/compressed/*.tar.gz
+            mac-build/*.dmg
+            mac-build/*.tar.gz
           draft: false
           prerelease: true
           generate_release_notes: true
