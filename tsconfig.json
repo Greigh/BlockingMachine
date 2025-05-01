@@ -1,23 +1,29 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "NodeNext", // Change to NodeNext
-    "moduleResolution": "NodeNext", // Change to NodeNext
+    "target": "ESNext",
+    "module": "ESNext",
+    "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "skipLibCheck": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
+    "outDir": ".build",
     "typeRoots": [
       "./node_modules/@types",
       "./src/types"
-    ]
+    ],
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".build",
+    "dist"
   ]
 }

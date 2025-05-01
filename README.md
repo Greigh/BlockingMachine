@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="../../assets/blockingmachine.png" width="200" alt="BlockingMachine Logo" />
+  <img src="../../assets/blockingmachine.png" width="200" alt="Blockingmachine Logo" />
 
-# BlockingMachine Desktop
+# Blockingmachine Desktop
 
 [![GITHUB RELEASE](https://img.shields.io/github/v/release/greigh/Blockingmachine)](https://github.com/greigh/Blockingmachine/releases)
-[![LICENSE](https://img.shields.io/github/license/greigh/BlockingMachine)](LICENSE)
+[![LICENSE](https://img.shields.io/github/license/greigh/Blockingmachine)](LICENSE)
 [![ELECTRON](https://img.shields.io/badge/built%20with-Electron-blue.svg)](https://www.electronjs.org/)
 [![TYPESCRIPT](https://img.shields.io/badge/written%20in-TypeScript-3178c6.svg)](https://www.typescriptlang.org/)
 
@@ -16,8 +16,8 @@ _Modern, lightweight ad-blocking filter management tool for your desktop_
 
 # Related Projects
 
-- [BlockingMachine Core](https://github.com/greigh/Blockingmachine-core)
-- [BlockingMachine CLI](https://github.com/greigh/Blockingmachine-cli)
+- [Blockingmachine Core](https://github.com/greigh/Blockingmachine-core)
+- [Blockingmachine CLI](https://github.com/greigh/Blockingmachine-cli)
 - [Blockingmachine Database](https://github.com/greigh/Blockingmachine-database)
 
 ---
@@ -49,7 +49,7 @@ _Modern, lightweight ad-blocking filter management tool for your desktop_
 
 ### ⚙️ Seamless Experience
 - **Automatic Updates**: Stay current with the latest app improvements
-- **Cross-Platform**: Works on Windows (Beta), macOS (Beta - Stable), and Linux (Linux support coming soon)
+- **Cross-Platform**: Works on Windows (Coming soon), macOS (Beta), and Linux (Linux support coming soon)
 - **Persistent Settings**: Your configuration is saved between sessions
 - **Fast Processing**: Efficient handling of even large filter lists
 - **User Feedback**: We welcome your feedback to improve the app
@@ -61,29 +61,29 @@ _Modern, lightweight ad-blocking filter management tool for your desktop_
 
 ## Installation
 
-### macOS (Beta - Stable)
-1. Download the latest `.dmg` file from [Releases](https://github.com/greigh/BlockingMachine/releases)
-2. Open the `.dmg` file and drag BlockingMachine to your Applications folder
-3. Open BlockingMachine from your Applications folder 
+### macOS (Beta)
+1. Download the latest `.dmg` file from [Releases](https://github.com/greigh/Blockingmachine/releases)
+2. Open the `.dmg` file and drag Blockingmachine to your Applications folder
+3. Open Blockingmachine from your Applications folder 
 4. The app should be properly signed and notarized. If you encounter a security warning, open Privacy & Security settings, scroll to the bottom, and allow the app to run
 
-### Windows (Beta)
-1. Download the latest `.exe` installer from [Releases](https://github.com/greigh/BlockingMachine/releases)
+### Windows (Coming Soon)
+1. Download the latest `.exe` installer from [Releases](https://github.com/greigh/Blockingmachine/releases)
 2. Run the installer and follow the prompts
-3. Launch BlockingMachine from the Start menu
+3. Launch Blockingmachine from the Start menu
 4. **Note**: Windows support is currently in beta. Please see the [Windows Support](#windows-support-beta) section for more details.
 5. **Known Limitations**: The Windows version may require additional permissions for filter list generation and update functionality.
 6. **Reporting Windows Issues**: If you encounter issues with the Windows version, please check our [GitHub Issues](https://github.com/greigh/Blockingmachine/issues) to see if it's already reported.
 
 ### Linux (Coming Soon)
-1. Download the `.AppImage` or `.deb` package from [Releases](https://github.com/greigh/BlockingMachine/releases)
-2. Make the AppImage executable: `chmod +x BlockingMachine*.AppImage`
+1. Download the `.AppImage` or `.deb` package from [Releases](https://github.com/greigh/Blockingmachine/releases)
+2. Make the AppImage executable: `chmod +x Blockingmachine*.AppImage`
 3. Run the AppImage or install the .deb package
 4. **Note**: Linux support is coming soon. Please check back for updates.
 
-## Windows Support (Beta)
+## Windows Support (Coming Soon)
 
-The Windows version of BlockingMachine is currently in beta testing. While we've implemented all the necessary components for Windows support, it hasn't been extensively tested on all Windows configurations.
+The Windows version of Blockingmachine is currently in beta testing. While we've implemented all the necessary components for Windows support, it hasn't been extensively tested on all Windows configurations.
 
 ### Known Limitations
 
@@ -135,7 +135,7 @@ We're actively working to improve the Windows experience and appreciate your fee
 
 ### Current Release (v1.0.0-beta.3)
 - 🚀 Core functionality implementation
-- 💻 macOS (beta - stable) and Windows support (beta)
+- 💻 macOS support (beta - stable)
 - 🔄 Automatic updates (beta)
 - 🌓 Light and dark mode
 - 📊 Basic statistics dashboard
@@ -145,7 +145,7 @@ We're actively working to improve the Windows experience and appreciate your fee
 
 ### Upcoming Features (v1.0.0)
 - 📱 Enhanced UI responsiveness
-- 🖥️ Improved Windows stability
+- 🖥️ Windows support
 - 🐧 Linux support
 - ⚡ Performance optimizations for large lists
 - 💾 Better offline capabilities
@@ -166,12 +166,12 @@ We're actively working to improve the Windows experience and appreciate your fee
 ### Version History
 
 #### 1.0.0-beta.3 (Latest)
-- Added initial Windows support
 - Fixed critical stability issues
 - Enhanced dark mode implementation
 - Improved memory usage for large filter lists
 - Documentation improvements
 - Updated README for clarity and consistency
+- ** Had to delay Windows support due to critical issues with the installer. I am working on a fix and will release an update soon. **
 
 #### 1.0.0-beta.2
 - 🎉 Initial public beta release
@@ -205,7 +205,7 @@ We're actively working to improve the Windows experience and appreciate your fee
 
 ### Custom Rules Syntax 
 
-BlockingMachine supports standard AdGuard/AdBlock Plus syntax:
+Blockingmachine supports standard AdGuard/AdBlock Plus syntax:
 
 ```bash
   ! Comment line (ignored)
@@ -247,14 +247,14 @@ BlockingMachine supports standard AdGuard/AdBlock Plus syntax:
 
 ### Debug Mode
 
-Run BlockingMachine in debug mode to view detailed logs:
+Run Blockingmachine in debug mode to view detailed logs:
 
 ```bash
   # macOS/Linux
-  DEBUG=blockingmachine:* /Applications/BlockingMachine.app/Contents/MacOS/BlockingMachine
+  DEBUG=blockingmachine:* /Applications/Blockingmachine.app/Contents/MacOS/Blockingmachine
 
   # Windows
-  set DEBUG=blockingmachine:* & "C:\Program Files\BlockingMachine\BlockingMachine.exe"
+  set DEBUG=blockingmachine:* & "C:\Program Files\Blockingmachine\Blockingmachine.exe"
 ```
 
 ## Building From Source
@@ -269,10 +269,10 @@ Run BlockingMachine in debug mode to view detailed logs:
 
   ```bash
   # Clone the repository
-  git clone https://github.com/greigh/BlockingMachine.git
+  git clone https://github.com/greigh/Blockingmachine.git
 
   # Navigate to the electron app directory
-  cd BlockingMachine/packages/electron-app
+  cd Blockingmachine/packages/electron-app
 
   # Install dependencies
   npm install
@@ -298,7 +298,7 @@ Run BlockingMachine in debug mode to view detailed logs:
 
 ## Contributing
 
-We welcome contributions to BlockingMachine Desktop! Here's how to get started:
+We welcome contributions to Blockingmachine Desktop! Here's how to get started:
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature-name`

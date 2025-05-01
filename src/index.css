@@ -11,18 +11,22 @@
   --section-bg: transparent;
   --heading-color: #1d1d1f;
   --shadow-color: rgba(0, 0, 0, 0.05);
-  --container-padding-x: 20vh;
+  --container-padding-x: 10vh;
   --container-padding-y: 40px;
   --border-radius: 6px;
   --control-bg-color: #fff;
   --control-border-color: #c6c6c6;
   --input-bg-disabled: #f0f0f0;
+  --card-bg: #f7f7fa;
+  --primary-bg-hover: #e8f0fe;
+  --footer-bg: #fff;
+  --footer-text: #222;
 }
 
 /* Dark theme variables */
 .dark-theme {
-  --primary-color: #0a84ff;
-  --primary-color-hover: #3b9eff;
+  --primary-color: #0170e7;
+  --primary-color-hover: #005ecb;
   --secondary-color: #8d8d92;
   --secondary-color-hover: #a0a0a5;
   --background-color: #2d2d2d;
@@ -35,6 +39,10 @@
   --control-bg-color: #464648;
   --control-border-color: #5a5a5e;
   --input-bg-disabled: #38383a;
+  --card-bg: #23272e;
+  --primary-bg-hover: #2a2f38;
+  --footer-bg: #2d2d2d;
+  --footer-text: #eee;
 }
 
 /* Core element styles */
@@ -89,7 +97,21 @@ h2,
 h3,
 p,
 .main-content,
-.app-footer {
+.app-footer,
+.app-navigation,
+.footer-links,
+.footer-link,
+.footer-donate,
+.footer-donate a,
+.app-navigation,
+.footer-links a,
+.footer-link a,
+.footer-donate a,
+.theme-preview,
+.theme-preview-label,
+.app-navigation,
+.footer-links a,
+.footer-link a {
   -webkit-app-region: no-drag;
 }
 
@@ -326,18 +348,31 @@ input[type="checkbox"] {
 }
 
 .app-footer {
-  flex-shrink: 0;
-  padding: 6px 12px;
-  font-size: 11px;
-  color: var(--secondary-color);
-  text-align: center;
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 1.2rem 0 0.5rem 0;
   border-top: 1px solid var(--border-color);
-  background-color: var(--background-color);
   user-select: text;
   -webkit-user-select: text;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: left;
+  gap: 1rem;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 11px;
+}
+
+.footer-donate {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 0;
 }
 
 .footer-links {
@@ -357,6 +392,74 @@ input[type="checkbox"] {
 
 .app-version {
   font-weight: 500;
+}
+
+/* Donate Footer Styling */
+.footer-donate a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  color: #134e1c;
+  font-weight: 600;
+  border-radius: 24px;
+  padding: 0.5rem 1.3rem;
+  text-decoration: none;
+  font-size: 11px;
+  box-shadow: 0 2px 8px rgba(67, 233, 123, 0.15);
+  transition: background 0.18s, box-shadow 0.18s, color 0.18s;
+}
+
+.footer-donate a:hover {
+  background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+  color: #0d3a13;
+  box-shadow: 0 4px 16px rgba(67, 233, 123, 0.25);
+}
+
+.donate-money {
+  vertical-align: middle;
+  transition: transform 0.2s;
+}
+
+.footer-donate a:hover .donate-money {
+  transform: scale(1.12) rotate(-5deg);
+  filter: drop-shadow(0 0 8px #43e97b88);
+}
+
+.footer-donate .donate-heart {
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: middle;
+  animation: donate-heart-beat 1.2s infinite;
+  filter: drop-shadow(0 2px 6px rgba(255, 90, 95, 0.18));
+}
+
+@keyframes donate-heart-beat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  10% {
+    transform: scale(1.15);
+  }
+
+  20% {
+    transform: scale(0.95);
+  }
+
+  30% {
+    transform: scale(1.08);
+  }
+
+  40% {
+    transform: scale(0.97);
+  }
+
+  50% {
+    transform: scale(1);
+  }
 }
 
 /* Root element styles */
@@ -854,7 +957,7 @@ body,
   color: #F44336;
 }
 
-/* Dark mode status indicators */
+/* Dark theme status indicators */
 .dark-theme .status-active {
   background-color: rgba(76, 175, 80, 0.3);
 }
@@ -882,13 +985,18 @@ body,
 
 .last-processed-title {
   font-weight: 600;
-  margin-bottom: 0.25rem;
   color: var(--heading-color);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0;
 }
 
 .last-processed-time {
   color: var(--secondary-color);
   font-size: 0.9rem;
+  margin-bottom: 0;
 }
 
 /* Summary cards for important metrics */
@@ -1651,6 +1759,149 @@ input:focus-visible+.toggle-slider {
   80% {
     opacity: 1;
   }
+}
+
+/* "Made with ♥" heart styling (static, subtle shadow) */
+.heart-svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.2em 0 0.2em;
+  width: 1.1em;
+  height: 1.1em;
+  min-width: 1.1em;
+  min-height: 1.1em;
+  filter: drop-shadow(0 1px 2px rgba(255, 90, 95, 0.15));
+  transition: filter 0.2s;
+  overflow: visible;
+}
+
+.dark-theme .heart-svg {
+  fill: #ffb3b8;
+  stroke: #ffb3b8;
+}
+
+/* Donate heart styling and animation */
+.footer-donate .donate-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.5em;
+}
+
+.footer-donate .donate-heart {
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: middle;
+  animation: donate-heart-beat 1.2s infinite;
+  filter: drop-shadow(0 2px 6px rgba(255, 90, 95, 0.18));
+}
+
+@keyframes donate-heart-beat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  10% {
+    transform: scale(1.15);
+  }
+
+  20% {
+    transform: scale(0.95);
+  }
+
+  30% {
+    transform: scale(1.08);
+  }
+
+  40% {
+    transform: scale(0.97);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+.dark-theme .footer-donate .donate-heart {
+  fill: #ffb3b8;
+  stroke: #ffb3b8;
+}
+
+/* Show in Finder button enhancements */
+.show-in-finder-btn {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  margin-top: 0.75rem;
+  margin-left: 0;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.show-in-finder-btn:hover:not(:disabled) {
+  background-color: var(--secondary-color-hover);
+  color: #fff;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.show-in-finder-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* About & Contact section styles */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  background: var(--card-bg, #f7f7fa);
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  transition: background 0.15s;
+}
+
+.contact-list li:hover {
+  background: var(--primary-bg-hover);
+}
+
+.contact-list .contact-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.3rem;
+  color: var(--primary-color);
+}
+
+.contact-list a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  word-break: break-all;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+  color: var(--primary-color-hover);
+}
+
+.setting-card .setting-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2em;
 }
 
 /* Windows-specific adjustments */

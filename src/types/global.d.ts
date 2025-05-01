@@ -84,6 +84,7 @@ export interface ElectronAPI {
   onUpdateCheckRateLimited: (callback: () => void) => void;
   onProcessProgress: (callback: (data: { status: string; percent: number }) => void) => void;
   removeProcessProgressListener: (callback?: () => void) => void;
+  removeAllListeners: (channel: string) => void;
 }
 
 // Component Props
@@ -96,6 +97,33 @@ export interface SettingsProps {
 declare global {
   interface Window {
     electronAPI: ElectronAPI;
+    electron: {
+      getTheme: () => Promise<string>;
+      setTheme: (theme: string) => Promise<void>;
+      getSources: () => Promise<any>;
+      setSources: (sources: any) => Promise<void>;
+      getCustomRules: () => Promise<string>;
+      setCustomRules: (rules: string) => Promise<void>;
+      getExportFormat: () => Promise<string>;
+      setExportFormat: (format: string) => Promise<void>;
+      getSavePath: () => Promise<string>;
+      setSavePath: (path: string) => Promise<void>;
+      selectSavePath: () => Promise<string>;
+      onUpdateStatus: (callback: (status: any) => void) => void;
+      onUpdateProgress: (callback: (progress: any) => void) => void;
+      onUpdateDownloaded: (callback: () => void) => void;
+      notifyResize: (width: number, height: number) => void;
+      runImportProcess: () => Promise<any>;
+      getLastProcessTime: () => Promise<string>;
+      saveSources: (sources: any) => Promise<any>;
+      installUpdate: () => void;
+      onProcessProgress: (callback: (progress: any) => void) => void;
+      removeProcessProgressListener: () => void;
+      receive: (channel: string, callback: (...args: any[]) => void) => void;
+      removeAllListeners: (channel: string) => void;
+      showItemInFolder: (path: string) => void;
+      // Add any other APIs you expose
+    };
   }
   
   namespace NodeJS {

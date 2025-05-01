@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
-import Settings from './Settings';
+import Settings from './Settings.jsx';
+import type { FilterSource, ProcessingResult, Theme } from './types/global.js';
 import './index.css';
-import type { FilterSource, ProcessingResult, Theme, ElectronAPI } from './types/global.js';
 
 // --- Helper Function (applyTheme) ---
 const applyTheme = (theme: Theme) => {
@@ -17,8 +17,16 @@ const applyTheme = (theme: Theme) => {
   } else { // System theme
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       body.classList.add('dark-theme');
-    } else {
-      body.classList.add('light-theme');
+    } else { // System theme
+      try {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          body.classList.add('dark-theme');
+        } else {
+          body.classList.add('light-theme');
+        }
+      } catch (err) {
+        console.error("Failed to apply system theme:", err);
+      }
     }
   }
 };
@@ -339,9 +347,9 @@ const CustomRulesEditor = () => {
       setSaveStatus('idle');
       setIsLoading(true);
       try {
-        const loadedRules = await window.electronAPI.getCustomRules();
+        const loadedRules = await window.electron.getCustomRules();
         if (isMounted) {
-          setRules(loadedRules || ''); // Handle null/undefined
+          setRules(loadedRules || '');
         }
       } catch (err) {
         console.error("Failed to load custom rules:", err);
@@ -363,14 +371,10 @@ const CustomRulesEditor = () => {
     setError(null);
     setSaveStatus('saving');
     try {
-      const result = await window.electronAPI.saveCustomRules(rules);
-      if (result.success) {
-        setSaveStatus('success');
-        // Optionally clear success message after a delay
-        setTimeout(() => setSaveStatus('idle'), 2000);
-      } else {
-        throw new Error(result.error || "Unknown error saving custom rules");
-      }
+      await window.electron.setCustomRules(rules);
+      setSaveStatus('success');
+      // Optionally clear success message after a delay
+      setTimeout(() => setSaveStatus('idle'), 2000);
     } catch (err) {
       console.error("Failed to save custom rules:", err);
       setError(err instanceof Error ? err.message : "Failed to save custom rules.");
@@ -444,8 +448,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 // --- End CustomTooltip Component ---
 
 // --- ProcessingControls Component ---
-// Remove the duplicate ProcessingResult interface definition and use the imported one
-const ProcessingControls = () => {
+interface ProcessingControlsProps {
+  savePath: string;
+}
+
+const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<ProcessingResult | null>(null);
@@ -470,16 +477,16 @@ const ProcessingControls = () => {
     const loadStats = async () => {
       try {
         // Get current sources
-        const sources = await window.electronAPI.getSources();
-        const enabledSources = sources.filter(s => s.enabled).length;
+        const sources = await window.electron.getSources();
+        const enabledSources = sources.filter((s: FilterSource) => s.enabled).length;
         
         // Get custom rules
-        const customRules = await window.electronAPI.getCustomRules();
+        const customRules = await window.electron.getCustomRules();
         const customRulesCount = customRules.split('\n')
-          .filter(line => line.trim() && !line.trim().startsWith('#')).length;
+          .filter((line: string) => line.trim() && !line.trim().startsWith('#')).length;
           
         // Get last process time
-        const lastProcessTime = await window.electronAPI.getLastProcessTime();
+        const lastProcessTime = await window.electron.getLastProcessTime();
         
         setDashboardStats({
           enabledSources,
@@ -495,16 +502,30 @@ const ProcessingControls = () => {
     loadStats();
   }, []);
 
+  useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (
+      e.key === 'F12' ||
+      (e.metaKey && e.altKey && e.key.toLowerCase() === 'i') ||
+      (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i')
+    ) {
+      e.preventDefault();
+    }
+  };
+  window.addEventListener('keydown', handler);
+  return () => window.removeEventListener('keydown', handler);
+  }, []);
+
   // Listen for progress updates
   useEffect(() => {
     const onProgressUpdate = (data: { status: string; percent: number }) => {
       setProgress(data);
     };
     
-    window.electronAPI.onProcessProgress(onProgressUpdate);
+    window.electron.onProcessProgress(onProgressUpdate);
     
     return () => {
-      window.electronAPI.removeProcessProgressListener();
+      window.electron.removeProcessProgressListener();
     };
   }, []);
 
@@ -515,15 +536,15 @@ const ProcessingControls = () => {
     setProgress({ status: 'Initializing process...', percent: 0 });
     
     try {
-      const result = await window.electronAPI.runImportProcess();
+      const result = await window.electron.runImportProcess();
       setLastResult(result);
       
       // Refresh dashboard stats after processing
-      const sources = await window.electronAPI.getSources();
-      const lastProcessTime = await window.electronAPI.getLastProcessTime();
+      const sources = await window.electron.getSources();
+      const lastProcessTime = await window.electron.getLastProcessTime();
       setDashboardStats(prev => ({
         ...prev,
-        enabledSources: sources.filter(s => s.enabled).length,
+        enabledSources: sources.filter((s: FilterSource) => s.enabled).length,
         totalSources: sources.length,
         lastProcessedTime: lastProcessTime
       }));
@@ -582,6 +603,15 @@ const ProcessingControls = () => {
         <div className="last-processed-card">
           <div className="last-processed-title">Last Processing Time</div>
           <div className="last-processed-time">{dashboardStats.lastProcessedTime}</div>
+          <button
+            onClick={() => window.electron.showItemInFolder(savePath)}
+            disabled={!savePath}
+            className="process-button show-in-finder-btn"
+            style={{}}
+          >
+            <span role="img" aria-label="finder" style={{ marginRight: 6 }}>🗂️</span>
+            Show in Finder
+          </button>
         </div>
       )}
 
@@ -606,6 +636,7 @@ const ProcessingControls = () => {
               'Generate Filter Lists'
             )}
           </button>
+          {/* Show item in folder */}
           
           {isLoading && progress && (
             <div className="progress-container">
@@ -787,64 +818,45 @@ function App() {
   const [isLoadingSources, setIsLoadingSources] = useState(true); // Specific loading for sources
   const [globalError, setGlobalError] = useState<string | null>(null);
   const [globalSuccessMessage, setGlobalSuccessMessage] = useState<string | null>(null);
+  const [savePath, setSavePath] = useState<string>('');
+
+  useEffect(() => {
+    window.electron.getSavePath().then(setSavePath);
+  }, []);
 
   // Memoize applyTheme (existing)
   const memoizedApplyTheme = useCallback(applyTheme, []);
 
-  // Load and apply theme (existing)
+  // On mount, load and apply the user's theme preference
   useEffect(() => {
     let isMounted = true;
     const loadAndApplyTheme = async () => {
       try {
-        const storedTheme = await window.electronAPI.getTheme();
+        const storedTheme = await window.electron.getTheme();
         if (isMounted) {
-          setSelectedTheme(storedTheme);
-          memoizedApplyTheme(storedTheme); // Apply the loaded theme
+          setSelectedTheme(storedTheme as Theme);
+          memoizedApplyTheme(storedTheme as Theme);
         }
       } catch (error) {
-        console.error("Failed to load theme setting on launch:", error);
-        // Apply default system theme as fallback
-        if (isMounted) {
-          memoizedApplyTheme('system');
-        }
+        if (isMounted) memoizedApplyTheme('system');
       } finally {
-        if (isMounted) {
-          setIsThemeLoading(false);
-        }
+        if (isMounted) setIsThemeLoading(false);
       }
     };
     loadAndApplyTheme();
     return () => { isMounted = false; };
-  }, [memoizedApplyTheme]); // Depend on memoized function
+  }, [memoizedApplyTheme]);
 
-  // Listener for system theme changes (existing)
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleSystemChange = () => {
-      // Only re-apply if the current setting is 'system'
-      if (selectedTheme === 'system') {
-        memoizedApplyTheme('system');
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleSystemChange);
-    // Initial check in case the system theme changed while the app was closed
-    handleSystemChange();
-
-    return () => mediaQuery.removeEventListener('change', handleSystemChange);
-  }, [selectedTheme, memoizedApplyTheme]); // Re-run if selectedTheme or apply function changes
-
-  // Handler to change theme (existing)
+  // When the user changes the theme
   const handleThemeChange = useCallback(async (newTheme: Theme) => {
     setSelectedTheme(newTheme);
-    memoizedApplyTheme(newTheme); // Apply theme immediately
+    memoizedApplyTheme(newTheme);
     try {
-      await window.electronAPI.setTheme(newTheme);
+      await window.electron.setTheme(newTheme);
     } catch (error) {
-      console.error("Failed to save theme setting:", error);
-      // Optionally revert state or show error message
+      // handle error
     }
-  }, [memoizedApplyTheme]); // Depend on memoized function
+  }, [memoizedApplyTheme]);
 
   // vvv Load sources on mount (moved from SourcesManager) vvv
   useEffect(() => {
@@ -853,7 +865,7 @@ function App() {
       setGlobalError(null); // Clear previous errors
       setIsLoadingSources(true);
       try {
-        const loadedSources = await window.electronAPI.getSources();
+        const loadedSources = await window.electron.getSources();
         if (isMounted) {
           setSources(loadedSources || []); // Handle null/undefined case
         }
@@ -891,7 +903,7 @@ function App() {
     setGlobalError(null);
     setGlobalSuccessMessage(null);
     try {
-      const result = await window.electronAPI.saveSources(updatedSources);
+      const result = await window.electron.saveSources(updatedSources);
       if (!result.success) {
         throw new Error(result.error || "Unknown error saving sources");
       }
@@ -932,7 +944,7 @@ function App() {
 
       // Debounce the notification to main process
       resizeTimeout = setTimeout(() => {
-        window.electronAPI.notifyResize(width, height);
+        window.electron.notifyResize(width, height);
       }, 250);
     });
 
@@ -956,21 +968,43 @@ function App() {
 
   // Listen for update events
   useEffect(() => {
-    window.electronAPI.onUpdateStatus((status) => {
+    window.electron.onUpdateStatus((status) => {
       setUpdateStatus(status);
       if (status.includes('Update available')) {
         setUpdateAvailable(true);
       }
     });
     
-    window.electronAPI.onUpdateProgress((progress) => {
+    window.electron.onUpdateProgress((progress) => {
       setUpdateProgress(progress);
     });
     
-    window.electronAPI.onUpdateDownloaded(() => {
+    window.electron.onUpdateDownloaded(() => {
       setUpdateStatus('Update downloaded. Ready to install.');
     });
   }, []);
+
+  useEffect(() => {
+    window.electron.receive('open-settings', () => setCurrentView('settings'));
+    return () => {
+      window.electron.removeAllListeners('open-settings');
+    };
+  }, []);
+
+  useEffect(() => {
+    // Only auto-switch if theme is set to 'system'
+    if (selectedTheme === 'system') {
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = () => {
+        const isDark = media.matches;
+        // Apply your theme logic here
+        document.body.classList.toggle('dark-theme', isDark);
+      };
+      handleChange(); // Set on mount
+      media.addEventListener('change', handleChange);
+      return () => media.removeEventListener('change', handleChange);
+    }
+  }, [selectedTheme]);
 
   if (isThemeLoading) {
     return <div>Loading...</div>;
@@ -1055,7 +1089,7 @@ function App() {
         )}
         {/* ^^^ Render BulkImportManager ^^^ */}
         {currentView === 'custom' && <CustomRulesEditor />}
-        {currentView === 'process' && <ProcessingControls />}
+        {currentView === 'process' && <ProcessingControls savePath={savePath} />}
         {currentView === 'settings' && (
           <Settings
             currentTheme={selectedTheme}
@@ -1064,24 +1098,34 @@ function App() {
         )}
       </div>
 
-      {/* vvv Update Footer vvv */}
+      { /* --- Footer --- */}
       <footer className="app-footer">
-        Made with ❤️ by Daniel Hipskind
-        {updateStatus && (
-          <span style={{ marginLeft: '20px', fontSize: '11px' }}>
-            {updateStatus}
-            {updateAvailable && (
-              <button 
-                onClick={() => window.electronAPI.installUpdate()}
-                style={{ marginLeft: '5px', padding: '0px 5px', fontSize: '10px' }}
-              >
-                Install
-              </button>
-            )}
-          </span>
-        )}
+        <div className="footer-left">
+          Made with
+          <svg xmlns="http://www.w3.org/2000/svg" className="heart-svg" width="24" height="24" viewBox="0 0 24 24">
+            <path
+            className="heart-shape"
+            d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+            fill="#ff5a5f"
+            stroke="#ff5a5f"
+            strokeWidth="1"
+          />
+          </svg>
+          by Daniel Hipskind
+        </div>
+        <div className="footer-donate">
+          <a href="https://danielhipskind.bio" target="_blank" rel="noopener noreferrer">
+            <span className="donate-icon">
+              {/* Money SVG */}
+              <svg className="donate-money" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="22" height="22">
+                <path d="M256 416c114.9 0 208-93.1 208-208S370.9 0 256 0 48 93.1 48 208s93.1 208 208 208zM233.8 97.4V80.6c0-9.2 7.4-16.6 16.6-16.6h11.1c9.2 0 16.6 7.4 16.6 16.6v17c15.5 .8 30.5 6.1 43 15.4 5.6 4.1 6.2 12.3 1.2 17.1L306 145.6c-3.8 3.7-9.5 3.8-14 1-5.4-3.4-11.4-5.1-17.8-5.1h-38.9c-9 0-16.3 8.2-16.3 18.3 0 8.2 5 15.5 12.1 17.6l62.3 18.7c25.7 7.7 43.7 32.4 43.7 60.1 0 34-26.4 61.5-59.1 62.4v16.8c0 9.2-7.4 16.6-16.6 16.6h-11.1c-9.2 0-16.6-7.4-16.6-16.6v-17c-15.5-.8-30.5-6.1-43-15.4-5.6-4.1-6.2-12.3-1.2-17.1l16.3-15.5c3.8-3.7 9.5-3.8 14-1 5.4 3.4 11.4 5.1 17.8 5.1h38.9c9 0 16.3-8.2 16.3-18.3 0-8.2-5-15.5-12.1-17.6l-62.3-18.7c-25.7-7.7-43.7-32.4-43.7-60.1 .1-34 26.4-61.5 59.1-62.4zM480 352h-32.5c-19.6 26-44.6 47.7-73 64h63.8c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8h63.8c-28.4-16.3-53.3-38-73-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32z"/>
+              </svg>
+            </span>
+            Donate
+          </a>
+        </div>
       </footer>
-      {/* ^^^ Update Footer ^^^ */}
+      {}
 
     </div> // End of container div
   );

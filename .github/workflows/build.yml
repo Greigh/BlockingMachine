@@ -7,32 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: |
-          npm install
-      - name: Build Windows app
-        run: npm run make:win
-      - name: Create directories and compress Windows artifacts
-        run: |
-          mkdir -p compressed
-          mkdir -p installers
-          Move-Item -Path out/make/**/*.exe -Destination installers/ -Force
-          Compress-Archive -Path installers/*.exe -DestinationPath compressed/BlockingMachine-Windows-${{ github.ref_name }}.zip
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-build
-          path: |
-            installers/*.exe
-            compressed/*.zip
-
   build-mac:
     runs-on: macos-latest
     steps:
@@ -59,7 +33,7 @@ jobs:
 
           if [ -n "$(ls -A installers 2>/dev/null)" ]; then
             cd installers
-            tar -czf ../compressed/BlockingMachine-macOS-${{ github.ref_name }}.tar.gz *
+            tar -czf ../compressed/Blockingmachine-macOS-${{ github.ref_name }}.tar.gz *
             cd ..
           else
             echo "No files to compress"
@@ -74,7 +48,7 @@ jobs:
 
   # New job to create a GitHub Release with the built artifacts
   create-release:
-    needs: [build-windows, build-mac]
+    needs: [build-mac]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
@@ -92,14 +66,21 @@ jobs:
           echo "Listing all files in out directory:"
           find out -type f
 
+      - name: Prepare assets
+        run: |
+          mkdir -p packages/electron-app/assets
+
+          if [ ! -f "packages/electron-app/assets/dmg-background.png" ]; then
+            echo "Creating placeholder DMG background"
+            curl -o packages/electron-app/assets/dmg-background.png https://via.placeholder.com/600x400/2C3E50/FFFFFF
+          fi
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            windows-build/installers/*.exe || true
-            windows-build/compressed/*.zip || true
-            mac-build/installers/*.dmg || true
-            mac-build/compressed/*.tar.gz || true
+            mac-build/installers/*.dmg
+            mac-build/compressed/*.tar.gz
           draft: false
           prerelease: true
           generate_release_notes: true

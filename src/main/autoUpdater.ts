@@ -37,6 +37,14 @@ export function initAutoUpdater(mainWindow: BrowserWindow) {
     mainWindow.webContents.send('update-status', `Error: ${err.message}`);
   });
 
+  autoUpdater.on('update-not-available', () => {
+    mainWindow.webContents.send('update-status', 'App is up to date');
+  });
+
+  autoUpdater.on('error', (err) => {
+    mainWindow.webContents.send('update-status', `Error: ${err.message}`);
+  });
+
   autoUpdater.on('download-progress', (progress) => {
     mainWindow.webContents.send('update-progress', progress.percent);
   });
@@ -44,4 +52,5 @@ export function initAutoUpdater(mainWindow: BrowserWindow) {
   autoUpdater.on('update-downloaded', () => {
     mainWindow.webContents.send('update-downloaded');
   });
+
 }

@@ -1,93 +1,68 @@
-import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
-import type { FilterSource, ProcessingResult, Theme, ElectronAPI } from './types/global.js';
+const { contextBridge, ipcRenderer } = require('electron');
+import type { IpcRendererEvent } from 'electron';
 
-const electronAPI: ElectronAPI = {
+// Define the API type
+interface ElectronAPI {
+  getFilterSources: () => Promise<any[]>;
+  setFilterSources: (sources: any[]) => Promise<void>;
+  getSources: () => Promise<any[]>;
+  setSources: (sources: any[]) => Promise<void>;
+  saveSources: (sources: any[]) => Promise<{ success: boolean; error?: string }>;
+  getCustomRules: () => Promise<string>;
+  setCustomRules: (rules: string) => Promise<void>;
+  getSavePath: () => Promise<string>;
+  setSavePath: (path: string) => Promise<void>;
+  selectSavePath: () => Promise<string>;
+  getExportFormat: () => Promise<string>;
+  setExportFormat: (format: string) => Promise<{ success: boolean; error?: string }>;
+  getTheme: () => Promise<string>;
+  setTheme: (theme: string) => Promise<void>;
+  onUpdateAvailable: (callback: (event: IpcRendererEvent, info: any) => void) => void;
+  onUpdateDownloaded: (callback: (event: IpcRendererEvent, info: any) => void) => void;
+  onUpdateError: (callback: (event: IpcRendererEvent, error: Error) => void) => void;
+  onUpdateStatus: (callback: (event: IpcRendererEvent, info: any) => void) => void;
+  onProcessProgress: (callback: (progress: any) => void) => void;
+  removeProcessProgressListener: () => void;
+  onUpdateProgress: (callback: (progress: any) => void) => void;
+  getLastProcessTime: () => Promise<string>;
+  notifyResize: (width: number, height: number) => void;
+  runImportProcess: () => Promise<void>;
+  on: (channel: string, listener: (...args: any[]) => void) => void;
+  receive: (channel: string, callback: (...args: any[]) => void) => void;
+  removeAllListeners: (channel: string) => void;
+  showItemInFolder: (path: string) => void;
+}
+
+// Expose the API to the renderer process
+contextBridge.exposeInMainWorld('electron', {
+  getFilterSources: () => ipcRenderer.invoke('get-filter-sources'),
+  setFilterSources: (sources) => ipcRenderer.invoke('set-filter-sources', sources),
   getSources: () => ipcRenderer.invoke('get-sources'),
+  setSources: (sources) => ipcRenderer.invoke('save-sources', sources),
   saveSources: (sources) => ipcRenderer.invoke('save-sources', sources),
   getCustomRules: () => ipcRenderer.invoke('get-custom-rules'),
-  saveCustomRules: (rules) => ipcRenderer.invoke('save-custom-rules', rules),
-  runImportProcess: () => ipcRenderer.invoke('run-import-process'),
-  browseSavePath: () => ipcRenderer.invoke('browse-save-path'),
-  getTheme: () => ipcRenderer.invoke('get-theme'),
-  setTheme: (theme) => ipcRenderer.invoke('set-theme', theme),
-  notifyResize: (width, height) => {
-    ipcRenderer.send('notify-content-size', width, height);
-  },
+  setCustomRules: (rules) => ipcRenderer.invoke('save-custom-rules', rules),
   getSavePath: () => ipcRenderer.invoke('get-save-path'),
-  selectSavePath: () => ipcRenderer.invoke('select-save-path'),
-  
-  // Update related handlers
-  onUpdateStatus: (callback) => {
-    ipcRenderer.on('update-status', (_: IpcRendererEvent, status: string) => callback(status));
-  },
-  onUpdateProgress: (callback) => {
-    ipcRenderer.on('update-progress', (_: IpcRendererEvent, percent: number) => callback(percent));
-  },
-  onUpdateDownloaded: (callback) => {
-    ipcRenderer.on('update-downloaded', (_: IpcRendererEvent) => callback());
-  },
-  
-  // Additional update handlers and other API methods
-  onUpdateError: (callback) => {
-    ipcRenderer.on('update-error', (_: IpcRendererEvent, error: string) => callback(error));
-  },
-  
-  // Processing progress handlers
-  getLastProcessTime: () => ipcRenderer.invoke('get-last-process-time'),
-  onProcessProgress: (callback: (data: { status: string; percent: number }) => void) => {
-    const handler = (_event: IpcRendererEvent, data: { status: string; percent: number }) => callback(data);
-    ipcRenderer.on('process-progress', handler);
-  },
-  removeProcessProgressListener: (callback?: () => void) => {
-    ipcRenderer.removeAllListeners('process-progress');
-    if (callback) callback();
-  },
-  
-  // Export format handlers
+  setSavePath: (path) => ipcRenderer.invoke('set-save-path', path),
+  selectSavePath: () => ipcRenderer.invoke('select-save-path') as Promise<string>,
   getExportFormat: () => ipcRenderer.invoke('get-export-format'),
   setExportFormat: (format) => ipcRenderer.invoke('set-export-format', format),
-  
-  // Other required API methods
-  installUpdate: () => ipcRenderer.invoke('install-update'),
-  
-  // Various update status event handlers
-  onUpdateAvailable: (callback) => {
-    ipcRenderer.on('update-available', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateNotAvailable: (callback) => {
-    ipcRenderer.on('update-not-available', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateNotSupported: (callback) => {
-    ipcRenderer.on('update-not-supported', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckError: (callback) => {
-    ipcRenderer.on('update-check-error', (_: IpcRendererEvent, error: string) => callback(error));
-  },
-  onUpdateCheckSuccess: (callback) => {
-    ipcRenderer.on('update-check-success', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckNotAvailable: (callback) => {
-    ipcRenderer.on('update-check-not-available', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckNotSupported: (callback) => {
-    ipcRenderer.on('update-check-not-supported', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckInProgress: (callback) => {
-    ipcRenderer.on('update-check-in-progress', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckCompleted: (callback) => {
-    ipcRenderer.on('update-check-completed', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckCanceled: (callback) => {
-    ipcRenderer.on('update-check-canceled', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckTimeout: (callback) => {
-    ipcRenderer.on('update-check-timeout', (_: IpcRendererEvent) => callback());
-  },
-  onUpdateCheckRateLimited: (callback) => {
-    ipcRenderer.on('update-check-rate-limited', (_: IpcRendererEvent) => callback());
-  },
-  setSavePath: (path) => ipcRenderer.invoke('set-save-path', path),
-};
-
-contextBridge.exposeInMainWorld('electronAPI', electronAPI);
+  getTheme: () => ipcRenderer.invoke('get-theme'),
+  setTheme: (theme) => ipcRenderer.invoke('set-theme', theme),
+  onUpdateAvailable: (callback) => ipcRenderer.on('update-available', callback),
+  onUpdateDownloaded: (callback) => ipcRenderer.on('update-downloaded', callback),
+  onUpdateError: (callback) => ipcRenderer.on('update-error', callback),
+  onUpdateStatus: (callback) => ipcRenderer.on('update-status', callback),
+  onProcessProgress: (callback: (progress: any) => void) =>
+    ipcRenderer.on('process-progress', (_event: IpcRendererEvent, progress: any) => callback(progress)),
+  removeProcessProgressListener: () => ipcRenderer.removeAllListeners('process-progress'),
+  onUpdateProgress: (callback: (progress: any) => void) =>
+    ipcRenderer.on('update-progress', (_event: IpcRendererEvent, progress: any) => callback(progress)),
+  getLastProcessTime: () => ipcRenderer.invoke('get-last-process-time'),
+  notifyResize: (width: number, height: number) => ipcRenderer.send('notify-resize', width, height),
+  runImportProcess: () => ipcRenderer.invoke('run-import-process'),
+  on: (channel: string, listener: (...args: any[]) => void) => ipcRenderer.on(channel, listener),
+  receive: (channel: string, callback: (...args: any[]) => void) => ipcRenderer.on(channel, callback),
+  removeAllListeners: (channel: string) => ipcRenderer.removeAllListeners(channel),
+  showItemInFolder: (path: string) => ipcRenderer.send('show-item-in-folder', path),
+} as ElectronAPI);

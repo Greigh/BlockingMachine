@@ -32,6 +32,7 @@ Desktop.ini
 # Build artifacts
 dist/
 build/
+.build
 *.app
 *.dmg
 *.zip
