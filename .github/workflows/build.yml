@@ -19,7 +19,8 @@ jobs:
           npm install
       - name: Build macOS app
         run: |
-          npm run make:mac -- --arch=arm64
+          npm run build
+
       - name: Create directories and compress macOS artifacts
         run: |
           mkdir -p compressed
