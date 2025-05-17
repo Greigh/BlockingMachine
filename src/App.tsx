@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from 'recharts';
 
-import Settings from './Settings.jsx';
-import type { FilterSource, ProcessingResult, Theme } from './types/global.js';
+import Settings from './Settings';
+import type { FilterSource, ProcessingResult, ThemeType } from './types/';
 import './index.css';
 
 // --- Helper Function (applyTheme) ---
-const applyTheme = (theme: Theme) => {
+const applyTheme = (theme: ThemeType) => {
   const body = document.body;
   body.classList.remove('light-theme', 'dark-theme');
 
@@ -14,27 +26,36 @@ const applyTheme = (theme: Theme) => {
     body.classList.add('light-theme');
   } else if (theme === 'dark') {
     body.classList.add('dark-theme');
-  } else { // System theme
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  } else {
+    // System theme
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
       body.classList.add('dark-theme');
-    } else { // System theme
-      try {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          body.classList.add('dark-theme');
-        } else {
-          body.classList.add('light-theme');
-        }
-      } catch (err) {
-        console.error("Failed to apply system theme:", err);
-      }
+    } else {
+      body.classList.add('light-theme');
     }
+  }
+};
+
+// --- Helper Function (handleExternalLink) ---
+const handleExternalLink = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, url: string) => {
+  e.preventDefault();
+  try {
+    await window.electron.openExternal(url);
+  } catch (error) {
+    console.error('Failed to open link:', error);
   }
 };
 
 // --- BulkImportManager Component ---
 interface BulkImportManagerProps {
   currentSources: FilterSource[];
-  saveSources: (updatedSources: FilterSource[], successMsg?: string) => Promise<void>;
+  saveSources: (
+    updatedSources: FilterSource[],
+    successMsg?: string
+  ) => Promise<void>;
   setError: (error: string | null) => void;
   setSuccessMessage: (message: string | null) => void;
 }
@@ -43,7 +64,7 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
   currentSources,
   saveSources,
   setError,
-  setSuccessMessage
+  setSuccessMessage,
 }) => {
   const [bulkUrls, setBulkUrls] = useState('');
   const [isImporting, setIsImporting] = useState(false);
@@ -53,9 +74,12 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
     setSuccessMessage(null);
     setIsImporting(true);
 
-    const urls = bulkUrls.split('\n').map(url => url.trim()).filter(url => url.length > 0);
+    const urls = bulkUrls
+      .split('\n')
+      .map((url) => url.trim())
+      .filter((url) => url.length > 0);
     if (urls.length === 0) {
-      setError("No URLs entered in the bulk import field.");
+      setError('No URLs entered in the bulk import field.');
       setIsImporting(false);
       return;
     }
@@ -67,16 +91,19 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
     urls.forEach((url, lineIndex) => {
       try {
         const parsedUrl = new URL(url);
-        if (currentSources.some(s => s.url === url) || newSources.some(s => s.url === url)) {
+        if (
+          currentSources.some((s) => s.url === url) ||
+          newSources.some((s) => s.url === url)
+        ) {
           skippedCount++;
           return;
         }
-        
+
         let name = parsedUrl.hostname.replace(/^www\./, '');
         let originalName = name;
         let counter = 1;
-        
-        while (currentSources.concat(newSources).some(s => s.name === name)) {
+
+        while (currentSources.concat(newSources).some((s) => s.name === name)) {
           name = `${originalName} (${++counter})`;
         }
 
@@ -93,7 +120,8 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
       const updatedSources = [...currentSources, ...newSources];
       try {
         await saveSources(updatedSources);
-        finalSuccessMessage = `Imported ${newSources.length} new sources.` + 
+        finalSuccessMessage =
+          `Imported ${newSources.length} new sources.` +
           (skippedCount > 0 ? ` Skipped ${skippedCount} duplicates.` : '');
         setBulkUrls('');
       } catch (saveError) {
@@ -104,7 +132,8 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
     }
 
     if (importErrors.length > 0) {
-      finalErrorMessage = (finalErrorMessage ? finalErrorMessage + '\n' : '') + 
+      finalErrorMessage =
+        (finalErrorMessage ? finalErrorMessage + '\n' : '') +
         `Bulk import errors:\n${importErrors.join('\n')}`;
     }
 
@@ -117,7 +146,9 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
   return (
     <div className="section">
       <h2>Bulk Import Sources</h2>
-      <p>Enter one source URL per line. Duplicates based on URL will be skipped.</p>
+      <p>
+        Enter one source URL per line. Duplicates based on URL will be skipped.
+      </p>
       <textarea
         value={bulkUrls}
         onChange={(e) => setBulkUrls(e.target.value)}
@@ -125,7 +156,10 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
         rows={10}
         disabled={isImporting}
       />
-      <button onClick={handleBulkImport} disabled={!bulkUrls.trim() || isImporting}>
+      <button
+        onClick={handleBulkImport}
+        disabled={!bulkUrls.trim() || isImporting}
+      >
         {isImporting ? 'Importing...' : 'Import URLs'}
       </button>
     </div>
@@ -136,7 +170,10 @@ const BulkImportManager: React.FC<BulkImportManagerProps> = ({
 // --- SourcesManager Component ---
 interface SourcesManagerProps {
   sources: FilterSource[];
-  saveSources: (updatedSources: FilterSource[], successMsg?: string) => Promise<void>;
+  saveSources: (
+    updatedSources: FilterSource[],
+    successMsg?: string
+  ) => Promise<void>;
   setError: (error: string | null) => void;
   setSuccessMessage: (message: string | null) => void;
 }
@@ -145,7 +182,7 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
   sources,
   saveSources,
   setError,
-  setSuccessMessage
+  setSuccessMessage,
 }) => {
   const [newSourceName, setNewSourceName] = useState('');
   const [newSourceUrl, setNewSourceUrl] = useState('');
@@ -156,21 +193,25 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
   // --- Handlers ---
   const handleAddSource = () => {
     if (!newSourceName.trim() || !newSourceUrl.trim()) {
-      setError("Source name and URL cannot be empty.");
+      setError('Source name and URL cannot be empty.');
       return;
     }
-    
+
     // Basic URL validation (consider a more robust library if needed)
     try {
       new URL(newSourceUrl);
     } catch (_) {
-      setError("Invalid URL format.");
+      setError('Invalid URL format.');
       return;
     }
 
     // Check for duplicate name or URL before adding
-    if (sources.some(s => s.name === newSourceName.trim() || s.url === newSourceUrl.trim())) {
-      setError("Source with this name or URL already exists.");
+    if (
+      sources.some(
+        (s) => s.name === newSourceName.trim() || s.url === newSourceUrl.trim()
+      )
+    ) {
+      setError('Source with this name or URL already exists.');
       return;
     }
 
@@ -181,17 +222,20 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
     };
 
     const updatedSources = [...sources, newSource];
-    saveSources(updatedSources, `Source "${newSource.name}" added.`)
-      .then(() => {
+    saveSources(updatedSources, `Source "${newSource.name}" added.`).then(
+      () => {
         // Clear input fields only on successful save
         setNewSourceName('');
         setNewSourceUrl('');
-      });
+      }
+    );
   };
 
   const handleRemoveSource = (indexToRemove: number) => {
     const sourceName = sources[indexToRemove]?.name || 'Source';
-    const updatedSources = sources.filter((_, index) => index !== indexToRemove);
+    const updatedSources = sources.filter(
+      (_, index) => index !== indexToRemove
+    );
     saveSources(updatedSources, `"${sourceName}" removed.`);
   };
 
@@ -223,19 +267,25 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
   const handleSaveEdit = () => {
     if (editingIndex === null) return;
     if (!editName.trim() || !editUrl.trim()) {
-      setError("Source name and URL cannot be empty during edit.");
+      setError('Source name and URL cannot be empty during edit.');
       return;
     }
     try {
       new URL(editUrl); // Validate URL
     } catch (_) {
-      setError("Invalid URL format during edit.");
+      setError('Invalid URL format during edit.');
       return;
     }
 
     // Check if name/URL conflicts with *other* existing sources
-    if (sources.some((s, i) => i !== editingIndex && (s.name === editName.trim() || s.url === editUrl.trim()))) {
-      setError("Edited name or URL conflicts with another existing source.");
+    if (
+      sources.some(
+        (s, i) =>
+          i !== editingIndex &&
+          (s.name === editName.trim() || s.url === editUrl.trim())
+      )
+    ) {
+      setError('Edited name or URL conflicts with another existing source.');
       return;
     }
 
@@ -246,16 +296,16 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
       return source;
     });
 
-    saveSources(updatedSources, `Source "${editName.trim()}" updated.`)
-      .then(() => {
+    saveSources(updatedSources, `Source "${editName.trim()}" updated.`).then(
+      () => {
         // Exit edit mode only on successful save
         setEditingIndex(null);
         setEditName('');
         setEditUrl('');
-      });
+      }
+    );
   };
   // ^^^ Handlers for editing ^^^
-
 
   // --- Render ---
   return (
@@ -270,22 +320,41 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
             <span>Filter Sources</span>
             <span>{sources.length} Sources</span>
           </div>
-          {sources.map((source, index) => (  // add index parameter here
-            <div className="source-list-item" key={index}>
-              <label className="toggle-switch">
-                <input type="checkbox" checked={source.enabled} onChange={() => handleToggleEnabled(index)} />
-                <span className="toggle-slider"></span>
-              </label>
-              <div className="source-list-content">
-                <div className="source-name">{source.name}</div>
-                <div className="source-url">{source.url}</div>
+          {sources.map(
+            (
+              source,
+              index // add index parameter here
+            ) => (
+              <div className="source-list-item" key={index}>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={source.enabled}
+                    onChange={() => handleToggleEnabled(index)}
+                  />
+                  <span className="toggle-slider"></span>
+                </label>
+                <div className="source-list-content">
+                  <div className="source-name">{source.name}</div>
+                  <div className="source-url">{source.url}</div>
+                </div>
+                <div className="source-actions">
+                  <button
+                    className="source-action-btn secondary"
+                    onClick={() => handleStartEdit(index)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="source-action-btn secondary"
+                    onClick={() => handleRemoveSource(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-              <div className="source-actions">
-                <button className="source-action-btn secondary" onClick={() => handleStartEdit(index)}>Edit</button>
-                <button className="source-action-btn secondary" onClick={() => handleRemoveSource(index)}>Remove</button>
-              </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       )}
       {sources.length === 0 && (
@@ -295,9 +364,13 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
           <div className="empty-state-description">
             Add filter list sources to start building your blocklist.
           </div>
-          <button onClick={() => {
-            document.getElementById('new-source-name')?.focus();
-          }}>Add First Source</button>
+          <button
+            onClick={() => {
+              document.getElementById('new-source-name')?.focus();
+            }}
+          >
+            Add First Source
+          </button>
         </div>
       )}
 
@@ -324,20 +397,26 @@ const SourcesManager: React.FC<SourcesManagerProps> = ({
             placeholder="https://easylist.to/easylist/easylist.txt"
           />
         </div>
-        <button onClick={handleAddSource} disabled={!newSourceName || !newSourceUrl}>Add Source</button>
+        <button
+          onClick={handleAddSource}
+          disabled={!newSourceName || !newSourceUrl}
+        >
+          Add Source
+        </button>
       </div>
     </div>
   );
 };
 // --- End SourcesManager Component ---
 
-
 // --- CustomRulesEditor Component ---
 const CustomRulesEditor = () => {
   const [rules, setRules] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+  const [saveStatus, setSaveStatus] = useState<
+    'idle' | 'saving' | 'success' | 'error'
+  >('idle');
 
   // Load custom rules on mount
   useEffect(() => {
@@ -352,9 +431,11 @@ const CustomRulesEditor = () => {
           setRules(loadedRules || '');
         }
       } catch (err) {
-        console.error("Failed to load custom rules:", err);
+        console.error('Failed to load custom rules:', err);
         if (isMounted) {
-          setError(err instanceof Error ? err.message : "Failed to load custom rules.");
+          setError(
+            err instanceof Error ? err.message : 'Failed to load custom rules.'
+          );
         }
       } finally {
         if (isMounted) {
@@ -363,7 +444,9 @@ const CustomRulesEditor = () => {
       }
     };
     loadRules();
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, []); // Empty dependency array means run once on mount
 
   // Add handler to save custom rules
@@ -376,8 +459,10 @@ const CustomRulesEditor = () => {
       // Optionally clear success message after a delay
       setTimeout(() => setSaveStatus('idle'), 2000);
     } catch (err) {
-      console.error("Failed to save custom rules:", err);
-      setError(err instanceof Error ? err.message : "Failed to save custom rules.");
+      console.error('Failed to save custom rules:', err);
+      setError(
+        err instanceof Error ? err.message : 'Failed to save custom rules.'
+      );
       setSaveStatus('error');
     }
   };
@@ -387,12 +472,19 @@ const CustomRulesEditor = () => {
       <h2>Custom Rules</h2>
       <p>Enter custom filter rules below (one per line).</p>
       <ul style={{ marginBottom: '1rem' }}>
-        <li>For blocking rules, use: <code>||example.com^</code></li>
-        <li>For exception rules, use: <code>@@||example.com^</code> (note the <code>@@</code> prefix)</li>
+        <li>
+          For blocking rules, use: <code>||example.com^</code>
+        </li>
+        <li>
+          For exception rules, use: <code>@@||example.com^</code> (note the{' '}
+          <code>@@</code> prefix)
+        </li>
       </ul>
       {isLoading && <p>Loading...</p>}
       {/* Display loading error */}
-      {!isLoading && error && saveStatus !== 'saving' && <p style={{ color: 'red' }}>Error: {error}</p>}
+      {!isLoading && error && saveStatus !== 'saving' && (
+        <p style={{ color: 'red' }}>Error: {error}</p>
+      )}
       <textarea
         placeholder="||example.com^ ← blocking rule
 @@||example.com/ads^ ← exception rule"
@@ -409,12 +501,26 @@ const CustomRulesEditor = () => {
         disabled={isLoading || saveStatus === 'saving'} // Disable during initial load or save
       />
       {/* Save button div */}
-      <div style={{ marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <button onClick={handleSaveCustomRules} disabled={isLoading || saveStatus === 'saving'}>
+      <div
+        style={{
+          marginTop: '0.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+        }}
+      >
+        <button
+          onClick={handleSaveCustomRules}
+          disabled={isLoading || saveStatus === 'saving'}
+        >
           {saveStatus === 'saving' ? 'Saving...' : 'Save Custom Rules'}
         </button>
-        {saveStatus === 'success' && <span style={{ color: 'green' }}>✅ Saved!</span>}
-        {saveStatus === 'error' && <span style={{ color: 'red' }}>❌ Save failed: {error}</span>}
+        {saveStatus === 'success' && (
+          <span style={{ color: 'green' }}>✅ Saved!</span>
+        )}
+        {saveStatus === 'error' && (
+          <span style={{ color: 'red' }}>❌ Save failed: {error}</span>
+        )}
       </div>
     </div>
   );
@@ -432,14 +538,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       <p className="tooltip-label">{label}</p>
       {payload.map((entry: any, index: number) => (
         <div className="tooltip-item" key={`item-${index}`}>
-          <div 
-            className="tooltip-color" 
-            style={{ backgroundColor: entry.color }} 
+          <div
+            className="tooltip-color"
+            style={{ backgroundColor: entry.color }}
           />
           <span className="tooltip-name">{entry.name}:</span>
-          <span className="tooltip-value">
-            {entry.value.toLocaleString()}
-          </span>
+          <span className="tooltip-value">{entry.value.toLocaleString()}</span>
         </div>
       ))}
     </div>
@@ -452,7 +556,9 @@ interface ProcessingControlsProps {
   savePath: string;
 }
 
-const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => {
+const ProcessingControls: React.FC<ProcessingControlsProps> = ({
+  savePath,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<ProcessingResult | null>(null);
@@ -469,7 +575,7 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
     enabledSources: 0,
     totalSources: 0,
     customRulesCount: 0,
-    lastProcessedTime: null
+    lastProcessedTime: null,
   });
 
   // Load dashboard stats
@@ -478,42 +584,47 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
       try {
         // Get current sources
         const sources = await window.electron.getSources();
-        const enabledSources = sources.filter((s: FilterSource) => s.enabled).length;
-        
+        const enabledSources = sources.filter(
+          (s: FilterSource) => s.enabled
+        ).length;
+
         // Get custom rules
         const customRules = await window.electron.getCustomRules();
-        const customRulesCount = customRules.split('\n')
-          .filter((line: string) => line.trim() && !line.trim().startsWith('#')).length;
-          
+        const customRulesCount = customRules
+          .split('\n')
+          .filter(
+            (line: string) => line.trim() && !line.trim().startsWith('#')
+          ).length;
+
         // Get last process time
         const lastProcessTime = await window.electron.getLastProcessTime();
-        
+
         setDashboardStats({
           enabledSources,
           totalSources: sources.length,
           customRulesCount,
-          lastProcessedTime: lastProcessTime
+          lastProcessedTime: lastProcessTime,
         });
       } catch (err) {
-        console.error("Failed to load dashboard stats:", err);
+        console.error('Failed to load dashboard stats:', err);
       }
     };
-    
+
     loadStats();
   }, []);
 
   useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (
-      e.key === 'F12' ||
-      (e.metaKey && e.altKey && e.key.toLowerCase() === 'i') ||
-      (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i')
-    ) {
-      e.preventDefault();
-    }
-  };
-  window.addEventListener('keydown', handler);
-  return () => window.removeEventListener('keydown', handler);
+    const handler = (e: KeyboardEvent) => {
+      if (
+        e.key === 'F12' ||
+        (e.metaKey && e.altKey && e.key.toLowerCase() === 'i') ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i')
+      ) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
   }, []);
 
   // Listen for progress updates
@@ -521,9 +632,9 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
     const onProgressUpdate = (data: { status: string; percent: number }) => {
       setProgress(data);
     };
-    
+
     window.electron.onProcessProgress(onProgressUpdate);
-    
+
     return () => {
       window.electron.removeProcessProgressListener();
     };
@@ -534,27 +645,30 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
     setError(null);
     setLastResult(null);
     setProgress({ status: 'Initializing process...', percent: 0 });
-    
+
     try {
       const result = await window.electron.runImportProcess();
       setLastResult(result);
-      
+
       // Refresh dashboard stats after processing
       const sources = await window.electron.getSources();
       const lastProcessTime = await window.electron.getLastProcessTime();
-      setDashboardStats(prev => ({
+      setDashboardStats((prev) => ({
         ...prev,
         enabledSources: sources.filter((s: FilterSource) => s.enabled).length,
         totalSources: sources.length,
-        lastProcessedTime: lastProcessTime
+        lastProcessedTime: lastProcessTime,
       }));
-      
+
       if (!result.success) {
-        setError(result.error || "An unknown error occurred during processing.");
+        setError(
+          result.error || 'An unknown error occurred during processing.'
+        );
       }
     } catch (err) {
       console.error('Error running process:', err);
-      const message = err instanceof Error ? err.message : "An unexpected error occurred.";
+      const message =
+        err instanceof Error ? err.message : 'An unexpected error occurred.';
       setError(message);
     } finally {
       setIsLoading(false);
@@ -567,7 +681,8 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
       <div className="process-header">
         <h2>Blockingmachine Filter Processor</h2>
         <p>
-          Combine, deduplicate, and optimize filter lists from your configured sources.
+          Combine, deduplicate, and optimize filter lists from your configured
+          sources.
         </p>
       </div>
 
@@ -576,24 +691,32 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
         <div className="dashboard-card">
           <div className="dashboard-icon">📋</div>
           <div className="dashboard-stat-content">
-            <span className="dashboard-stat-value">{dashboardStats.enabledSources}/{dashboardStats.totalSources}</span>
+            <span className="dashboard-stat-value">
+              {dashboardStats.enabledSources}/{dashboardStats.totalSources}
+            </span>
             <span className="dashboard-stat-label">Active Sources</span>
           </div>
         </div>
-        
+
         <div className="dashboard-card">
           <div className="dashboard-icon">✏️</div>
           <div className="dashboard-stat-content">
-            <span className="dashboard-stat-value">{dashboardStats.customRulesCount}</span>
+            <span className="dashboard-stat-value">
+              {dashboardStats.customRulesCount}
+            </span>
             <span className="dashboard-stat-label">Custom Rules</span>
           </div>
         </div>
-        
+
         <div className="dashboard-card">
           <div className="dashboard-icon">🕒</div>
           <div className="dashboard-stat-content">
-            <span className="dashboard-stat-value">{dashboardStats.lastProcessedTime ? 'Last Run' : 'Never Run'}</span>
-            <span className="dashboard-stat-label">{dashboardStats.lastProcessedTime || 'Run your first process'}</span>
+            <span className="dashboard-stat-value">
+              {dashboardStats.lastProcessedTime ? 'Last Run' : 'Never Run'}
+            </span>
+            <span className="dashboard-stat-label">
+              {dashboardStats.lastProcessedTime || 'Run your first process'}
+            </span>
           </div>
         </div>
       </div>
@@ -602,14 +725,18 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
       {dashboardStats.lastProcessedTime && (
         <div className="last-processed-card">
           <div className="last-processed-title">Last Processing Time</div>
-          <div className="last-processed-time">{dashboardStats.lastProcessedTime}</div>
+          <div className="last-processed-time">
+            {dashboardStats.lastProcessedTime}
+          </div>
           <button
             onClick={() => window.electron.showItemInFolder(savePath)}
             disabled={!savePath}
             className="process-button show-in-finder-btn"
             style={{}}
           >
-            <span role="img" aria-label="finder" style={{ marginRight: 6 }}>🗂️</span>
+            <span role="img" aria-label="finder" style={{ marginRight: 6 }}>
+              🗂️
+            </span>
             Show in Finder
           </button>
         </div>
@@ -620,11 +747,12 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
           <h3>Run Processing</h3>
           <p>
             Download sources, parse rules, and generate optimized filter lists.
-            This process may take several seconds depending on the number of enabled sources.
+            This process may take several seconds depending on the number of
+            enabled sources.
           </p>
-          
-          <button 
-            onClick={handleRunProcess} 
+
+          <button
+            onClick={handleRunProcess}
             disabled={isLoading}
             className="process-button"
           >
@@ -637,13 +765,13 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
             )}
           </button>
           {/* Show item in folder */}
-          
+
           {isLoading && progress && (
             <div className="progress-container">
               <div className="progress-status">{progress.status}</div>
               <div className="progress-bar-outer">
-                <div 
-                  className="progress-bar-inner" 
+                <div
+                  className="progress-bar-inner"
                   style={{ width: `${progress.percent}%` }}
                 ></div>
               </div>
@@ -655,7 +783,9 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
 
       {/* Results Card */}
       {lastResult && (
-        <div className={`process-card results-card ${lastResult.success ? 'success' : 'error'}`}>
+        <div
+          className={`process-card results-card ${lastResult.success ? 'success' : 'error'}`}
+        >
           <div className="card-header">
             <h3>
               {lastResult.success ? (
@@ -682,7 +812,7 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
                       Rules processed from all sources
                     </div>
                   </div>
-                  
+
                   <div className="summary-card">
                     <div className="summary-card-header">
                       <h4 className="summary-card-title">Unique Rules</h4>
@@ -691,9 +821,9 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
                       {lastResult.uniqueRuleCount?.toLocaleString() ?? 'N/A'}
                     </div>
                     <div className="summary-card-footer">
-                      {lastResult.processedRuleCount > 0 ? (
-                        `${((1 - lastResult.uniqueRuleCount / lastResult.processedRuleCount) * 100).toFixed(1)}% deduplication rate`
-                      ) : 'N/A'}
+                      {lastResult.processedRuleCount > 0
+                        ? `${((1 - lastResult.uniqueRuleCount / lastResult.processedRuleCount) * 100).toFixed(1)}% deduplication rate`
+                        : 'N/A'}
                     </div>
                   </div>
                 </div>
@@ -702,23 +832,33 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
                   <div className="stat-item">
                     <span className="stat-label">Blocking Rules</span>
                     <span className="stat-value">
-                      {(lastResult.uniqueRuleCount - (lastResult.exceptionRuleCount || 0)).toLocaleString()}
+                      {(
+                        lastResult.uniqueRuleCount -
+                        (lastResult.exceptionRuleCount || 0)
+                      ).toLocaleString()}
                     </span>
                   </div>
                   <div className="stat-item">
                     <span className="stat-label">Exception Rules</span>
-                    <span className="stat-value">{lastResult.exceptionRuleCount?.toLocaleString() ?? 'N/A'}</span>
+                    <span className="stat-value">
+                      {lastResult.exceptionRuleCount?.toLocaleString() ?? 'N/A'}
+                    </span>
                   </div>
                   <div className="stat-item">
                     <span className="stat-label">Deduplication Rate</span>
                     <span className="stat-value">
-                      {lastResult.processedRuleCount > 0 
-                        ? ((1 - lastResult.uniqueRuleCount / lastResult.processedRuleCount) * 100).toFixed(2) + '%'
+                      {lastResult.processedRuleCount > 0
+                        ? (
+                            (1 -
+                              lastResult.uniqueRuleCount /
+                                lastResult.processedRuleCount) *
+                            100
+                          ).toFixed(2) + '%'
                         : 'N/A'}
                     </span>
                   </div>
                 </div>
-                
+
                 {/* Chart using Recharts */}
                 <div className="comparison-chart">
                   <h3>Rule Distribution</h3>
@@ -727,14 +867,16 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
                       <PieChart>
                         <Pie
                           data={[
-                            { 
-                              name: 'Blocking Rules', 
-                              value: lastResult.uniqueRuleCount - (lastResult.exceptionRuleCount || 0) 
+                            {
+                              name: 'Blocking Rules',
+                              value:
+                                lastResult.uniqueRuleCount -
+                                (lastResult.exceptionRuleCount || 0),
                             },
-                            { 
-                              name: 'Exception Rules', 
-                              value: lastResult.exceptionRuleCount || 0 
-                            }
+                            {
+                              name: 'Exception Rules',
+                              value: lastResult.exceptionRuleCount || 0,
+                            },
                           ]}
                           cx="50%"
                           cy="50%"
@@ -742,7 +884,9 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
                           outerRadius={80}
                           fill="#8884d8"
                           dataKey="value"
-                          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }) =>
+                            `${name}: ${(percent * 100).toFixed(0)}%`
+                          }
                         >
                           <Cell fill="#4CAF50" />
                           <Cell fill="#FFA726" />
@@ -753,7 +897,7 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
                     </ResponsiveContainer>
                   </div>
                 </div>
-                
+
                 {/* Bar Chart for filter stats */}
                 <div className="comparison-chart">
                   <h3>Filter Stats Comparison</h3>
@@ -766,8 +910,10 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
                             Processed: lastResult.processedRuleCount,
                             Unique: lastResult.uniqueRuleCount,
                             Exceptions: lastResult.exceptionRuleCount || 0,
-                            Blocking: lastResult.uniqueRuleCount - (lastResult.exceptionRuleCount || 0)
-                          }
+                            Blocking:
+                              lastResult.uniqueRuleCount -
+                              (lastResult.exceptionRuleCount || 0),
+                          },
                         ]}
                         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                       >
@@ -796,12 +942,12 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
 
       {/* Display specific error if lastResult is null but error exists (e.g., IPC call failed) */}
       {!lastResult && error && (
-         <div className="process-card error-card">
+        <div className="process-card error-card">
           <div className="card-content">
             <h3 className="error-icon">❌ Error</h3>
             <p>{error}</p>
           </div>
-         </div>
+        </div>
       )}
     </div>
   );
@@ -811,13 +957,15 @@ const ProcessingControls: React.FC<ProcessingControlsProps> = ({ savePath }) => 
 // --- Main App Component ---
 function App() {
   const [currentView, setCurrentView] = useState('process');
-  const [selectedTheme, setSelectedTheme] = useState<Theme>('system');
+  const [selectedTheme, setSelectedTheme] = useState<ThemeType>('system');
   const [isThemeLoading, setIsThemeLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const [sources, setSources] = useState<FilterSource[]>([]);
   const [isLoadingSources, setIsLoadingSources] = useState(true); // Specific loading for sources
   const [globalError, setGlobalError] = useState<string | null>(null);
-  const [globalSuccessMessage, setGlobalSuccessMessage] = useState<string | null>(null);
+  const [globalSuccessMessage, setGlobalSuccessMessage] = useState<
+    string | null
+  >(null);
   const [savePath, setSavePath] = useState<string>('');
 
   useEffect(() => {
@@ -832,10 +980,10 @@ function App() {
     let isMounted = true;
     const loadAndApplyTheme = async () => {
       try {
-        const storedTheme = await window.electron.getTheme();
+        const storedTheme = await window.electron.getTheme() as ThemeType;
         if (isMounted) {
-          setSelectedTheme(storedTheme as Theme);
-          memoizedApplyTheme(storedTheme as Theme);
+          setSelectedTheme(storedTheme);
+          memoizedApplyTheme(storedTheme);
         }
       } catch (error) {
         if (isMounted) memoizedApplyTheme('system');
@@ -844,19 +992,24 @@ function App() {
       }
     };
     loadAndApplyTheme();
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, [memoizedApplyTheme]);
 
   // When the user changes the theme
-  const handleThemeChange = useCallback(async (newTheme: Theme) => {
-    setSelectedTheme(newTheme);
-    memoizedApplyTheme(newTheme);
-    try {
-      await window.electron.setTheme(newTheme);
-    } catch (error) {
-      // handle error
-    }
-  }, [memoizedApplyTheme]);
+  const handleThemeChange = useCallback(
+    async (newTheme: ThemeType) => {
+      setSelectedTheme(newTheme);
+      memoizedApplyTheme(newTheme);
+      try {
+        await window.electron.setTheme(newTheme);
+      } catch (error) {
+        console.error('Failed to set theme:', error);
+      }
+    },
+    [memoizedApplyTheme]
+  );
 
   // vvv Load sources on mount (moved from SourcesManager) vvv
   useEffect(() => {
@@ -870,9 +1023,11 @@ function App() {
           setSources(loadedSources || []); // Handle null/undefined case
         }
       } catch (err) {
-        console.error("Failed to load sources:", err);
+        console.error('Failed to load sources:', err);
         if (isMounted) {
-          setGlobalError(err instanceof Error ? err.message : "Failed to load sources.");
+          setGlobalError(
+            err instanceof Error ? err.message : 'Failed to load sources.'
+          );
         }
       } finally {
         if (isMounted) {
@@ -881,7 +1036,9 @@ function App() {
       }
     };
     loadSources();
-    return () => { isMounted = false; }; // Cleanup on unmount
+    return () => {
+      isMounted = false;
+    }; // Cleanup on unmount
   }, []);
   // ^^^ Load sources on mount ^^^
 
@@ -898,27 +1055,31 @@ function App() {
   // ^^^ Clear global messages ^^^
 
   // vvv Save sources function (moved from SourcesManager) vvv
-  const saveSources = useCallback(async (updatedSources: FilterSource[], successMsg?: string) => {
-    // Reset messages before attempting save
-    setGlobalError(null);
-    setGlobalSuccessMessage(null);
-    try {
-      const result = await window.electron.saveSources(updatedSources);
-      if (!result.success) {
-        throw new Error(result.error || "Unknown error saving sources");
+  const saveSources = useCallback(
+    async (updatedSources: FilterSource[], successMsg?: string) => {
+      // Reset messages before attempting save
+      setGlobalError(null);
+      setGlobalSuccessMessage(null);
+      try {
+        const result = await window.electron.saveSources(updatedSources);
+        if (!result.success) {
+          throw new Error(result.error || 'Unknown error saving sources');
+        }
+        setSources(updatedSources); // Update global state on successful save
+        if (successMsg) {
+          setGlobalSuccessMessage(successMsg);
+        }
+      } catch (err) {
+        console.error('Failed to save sources:', err);
+        const errorMsg =
+          err instanceof Error ? err.message : 'Failed to save sources.';
+        setGlobalError(errorMsg);
+        // Re-throw the error so calling components know the save failed
+        throw err;
       }
-      setSources(updatedSources); // Update global state on successful save
-      if (successMsg) {
-        setGlobalSuccessMessage(successMsg);
-      }
-    } catch (err) {
-      console.error("Failed to save sources:", err);
-      const errorMsg = err instanceof Error ? err.message : "Failed to save sources.";
-      setGlobalError(errorMsg);
-      // Re-throw the error so calling components know the save failed
-      throw err;
-    }
-  }, []); // Empty dependency array
+    },
+    []
+  ); // Empty dependency array
   // ^^^ Save sources function ^^^
 
   // ResizeObserver Effect (existing)
@@ -928,7 +1089,7 @@ function App() {
 
     let resizeTimeout: NodeJS.Timeout | null = null;
 
-    const observer = new ResizeObserver(entries => {
+    const observer = new ResizeObserver((entries) => {
       // We only observe one element, so entries[0] is fine
       if (!entries || entries.length === 0) return;
 
@@ -958,7 +1119,6 @@ function App() {
       }
       observer.disconnect();
     };
-
   }, [isThemeLoading]); // Re-run only when theme loading finishes (initial setup)
   // ^^^ ResizeObserver Effect ^^^
 
@@ -974,11 +1134,11 @@ function App() {
         setUpdateAvailable(true);
       }
     });
-    
+
     window.electron.onUpdateProgress((progress) => {
       setUpdateProgress(progress);
     });
-    
+
     window.electron.onUpdateDownloaded(() => {
       setUpdateStatus('Update downloaded. Ready to install.');
     });
@@ -996,9 +1156,7 @@ function App() {
     if (selectedTheme === 'system') {
       const media = window.matchMedia('(prefers-color-scheme: dark)');
       const handleChange = () => {
-        const isDark = media.matches;
-        // Apply your theme logic here
-        document.body.classList.toggle('dark-theme', isDark);
+        document.body.classList.toggle('dark-theme', media.matches);
       };
       handleChange(); // Set on mount
       media.addEventListener('change', handleChange);
@@ -1014,36 +1172,36 @@ function App() {
     <div className="container" ref={containerRef}>
       <h1>Blockingmachine</h1>
       <nav className="app-navigation">
-        <button 
-          className={`nav-button ${currentView === 'process' ? 'active' : ''}`} 
+        <button
+          className={`nav-button ${currentView === 'process' ? 'active' : ''}`}
           onClick={() => setCurrentView('process')}
         >
           <span className="nav-icon">⚙️</span>
           <span className="nav-text">Process</span>
         </button>
-        <button 
-          className={`nav-button ${currentView === 'sources' ? 'active' : ''}`} 
+        <button
+          className={`nav-button ${currentView === 'sources' ? 'active' : ''}`}
           onClick={() => setCurrentView('sources')}
         >
           <span className="nav-icon">📋</span>
           <span className="nav-text">Sources</span>
         </button>
-        <button 
-          className={`nav-button ${currentView === 'bulkImport' ? 'active' : ''}`} 
+        <button
+          className={`nav-button ${currentView === 'bulkImport' ? 'active' : ''}`}
           onClick={() => setCurrentView('bulkImport')}
         >
           <span className="nav-icon">📥</span>
           <span className="nav-text">Bulk Import</span>
         </button>
-        <button 
-          className={`nav-button ${currentView === 'custom' ? 'active' : ''}`} 
+        <button
+          className={`nav-button ${currentView === 'custom' ? 'active' : ''}`}
           onClick={() => setCurrentView('custom')}
         >
           <span className="nav-icon">✏️</span>
           <span className="nav-text">Custom Rules</span>
         </button>
-        <button 
-          className={`nav-button ${currentView === 'settings' ? 'active' : ''}`} 
+        <button
+          className={`nav-button ${currentView === 'settings' ? 'active' : ''}`}
           onClick={() => setCurrentView('settings')}
         >
           <span className="nav-icon">⚙️</span>
@@ -1052,7 +1210,9 @@ function App() {
       </nav>
 
       {/* Global Feedback Area */}
-      <div className={`feedback-container ${globalError ? 'error' : globalSuccessMessage ? 'success' : ''}`}>
+      <div
+        className={`feedback-container ${globalError ? 'error' : globalSuccessMessage ? 'success' : ''}`}
+      >
         {globalError && (
           <div className="feedback-message error-feedback">
             <span className="feedback-icon">❌</span>
@@ -1068,28 +1228,34 @@ function App() {
       </div>
 
       {/* Render current view */}
-      <div className="main-content"> {/* Wrap views for potential flex layout */}
-        {currentView === 'sources' && (
-          isLoadingSources ? <p>Loading sources...</p> :
-          <SourcesManager
-            sources={sources}
+      <div className="main-content">
+        {' '}
+        {/* Wrap views for potential flex layout */}
+        {currentView === 'sources' &&
+          (isLoadingSources ? (
+            <p>Loading sources...</p>
+          ) : (
+            <SourcesManager
+              sources={sources}
+              saveSources={saveSources}
+              setError={setGlobalError}
+              setSuccessMessage={setGlobalSuccessMessage}
+            />
+          ))}
+        {/* vvv Render BulkImportManager vvv */}
+        {currentView === 'bulkImport' && (
+          <BulkImportManager
+            currentSources={sources}
             saveSources={saveSources}
             setError={setGlobalError}
             setSuccessMessage={setGlobalSuccessMessage}
           />
         )}
-        {/* vvv Render BulkImportManager vvv */}
-        {currentView === 'bulkImport' && (
-           <BulkImportManager
-             currentSources={sources}
-             saveSources={saveSources}
-             setError={setGlobalError}
-             setSuccessMessage={setGlobalSuccessMessage}
-           />
-        )}
         {/* ^^^ Render BulkImportManager ^^^ */}
         {currentView === 'custom' && <CustomRulesEditor />}
-        {currentView === 'process' && <ProcessingControls savePath={savePath} />}
+        {currentView === 'process' && (
+          <ProcessingControls savePath={savePath} />
+        )}
         {currentView === 'settings' && (
           <Settings
             currentTheme={selectedTheme}
@@ -1098,27 +1264,45 @@ function App() {
         )}
       </div>
 
-      { /* --- Footer --- */}
+      {/* --- Footer --- */}
       <footer className="app-footer">
         <div className="footer-left">
           Made with
-          <svg xmlns="http://www.w3.org/2000/svg" className="heart-svg" width="24" height="24" viewBox="0 0 24 24">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="heart-svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
             <path
-            className="heart-shape"
-            d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
-            fill="#ff5a5f"
-            stroke="#ff5a5f"
-            strokeWidth="1"
-          />
+              className="heart-shape"
+              d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+              fill="#ff5a5f"
+              stroke="#ff5a5f"
+              strokeWidth="1"
+            />
           </svg>
           by Daniel Hipskind
         </div>
         <div className="footer-donate">
-          <a href="https://danielhipskind.bio" target="_blank" rel="noopener noreferrer">
+          <a
+            href="#"
+            onClick={(e) => handleExternalLink(e, 'https://danielhipskind.bio')}
+            rel="noopener noreferrer"
+          >
             <span className="donate-icon">
               {/* Money SVG */}
-              <svg className="donate-money" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="22" height="22">
-                <path d="M256 416c114.9 0 208-93.1 208-208S370.9 0 256 0 48 93.1 48 208s93.1 208 208 208zM233.8 97.4V80.6c0-9.2 7.4-16.6 16.6-16.6h11.1c9.2 0 16.6 7.4 16.6 16.6v17c15.5 .8 30.5 6.1 43 15.4 5.6 4.1 6.2 12.3 1.2 17.1L306 145.6c-3.8 3.7-9.5 3.8-14 1-5.4-3.4-11.4-5.1-17.8-5.1h-38.9c-9 0-16.3 8.2-16.3 18.3 0 8.2 5 15.5 12.1 17.6l62.3 18.7c25.7 7.7 43.7 32.4 43.7 60.1 0 34-26.4 61.5-59.1 62.4v16.8c0 9.2-7.4 16.6-16.6 16.6h-11.1c-9.2 0-16.6-7.4-16.6-16.6v-17c-15.5-.8-30.5-6.1-43-15.4-5.6-4.1-6.2-12.3-1.2-17.1l16.3-15.5c3.8-3.7 9.5-3.8 14-1 5.4 3.4 11.4 5.1 17.8 5.1h38.9c9 0 16.3-8.2 16.3-18.3 0-8.2-5-15.5-12.1-17.6l-62.3-18.7c-25.7-7.7-43.7-32.4-43.7-60.1 .1-34 26.4-61.5 59.1-62.4zM480 352h-32.5c-19.6 26-44.6 47.7-73 64h63.8c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8h63.8c-28.4-16.3-53.3-38-73-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32z"/>
+              <svg
+                className="donate-money"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                width="22"
+                height="22"
+              >
+                <path
+                  d="M256 416c114.9 0 208-93.1 208-208S370.9 0 256 0 48 93.1 48 208s93.1 208 208 208zM233.8 97.4V80.6c0-9.2 7.4-16.6 16.6-16.6h11.1c9.2 0 16.6 7.4 16.6 16.6v17c15.5 .8 30.5 6.1 43 15.4 5.6 4.1 6.2 12.3 1.2 17.1L306 145.6c-3.8 3.7-9.5 3.8-14 1-5.4-3.4-11.4-5.1-17.8-5.1h-38.9c-9 0-16.3 8.2-16.3 18.3 0 8.2 5 15.5 12.1 17.6l62.3 18.7c25.7 7.7 43.7 32.4 43.7 60.1 0 34-26.4 61.5-59.1 62.4v16.8c0 9.2-7.4 16.6-16.6 16.6h-11.1c-9.2 0-16.6-7.4-16.6-16.6v-17c-15.5-.8-30.5-6.1-43-15.4-5.6-4.1-6.2-12.3-1.2-17.1l16.3-15.5c3.8-3.7 9.5-3.8 14-1 5.4 3.4 11.4 5.1 17.8 5.1h38.9c9 0 16.3-8.2 16.3-18.3 0-8.2-5 15.5-12.1 17.6l-62.3-18.7c-25.7-7.7-43.7-32.4-43.7-60.1 .1-34 26.4-61.5 59.1-62.4zM480 352h-32.5c-19.6 26-44.6 47.7-73 64h63.8c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8h63.8c-28.4-16.3-53.3-38-73-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32z"
+                />
               </svg>
             </span>
             Donate
@@ -1126,7 +1310,6 @@ function App() {
         </div>
       </footer>
       {}
-
     </div> // End of container div
   );
 }

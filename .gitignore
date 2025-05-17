@@ -70,3 +70,9 @@ temp/
 out
 node_modules
 .webpack
+
+assets/*.p12
+assets/*.pfx
+assets/*.cert
+
+*.backup

@@ -6,26 +6,19 @@ const mainConfig = {
   entryPoints: ['src/index.ts'],
   bundle: true,
   platform: 'node',
-  target: 'node22',
-  outfile: '.build/main.cjs',
+  target: 'node18',
+  outfile: '.build/main.js',
+  format: 'esm',
   external: [
     'electron',
-    'electron-updater',
-    'fs',
-    'path',
-    'graceful-fs',
-    'fs-extra',
     'electron-store',
+    'fs-extra',
     '@blockingmachine/core',
+    'electron-devtools-installer'
   ],
-  format: 'cjs',
   define: {
-    'process.env.NODE_ENV': JSON.stringify(
-      process.env.NODE_ENV || 'development'
-    ),
-    __filename: '__filename',
-    __dirname: '__dirname',
-  },
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+  }
 };
 
 const rendererConfig = {
@@ -34,7 +27,7 @@ const rendererConfig = {
   platform: 'browser',
   target: 'chrome96',
   outfile: '.build/renderer.js',
-  format: 'cjs',
+  format: 'esm',
   loader: {
     '.css': 'css',
   },
@@ -64,8 +57,8 @@ const preloadConfig = {
   platform: 'node',
   target: 'node22',
   outfile: '.build/preload.js',
+  format: 'esm',
   external: ['electron'],
-  format: 'cjs',
 };
 
 async function buildApp() {
