@@ -1,9 +1,8 @@
 <div align="center">
-  <img src="../../assets/blockingmachine.png" width="200" alt="Blockingmachine Logo" />
+  <img src="./assets/Blockinglockingmachine.png" width="200" alt="Blockingmachine Logo" />
 
 # Blockingmachine Desktop
 
-[![GITHUB RELEASE](https://img.shields.io/github/v/release/greigh/Blockingmachine)](https://github.com/greigh/Blockingmachine/releases)
 [![LICENSE](https://img.shields.io/github/license/greigh/Blockingmachine)](LICENSE)
 [![ELECTRON](https://img.shields.io/badge/built%20with-Electron-blue.svg)](https://www.electronjs.org/)
 [![TYPESCRIPT](https://img.shields.io/badge/written%20in-TypeScript-3178c6.svg)](https://www.typescriptlang.org/)
